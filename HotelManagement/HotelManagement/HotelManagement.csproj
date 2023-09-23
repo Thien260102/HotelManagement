@@ -6,4 +6,28 @@
     <UseWPF>true</UseWPF>
   </PropertyGroup>
 
+  <ItemGroup>
+    <None Remove="Resources\besttravel-logos_white.png" />
+    <None Remove="Resources\Group 102.png" />
+    <None Remove="Resources\Group 103.png" />
+    <None Remove="Resources\sk.jpg" />
+    <None Remove="Resources\Vector.png" />
+    <None Remove="Resources\Vectorkey.png" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="MahApps.Metro.IconPacks.Material" Version="4.11.0" />
+    <PackageReference Include="MaterialDesignThemes" Version="4.9.0" />
+    <PackageReference Include="System.Data.SqlClient" Version="4.8.5" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Resource Include="Resources\besttravel-logos_white.png" />
+    <Resource Include="Resources\Group 102.png" />
+    <Resource Include="Resources\Group 103.png" />
+    <Resource Include="Resources\sk.jpg" />
+    <Resource Include="Resources\Vector.png" />
+    <Resource Include="Resources\Vectorkey.png" />
+  </ItemGroup>
+
 </Project>
