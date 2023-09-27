@@ -33,5 +33,11 @@ namespace HotelManagement
 			public const decimal MANAGER_SALARY = 20_000_000M;
 			public const decimal EMPLOYEE_SALARY = 10_000_000M;
 		}
+
+		public enum AGE
+		{
+			CUSTOMER = 15,
+			EMPLOYEE = 18
+		}
 	}
 }

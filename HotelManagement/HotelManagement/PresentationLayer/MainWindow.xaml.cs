@@ -203,9 +203,9 @@ namespace HotelManagement.PresentationLayer
             Button_Choose(sender);
             if (MessageBox.Show("Do you want to sign out?", "Notification", MessageBoxButton.YesNoCancel, MessageBoxImage.Question) == MessageBoxResult.Yes)
             {
-                //Login login = new Login();
-                //login.Show();
-                this.Close();
+				Login login = new Login();
+				login.Show();
+				this.Close();
             }
         }
     }

@@ -76,6 +76,11 @@ namespace HotelManagement.PresentationLayer
                 MessageBox.Show("Please choose your birthday");
                 return;
 			}
+            else if((DateTime.Now - selectedDate).Value.TotalDays < 365 * (int)Rule.AGE.EMPLOYEE)
+			{
+                MessageBox.Show("You so young so I cannot hire.");
+                return;
+			}
             string birthDay = selectedDate.Value.ToString("yyyy-MM-dd");
 
             decimal salary = 0m;
@@ -106,10 +111,9 @@ namespace HotelManagement.PresentationLayer
 			}
 
             string passWord = txtBox_Password.Password.Trim();
-            if(passWord == "")
-
+            if(passWord.Length < 6)
             {
-                MessageBox.Show("Please fill password");
+                MessageBox.Show("Please fill password with 6 characters");
                 return;
             }
 
@@ -118,6 +122,12 @@ namespace HotelManagement.PresentationLayer
 
             {
                 MessageBox.Show("Please fill confirm password");
+                return;
+            }
+
+            if(passWord != cPassword)
+			{
+                MessageBox.Show("Confirm password not match.");
                 return;
             }
 
@@ -136,6 +146,10 @@ namespace HotelManagement.PresentationLayer
                                                     false, -1, employeeId), role))
 						{
                             MessageBox.Show("Add new account successful");
+
+                            Login login = new Login();
+                            login.Show();
+                            this.Close();
 						}
 					}
                     catch(Exception ex)

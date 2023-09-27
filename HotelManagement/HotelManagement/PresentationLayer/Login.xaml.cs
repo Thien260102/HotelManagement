@@ -38,6 +38,9 @@ namespace HotelManagement.PresentationLayer
 			{
                 case 0:
                     MessageBox.Show("Login Successful!");
+                    MainWindow mainWindow = new MainWindow();
+                    mainWindow.Show();
+                    this.Close();
                     break;
 
                 case 1:
