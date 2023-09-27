@@ -13,7 +13,7 @@ namespace HotelManagement.BusinessLogicLayer
 	{
 		#region Fields & Properties
 
-		AccountDTO account;
+		public static AccountDTO Account = null;
 
 		#endregion
 
@@ -32,11 +32,11 @@ namespace HotelManagement.BusinessLogicLayer
 
 			try
 			{
-				account = AccountDAL.Instance.GetAccount(userName);
-				if (account.UserName == "")
+				Account = AccountDAL.Instance.GetAccount(userName);
+				if (Account.UserName == "")
 					return 3;
 
-				if (account.UserName == userName && account.Password == passWord)
+				if (Account.UserName == userName && Account.Password == passWord)
 				{
 					return 0;
 				}
@@ -53,7 +53,7 @@ namespace HotelManagement.BusinessLogicLayer
 		{
 			try
 			{
-				switch(RoleDAL.Instance.GetRoleName(account.RoleID))
+				switch(RoleDAL.Instance.GetRoleName(Account.RoleID))
 				{
 					case "Admin":
 						return 1;
@@ -71,11 +71,11 @@ namespace HotelManagement.BusinessLogicLayer
 			return 0;
 		}
 
-		public bool InsertAccount(AccountDTO account, Rule.ROLE role)
+		public bool InsertAccount(AccountDTO account, int role)
 		{
 			if(account.RoleID == -1)
 			{
-				account.RoleID = RoleDAL.Instance.GetRoleId(role.ToString());
+				account.RoleID = role;
 			}
 
 			if(account.RoleID == -1)

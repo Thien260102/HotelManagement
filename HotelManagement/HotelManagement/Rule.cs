@@ -25,7 +25,7 @@ namespace HotelManagement
 		{
 			ADMIN = 1,
 			MANAGER,
-			EMPLOYEE
+			EMPLOYEE,
 		}
 
 		public class SALARY
@@ -38,6 +38,13 @@ namespace HotelManagement
 		{
 			CUSTOMER = 15,
 			EMPLOYEE = 18
+		}
+
+		public class BUTTON
+		{
+			public const string NORMAL = "#F7F6F4";
+
+			public const string HIGHLIGHT = "#FB7657";
 		}
 	}
 }

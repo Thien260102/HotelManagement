@@ -84,21 +84,21 @@ namespace HotelManagement.PresentationLayer
             string birthDay = selectedDate.Value.ToString("yyyy-MM-dd");
 
             decimal salary = 0m;
-            Rule.ROLE role = Rule.ROLE.EMPLOYEE;
+            int role = (int)Rule.ROLE.EMPLOYEE;
             switch(((ComboBoxItem)cb_Role.SelectedValue).Content.ToString().Trim())
 			{
                 case "Admin":
-                    role = Rule.ROLE.ADMIN;
+                    role = (int)Rule.ROLE.ADMIN;
                     
                     break;
 
                 case "Manager":
-                    role = Rule.ROLE.MANAGER;
+                    role = (int)Rule.ROLE.MANAGER;
                     salary = Rule.SALARY.MANAGER_SALARY;
                     break;
 
                 case "Employee":
-                    role = Rule.ROLE.EMPLOYEE;
+                    role = (int)Rule.ROLE.EMPLOYEE;
                     salary = Rule.SALARY.EMPLOYEE_SALARY;
                     break;
 			}

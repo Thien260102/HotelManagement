@@ -1,4 +1,5 @@
 ﻿using HotelManagement.BusinessLogicLayer;
+using HotelManagement.DataTransferObject;
 using System.Windows;
 using System.Windows.Input;
 
@@ -9,6 +10,11 @@ namespace HotelManagement.PresentationLayer
 	/// </summary>
 	public partial class Login : Window
 	{
+        #region Fields & Properties
+        
+		#endregion
+
+		#region Methods
 		public Login()
 		{
 			InitializeComponent();
@@ -69,6 +75,6 @@ namespace HotelManagement.PresentationLayer
             signup.Show();
 			this.Close();
 		}
-
-    }
+		#endregion
+	}
 }

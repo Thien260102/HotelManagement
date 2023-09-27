@@ -4,7 +4,7 @@
              xmlns:local="clr-namespace:HotelManagement"
              xmlns:Icon="http://metro.mahapps.com/winfx/xaml/iconpacks"
              xmlns:theme="clr-namespace:Microsoft.Windows.Themes;assembly=PresentationFramework.Aero2"
-             StartupUri="PresentationLayer/Login.xaml">
+             >
     <Application.Resources>
         <!--Colors-->
         <SolidColorBrush x:Key="BlackColor" Color="#083353"/>

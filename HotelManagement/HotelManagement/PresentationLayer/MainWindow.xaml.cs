@@ -1,4 +1,5 @@
-﻿using HotelManagement.PresentationLayer;
+﻿using HotelManagement.BusinessLogicLayer;
+using HotelManagement.PresentationLayer;
 using Microsoft.Win32;
 using System;
 using System.IO;
@@ -17,7 +18,7 @@ namespace HotelManagement.PresentationLayer
     {
         static public String Source = "";
 
-        //private UserControl currentChildForm;
+        private UserControl currentUserControl;
         private Button currentButton;
         //  IFirebaseConfig config = new FirebaseConfig { AuthSecret = "Fl7sCjIzoHwpSJjtVO501T21vVAXcsd6QyLKFSuv", BasePath = "https://wpff-debb4-default-rtdb.firebaseio.com" };
         //IFirebaseClient client;
@@ -76,6 +77,17 @@ namespace HotelManagement.PresentationLayer
             Source = Directory.GetParent(Environment.CurrentDirectory).Parent.Parent.FullName + "\\Image\\";
         }
 
+        private void OpenUserControl(UserControl userControl)
+        {
+            if (currentUserControl != null)
+            {
+                panelMain.Children.Clear();
+            }
+
+            currentUserControl = userControl;
+            panelMain.Children.Add(currentUserControl);
+        }
+
         private void Border_MouseDown(object sender, MouseButtonEventArgs e)
         {
             if (e.ChangedButton == MouseButton.Left)
@@ -87,8 +99,8 @@ namespace HotelManagement.PresentationLayer
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
             //Email.Text = Login.LuuThongTin.Email;
-            //currentButton = ButtonHome;
-            OpenChildForm(new Home());
+            currentButton = ButtonHome;
+            OpenUserControl(new Home());
             //string query = "Select * from User where User_Email = @Email ";
             //DataTable data = DataBase.Instance.ExecuteQuery(query, new object[] { Login.LuuThongTin.Email });
 
@@ -109,8 +121,8 @@ namespace HotelManagement.PresentationLayer
             {
                 DisableButton();
                 currentButton = (Button)senderButton;
-                currentButton.Background = (SolidColorBrush)new BrushConverter().ConvertFromString("#F7F6F4");
-                currentButton.Foreground = (SolidColorBrush)new BrushConverter().ConvertFromString("#FB7657");
+                currentButton.Background = (SolidColorBrush)new BrushConverter().ConvertFromString(Rule.BUTTON.NORMAL);
+                currentButton.Foreground = (SolidColorBrush)new BrushConverter().ConvertFromString(Rule.BUTTON.HIGHLIGHT);
                 currentButton.FontWeight = FontWeights.Bold;
             }
         }
@@ -120,20 +132,9 @@ namespace HotelManagement.PresentationLayer
             if (currentButton != null)
             {
                 currentButton.Background = Brushes.Transparent;
-                currentButton.Foreground = (SolidColorBrush)new BrushConverter().ConvertFromString("#F7F6F4");
+                currentButton.Foreground = (SolidColorBrush)new BrushConverter().ConvertFromString(Rule.BUTTON.NORMAL);
                 currentButton.FontWeight = FontWeights.Normal;
             }
-        }
-
-        void OpenChildForm(UserControl form)
-        {
-            //if (currentChildForm != null)
-            //{
-            //    panelMain.Children.Clear();
-            //}
-
-            //currentChildForm = form;
-            //panelMain.Children.Add(currentChildForm);
         }
 
         private void Home_Change_Click(object sender, RoutedEventArgs e)
@@ -156,17 +157,16 @@ namespace HotelManagement.PresentationLayer
 
         private void Admin_Change_Click(object sender, RoutedEventArgs e)
         {
-            Button_Choose(sender);
-            //if (Login.LuuThongTin.Email != "admin@gmail.com")
-            //{
-            //    MessageBox.Show("Bạn không có quyền truy cập vào mục này!");
-            //}
-            //else
-            //{
-            //    //OpenChildForm(new Administration());
-            //    String a = "fdfdaf";
-            //}
-        }
+			if (AccountBLL.Account.RoleID != (int)Rule.ROLE.ADMIN)
+			{
+				MessageBox.Show("Bạn không có quyền truy cập vào mục này!");
+			}
+			else
+			{
+				OpenUserControl(new Administration());
+                Button_Choose(sender);
+            }
+		}
 
         private void Flight_Change_Click(object sender, RoutedEventArgs e)
         {

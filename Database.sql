@@ -17,7 +17,7 @@ ADD CONSTRAINT PK_ACCOUNT PRIMARY KEY (UserName);
 Drop table ROLE;
 Create Table ROLE
 (
-	ID int not null IDENTITY(1,1),
+	ID int not null,
 	RoleName nvarchar(50),
 );
 ALTER TABLE ROLE
@@ -56,10 +56,9 @@ ADD CONSTRAINT PK_CUSTOMER PRIMARY KEY (ID, CitizenID);
 --- Data to test ---
 
 
-Insert into ROLE Values('Admin');
-Insert into ROLE Values('Manager');
-Insert into ROLE Values('Employee');
-
+Insert into ROLE Values(1, 'Admin');
+Insert into ROLE Values(2, 'Manager');
+Insert into ROLE Values(3, 'Employee');
 
 
 Select * from ACCOUNT
