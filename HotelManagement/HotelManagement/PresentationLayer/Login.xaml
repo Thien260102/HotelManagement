@@ -7,144 +7,57 @@
         mc:Ignorable="d"
         xmlns:Icon="http://metro.mahapps.com/winfx/xaml/iconpacks"
         xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
-        WindowStartupLocation="CenterScreen" Background="Transparent"
-        WindowStyle="None" AllowsTransparency="True" Height="600" Width="980" >
+            WindowStartupLocation="CenterScreen" Background="Transparent"
+    WindowStyle="None" AllowsTransparency="True" Height="450" Width="900" >
+    <Border CornerRadius="30">
 
-    <Window.Resources>
-        <BooleanToVisibilityConverter x:Key="BoolToVisConverter" />
-    </Window.Resources>
+        <Grid>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="570"/>
+                <ColumnDefinition/>
+            </Grid.ColumnDefinitions>
+            <Border Grid.Column="0" CornerRadius="25 0 0 25" >
+                <Border.Background>
+                    <ImageBrush ImageSource="/Resources/b.png" Stretch="Fill"></ImageBrush>
+                </Border.Background>
+            </Border>
 
-    <Border CornerRadius="25" MouseDown="Border_MouseDown">
+            <Border Grid.Column="1" CornerRadius="0 25 25 0" Background="#F3E0E6">
+                <Border CornerRadius="20" Background="#E2D8FB" Margin="10,10,10,10" >
+                    <StackPanel Background="Transparent" Margin="0,0,0,10">
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="251" />
+                                <ColumnDefinition Width="*"/>
+                            </Grid.ColumnDefinitions>
+                            <!--btn_Exit-->
+                            <Button x:Name="btn_Exit"  Height="32" Width="32" BorderThickness="0" Margin="17,10,10,31" Grid.Column="1" Click="btn_Exit_Click"   >
+                                <Button.Background>
+                                    <ImageBrush ImageSource="/Resources/cross.png" Stretch="Fill"/>
+                                </Button.Background> 
+                            </Button>
+                            <Label Grid.Column="0" Content="SIGN IN" FontSize="40" FontWeight="Bold" Padding="10" FontFamily="Segoe UI" Foreground="#4C00A3"/>
+                        </Grid>
+                        <Label  Content="User name:" FontSize="20" FontWeight="SemiBold" Padding="5" FontFamily="Segoe UI" Foreground="White" Width="244" Height="32"/>
+                        <!--Texboxusername-->
+                        <Border CornerRadius="12" Width="240" Height="32" Background="White" BorderThickness="2" BorderBrush="#9081E4">
+                            <TextBox x:Name="textUserName" TextWrapping="Wrap"  Width="240" Height="32" FontSize="18" Background="Transparent" BorderThickness="0" />
+                        </Border>
+                        <Label  Content="Password:" FontSize="20" FontWeight="SemiBold" Padding="5" FontFamily="Segoe UI" Foreground="White" Width="244" Height="32"/>
+                        <!--Texboxpass-->
+                        <Border CornerRadius="12" Width="240" Height="32" Background="White" BorderThickness="2" BorderBrush="#9081E4">
+                            <PasswordBox x:Name="textPass" VerticalAlignment="Center" Width="240" Height="32" FontSize="18" Background="Transparent" BorderThickness="0" PasswordChar="*" />
+                        </Border>
+                        <!--button login-->
+                        <Border CornerRadius="20" Width="125" Background="#4C00A3" BorderThickness="0">
+                            <Button x:Name="buttonLogin" Content="SIGN IN" FontSize="20" FontWeight="SemiBold" Height="41" Width="125" Background="Transparent" Foreground="White" Click="buttonLogin_Click" BorderThickness="0" />
+                        </Border>
 
-        <Border CornerRadius="25" Opacity="1">
 
-            <Border.Background>
-                <ImageBrush ImageSource="/Resources/Group 102.png" />
-            </Border.Background>
-
-            <Grid>
-
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="540"/>
-                    <ColumnDefinition Width="*"/>
-                </Grid.ColumnDefinitions>
-
-                <Border Grid.Column="0" CornerRadius="25 0 0 25">
-                    <StackPanel Orientation="Horizontal" HorizontalAlignment="Left" Height="100" Width="250" Margin="-8,498,0,0" >
-                        <StackPanel.Background>
-                            <ImageBrush ImageSource="/Resources/besttravel-logos_white.png" Stretch="Fill">
-                                <ImageBrush.RelativeTransform>
-                                    <TransformGroup>
-                                        <ScaleTransform CenterY="0.5" CenterX="0.5" ScaleX="1" ScaleY="2.5"/>
-                                        <SkewTransform CenterY="0.5" CenterX="0.5"/>
-                                        <RotateTransform CenterY="0.5" CenterX="0.5"/>
-                                        <TranslateTransform X="0" Y="0"/>
-                                    </TransformGroup>
-                                </ImageBrush.RelativeTransform>
-                            </ImageBrush>
-                        </StackPanel.Background>
                     </StackPanel>
                 </Border>
+            </Border>
 
-                <Border x:Name="panelLogin" Grid.Column="1" CornerRadius="0 25 25 0" Background="Transparent">
-                    <Border Background="Transparent">
-                        <StackPanel Background="Transparent">
-                            <Icon:PackIconMaterial x:Name="iconClose" Kind="Close" VerticalAlignment="Top" Width="20" Height="20" HorizontalAlignment="Right" Margin="0 15 18 0" Foreground="#FF7657" MouseDown="iconClose_MouseDown" />
-                            <Label Content="Welcome" FontSize="40" FontWeight="Bold" Padding="10" FontFamily="Segoe UI" Foreground="#FF7657" HorizontalContentAlignment="Center" Margin="0 10 0 0" HorizontalAlignment="Center"/>
-                            <Label Content="Login below to get started" FontSize="18" FontFamily="Segoe UI" Foreground="#A0A0A0" HorizontalAlignment="Center" Margin="10 -10 0 0"/>
-                            <Grid Margin="20">
-                                <Grid.RowDefinitions>
-                                    <RowDefinition Height="30"/>
-                                    <RowDefinition Height="60"/>
-                                    <RowDefinition Height="30"/>
-                                    <RowDefinition Height="60"/>
-                                    <RowDefinition Height="40"/>
-                                    <RowDefinition Height="30"/>
-                                </Grid.RowDefinitions>
-
-                                <!--Text Box-->
-                                <Label Grid.Row="0" Content="Username" FontSize="15" FontWeight="SemiBold" Foreground="#FF7657" HorizontalAlignment="Left" Margin="50,0,0,0" />
-                                <StackPanel Orientation="Horizontal" Grid.Row="1" HorizontalAlignment="Center">
-                                    <TextBox x:Name="textUserName" Width="300" Height="50" materialDesign:HintAssist.Hint="UserName" Style="{StaticResource loginTextbox}" Margin="10 0 0 0" materialDesign:HintAssist.IsFloating="True">
-                                        <TextBox.Background>
-                                            <ImageBrush ImageSource="/Resources/Vector.png"
-                                        Stretch="None"
-                                        AlignmentX="Left">
-                                                <ImageBrush.RelativeTransform>
-                                                    <TransformGroup>
-                                                        <ScaleTransform CenterY="0.5" CenterX="0" ScaleX="0.5" ScaleY="0.5"/>
-                                                        <SkewTransform CenterY="0.5" CenterX="0"/>
-                                                        <RotateTransform CenterY="0.5" CenterX="0" Angle="0"/>
-                                                        <TranslateTransform/>
-                                                    </TransformGroup>
-                                                </ImageBrush.RelativeTransform>
-                                            </ImageBrush>
-                                        </TextBox.Background>
-                                    </TextBox>
-                                </StackPanel>
-                                <Label Grid.Row="2" Content="Password" FontSize="15" FontWeight="SemiBold" Foreground="#FF7657" HorizontalAlignment="Center" Margin="0 0 230 0 " />
-                                <StackPanel Orientation="Horizontal" Grid.Row="3" HorizontalAlignment="Center">
-                                    <PasswordBox x:Name="textPass" Width="300" Height="50" materialDesign:HintAssist.Hint="UserName" Style="{StaticResource loginPasswordbox}" Margin="10 0 0 0" materialDesign:HintAssist.IsFloating="True" PasswordChar="•">
-                                        <PasswordBox.Background>
-                                            <ImageBrush ImageSource="/Resources/Vectorkey.png"
-                                        Stretch="None"
-                                        AlignmentX="Left">
-                                                <ImageBrush.RelativeTransform>
-                                                    <TransformGroup>
-                                                        <ScaleTransform CenterY="0.5" CenterX="0" ScaleX="0.5" ScaleY="0.5"/>
-                                                        <SkewTransform CenterY="0.5" CenterX="0"/>
-                                                        <RotateTransform CenterY="0.5" CenterX="0" Angle="0"/>
-                                                        <TranslateTransform/>
-                                                    </TransformGroup>
-                                                </ImageBrush.RelativeTransform>
-                                            </ImageBrush>
-                                        </PasswordBox.Background>
-                                    </PasswordBox>
-                                </StackPanel>
-
-                                <StackPanel Grid.Row="4" Orientation="Horizontal" HorizontalAlignment="Center">
-                                </StackPanel>
-
-                            </Grid>
-
-                            <Button Margin="0 -20 0 0" x:Name="buttonLogin"  Style="{StaticResource loginButton}" Width="300" Height="50" Content="Login" FontSize="18" Foreground="#FFF7F6F4" Background="#FF7657" Click="buttonLogin_Click" />
-                            <StackPanel Orientation="Horizontal"
-                                HorizontalAlignment="Center"
-                                Margin="0,15,0,0">
-                                <TextBlock Text="If you don't have account ?"
-                               Foreground="#A0A0A0"
-                               FontSize="18"
-                               FontWeight="Medium"
-                               FontFamily="Montserrat"/>
-                                <TextBlock Text="Sign Up"
-                               Foreground="#FF7657"
-                               FontSize="18"
-                               FontWeight="Medium"
-                               FontFamily="Montserrat"
-                               Cursor="Hand"
-                               Margin="8,0,0,0" MouseDown="TextBlock_MouseDown"/>
-                            </StackPanel>
-
-                            <!--<StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Margin="0 25 0 0">
-                                <Image Source="/logos_facebook.png" Width="40" Height="40"/>
-                                <Label Content="Facebook" Foreground="#A0A0A0" Padding="10 15 0 0"
-                               FontSize="18"
-                               FontWeight="SemiBold"
-                               FontFamily="Montserrat"/>
-                                <Image Source="/flat-color-icons_google.png" Width="40" Height="40" Margin="50 0 0 0"/>
-                                <Label Content="Google" Foreground="#A0A0A0" Padding="10 15 0 0"
-                               FontSize="18"
-                               FontWeight="SemiBold"
-                               FontFamily="Montserrat"/>
-                            </StackPanel>-->
-
-                        </StackPanel>
-
-                    </Border>
-                </Border>
-            </Grid>
-        </Border>
-
+        </Grid>
     </Border>
-
 </Window>

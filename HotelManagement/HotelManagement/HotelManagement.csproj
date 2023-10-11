@@ -7,6 +7,20 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <None Remove="PresentationLayer\b.png" />
+    <None Remove="PresentationLayer\calendar.png" />
+    <None Remove="PresentationLayer\coupon.png" />
+    <None Remove="PresentationLayer\cross.png" />
+    <None Remove="PresentationLayer\dashboard.png" />
+    <None Remove="PresentationLayer\double-bed.png" />
+    <None Remove="PresentationLayer\employee.png" />
+    <None Remove="PresentationLayer\guests.png" />
+    <None Remove="PresentationLayer\log-out.png" />
+    <None Remove="PresentationLayer\logo.png" />
+    <None Remove="PresentationLayer\minimize-sign.png" />
+    <None Remove="PresentationLayer\report.png" />
+    <None Remove="PresentationLayer\Search.png" />
+    <None Remove="PresentationLayer\user.png" />
     <None Remove="Resources\besttravel-logos_white.png" />
     <None Remove="Resources\Group 102.png" />
     <None Remove="Resources\Group 103.png" />
@@ -22,6 +36,20 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Resource Include="Resources\Search.png" />
+    <Resource Include="Resources\user.png" />
+    <Resource Include="Resources\calendar.png" />
+    <Resource Include="Resources\coupon.png" />
+    <Resource Include="Resources\double-bed.png" />
+    <Resource Include="Resources\employee.png" />
+    <Resource Include="Resources\guests.png" />
+    <Resource Include="Resources\log-out.png" />
+    <Resource Include="Resources\logo.png" />
+    <Resource Include="Resources\report.png" />
+    <Resource Include="Resources\dashboard.png" />
+    <Resource Include="Resources\minimize-sign.png" />
+    <Resource Include="Resources\cross.png" />
+    <Resource Include="Resources\b.png" />
     <Resource Include="Resources\besttravel-logos_white.png" />
     <Resource Include="Resources\Group 102.png" />
     <Resource Include="Resources\Group 103.png" />

@@ -29,7 +29,7 @@ namespace HotelManagement.PresentationLayer
             }
         }
 
-        private void iconClose_MouseDown(object sender, MouseButtonEventArgs e)
+        private void btn_Exit_Click(object sender, RoutedEventArgs e)
         {
             this.Close();
         }
@@ -75,6 +75,8 @@ namespace HotelManagement.PresentationLayer
             signup.Show();
 			this.Close();
 		}
-		#endregion
-	}
+        #endregion
+
+       
+    }
 }

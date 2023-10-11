@@ -26,6 +26,7 @@ namespace HotelManagement
 		{
 			Login login = new Login();
 			login.Show();
+
 		}
 	}
 }
