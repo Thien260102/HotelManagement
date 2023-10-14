@@ -42,9 +42,11 @@ namespace HotelManagement
 
 		public class BUTTON
 		{
-			public const string NORMAL = "#F7F6F4";
+			public const string NORMAL = "#7F000000";
 
-			public const string HIGHLIGHT = "#FB7657";
-		}
+			public const string HIGHLIGHT = "#C379E2";
+
+            public const string BORDER = "#F3E5FF";
+        }
 	}
 }

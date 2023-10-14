@@ -24,8 +24,10 @@ namespace HotelManagement
 
 		private void InitializeApp()
 		{
-			Login login = new Login();
-			login.Show();
+			//Login login = new Login();
+			//login.Show();
+			Main main = new Main();
+			main.Show();
 
 		}
 	}

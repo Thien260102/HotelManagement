@@ -1,4 +1,5 @@
-﻿using System;
+﻿using MaterialDesignThemes.Wpf;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -16,19 +17,20 @@ using System.Windows.Shapes;
 namespace HotelManagement.PresentationLayer
 {
     /// <summary>
-    /// Interaction logic for Employee.xaml
+    /// Interaction logic for Booking.xaml
     /// </summary>
-    public partial class Employee : UserControl
+    public partial class Booking : UserControl
     {
-        public Employee()
+        public Booking()
         {
             InitializeComponent();
         }
 
         private void btn_Add_Click(object sender, RoutedEventArgs e)
         {
-            Employeeinfo employeeinfo = new Employeeinfo();
-            employeeinfo.Show();
+            ReceiveBooking receiveBooking = new ReceiveBooking();
+            receiveBooking.Show();
+                    
         }
 
         private void btn_Delete_Click(object sender, RoutedEventArgs e)
