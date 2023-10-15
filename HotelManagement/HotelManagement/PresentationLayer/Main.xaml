@@ -98,7 +98,7 @@ WindowStyle="None" AllowsTransparency="True" Height="600" Width="950" >
                                             <ImageBrush  Stretch="Fill" ImageSource="/Resources/double-bed.png"/>
                                         </Border.Background>
                                     </Border>
-                                    <Button x:Name="btn_Room" Content="Room" Width="134" Height="45" FontSize="16" FontWeight="SemiBold" Background="Transparent" Foreground="#7F000000"  BorderThickness="0"  />
+                                    <Button x:Name="btn_Room" Content="Room" Width="134" Height="45" FontSize="16" FontWeight="SemiBold" Background="Transparent" Foreground="#7F000000"  BorderThickness="0" Click="btn_Room_Click"  />
                                 </StackPanel>
                             </Border>
                             <!--Guest-->
@@ -109,7 +109,7 @@ WindowStyle="None" AllowsTransparency="True" Height="600" Width="950" >
                                             <ImageBrush  Stretch="Fill" ImageSource="/Resources/guests.png"/>
                                         </Border.Background>
                                     </Border>
-                                    <Button x:Name="btn_Guest" Content="Guest" Width="134" Height="45" FontSize="16" FontWeight="SemiBold" Background="Transparent" Foreground="#7F000000"  BorderThickness="0"  />
+                                    <Button x:Name="btn_Guest" Content="Guest" Width="134" Height="45" FontSize="16" FontWeight="SemiBold" Background="Transparent" Foreground="#7F000000"  BorderThickness="0" Click="btn_Guest_Click" />
                                 </StackPanel>
                             </Border>
                             <!--Booking-->
@@ -142,7 +142,7 @@ WindowStyle="None" AllowsTransparency="True" Height="600" Width="950" >
                                             <ImageBrush  Stretch="Fill" ImageSource="/Resources/coupon.png"/>
                                         </Border.Background>
                                     </Border>
-                                    <Button x:Name="btn_Voucher" Content="Voucher" Width="134" Height="45" FontSize="16" FontWeight="SemiBold" Background="Transparent" Foreground="#7F000000"  BorderThickness="0"  />
+                                    <Button x:Name="btn_Voucher" Content="Voucher" Width="134" Height="45" FontSize="16" FontWeight="SemiBold" Background="Transparent" Foreground="#7F000000"  BorderThickness="0" Click="btn_Voucher_Click" />
                                 </StackPanel>
                             </Border>
                             <!--Report-->
