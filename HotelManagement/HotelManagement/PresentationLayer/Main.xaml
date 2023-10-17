@@ -87,7 +87,7 @@ WindowStyle="None" AllowsTransparency="True" Height="600" Width="950" >
                                             <ImageBrush  Stretch="Fill" ImageSource="/Resources/dashboard.png"/>
                                         </Border.Background>
                                     </Border>
-                                    <Button x:Name="btn_Dashboard" Content="Dashboard" Width="134" Height="45" FontSize="16" FontWeight="SemiBold" Background="Transparent" Foreground="#7F000000"  BorderThickness="0"  />
+                                    <Button x:Name="btn_Dashboard" Content="Dashboard" Width="134" Height="45" FontSize="16" FontWeight="SemiBold" Background="Transparent" Foreground="#7F000000"  BorderThickness="0" Click="btn_Dashboard_Click" />
                                 </StackPanel>
                             </Border>
                             <!--Room-->
@@ -153,7 +153,7 @@ WindowStyle="None" AllowsTransparency="True" Height="600" Width="950" >
                                             <ImageBrush  Stretch="Fill" ImageSource="/Resources/report.png"/>
                                         </Border.Background>
                                     </Border>
-                                    <Button x:Name="btn_Report" Content="Report" Width="134" Height="45" FontSize="16" FontWeight="SemiBold" Background="Transparent" Foreground="#7F000000"  BorderThickness="0"  />
+                                    <Button x:Name="btn_Report" Content="Report" Width="134" Height="45" FontSize="16" FontWeight="SemiBold" Background="Transparent" Foreground="#7F000000"  BorderThickness="0" Click="btn_Report_Click" />
                                 </StackPanel>
                             </Border>
                             <!--Logout-->

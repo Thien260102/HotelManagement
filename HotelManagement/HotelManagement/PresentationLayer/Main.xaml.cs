@@ -62,6 +62,13 @@ namespace HotelManagement.PresentationLayer
             currentUserControl = userControl;
             panelMain.Children.Add(currentUserControl);
         }
+        private void btn_Dashboard_Click(object sender, RoutedEventArgs e)
+        {
+            Button_Choose(sender);
+            Dashboards.Background = (SolidColorBrush)new BrushConverter().ConvertFromString(Rule.BUTTON.BORDER);
+            Dashboard dashboard = new Dashboard();
+            OpenUserControl(dashboard);
+        }
         private void btn_Room_Click(object sender, RoutedEventArgs e)
         {
             Button_Choose(sender);
@@ -97,7 +104,13 @@ namespace HotelManagement.PresentationLayer
             Voucher voucher = new Voucher();    
             OpenUserControl(voucher);
         }
-       
+        private void btn_Report_Click(object sender, RoutedEventArgs e)
+        {
+            Button_Choose(sender);
+            Reports.Background = (SolidColorBrush)new BrushConverter().ConvertFromString(Rule.BUTTON.BORDER);
+            Report report = new Report();  
+            OpenUserControl (report);
+        }
 
         private void btn_Exit_Click(object sender, RoutedEventArgs e)
         {

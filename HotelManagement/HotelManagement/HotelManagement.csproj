@@ -8,13 +8,18 @@
 
   <ItemGroup>
     <None Remove="PresentationLayer\b.png" />
+    <None Remove="PresentationLayer\bed.png" />
+    <None Remove="PresentationLayer\calendar-check.png" />
     <None Remove="PresentationLayer\calendar.png" />
     <None Remove="PresentationLayer\coupon.png" />
     <None Remove="PresentationLayer\cross.png" />
     <None Remove="PresentationLayer\dashboard.png" />
     <None Remove="PresentationLayer\double-bed.png" />
     <None Remove="PresentationLayer\employee.png" />
+    <None Remove="PresentationLayer\export.png" />
+    <None Remove="PresentationLayer\guests %281%29.png" />
     <None Remove="PresentationLayer\guests.png" />
+    <None Remove="PresentationLayer\location.png" />
     <None Remove="PresentationLayer\log-out.png" />
     <None Remove="PresentationLayer\logo.png" />
     <None Remove="PresentationLayer\minimize-sign.png" />
@@ -36,6 +41,11 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Resource Include="Resources\export.png" />
+    <Resource Include="Resources\bed.png" />
+    <Resource Include="Resources\calendar-check.png" />
+    <Resource Include="Resources\guests %281%29.png" />
+    <Resource Include="Resources\location.png" />
     <Resource Include="Resources\Search.png" />
     <Resource Include="Resources\user.png" />
     <Resource Include="Resources\calendar.png" />
