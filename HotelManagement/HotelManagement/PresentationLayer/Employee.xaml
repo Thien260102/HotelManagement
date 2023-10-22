@@ -30,9 +30,17 @@
                 </Border>
             </StackPanel>
             <!--DataGridView-->
-            <StackPanel Height="495" Background="Transparent">
-                <DataGrid x:Name="DataGridEmployee" Margin="10" Height="470 " d:ItemsSource="{d:SampleData ItemCount=5}"/>
-            </StackPanel>
+            <!--<StackPanel Height="495" Background="Transparent">
+                <DataGrid x:Name="DataGridEmployee" RowHeight="30"
+                          Margin="10" Height="470" >
+                    
+                </DataGrid>
+            </StackPanel>-->
+            <Grid>
+                <DataGrid Name="dataGrid_Employees" RowHeight="30"
+                           AutoGenerateColumns="True" ItemsSource="{Binding employees}">
+                </DataGrid>
+            </Grid>
         </StackPanel>
     </Grid>
 </UserControl>

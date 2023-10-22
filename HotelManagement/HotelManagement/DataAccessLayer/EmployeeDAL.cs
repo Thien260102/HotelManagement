@@ -23,6 +23,22 @@ namespace HotelManagement.DataAccessLayer
         #region Methods
         private EmployeeDAL() { }
 
+        public List<EmployeeDTO> GetAll()
+		{
+            List<EmployeeDTO> employees = new List<EmployeeDTO>();
+
+            string query = "Select * from EMPLOYEE ";
+
+            DataTable data = DataProvider.Instance.ExecuteQuery(query, new object[] {});
+
+            foreach(DataRow row in data.Rows)
+			{
+                employees.Add(new EmployeeDTO(row));
+			}
+
+            return employees;
+		}
+
         public Rule.STATE AddNewEmployee(EmployeeDTO employee)
         {
             string query = "Insert into EMPLOYEE " +

@@ -34,14 +34,14 @@ namespace HotelManagement.PresentationLayer
             this.Close();
         }
 
-        private void buttonLogin_Click(object sender, RoutedEventArgs e)
-        {
-			string user = textUserName.Text.Trim();
-			string pass = textPass.Password.ToString().Trim();
+        private void LoginHandle()
+		{
+            string user = textUserName.Text.Trim();
+            string pass = textPass.Password.ToString().Trim();
 
             AccountBLL accountBLL = new AccountBLL();
-            switch(accountBLL.Login(user, pass))
-			{
+            switch (accountBLL.Login(user, pass))
+            {
                 case 0:
                     MessageBox.Show("Login Successful!");
                     Main main = new Main();
@@ -59,18 +59,29 @@ namespace HotelManagement.PresentationLayer
 
                 case 3:
                     MessageBox.Show("Not exist username");
-                    break; 
-			}
-            
-		}
+                    break;
+            }
+        }
+        
+        private void buttonLogin_Click(object sender, RoutedEventArgs e)
+        {
+            LoginHandle();
+        }
 
         private void checkBoxPass_Checked(object sender, RoutedEventArgs e)
         {
 
         }
 
-        #endregion
+        private void KeyEvent(object sender, KeyEventArgs e)
+		{
+            if(e.Key == Key.Enter)
+			{
+                LoginHandle();
 
-       
+            }
+		}
+
+        #endregion
     }
 }

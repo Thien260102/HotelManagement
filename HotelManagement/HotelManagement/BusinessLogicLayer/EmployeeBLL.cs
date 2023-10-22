@@ -46,6 +46,8 @@ namespace HotelManagement.BusinessLogicLayer
 		{
 			return EmployeeDAL.Instance.RemoveEmployee(id);
 		}
+
+		public List<EmployeeDTO> GetAllEmployees() => EmployeeDAL.Instance.GetAll();
 		#endregion
 	}
 }
