@@ -69,12 +69,6 @@ namespace HotelManagement.PresentationLayer
 
         }
 
-        private void TextBlock_MouseDown(object sender, MouseButtonEventArgs e)
-        {
-			Signup signup = new Signup();
-            signup.Show();
-			this.Close();
-		}
         #endregion
 
        
