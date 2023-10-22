@@ -14,7 +14,7 @@ WindowStyle="None" AllowsTransparency="True" Height="600" Width="950" >
                 <RowDefinition Height="*"/>
             </Grid.RowDefinitions>
             <!--Header-->
-            <Border Grid.Row="0" CornerRadius="15 15 0 0" Background="#B9B4EE">
+            <Border Grid.Row="0" CornerRadius="15 15 0 0" Background="#B9B4EE" MouseDown="Border_MouseDown">
                 <StackPanel Grid.Row="0" Width="950" Background="Transparent">
                     <Grid Width="950" Height="55">
                         <Grid.ColumnDefinitions>

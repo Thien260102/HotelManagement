@@ -5,7 +5,8 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:HotelManagement.PresentationLayer"
         mc:Ignorable="d"
-           Background="Transparent" WindowStyle="None" AllowsTransparency="True" Height="355" Width="600">
+        WindowStartupLocation="CenterScreen"
+        Background="Transparent" WindowStyle="None" AllowsTransparency="True" Height="355" Width="600">
     <Grid>
         <Border Background="White" CornerRadius="10" Height="355" Width="600">
             <StackPanel Background="Transparent" >

@@ -1,4 +1,5 @@
-﻿using System;
+﻿using HotelManagement.BusinessLogicLayer;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -24,6 +25,8 @@ namespace HotelManagement.PresentationLayer
         public Main()
         {
             InitializeComponent();
+
+            btn_Dashboard_Click(null, null);
         }
         public void DisableButton()
         {
@@ -42,6 +45,7 @@ namespace HotelManagement.PresentationLayer
             Reports.Background = Brushes.Transparent;
             btn_Report.Foreground = (SolidColorBrush)new BrushConverter().ConvertFromString(Rule.BUTTON.NORMAL);
         }
+
         void Button_Choose(object senderButton)
         {
             if (senderButton != null)
@@ -92,6 +96,12 @@ namespace HotelManagement.PresentationLayer
         }
         private void btn_Employee_Click(object sender, RoutedEventArgs e)
         {
+            if(Utilities.GetRole() != Rule.ROLE.ADMIN)
+			{
+                MessageBox.Show("You do not have an authority.");
+                return;
+			}
+
             Button_Choose(sender);
             Employees.Background = (SolidColorBrush)new BrushConverter().ConvertFromString(Rule.BUTTON.BORDER);
             Employee employee = new Employee();
@@ -129,6 +139,13 @@ namespace HotelManagement.PresentationLayer
             this.Close();
         }
 
-       
+        private void Border_MouseDown(object sender, MouseButtonEventArgs e)
+        {
+            if (e.ChangedButton == MouseButton.Left)
+            {
+                this.DragMove();
+            }
+        }
+
     }
 }

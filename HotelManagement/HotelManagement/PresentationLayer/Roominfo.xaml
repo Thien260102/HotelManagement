@@ -5,14 +5,15 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:HotelManagement.PresentationLayer"
         mc:Ignorable="d"
-           Background="Transparent" WindowStyle="None" AllowsTransparency="True" Height="290" Width="280">
+        WindowStartupLocation="CenterScreen"
+        Background="Transparent" WindowStyle="None" AllowsTransparency="True" Height="290" Width="280">
     <Grid>
         <Border Background="White" CornerRadius="10" Height="290" Width="280">
             <StackPanel Background="Transparent" >
-                <Label Content="Room number" Margin="10 10 0 0" FontSize="12" FontWeight="Regular" Padding="5" FontFamily="Segoe UI" Width="264" />
+                <Label Content="Room name" Margin="10 10 0 0" FontSize="12" FontWeight="Regular" Padding="5" FontFamily="Segoe UI" Width="264" />
                 <!--txt_RoomNumber-->
                 <Border CornerRadius="5" Width="252" Height="35" BorderThickness="1" BorderBrush="#7F000000" Margin="5 0 0 0">
-                    <TextBox x:Name="txt_RoomNumber" Width="248" BorderThickness="0" FontFamily="Segoe UI" FontSize="14" VerticalContentAlignment="Center" Background="Transparent" Margin="1,0,1,0" />
+                    <TextBox x:Name="txt_RoomName" Width="248" BorderThickness="0" FontFamily="Segoe UI" FontSize="14" VerticalContentAlignment="Center" Background="Transparent" Margin="1,0,1,0" />
                 </Border>
                 <Label Content="Room type" Margin="10 10 0 0" FontSize="12" FontWeight="Regular" Padding="5" FontFamily="Segoe UI" Width="264" />
                 <!--txt_RoomType-->
