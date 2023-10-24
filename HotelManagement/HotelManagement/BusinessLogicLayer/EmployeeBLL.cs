@@ -37,6 +37,25 @@ namespace HotelManagement.BusinessLogicLayer
 			return false;
 		}
 
+		public bool UpdateEmployee(EmployeeDTO employee)
+		{
+			switch (EmployeeDAL.Instance.UpdateEmployee(employee))
+			{
+				case Rule.STATE.SUCCESS:
+					return true;
+
+				case Rule.STATE.FAIL:
+					MessageBox.Show("Update employee infor fail");
+					return false;
+
+				case Rule.STATE.EXIST:
+					MessageBox.Show("CitizenID is existed.");
+					return false;
+			}
+
+			return false;
+		}
+
 		public int GetEmployeeId(string citizenId)
 		{
 			return EmployeeDAL.Instance.GetEmployeeID(citizenId);
@@ -48,6 +67,13 @@ namespace HotelManagement.BusinessLogicLayer
 		}
 
 		public List<EmployeeDTO> GetAllEmployees() => EmployeeDAL.Instance.GetAll();
+
+		public int GetRoleId(int id)
+		{
+			AccountDTO account = AccountDAL.Instance.GetAccount(id);
+
+			return account.RoleID;
+		}
 		#endregion
 	}
 }

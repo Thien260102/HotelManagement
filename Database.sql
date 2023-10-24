@@ -160,6 +160,11 @@ Insert into ACCOUNT Values('admin', '123', null, 1, 1, 0);
 delete from EMPLOYEE 
 Select * from EMPLOYEE where CitizenID = '123'
 insert into EMPLOYEE values(123, 'thien', 123, 0, '2022-12-12', '2022-12-12', 0)
+
+UPDATE EMPLOYEE
+SET Sex = 1, FullName = 'Tien'
+WHERE CitizenID = 12345;
+
 ------------------
 
 --- ROOM_TYPE ---

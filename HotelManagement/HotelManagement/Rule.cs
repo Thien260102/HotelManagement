@@ -30,6 +30,7 @@ namespace HotelManagement
 
 		public class SALARY
 		{
+			public const decimal ADMIN_SALARY = 0M;
 			public const decimal MANAGER_SALARY = 20_000_000M;
 			public const decimal EMPLOYEE_SALARY = 10_000_000M;
 		}

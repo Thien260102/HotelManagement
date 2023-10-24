@@ -40,7 +40,7 @@
                         <StackPanel Orientation="Horizontal">
                             <Label Content="Sex: " Margin="23 10 0 0" FontSize="12" FontWeight="Regular" Padding="5" FontFamily="Segoe UI" Width="50" />
                             <CheckBox x:Name="Checkbox_Male" Content="Male" HorizontalAlignment="Right" VerticalAlignment="Bottom" Margin="0 0 0 5" FontFamily="Segoe UI"/>
-                            <CheckBox x:Name="Checkbox_Female" Content="Female" HorizontalAlignment="Right" VerticalAlignment="Bottom" Margin="45  0 0 5" FontFamily="Segoe UI"/>
+                            <!--<CheckBox x:Name="Checkbox_Female" Content="Female" HorizontalAlignment="Right" VerticalAlignment="Bottom" Margin="45  0 0 5" FontFamily="Segoe UI"/>-->
                         </StackPanel>
                     </StackPanel>
                     <StackPanel Grid.Column="1">
@@ -52,7 +52,8 @@
                         <Label Content="Position" Margin="10 10 0 0" FontSize="12" FontWeight="Regular" Padding="5" FontFamily="Segoe UI" Width="264" />
                         <!--txt_Position-->
                         <Border CornerRadius="5" Width="252" Height="35" BorderThickness="1" BorderBrush="#7F000000" Margin="5 0 0 0">
-                            <TextBox x:Name="txt_Position" Width="248" BorderThickness="0" FontFamily="Segoe UI" FontSize="14" VerticalContentAlignment="Center" Background="Transparent" Margin="1,0,1,0" />
+                            <!--<TextBox x:Name="txt_Position" Width="248" BorderThickness="0" FontFamily="Segoe UI" FontSize="14" VerticalContentAlignment="Center" Background="Transparent" Margin="1,0,1,0" />-->
+                            <ComboBox Name="cbb_Position" Width="248" BorderThickness="0" FontFamily="Segoe UI" FontSize="14" VerticalContentAlignment="Center" Background="Transparent" Margin="1,0,1,0"/>
                         </Border>
                         <Label Content="Salary" Margin="10 10 0 0" FontSize="12" FontWeight="Regular" Padding="5" FontFamily="Segoe UI" Width="264" />
                         <!--txt_Salary-->

@@ -5,17 +5,17 @@ namespace HotelManagement.DataTransferObject
 	public class AccountDTO
     {
 		#region Fields & Properties
-		public string UserName;
+		public string UserName { get; set; }
 
-		public string Password;
+        public string Password { get; set; }
 
-		public string Email;
+        public string Email { get; set; }
 
-		public bool IsAvailable;
+        public bool IsAvailable { get; set; }
 
-		public int RoleID;
+        public int RoleID { get; set; }
 
-		public int EmployeeID;
+        public int EmployeeID { get; set; }
         #endregion
 
         #region Methods

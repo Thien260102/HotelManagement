@@ -38,6 +38,21 @@ namespace HotelManagement.DataAccessLayer
             return account;
         }
 
+        public AccountDTO GetAccount(int employeeId)
+		{
+            string query = "Select * from Account " +
+                "where EmployeeID = @id ";
+
+            DataTable data = DataProvider.Instance.ExecuteQuery(query, new object[] { employeeId });
+
+            AccountDTO account = new AccountDTO();
+
+            if (data.Rows.Count == 1)
+                account = new AccountDTO(data.Rows[0]);
+
+            return account;
+        }
+
         public Rule.STATE AddNewAccount(AccountDTO account)
         {
             string query = "Insert into ACCOUNT " +
@@ -72,6 +87,21 @@ namespace HotelManagement.DataAccessLayer
 
             return false;
 		}
+
+        public Rule.STATE UpdateRole(string userName, int roleId)
+		{
+            string query = "UPDATE ACCOUNT " +
+                "SET RoleID = @id " +
+                "WHERE UserName = @name ";
+
+            if (DataProvider.Instance.ExecuteNonQuery(query,
+                new object[] { roleId, userName}) > 0)
+            {
+                return Rule.STATE.SUCCESS;
+            }
+
+            return Rule.STATE.FAIL;
+        }
         #endregion
     }
 }

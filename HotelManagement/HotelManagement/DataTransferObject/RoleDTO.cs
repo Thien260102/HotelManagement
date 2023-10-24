@@ -10,9 +10,9 @@ namespace HotelManagement.DataTransferObject
 	public class RoleDTO
 	{
 		#region Fields & Properties
-		public int Id;
+		public int Id { get; set; }
 
-		public string RoleName;
+		public string RoleName { get; set; }
 		#endregion
 
 		#region Methods

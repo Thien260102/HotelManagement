@@ -96,6 +96,24 @@ namespace HotelManagement.DataAccessLayer
 
             return false;
 		}
+
+        public Rule.STATE UpdateEmployee(EmployeeDTO employee)
+		{
+            string query = "UPDATE EMPLOYEE " +
+                "SET FullName = @name , PhoneNumber = @phone , " +
+                "Sex = @sex , BirthDay = @birth , StartDay = @start , Salary = @salary " +
+                "WHERE ID = @id ";
+
+            if (DataProvider.Instance.ExecuteNonQuery(query,
+                new object[] { employee.FullName, employee.PhoneNumber
+                             , employee.Sex, employee.BirthDay, employee.StartDay, 
+                               employee.Salary, employee.Id}) > 0)
+            {
+                return Rule.STATE.SUCCESS;
+            }
+
+            return Rule.STATE.FAIL;
+        }
         #endregion
     }
 }

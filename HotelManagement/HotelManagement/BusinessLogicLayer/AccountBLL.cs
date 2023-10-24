@@ -101,6 +101,24 @@ namespace HotelManagement.BusinessLogicLayer
 
 			return false;
 		}
+
+		public bool UpdateRole(int employeeId, int roleId)
+		{
+			string userName = AccountDAL.Instance.GetAccount(employeeId).UserName;
+
+			switch(AccountDAL.Instance.UpdateRole(userName, roleId))
+			{
+				case Rule.STATE.SUCCESS:
+					
+					return true;
+
+				case Rule.STATE.FAIL:
+					
+					return false;
+			}
+
+			return false;
+		}
 		#endregion
 	}
 }
