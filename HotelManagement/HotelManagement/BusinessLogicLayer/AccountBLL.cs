@@ -71,6 +71,26 @@ namespace HotelManagement.BusinessLogicLayer
 			return 0;
 		}
 
+		public bool InsertAccount(AccountDTO account)
+		{
+			switch (AccountDAL.Instance.AddNewAccount(account))
+			{
+				case Rule.STATE.SUCCESS:
+
+					return true;
+
+				case Rule.STATE.EXIST:
+					MessageBox.Show("Username or email is existed");
+					return false;
+
+				case Rule.STATE.FAIL:
+					MessageBox.Show("Add account fail");
+					return false;
+			}
+
+			return false;
+		}
+
 		public bool InsertAccount(AccountDTO account, int role)
 		{
 			if(account.RoleID == -1)
@@ -102,6 +122,22 @@ namespace HotelManagement.BusinessLogicLayer
 			return false;
 		}
 
+		public bool UpdateAccount(AccountDTO account)
+		{
+			switch (AccountDAL.Instance.UpdateAccount(account))
+			{
+				case Rule.STATE.SUCCESS:
+
+					return true;
+
+				case Rule.STATE.FAIL:
+
+					return false;
+			}
+
+			return false;
+		}
+
 		public bool UpdateRole(int employeeId, int roleId)
 		{
 			string userName = AccountDAL.Instance.GetAccount(employeeId).UserName;
@@ -119,6 +155,10 @@ namespace HotelManagement.BusinessLogicLayer
 
 			return false;
 		}
+
+		public AccountDTO GetAccount(int employeeId) => AccountDAL.Instance.GetAccount(employeeId);
+
+		public bool RemoveAccount(string userName) => AccountDAL.Instance.RemoveAccount(userName);
 		#endregion
 	}
 }

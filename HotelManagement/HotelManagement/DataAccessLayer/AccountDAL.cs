@@ -102,6 +102,33 @@ namespace HotelManagement.DataAccessLayer
 
             return Rule.STATE.FAIL;
         }
+
+        public Rule.STATE UpdateAccount(AccountDTO account)
+        {
+            string query = "UPDATE ACCOUNT " +
+                "SET PassWord = @pass , Email = @email , IsAvailable = @available , RoleID = @roleId " +
+                "WHERE UserName = @name ";
+
+            if (DataProvider.Instance.ExecuteNonQuery(query,
+                new object[] { account.Password, account.Email, account.IsAvailable, 
+                               account.RoleID, account.UserName}) > 0)
+            {
+                return Rule.STATE.SUCCESS;
+            }
+
+            return Rule.STATE.FAIL;
+        }
+
+        public bool RemoveAccount(string userName)
+        {
+            string query = "Delete from ACCOUNT " +
+                "where UserName = @name ";
+
+            if (DataProvider.Instance.ExecuteNonQuery(query, new object[] { userName }) > 0)
+                return true;
+
+            return false;
+        }
         #endregion
     }
 }

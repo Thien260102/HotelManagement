@@ -23,6 +23,7 @@ namespace HotelManagement.PresentationLayer
     public partial class Employeeinfo : Window
     {
         EmployeeDTO employee;
+        AccountDTO account;
 
         public Action ReloadEmployee;
 
@@ -38,6 +39,7 @@ namespace HotelManagement.PresentationLayer
             txt_Salary.IsReadOnly = true;
 
             employee = new EmployeeDTO();
+            account = new AccountDTO();
         }
 
 		private void SelectPosition(object sender, SelectionChangedEventArgs e)
@@ -71,6 +73,16 @@ namespace HotelManagement.PresentationLayer
             Checkbox_Male.IsChecked = employee.Sex;
 
             txt_CCCD.IsReadOnly = true;
+
+
+            // Account
+            AccountBLL accountBLL = new AccountBLL();
+            account = accountBLL.GetAccount(employee.Id);
+            txt_UserName.Text = account.UserName;
+            txt_Password.Text = account.Password;
+            Checkbox_IsAvailable.IsChecked = account.IsAvailable;
+
+            txt_UserName.IsReadOnly = true;
 		}
 
         private void btn_Cancel_Click(object sender, RoutedEventArgs e)
@@ -90,18 +102,36 @@ namespace HotelManagement.PresentationLayer
                 Rule.ROLE position = (Rule.ROLE)cbb_Position.SelectedItem;
                 decimal salary = Decimal.Parse(txt_Salary.Text.Trim());
 
+                string userName = txt_UserName.Text.Trim();
+                string pass = txt_Password.Text.Trim();
+
                 if (string.IsNullOrEmpty(name) || string.IsNullOrEmpty(citizenId) ||
                    string.IsNullOrEmpty(phone) || string.IsNullOrEmpty(birth) ||
-                   string.IsNullOrEmpty(start))
+                   string.IsNullOrEmpty(start) || string.IsNullOrEmpty(userName))
                 {
                     throw new Exception("Please fill all information");
                 }
+
+                if (!Utilities.Validate_CitizenId(citizenId))
+				{
+                    throw new Exception("Please fill correct citizen ID.");
+                }
+
+                if (!Utilities.Validate_Phone(phone))
+				{
+                    throw new Exception("Please fill correct phone number");
+				}
 
                 DateTime birthDay;
                 DateTime startDay;
                 if (!(DateTime.TryParse(birth, out birthDay) && DateTime.TryParse(start, out startDay)))
 				{
                     throw new Exception("Please fill date with correct format");
+                }
+
+                if (!Utilities.Validate_Password(pass))
+				{
+                    throw new Exception("Please fill password length more or equal 6 characters");
                 }
 
                 employee.FullName = name;
@@ -112,20 +142,34 @@ namespace HotelManagement.PresentationLayer
                 employee.Salary = salary;
                 employee.Sex = (bool)Checkbox_Male.IsChecked;
 
+                account.UserName = userName;
+                account.Password = pass;
+                account.IsAvailable = (bool)Checkbox_IsAvailable.IsChecked;
+                account.EmployeeID = employee.Id;
+                account.RoleID = (int)position;
+
                 EmployeeBLL employeeBLL = new EmployeeBLL();
+                AccountBLL accountBLL = new AccountBLL();
 
                 if (employee.Id == -1) // add new employeee
                 {
                     if (employeeBLL.InsertEmployee(employee))
                     {
                         int employeeId = employeeBLL.GetEmployeeId(citizenId);
-                        AccountBLL accountBLL = new AccountBLL();
-                        //if (accountBLL.InsertAccount(new DataTransferObject.AccountDTO(userName, passWord, "",
-                        //                            false, -1, employeeId), role))
-                        //{
-                        //    MessageBox.Show("Add new account successful");
-                        //    this.Close();
-                        //}
+                        account.EmployeeID = employeeId;
+
+						if (accountBLL.InsertAccount(account))
+						{
+							MessageBox.Show("Add new employee successful");
+
+                            ReloadEmployee?.Invoke();
+                            this.Close();
+						}
+                        else
+                        {
+                            employeeBLL.RemoveEmployee(employeeId);
+                            throw new Exception("Add new employee fail");
+                        }
                     }
                 }
 
@@ -134,8 +178,7 @@ namespace HotelManagement.PresentationLayer
                     if (employeeBLL.UpdateEmployee(employee))
                     {
                         MessageBox.Show("Update employee successful");
-                        AccountBLL accountBLL = new AccountBLL();
-                        accountBLL.UpdateRole(employee.Id, (int)position);
+                        accountBLL.UpdateAccount(account);
 
                         ReloadEmployee?.Invoke();
                         this.Close();

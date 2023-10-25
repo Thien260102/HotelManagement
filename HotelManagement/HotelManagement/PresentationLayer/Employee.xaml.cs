@@ -55,6 +55,7 @@ namespace HotelManagement.PresentationLayer
         private void btn_Add_Click(object sender, RoutedEventArgs e)
         {
             Employeeinfo employeeinfo = new Employeeinfo();
+            employeeinfo.ReloadEmployee += LoadEmployee;
             employeeinfo.Show();
         }
 
@@ -74,7 +75,30 @@ namespace HotelManagement.PresentationLayer
 
         private void btn_Delete_Click(object sender, RoutedEventArgs e)
         {
-            
+            if (currentIndex == -1)
+            {
+                MessageBox.Show("Please choose employee you want to change.");
+                return;
+            }
+
+            EmployeeBLL employeeBLL = new EmployeeBLL();
+            EmployeeDTO employee = employees[currentIndex];
+
+            AccountBLL accountBLL = new AccountBLL();
+            AccountDTO account = accountBLL.GetAccount(employee.Id);
+
+            try
+			{
+                employeeBLL.RemoveEmployee(employee.Id);
+                accountBLL.RemoveAccount(account.UserName);
+
+                LoadEmployee();
+                MessageBox.Show("Remove employee successful");
+			}
+            catch (Exception ex)
+			{
+                MessageBox.Show(ex.Message);
+			}
         }
 		#endregion
 	}
