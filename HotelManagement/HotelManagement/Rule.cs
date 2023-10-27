@@ -49,5 +49,12 @@ namespace HotelManagement
 
             public const string BORDER = "#F3E5FF";
         }
+
+		public enum ROOM_STATE
+		{
+			AVAILABLE = 0,
+			RENTING,
+			FIXING
+		}
 	}
 }

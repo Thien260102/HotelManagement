@@ -66,9 +66,9 @@ ADD CONSTRAINT PK_ROOM_TYPE PRIMARY KEY (ID);
 Drop table ROOM;
 Create Table ROOM
 (
-	ID int not null,
+	ID int not null IDENTITY(1,1),
 	Name nvarchar(50),
-	State nvarchar(10),
+	State int,
 	TypeID int,
 	Note nvarchar(max)
 )
@@ -178,6 +178,9 @@ Select * from ROOM_TYPE
 -----------------
 
 --- ROOM ---
+Delete from ROOM
+Insert into ROOM Values('1', 0, 1, 'TV');
+
 Select * from ROOM
 ------------------
 
