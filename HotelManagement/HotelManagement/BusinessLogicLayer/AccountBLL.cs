@@ -34,14 +34,21 @@ namespace HotelManagement.BusinessLogicLayer
 			{
 				Account = AccountDAL.Instance.GetAccount(userName);
 				if (Account.UserName == "")
-					return 3;
-
-				if (Account.UserName == userName && Account.Password == passWord)
 				{
-					return 0;
+					return 3;
 				}
 
-				return 2;
+				if (Account.UserName != userName || Account.Password != passWord)
+				{
+					return 2;
+				}
+
+				if (!Account.IsAvailable)
+				{
+					return 4;
+				}
+
+				return 0;
 			}
 			catch
 			{

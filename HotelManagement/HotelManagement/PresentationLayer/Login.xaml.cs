@@ -60,6 +60,10 @@ namespace HotelManagement.PresentationLayer
                 case 3:
                     MessageBox.Show("Not exist username");
                     break;
+
+                case 4:
+                    MessageBox.Show("Your account not available. Please contact with your boss.");
+                    break;
             }
         }
         

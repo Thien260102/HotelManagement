@@ -151,7 +151,7 @@ Select * from ROLE
 ---------------
 
 --- ACCOUNT ---
-Delete from ACCOUNT;
+Delete from ACCOUNT where UserName != 'admin';
 Select * from ACCOUNT
 Insert into ACCOUNT Values('admin', '123', null, 1, 1, 0);
 ---------------
