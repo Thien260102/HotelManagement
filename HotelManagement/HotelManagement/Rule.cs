@@ -56,5 +56,19 @@ namespace HotelManagement
 			RENTING,
 			FIXING
 		}
+
+		public enum ATTENDANCE
+		{
+			WORKED = 0,
+			EXCUSED,
+			UNEXCUSED
+		}
+
+		public enum REPORT
+		{
+			REVENUE,
+			MOST_USED,
+			SALARY
+		}
 	}
 }

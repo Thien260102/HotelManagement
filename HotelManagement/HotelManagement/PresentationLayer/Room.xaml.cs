@@ -23,6 +23,7 @@ namespace HotelManagement.PresentationLayer
     public partial class Room : UserControl
     {
         List<RoomDTO> rooms;
+        Dictionary<Rule.ROOM_STATE, List<RoomDTO>> dicRooms;
         int currentRoom;
 
         public Room()
@@ -30,28 +31,62 @@ namespace HotelManagement.PresentationLayer
             InitializeComponent();
 
             LoadRoom();
-            currentRoom = -1;
             DataGridRoom.SelectionChanged += SelectRoom;
         }
 
 		private void LoadRoom()
-		{
+        {
+            currentRoom = -1;
             rooms = new RoomBLL().GetAllRooms();
-            DataGridRoom.ItemsSource = rooms;
+
+            dicRooms = new Dictionary<Rule.ROOM_STATE, List<RoomDTO>>();
+            dicRooms.Add(Rule.ROOM_STATE.AVAILABLE, rooms.FindAll(element => element.State == (int)Rule.ROOM_STATE.AVAILABLE));
+            dicRooms.Add(Rule.ROOM_STATE.RENTING, rooms.FindAll(element => element.State == (int)Rule.ROOM_STATE.RENTING));
+            dicRooms.Add(Rule.ROOM_STATE.FIXING, rooms.FindAll(element => element.State == (int)Rule.ROOM_STATE.FIXING));
+
+            btn_Avaliable.Content = $"Available({dicRooms[Rule.ROOM_STATE.AVAILABLE].Count})";
+            btn_Booked.Content = $"Booked({dicRooms[Rule.ROOM_STATE.RENTING].Count})";
+            btn_Fixing.Content = $"Fixing({dicRooms[Rule.ROOM_STATE.FIXING].Count})";
+            btn_All.Content = $"Fixing({rooms.Count})";
+
+            AllRooms();
 		}
+
+        private void FilterRoom(Rule.ROOM_STATE state)
+		{
+            currentRoom = -1;
+            DataGridRoom.ItemsSource = dicRooms[state];
+        }
+
+        private void AllRooms()
+		{
+            DisableButton();
+            BdAll.Background = (SolidColorBrush)new BrushConverter().ConvertFromString("#FDDDB3");
+            BdAll.BorderBrush = (SolidColorBrush)new BrushConverter().ConvertFromString("#E18308");
+            btn_All.Foreground = (SolidColorBrush)new BrushConverter().ConvertFromString("#E18308");
+
+            btn_All.Content = $"All({rooms.Count})";
+            DataGridRoom.ItemsSource = rooms;
+        }
 
         public void DisableButton()
         {
             BdAvaliable.Background = Brushes.White;
             BdAvaliable.BorderBrush = (SolidColorBrush)new BrushConverter().ConvertFromString(Rule.BUTTON.NORMAL);
             btn_Avaliable.Foreground = (SolidColorBrush)new BrushConverter().ConvertFromString(Rule.BUTTON.NORMAL);
+            
             BdBooked.Background = Brushes.White;
             BdBooked.BorderBrush = (SolidColorBrush)new BrushConverter().ConvertFromString(Rule.BUTTON.NORMAL);
             btn_Booked.Foreground = (SolidColorBrush)new BrushConverter().ConvertFromString(Rule.BUTTON.NORMAL);
+            
             BdFixing.Background = Brushes.Transparent;
             BdFixing.BorderBrush = (SolidColorBrush)new BrushConverter().ConvertFromString(Rule.BUTTON.NORMAL);
             btn_Fixing.Foreground = (SolidColorBrush)new BrushConverter().ConvertFromString(Rule.BUTTON.NORMAL);
-           
+
+            BdAll.Background = Brushes.Transparent;
+            BdAll.BorderBrush = (SolidColorBrush)new BrushConverter().ConvertFromString(Rule.BUTTON.NORMAL);
+            btn_All.Foreground = (SolidColorBrush)new BrushConverter().ConvertFromString(Rule.BUTTON.NORMAL);
+
         }
 
         #region Events
@@ -66,6 +101,9 @@ namespace HotelManagement.PresentationLayer
             BdAvaliable.Background = (SolidColorBrush)new BrushConverter().ConvertFromString("#E8F1FD");
             BdAvaliable.BorderBrush = (SolidColorBrush)new BrushConverter().ConvertFromString("#1570EF");
             btn_Avaliable.Foreground = (SolidColorBrush)new BrushConverter().ConvertFromString("#1570EF");
+
+            btn_Avaliable.Content = $"Available({dicRooms[Rule.ROOM_STATE.AVAILABLE].Count})";
+            FilterRoom(Rule.ROOM_STATE.AVAILABLE);
         }
 
         private void btn_Booked_Click(object sender, RoutedEventArgs e)
@@ -74,6 +112,9 @@ namespace HotelManagement.PresentationLayer
             BdBooked.Background = (SolidColorBrush)new BrushConverter().ConvertFromString("#FAC5C1");
             BdBooked.BorderBrush = (SolidColorBrush)new BrushConverter().ConvertFromString("#F04438");
             btn_Booked.Foreground = (SolidColorBrush)new BrushConverter().ConvertFromString("#F04438");
+
+            btn_Booked.Content = $"Booked({dicRooms[Rule.ROOM_STATE.RENTING].Count})";
+            FilterRoom(Rule.ROOM_STATE.RENTING);
         }
 
         private void btn_Fixing_Click(object sender, RoutedEventArgs e)
@@ -82,6 +123,14 @@ namespace HotelManagement.PresentationLayer
             BdFixing.Background = (SolidColorBrush)new BrushConverter().ConvertFromString("#FDDDB3");
             BdFixing.BorderBrush = (SolidColorBrush)new BrushConverter().ConvertFromString("#E18308");
             btn_Fixing.Foreground = (SolidColorBrush)new BrushConverter().ConvertFromString("#E18308");
+
+            btn_Fixing.Content = $"Fixing({dicRooms[Rule.ROOM_STATE.FIXING].Count})";
+            FilterRoom(Rule.ROOM_STATE.FIXING);
+        }
+
+        private void btn_All_Click(object sender, RoutedEventArgs e)
+        {
+            AllRooms();
         }
 
         private void btn_Add_Click(object sender, RoutedEventArgs e)
