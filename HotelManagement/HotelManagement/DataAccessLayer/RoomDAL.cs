@@ -50,27 +50,28 @@ namespace HotelManagement.DataAccessLayer
             return null;
         }
 
-        public int CountExistRoom(string roomName)
+        public int CountExistRoom(string roomName, int floor)
         {
             string query = "Select Count(*) from ROOM " +
-                "where Name = @name ";
+                "where Name = @name and FloorNumber = @floor ";
 
             return (int)DataProvider.Instance.ExecuteScalar(query,
-                new object[] { roomName });
+                new object[] { roomName, floor });
         }
 
         public Rule.STATE AddNewRoom(RoomDTO room)
         {
             string query = "Insert into ROOM " +
-                "Values( @Name , @State , @TypeId , @Note ) ";
+                "Values( @Name , @floor , @State , @TypeId , @Note ) ";
 
-            if (CountExistRoom(room.Name) > 0)
+            if (CountExistRoom(room.Name, room.Floor) > 0)
             {
                 return Rule.STATE.EXIST;
             }
 
             if (DataProvider.Instance.ExecuteNonQuery(query,
-                new object[] { room.Name, room.State, room.RoomTypeId, room.Note }) > 0)
+                new object[] { room.Name, room.Floor, 
+                               room.State, room.RoomTypeId, room.Note }) > 0)
             {
                 return Rule.STATE.SUCCESS;
             }
@@ -82,17 +83,17 @@ namespace HotelManagement.DataAccessLayer
         public Rule.STATE UpdateRoom(RoomDTO room)
         {
             string query = "UPDATE ROOM " +
-                "SET Name = @name , State = @state , TypeID = @typeId , Note = @note " +
+                "SET Name = @name , FloorNumber = @floor , State = @state , TypeID = @typeId , Note = @note " +
                 "WHERE ID = @id ";
 
-            if (CountExistRoom(room.Name) > 1)
+            if (CountExistRoom(room.Name, room.Floor) > 1)
             {
                 return Rule.STATE.EXIST;
             }
 
             if (DataProvider.Instance.ExecuteNonQuery(query,
-                new object[] { room.Name, room.State, room.RoomTypeId,
-                               room.Note, room.Id }) > 0)
+                new object[] { room.Name, room.Floor, room.State, 
+                               room.RoomTypeId, room.Note, room.Id }) > 0)
             {
                 return Rule.STATE.SUCCESS;
             }

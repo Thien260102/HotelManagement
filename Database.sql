@@ -66,7 +66,7 @@ ADD CONSTRAINT PK_ROOM_TYPE PRIMARY KEY (ID);
 Drop table ROOM;
 Create Table ROOM
 (
-	ID int not null IDENTITY(1,1),
+	ID bigint not null,
 	Name nvarchar(50),
 	State int,
 	TypeID int,
@@ -179,7 +179,7 @@ Select * from ROOM_TYPE
 
 --- ROOM ---
 Delete from ROOM
-Insert into ROOM Values('1', 0, 1, 'TV');
+Insert into ROOM Values(1001, '1', 0, 1, 'TV');	--- 1_001: 1 is room's number, 001 is floor
 
 Select * from ROOM
 ------------------

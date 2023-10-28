@@ -53,6 +53,7 @@ namespace HotelManagement.PresentationLayer
 		{
             this.room = room;
             txt_RoomName.Text = room.Name;
+            txt_Floor.Text = room.Floor.ToString();
             txt_RoomFacility.Text = room.Note;
             cb_RoomType.Text = roomTypes.Find(element => element.Id == room.RoomTypeId).Name;
             
@@ -85,6 +86,12 @@ namespace HotelManagement.PresentationLayer
                 string note = txt_RoomFacility.Text.Trim();
                 Rule.ROOM_STATE state = Rule.ROOM_STATE.AVAILABLE;
 
+                int floor;
+                if (!int.TryParse(txt_Floor.Text.Trim(), out floor))
+				{
+                    throw new Exception("Floor must be number");
+				}
+
                 if (!Enum.TryParse<Rule.ROOM_STATE>(cb_State.SelectedItem.ToString(), true, out state))
 				{
                     throw new Exception("Room state error");
@@ -98,6 +105,7 @@ namespace HotelManagement.PresentationLayer
                 }
 
                 room.Name = name;
+                room.Floor = floor;
                 room.Note = note;
                 room.State = (int)state;
                 room.RoomTypeId = roomTypeId;

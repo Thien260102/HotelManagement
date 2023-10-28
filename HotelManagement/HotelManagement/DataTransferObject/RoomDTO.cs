@@ -9,6 +9,8 @@ namespace HotelManagement.DataTransferObject
 
 		public string Name { get; set; }
 
+		public int Floor { get; set; }
+
 		public int State { get; set; }
 		public string StateName { get; set; }
 
@@ -25,10 +27,11 @@ namespace HotelManagement.DataTransferObject
 			Id = -1;
 		}
 
-		public RoomDTO(int id, string name, int state, int roomTypeId, string note)
+		public RoomDTO(int id, string name, int floor, int state, int roomTypeId, string note)
 		{
 			Id = id;
 			Name = name;
+			Floor = floor;
 			State = state;
 			StateName = ((Rule.ROOM_STATE)state).ToString();
 			RoomTypeId = roomTypeId;
@@ -39,6 +42,7 @@ namespace HotelManagement.DataTransferObject
 		{
 			Id = (int)row["ID"];
 			Name = row["Name"].ToString();
+			Floor = (int)row["FloorNumber"];
 
 			State = (int)row["State"];
 			StateName = ((Rule.ROOM_STATE)State).ToString();
