@@ -76,6 +76,7 @@ WindowStyle="None" AllowsTransparency="True" Height="600" Width="950" >
                                 <RowDefinition Height="45"/>
                                 <RowDefinition Height="45"/>
                                 <RowDefinition Height="45"/>
+                                <RowDefinition Height="45"/>
                                 <RowDefinition Height="*" />
                                 <RowDefinition Height="45"/>
                             </Grid.RowDefinitions>
@@ -90,8 +91,19 @@ WindowStyle="None" AllowsTransparency="True" Height="600" Width="950" >
                                     <Button x:Name="btn_Dashboard" Content="Dashboard" Width="134" Height="45" FontSize="16" FontWeight="SemiBold" Background="Transparent" Foreground="#7F000000"  BorderThickness="0" Click="btn_Dashboard_Click" />
                                 </StackPanel>
                             </Border>
+                            <!--RoomType-->
+                            <Border x:Name="RoomTypes"  Background="White"  CornerRadius="15" Grid.Row="1" Margin="5,0,5,0">
+                                <StackPanel  Orientation="Horizontal" Background="Transparent" >
+                                    <Border Height="28" Width="28" Margin="8 4 0 0" HorizontalAlignment="Left" BorderThickness="0">
+                                        <Border.Background>
+                                            <ImageBrush  Stretch="Fill" ImageSource="/Resources/double-bed.png"/>
+                                        </Border.Background>
+                                    </Border>
+                                    <Button x:Name="btn_RoomType" Content="Room Type" Width="134" Height="45" FontSize="16" FontWeight="SemiBold" Background="Transparent" Foreground="#7F000000"  BorderThickness="0" Click="btn_RoomType_Click"  />
+                                </StackPanel>
+                            </Border>
                             <!--Room-->
-                            <Border x:Name="Rooms"  Background="White"  CornerRadius="15" Grid.Row="1" Margin="5,0,5,0">
+                            <Border x:Name="Rooms"  Background="White"  CornerRadius="15" Grid.Row="2" Margin="5,0,5,0">
                                 <StackPanel  Orientation="Horizontal" Background="Transparent" >
                                     <Border Height="28" Width="28" Margin="8 4 0 0" HorizontalAlignment="Left" BorderThickness="0">
                                         <Border.Background>
@@ -102,7 +114,7 @@ WindowStyle="None" AllowsTransparency="True" Height="600" Width="950" >
                                 </StackPanel>
                             </Border>
                             <!--Guest-->
-                            <Border x:Name="Guests"  Background="White"  CornerRadius="15" Grid.Row="2" Margin="5,0,5,0">
+                            <Border x:Name="Guests"  Background="White"  CornerRadius="15" Grid.Row="3" Margin="5,0,5,0">
                                 <StackPanel  Orientation="Horizontal" Background="Transparent" >
                                     <Border Height="28" Width="28" Margin="8 4 0 0" HorizontalAlignment="Left" BorderThickness="0">
                                         <Border.Background>
@@ -113,7 +125,7 @@ WindowStyle="None" AllowsTransparency="True" Height="600" Width="950" >
                                 </StackPanel>
                             </Border>
                             <!--Booking-->
-                            <Border x:Name="Bookings"  Background="White"  CornerRadius="15" Grid.Row="3" Margin="5,0,5,0">
+                            <Border x:Name="Bookings"  Background="White"  CornerRadius="15" Grid.Row="4" Margin="5,0,5,0">
                                 <StackPanel  Orientation="Horizontal" Background="Transparent" >
                                     <Border Height="28" Width="28" Margin="8 4 0 0" HorizontalAlignment="Left" BorderThickness="0">
                                         <Border.Background>
@@ -124,7 +136,7 @@ WindowStyle="None" AllowsTransparency="True" Height="600" Width="950" >
                                 </StackPanel>
                             </Border>
                             <!--Employee-->
-                            <Border x:Name="Employees" Background="Transparent"  CornerRadius="15" Grid.Row="4" Margin="5,0,5,0">
+                            <Border x:Name="Employees" Background="Transparent"  CornerRadius="15" Grid.Row="5" Margin="5,0,5,0">
                                 <StackPanel  Orientation="Horizontal" Background="Transparent" >
                                     <Border Height="28" Width="28" Margin="8 4 0 0" HorizontalAlignment="Left" BorderThickness="0">
                                         <Border.Background>
@@ -135,7 +147,7 @@ WindowStyle="None" AllowsTransparency="True" Height="600" Width="950" >
                                 </StackPanel>
                             </Border>
                             <!--Voucher-->
-                            <Border x:Name="Vouchers"  Background="White"  CornerRadius="15" Grid.Row="5" Margin="5,0,5,0">
+                            <Border x:Name="Vouchers"  Background="White"  CornerRadius="15" Grid.Row="6" Margin="5,0,5,0">
                                 <StackPanel  Orientation="Horizontal" Background="Transparent" >
                                     <Border Height="28" Width="28" Margin="8 4 0 0" HorizontalAlignment="Left" BorderThickness="0">
                                         <Border.Background>
@@ -146,7 +158,7 @@ WindowStyle="None" AllowsTransparency="True" Height="600" Width="950" >
                                 </StackPanel>
                             </Border>
                             <!--Report-->
-                            <Border x:Name="Reports"  Background="White"  CornerRadius="15" Grid.Row="6" Margin="5,0,5,0">
+                            <Border x:Name="Reports"  Background="White"  CornerRadius="15" Grid.Row="7" Margin="5,0,5,0">
                                 <StackPanel  Orientation="Horizontal" Background="Transparent" >
                                     <Border Height="28" Width="28" Margin="8 4 0 0" HorizontalAlignment="Left" BorderThickness="0">
                                         <Border.Background>
@@ -157,7 +169,7 @@ WindowStyle="None" AllowsTransparency="True" Height="600" Width="950" >
                                 </StackPanel>
                             </Border>
                             <!--Logout-->
-                            <Border x:Name="Logout"  Background="White"  CornerRadius="15" Grid.Row="8" Margin="5,0,5,0">
+                            <Border x:Name="Logout"  Background="White"  CornerRadius="15" Grid.Row="9" Margin="5,0,5,0">
                                 <StackPanel  Orientation="Horizontal" Background="Transparent" >
                                     <Border Height="28" Width="28" Margin="8 4 0 0" HorizontalAlignment="Left" BorderThickness="0">
                                         <Border.Background>

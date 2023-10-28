@@ -147,5 +147,12 @@ namespace HotelManagement.PresentationLayer
             }
         }
 
+        private void btn_RoomType_Click(object sender, RoutedEventArgs e)
+        {
+            Button_Choose(sender);
+            RoomTypes.Background = (SolidColorBrush)new BrushConverter().ConvertFromString(Rule.BUTTON.BORDER);
+            RoomType roomType = new RoomType(); 
+            OpenUserControl(roomType);
+        }
     }
 }

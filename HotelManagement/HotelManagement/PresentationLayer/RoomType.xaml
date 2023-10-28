@@ -1,0 +1,42 @@
+﻿<UserControl x:Class="HotelManagement.PresentationLayer.RoomType"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:HotelManagement.PresentationLayer"
+             mc:Ignorable="d" 
+                     d:DesignHeight="545" d:DesignWidth="770">
+    <Grid>
+        <StackPanel Background="Transparent" >
+            <StackPanel Height="50" Orientation="Horizontal" >
+                
+                <!--Button Add-->
+                <Border Margin="450 5 0 0" CornerRadius="20" Background="#F3E5FF" Height="40" Width="96">
+                    <Button x:Name="btn_Add" Content="Add" FontSize="18" FontWeight="SemiBold"  Background="Transparent" Foreground="#4C00A3" BorderThickness="0" Click= "btn_Add_Click" Height="40" VerticalAlignment="Top" />
+                </Border>
+                <!--Button Update-->
+                <Border Margin="10 5 0 0" CornerRadius="20" Background="#F3E5FF" Height="40" Width="96">
+                    <Button x:Name="btn_Update" Content="Update" FontSize="18" FontWeight="SemiBold"  Background="Transparent" Foreground="#4C00A3" BorderThickness="0" Click= "btn_Update_Click" Height="40" VerticalAlignment="Top" />
+                </Border>
+                <!--Button Delete-->
+                <Border Margin="10 5 0 0" CornerRadius="20" Background="White" Height="40" Width="96" BorderThickness="1" BorderBrush="#4C00A3">
+                    <Button x:Name="btn_Delete" Content="Delete" FontSize="18" FontWeight="SemiBold"  Background="Transparent" Foreground="#4C00A3" BorderThickness="0" Click= "btn_Delete_Click"/>
+                </Border>
+            </StackPanel>
+            <!--DataGridView-->
+            <StackPanel Height="495" Background="Transparent">
+                <DataGrid RowStyle="{DynamicResource DataGridRowStyle1}" 
+                  ColumnHeaderStyle="{DynamicResource DataGridColumnHeaderStyle1}" 
+                  CellStyle="{DynamicResource DataGridCellStyle1}" 
+                  x:Name="DataGridRooType" Style="{DynamicResource DataGridStyle1}">
+                    <DataGrid.Columns>
+                        <!--<DataGridTextColumn Header="No." IsReadOnly="True" CanUserResize="False" Width="auto" Binding="{Binding Id}"/>-->
+                        <DataGridTextColumn Header="Name" Binding="{Binding Name}" IsReadOnly="True" Width="*"/>
+                        <DataGridTextColumn Header="Number people" Binding="{Binding HighestNumberPeople}" IsReadOnly="True" Width="*"/>
+                        <DataGridTextColumn Header="Price" Binding="{Binding Price}" IsReadOnly="True" Width="*"/>
+                    </DataGrid.Columns>
+                </DataGrid>
+            </StackPanel>
+        </StackPanel>
+    </Grid>
+</UserControl>
