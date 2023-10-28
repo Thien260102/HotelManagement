@@ -10,10 +10,10 @@ namespace HotelManagement.DataTransferObject
 		public string Name { get; set; }
 
 		public int State { get; set; }
+		public string StateName { get; set; }
 
 		public int RoomTypeId { get; set; }
-
-		//public string RoomTypeName { get; set; }
+		public string RoomTypeName { get; set; }
 
 		public string Note { get; set; }
 		#endregion
@@ -30,6 +30,7 @@ namespace HotelManagement.DataTransferObject
 			Id = id;
 			Name = name;
 			State = state;
+			StateName = ((Rule.ROOM_STATE)state).ToString();
 			RoomTypeId = roomTypeId;
 			Note = note;
 		}
@@ -38,7 +39,10 @@ namespace HotelManagement.DataTransferObject
 		{
 			Id = (int)row["ID"];
 			Name = row["Name"].ToString();
+
 			State = (int)row["State"];
+			StateName = ((Rule.ROOM_STATE)State).ToString();
+
 			RoomTypeId = (int)row["TypeID"];
 			Note = row["Note"].ToString();
 		}

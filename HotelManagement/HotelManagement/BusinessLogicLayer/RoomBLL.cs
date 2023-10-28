@@ -17,7 +17,18 @@ namespace HotelManagement.BusinessLogicLayer
 		#endregion
 
 		#region Methods
-		public List<RoomDTO> GetAllRooms() => RoomDAL.Instance.GetAll();
+		public List<RoomDTO> GetAllRooms()
+		{
+			List<RoomDTO> rooms = RoomDAL.Instance.GetAll();
+
+			List<RoomTypeDTO> roomTypes = new RoomTypeBLL().GetAllRoomTypes();
+			foreach (var room in rooms)
+			{
+				room.RoomTypeName = roomTypes.Find(element => element.Id == room.RoomTypeId).Name;
+			}
+
+			return rooms;
+		}
 
 		public bool AddNewRoom(RoomDTO room)
 		{

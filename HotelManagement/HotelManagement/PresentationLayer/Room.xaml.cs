@@ -36,20 +36,28 @@ namespace HotelManagement.PresentationLayer
 
 		private void LoadRoom()
         {
-            currentRoom = -1;
-            rooms = new RoomBLL().GetAllRooms();
+            try
+			{
+                currentRoom = -1;
+                rooms = new RoomBLL().GetAllRooms();
 
-            dicRooms = new Dictionary<Rule.ROOM_STATE, List<RoomDTO>>();
-            dicRooms.Add(Rule.ROOM_STATE.AVAILABLE, rooms.FindAll(element => element.State == (int)Rule.ROOM_STATE.AVAILABLE));
-            dicRooms.Add(Rule.ROOM_STATE.RENTING, rooms.FindAll(element => element.State == (int)Rule.ROOM_STATE.RENTING));
-            dicRooms.Add(Rule.ROOM_STATE.FIXING, rooms.FindAll(element => element.State == (int)Rule.ROOM_STATE.FIXING));
+                dicRooms = new Dictionary<Rule.ROOM_STATE, List<RoomDTO>>();
+                dicRooms.Add(Rule.ROOM_STATE.AVAILABLE, rooms.FindAll(element => element.State == (int)Rule.ROOM_STATE.AVAILABLE));
+                dicRooms.Add(Rule.ROOM_STATE.RENTING, rooms.FindAll(element => element.State == (int)Rule.ROOM_STATE.RENTING));
+                dicRooms.Add(Rule.ROOM_STATE.FIXING, rooms.FindAll(element => element.State == (int)Rule.ROOM_STATE.FIXING));
 
-            btn_Avaliable.Content = $"Available({dicRooms[Rule.ROOM_STATE.AVAILABLE].Count})";
-            btn_Booked.Content = $"Booked({dicRooms[Rule.ROOM_STATE.RENTING].Count})";
-            btn_Fixing.Content = $"Fixing({dicRooms[Rule.ROOM_STATE.FIXING].Count})";
-            btn_All.Content = $"Fixing({rooms.Count})";
+                btn_Avaliable.Content = $"Available({dicRooms[Rule.ROOM_STATE.AVAILABLE].Count})";
+                btn_Booked.Content = $"Booked({dicRooms[Rule.ROOM_STATE.RENTING].Count})";
+                btn_Fixing.Content = $"Fixing({dicRooms[Rule.ROOM_STATE.FIXING].Count})";
+                btn_All.Content = $"Fixing({rooms.Count})";
 
-            AllRooms();
+                AllRooms();
+            }
+            catch (Exception ex)
+			{
+                MessageBox.Show(ex.Message);
+			}
+            
 		}
 
         private void FilterRoom(Rule.ROOM_STATE state)

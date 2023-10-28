@@ -25,8 +25,9 @@
                 <Border x:Name="BdAll" Margin="5 10 0 0" CornerRadius="15" Background="White" Height="30" Width="100" BorderThickness="1" BorderBrush="#7F000000" >
                     <Button x:Name="btn_All" Content="All(20)" FontSize="12" FontWeight="Medium"  Background="Transparent" Foreground="#7F000000" BorderThickness="0" Click="btn_All_Click" />
                 </Border>
+                
                 <!--Button Add-->
-                <Border Margin="140 5 0 0" CornerRadius="20" Background="#F3E5FF" Height="40" Width="96">
+                <Border Margin="30 5 0 0" CornerRadius="20" Background="#F3E5FF" Height="40" Width="96">
                     <Button x:Name="btn_Add" Content="Add" FontSize="18" FontWeight="SemiBold"  Background="Transparent" Foreground="#4C00A3" BorderThickness="0" Click= "btn_Add_Click" Height="40" VerticalAlignment="Top" />
                 </Border>
                 <!--Button Update-->
@@ -47,8 +48,8 @@
                     <DataGrid.Columns>
                         <DataGridTextColumn Header="No." IsReadOnly="True" CanUserResize="False" Width="auto" Binding="{Binding Id}"/>
                         <DataGridTextColumn Header="Room Name" Binding="{Binding Name}" IsReadOnly="True" Width="*"/>
-                        <DataGridTextColumn Header="State" Binding="{Binding State}" IsReadOnly="True" Width="*"/>
-                        <DataGridTextColumn Header="Type" Binding="{Binding RoomTypeId}" IsReadOnly="True" Width="*"/>
+                        <DataGridTextColumn Header="State" Binding="{Binding StateName}" IsReadOnly="True" Width="*"/>
+                        <DataGridTextColumn Header="Type" Binding="{Binding RoomTypeName}" IsReadOnly="True" Width="*"/>
                         <DataGridTextColumn Header="Note" Binding="{Binding Note}" IsReadOnly="True" Width="*"/>
                     </DataGrid.Columns>
                 </DataGrid>
