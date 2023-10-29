@@ -18,7 +18,7 @@ namespace HotelManagement.DataTransferObject
 
 		public RoomTypeDTO()
 		{
-
+			Id = -1;
 		}
 
 		public RoomTypeDTO(int id, string name, int totalNumber, decimal price)

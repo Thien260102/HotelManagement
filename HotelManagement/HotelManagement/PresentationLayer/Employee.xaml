@@ -6,6 +6,11 @@
              xmlns:local="clr-namespace:HotelManagement.PresentationLayer"
              mc:Ignorable="d" 
              d:DesignHeight="545" d:DesignWidth="770">
+    
+    <UserControl.Resources>
+        <local:MoneyConverter x:Key="converter"></local:MoneyConverter>
+    </UserControl.Resources>
+    
     <Grid>
         <StackPanel Background="Transparent" >
             <StackPanel Height="50" Orientation="Horizontal" >
@@ -61,7 +66,7 @@
                     <DataGridTextColumn Header="Birth Day" Binding="{Binding BirthDay}" IsReadOnly="True" Width="*"/>
                     <DataGridTextColumn Header="Sex" Binding="{Binding SSex}" IsReadOnly="True" Width="*"/>
                     <DataGridTextColumn Header="Phone Number" Binding="{Binding PhoneNumber}" IsReadOnly="True" Width="*"/>
-                    <DataGridTextColumn Header="Salary" Binding="{Binding Salary}" IsReadOnly="True" Width="*"/>
+                    <DataGridTextColumn Header="Salary" Binding="{Binding Salary, Converter={StaticResource converter}}" IsReadOnly="True" Width="*"/>
 
                 </DataGrid.Columns>
             </DataGrid>

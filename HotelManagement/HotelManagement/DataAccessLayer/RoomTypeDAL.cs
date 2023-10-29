@@ -21,7 +21,23 @@ namespace HotelManagement.DataAccessLayer
         #endregion
 
         #region Methods
-        public string GetRoleName(int id)
+        public List<RoomTypeDTO> GetAll()
+        {
+            List<RoomTypeDTO> roomTypes = new List<RoomTypeDTO>();
+
+            string query = "Select * from ROOM_TYPE ";
+
+            DataTable data = DataProvider.Instance.ExecuteQuery(query, new object[] { });
+
+            foreach (DataRow element in data.Rows)
+            {
+                roomTypes.Add(new RoomTypeDTO(element));
+            }
+
+            return roomTypes;
+        }
+
+        public string GeRoomTypeName(int id)
         {
             string query = "Select * from ROOM_TYPE " +
                 "where Id = @id ";
@@ -32,6 +48,67 @@ namespace HotelManagement.DataAccessLayer
                 return new RoomTypeDTO(data.Rows[0]).Name;
 
             return null;
+        }
+
+        public int CountExistRoom(string roomName)
+        {
+            string query = "Select Count(*) from ROOM_TYPE " +
+                "where Name = @name ";
+
+            return (int)DataProvider.Instance.ExecuteScalar(query,
+                new object[] { roomName });
+        }
+
+        public Rule.STATE AddNewRoomType(RoomTypeDTO room)
+        {
+            string query = "Insert into ROOM_TYPE " +
+                "Values( @Id , @Name , @number , @price ) ";
+
+            if (CountExistRoom(room.Name) > 0)
+            {
+                return Rule.STATE.EXIST;
+            }
+
+            if (DataProvider.Instance.ExecuteNonQuery(query,
+                new object[] { room.Id, room.Name,
+                               room.HighestNumberPeople, room.Price }) > 0)
+            {
+                return Rule.STATE.SUCCESS;
+            }
+
+
+            return Rule.STATE.FAIL;
+        }
+
+        public Rule.STATE UpdateRoomType(RoomTypeDTO room, bool isCheck = false)
+        {
+            string query = "UPDATE ROOM_TYPE " +
+                "SET Name = @name , HighestNumberPeople = @number , Price = @price " +
+                "WHERE ID = @id ";
+
+            if (isCheck && CountExistRoom(room.Name) > 0)
+            {
+                return Rule.STATE.EXIST;
+            }
+
+            if (DataProvider.Instance.ExecuteNonQuery(query,
+                new object[] { room.Name, room.HighestNumberPeople, room.Price, room.Id }) > 0)
+            {
+                return Rule.STATE.SUCCESS;
+            }
+
+            return Rule.STATE.FAIL;
+        }
+
+        public bool RemoveRoomType(int id)
+        {
+            string query = "Delete from ROOM_TYPE " +
+                "where ID = @id ";
+
+            if (DataProvider.Instance.ExecuteNonQuery(query, new object[] { id }) > 0)
+                return true;
+
+            return false;
         }
 
         public int GetRoomTypeID(string roomTypeName)
@@ -47,20 +124,12 @@ namespace HotelManagement.DataAccessLayer
             return 0;
         }
 
-        public List<RoomTypeDTO> GetAll()
+        public int CountAll()
 		{
-            List<RoomTypeDTO> roomTypes = new List<RoomTypeDTO>();
+            string query = "Select Count(*) from ROOM_TYPE";
 
-            string query = "Select * from ROOM_TYPE ";
-
-            DataTable data = DataProvider.Instance.ExecuteQuery(query, new object[] { });
-
-            foreach (DataRow element in data.Rows)
-            {
-                roomTypes.Add(new RoomTypeDTO(element));
-            }
-
-            return roomTypes;
+            return (int)DataProvider.Instance.ExecuteScalar(query,
+                new object[] { });
         }
         #endregion
     }

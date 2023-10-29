@@ -32,6 +32,8 @@ namespace HotelManagement.PresentationLayer
         {
             Dashboards.Background = Brushes.Transparent;
             btn_Dashboard.Foreground = (SolidColorBrush)new BrushConverter().ConvertFromString(Rule.BUTTON.NORMAL);
+            RoomTypes.Background = Brushes.Transparent;
+            btn_RoomType.Foreground = (SolidColorBrush)new BrushConverter().ConvertFromString(Rule.BUTTON.NORMAL);
             Rooms.Background = Brushes.Transparent;
             btn_Room.Foreground = (SolidColorBrush)new BrushConverter().ConvertFromString(Rule.BUTTON.NORMAL);
             Guests.Background = Brushes.Transparent;

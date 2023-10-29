@@ -111,6 +111,15 @@ namespace HotelManagement.DataAccessLayer
 
             return false;
         }
+
+        public int CountRoomWith(int typeId)
+		{
+            string query = "Select Count(*) from ROOM " +
+                "where TypeID = @typeId ";
+
+            return (int)DataProvider.Instance.ExecuteScalar(query,
+                new object[] { typeId });
+        }
         #endregion
     }
 }
