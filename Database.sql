@@ -179,7 +179,7 @@ Select * from ROOM_TYPE
 -----------------
 
 --- ROOM ---
-Delete from ROOM
+Delete from ROOM 
 Insert into ROOM Values('1', 1, 0, 1, 'TV');	
 
 Select * from ROOM

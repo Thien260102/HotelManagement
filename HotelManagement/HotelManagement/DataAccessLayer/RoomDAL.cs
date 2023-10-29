@@ -80,13 +80,13 @@ namespace HotelManagement.DataAccessLayer
             return Rule.STATE.FAIL;
         }
 
-        public Rule.STATE UpdateRoom(RoomDTO room)
+        public Rule.STATE UpdateRoom(RoomDTO room, bool isCheck)
         {
             string query = "UPDATE ROOM " +
                 "SET Name = @name , FloorNumber = @floor , State = @state , TypeID = @typeId , Note = @note " +
                 "WHERE ID = @id ";
 
-            if (CountExistRoom(room.Name, room.Floor) > 1)
+            if (isCheck && CountExistRoom(room.Name, room.Floor) > 0)
             {
                 return Rule.STATE.EXIST;
             }

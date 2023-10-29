@@ -12,7 +12,7 @@ namespace HotelManagement.PresentationLayer
     {
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
-            string strNum = System.Convert.ToDouble(value.ToString()).ToString("# ### ###");
+            string strNum = System.Convert.ToDouble(value.ToString()).ToString("# ### ### ###");
             if (strNum.Trim() == "")
 			{
                 strNum = "0";

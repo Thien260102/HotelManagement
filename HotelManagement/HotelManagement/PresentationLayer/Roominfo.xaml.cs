@@ -25,6 +25,8 @@ namespace HotelManagement.PresentationLayer
 		List<RoomTypeDTO> roomTypes;
 
         RoomDTO room;
+        string originName = null;
+        int originFloor = -1;
 
         public Action ReloadRoom;
 		#endregion
@@ -56,6 +58,9 @@ namespace HotelManagement.PresentationLayer
             txt_Floor.Text = room.Floor.ToString();
             txt_RoomFacility.Text = room.Note;
             cb_RoomType.Text = roomTypes.Find(element => element.Id == room.RoomTypeId).Name;
+
+            originFloor = room.Floor;
+            originName = room.Name;
             
             switch((Rule.ROOM_STATE)room.State)
 			{
@@ -86,10 +91,10 @@ namespace HotelManagement.PresentationLayer
                 string note = txt_RoomFacility.Text.Trim();
                 Rule.ROOM_STATE state = Rule.ROOM_STATE.AVAILABLE;
 
-                int floor;
-                if (!int.TryParse(txt_Floor.Text.Trim(), out floor))
+                int floor = 0;
+                if (!int.TryParse(txt_Floor.Text.Trim(), out floor) || floor < 1)
 				{
-                    throw new Exception("Floor must be number");
+                    throw new Exception("Floor must be positive number");
 				}
 
                 if (!Enum.TryParse<Rule.ROOM_STATE>(cb_State.SelectedItem.ToString(), true, out state))
@@ -110,6 +115,12 @@ namespace HotelManagement.PresentationLayer
                 room.State = (int)state;
                 room.RoomTypeId = roomTypeId;
 
+                bool isCheck = true;
+                if (originName == name && originFloor == floor)
+				{
+                    isCheck = false;
+				}
+
                 RoomBLL roomBLL = new RoomBLL();
                 if (room.Id == -1)  // Add new room
                 {
@@ -122,7 +133,7 @@ namespace HotelManagement.PresentationLayer
                 }
                 else                // Update room
 				{
-                    if (roomBLL.UpdateRoom(room))
+                    if (roomBLL.UpdateRoom(room, isCheck))
 					{
                         MessageBox.Show("Update room successfully");
                         ReloadRoom?.Invoke();

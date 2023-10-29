@@ -49,9 +49,9 @@ namespace HotelManagement.BusinessLogicLayer
 			return false;
 		}
 
-		public bool UpdateRoom(RoomDTO room)
+		public bool UpdateRoom(RoomDTO room, bool isCheck = false)
 		{
-			switch (RoomDAL.Instance.UpdateRoom(room))
+			switch (RoomDAL.Instance.UpdateRoom(room, isCheck))
 			{
 				case Rule.STATE.SUCCESS:
 					return true;
