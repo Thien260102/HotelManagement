@@ -44,7 +44,8 @@ WindowStyle="None" AllowsTransparency="True" Height="600" Width="950" >
                                         <ImageBrush ImageSource="/Resources/user.png" Stretch="Fill"/>
                                     </Border.Background>
                                 </Border>
-                                <Label x:Name="labelAdmin" Grid.Column="1" Content="Admin" FontSize="14" FontWeight="SemiBold" Padding="10" FontFamily="Segoe UI" Foreground="White" VerticalAlignment="Top" />
+                                <Button x:Name="btn_Profile" Grid.Column="1" Content="ADMIN" FontSize="14" FontWeight="SemiBold" Background="Transparent" Foreground="White" FontFamily="Segoe UI"  BorderThickness="0" Click="btn_Profile_Click"/>
+                                
                             </Grid>
                         </Border>
 
