@@ -154,5 +154,11 @@ namespace HotelManagement.PresentationLayer
             RoomType roomType = new RoomType(); 
             OpenUserControl(roomType);
         }
+
+        private void btn_Profile_Click(object sender, RoutedEventArgs e)
+        {
+            Profile profile = new Profile();
+            profile.Show();
+        }
     }
 }
