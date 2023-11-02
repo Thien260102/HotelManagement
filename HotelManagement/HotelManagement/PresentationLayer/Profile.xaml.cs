@@ -93,6 +93,12 @@ namespace HotelManagement.PresentationLayer
                 }
 
                 employee.FullName = name;
+
+                bool isCheck = false;
+                if (employee.PhoneNumber != phone)
+				{
+                    isCheck = true;
+				}
                 employee.PhoneNumber = phone;
                 employee.BirthDay = birth;
                 employee.Sex = (bool)Checkbox_Male.IsChecked;
@@ -100,7 +106,7 @@ namespace HotelManagement.PresentationLayer
                 EmployeeBLL employeeBLL = new EmployeeBLL();
                 AccountBLL accountBLL = new AccountBLL();
 
-                if (employeeBLL.UpdateEmployee(employee))
+                if (employeeBLL.UpdateEmployee(employee, isCheck))
                 {
                     MessageBox.Show("Update employee successful!");
 

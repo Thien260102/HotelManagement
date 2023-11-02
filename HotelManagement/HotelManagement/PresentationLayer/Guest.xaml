@@ -6,6 +6,11 @@
              xmlns:local="clr-namespace:HotelManagement.PresentationLayer"
              mc:Ignorable="d" 
                       d:DesignHeight="545" d:DesignWidth="770">
+    <UserControl.Resources>
+        <local:MoneyConverter x:Key="moneyConverter"></local:MoneyConverter>
+        <local:PhoneConverter x:Key="phoneConverter"></local:PhoneConverter>
+    </UserControl.Resources>
+
     <Grid>
         <StackPanel Background="Transparent" >
             <StackPanel Height="50" Orientation="Horizontal" >
@@ -35,7 +40,30 @@
             </StackPanel>
             <!--DataGridView-->
             <StackPanel Height="495" Background="Transparent">
-                <DataGrid x:Name="DataGridGuest" Margin="10" Height="470 " d:ItemsSource="{d:SampleData ItemCount=5}"/>
+                <DataGrid RowStyle="{DynamicResource DataGridRowStyle1}" 
+                      ColumnHeaderStyle="{DynamicResource DataGridColumnHeaderStyle1}" 
+                      CellStyle="{DynamicResource DataGridCellStyle1}" 
+                      x:Name="DataGrid_Guest" Style="{DynamicResource DataGridStyle1}">
+                    <DataGrid.Columns>
+                        <DataGridTextColumn Header="No." IsReadOnly="True" CanUserResize="False" Width="auto" Binding="{Binding Id}"/>
+                        <DataGridTextColumn Header="CitizenId" Binding="{Binding CitizenId}" IsReadOnly="True" Width="*"/>
+                        <DataGridTemplateColumn Header="Full Name" IsReadOnly="True" Width="*">
+                            <DataGridTemplateColumn.CellTemplate>
+                                <DataTemplate>
+                                    <StackPanel Orientation="Horizontal">
+
+                                        <TextBlock Text="{Binding FullName}" VerticalAlignment="Center"/>
+                                    </StackPanel>
+                                </DataTemplate>
+                            </DataGridTemplateColumn.CellTemplate>
+                        </DataGridTemplateColumn>
+                        <DataGridTextColumn Header="Birth Day" Binding="{Binding BirthDay}" IsReadOnly="True" Width="*"/>
+                        <DataGridTextColumn Header="Sex" Binding="{Binding SSex}" IsReadOnly="True" Width="*"/>
+                        <DataGridTextColumn Header="Phone Number" Binding="{Binding PhoneNumber, Converter={StaticResource phoneConverter}}" IsReadOnly="True" Width="*"/>
+                        <DataGridTextColumn Header="Nationality" Binding="{Binding Nationality}" IsReadOnly="True" Width="*"/>
+
+                    </DataGrid.Columns>
+                </DataGrid>
             </StackPanel>
         </StackPanel>
     </Grid>

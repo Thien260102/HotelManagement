@@ -1,4 +1,5 @@
 ﻿using HotelManagement.BusinessLogicLayer;
+using HotelManagement.DataTransferObject;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -21,11 +22,24 @@ namespace HotelManagement.PresentationLayer
     /// </summary>
     public partial class Guest : UserControl
     {
+        List<CustomerDTO> customers;
+
         public Guest()
         {
             InitializeComponent();
+
+            LoadData();
         }
-        public void DisableButton()
+
+        private void LoadData()
+		{
+            customers = new CustomerBLL().GetAllCustomers();
+
+            DataGrid_Guest.ItemsSource = customers;
+		}
+
+		#region Button
+		public void DisableButton()
         {
             BdCheckin.Background = Brushes.White;
             BdCheckin.BorderBrush = (SolidColorBrush)new BrushConverter().ConvertFromString(Rule.BUTTON.NORMAL);
@@ -64,5 +78,6 @@ namespace HotelManagement.PresentationLayer
             BdAll.BorderBrush = (SolidColorBrush)new BrushConverter().ConvertFromString("#1570EF");
             btn_All.Foreground = (SolidColorBrush)new BrushConverter().ConvertFromString("#1570EF");
         }
-    }
+		#endregion
+	}
 }

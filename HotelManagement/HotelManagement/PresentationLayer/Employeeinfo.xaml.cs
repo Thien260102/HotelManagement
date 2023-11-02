@@ -40,6 +40,8 @@ namespace HotelManagement.PresentationLayer
 
             employee = new EmployeeDTO();
             account = new AccountDTO();
+
+            txt_DayStart.Text = DateTime.Now.ToString("yyyy-MM-dd");
         }
 
 		private void SelectPosition(object sender, SelectionChangedEventArgs e)
@@ -134,7 +136,14 @@ namespace HotelManagement.PresentationLayer
 
                 employee.FullName = name;
                 employee.CitizenId = citizenId;
+
+                bool isCheck = false;
+                if (employee.PhoneNumber != phone)
+				{
+                    isCheck = true;
+				}
                 employee.PhoneNumber = phone;
+
                 employee.BirthDay = birth;
                 employee.StartDay = start;
                 employee.Salary = salary;
@@ -173,7 +182,7 @@ namespace HotelManagement.PresentationLayer
 
                 else                    // update
                 {
-                    if (employeeBLL.UpdateEmployee(employee))
+                    if (employeeBLL.UpdateEmployee(employee, isCheck))
                     {
                         MessageBox.Show("Update employee successful");
                         accountBLL.UpdateAccount(account);

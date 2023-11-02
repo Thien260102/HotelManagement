@@ -24,7 +24,7 @@ namespace HotelManagement
 
 		public static bool Validate_CitizenId(string citizenId)
 		{
-			if (citizenId.Length < 12)
+			if (citizenId.Length != 12)
 				return false;
 
 			foreach (var c in citizenId)
@@ -36,7 +36,7 @@ namespace HotelManagement
 
 		public static bool Validate_Phone(string phone)
 		{
-			if (phone.Length < 10)
+			if (phone.Length < 10 || phone.Length > 11)
 				return false;
 
 			foreach (var c in phone)

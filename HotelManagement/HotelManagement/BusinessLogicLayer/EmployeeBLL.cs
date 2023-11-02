@@ -30,16 +30,16 @@ namespace HotelManagement.BusinessLogicLayer
 					return false;
 
 				case Rule.STATE.EXIST:
-					MessageBox.Show("CitizenID is existed.");
+					MessageBox.Show("CitizenID or Phone Number is existed.");
 					return false;
 			}
 
 			return false;
 		}
 
-		public bool UpdateEmployee(EmployeeDTO employee)
+		public bool UpdateEmployee(EmployeeDTO employee, bool isCheck = false)
 		{
-			switch (EmployeeDAL.Instance.UpdateEmployee(employee))
+			switch (EmployeeDAL.Instance.UpdateEmployee(employee, isCheck))
 			{
 				case Rule.STATE.SUCCESS:
 					return true;
@@ -49,7 +49,7 @@ namespace HotelManagement.BusinessLogicLayer
 					return false;
 
 				case Rule.STATE.EXIST:
-					MessageBox.Show("CitizenID is existed.");
+					MessageBox.Show("Phone number is existed.");
 					return false;
 			}
 

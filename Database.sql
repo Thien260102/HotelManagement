@@ -185,6 +185,15 @@ Insert into ROOM Values('1', 1, 0, 1, 'TV');
 Select * from ROOM
 ------------------
 
+--- CUSTOMER ---
+Delete from CUSTOMER
+
+Insert into CUSTOMER VALUES('123456789011', 'Nguyen Van Thien', '0326933046', 1, '2002-01-26', 'Vietnamese');
+
+Select * from CUSTOMER
+
+---------------
+
 
 --- RENTING ---
 Select * from RENTING

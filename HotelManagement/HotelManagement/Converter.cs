@@ -32,8 +32,19 @@ namespace HotelManagement.PresentationLayer
     {
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
-            string strNum = System.Convert.ToDouble(value.ToString()).ToString("### #### ###");
-            
+            string strNum = "";
+
+            int count = 0;
+            foreach(var c in System.Convert.ToString(value))
+			{
+                strNum += c;
+                if (count == 2 || count == 6 || count == 9) 
+				{
+                    strNum += ' ';
+				}
+                count++;
+			}
+
             return strNum;
 
         }
