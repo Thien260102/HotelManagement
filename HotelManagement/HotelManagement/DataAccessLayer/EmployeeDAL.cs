@@ -39,6 +39,21 @@ namespace HotelManagement.DataAccessLayer
             return employees;
 		}
 
+        public EmployeeDTO GetEmployee(int id)
+		{
+            string query = "Select * from EMPLOYEE " +
+                "where ID = @id ";
+
+            DataTable data = DataProvider.Instance.ExecuteQuery(query, new object[] { id });
+
+            if(data.Rows.Count > 0)
+			{
+                return new EmployeeDTO(data.Rows[0]);
+			}
+
+            return null;
+        }
+
         public Rule.STATE AddNewEmployee(EmployeeDTO employee)
         {
             string query = "Insert into EMPLOYEE " +

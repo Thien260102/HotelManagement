@@ -45,5 +45,11 @@ namespace HotelManagement
 
 			return true;
 		}
+
+		public static bool Validate_DateTime(string datetime)
+		{
+			DateTime birthDay;
+			return DateTime.TryParse(datetime, out birthDay);
+		}
 	}
 }

@@ -28,7 +28,10 @@ namespace HotelManagement.PresentationLayer
 
             btn_Dashboard_Click(null, null);
         }
-        public void DisableButton()
+
+		#region click Usercontrol
+
+		public void DisableButton()
         {
             Dashboards.Background = Brushes.Transparent;
             btn_Dashboard.Foreground = (SolidColorBrush)new BrushConverter().ConvertFromString(Rule.BUTTON.NORMAL);
@@ -47,7 +50,6 @@ namespace HotelManagement.PresentationLayer
             Reports.Background = Brushes.Transparent;
             btn_Report.Foreground = (SolidColorBrush)new BrushConverter().ConvertFromString(Rule.BUTTON.NORMAL);
         }
-
         void Button_Choose(object senderButton)
         {
             if (senderButton != null)
@@ -123,6 +125,15 @@ namespace HotelManagement.PresentationLayer
             Report report = new Report();  
             OpenUserControl (report);
         }
+        private void btn_RoomType_Click(object sender, RoutedEventArgs e)
+        {
+            Button_Choose(sender);
+            RoomTypes.Background = (SolidColorBrush)new BrushConverter().ConvertFromString(Rule.BUTTON.BORDER);
+            RoomType roomType = new RoomType();
+            OpenUserControl(roomType);
+        }
+
+        #endregion
 
         private void btn_Exit_Click(object sender, RoutedEventArgs e)
         {
@@ -149,18 +160,23 @@ namespace HotelManagement.PresentationLayer
             }
         }
 
-        private void btn_RoomType_Click(object sender, RoutedEventArgs e)
-        {
-            Button_Choose(sender);
-            RoomTypes.Background = (SolidColorBrush)new BrushConverter().ConvertFromString(Rule.BUTTON.BORDER);
-            RoomType roomType = new RoomType(); 
-            OpenUserControl(roomType);
-        }
-
         private void btn_Profile_Click(object sender, RoutedEventArgs e)
         {
+            if (Utilities.GetRole() == Rule.ROLE.ADMIN)
+            {
+                MessageBox.Show("Admin do not have personal infor.");
+                return;
+            }
+
             Profile profile = new Profile();
             profile.Show();
+            profile.IsChangePassword += ReLogin;
         }
+
+        private void ReLogin()
+		{
+            new Login().Show();
+            this.Close();
+		}
     }
 }

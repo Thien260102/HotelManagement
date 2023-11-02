@@ -122,9 +122,7 @@ namespace HotelManagement.PresentationLayer
                     throw new Exception("Please fill correct phone number");
 				}
 
-                DateTime birthDay;
-                DateTime startDay;
-                if (!(DateTime.TryParse(birth, out birthDay) && DateTime.TryParse(start, out startDay)))
+                if (!Utilities.Validate_DateTime(birth) && Utilities.Validate_DateTime(start))
 				{
                     throw new Exception("Please fill date with correct format");
                 }
