@@ -173,10 +173,21 @@ namespace HotelManagement.PresentationLayer
             profile.IsChangePassword += ReLogin;
         }
 
+
         private void ReLogin()
 		{
             new Login().Show();
             this.Close();
 		}
+
+        private void btn_Bill_Click(object sender, RoutedEventArgs e)
+        {
+            Button_Choose(sender);
+            Bills.Background = (SolidColorBrush)new BrushConverter().ConvertFromString(Rule.BUTTON.BORDER);
+            Bill bill = new Bill();
+            OpenUserControl (bill);
+
+        }
+
     }
 }
