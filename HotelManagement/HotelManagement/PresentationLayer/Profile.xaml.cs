@@ -22,6 +22,8 @@ namespace HotelManagement.PresentationLayer
     public partial class Profile : Window
     {
         AccountDTO account;
+        string originPhoneNumber = "";
+
         EmployeeDTO employee;
 
         public Action IsChangePassword;
@@ -53,6 +55,8 @@ namespace HotelManagement.PresentationLayer
             txt_UserName.IsReadOnly = true;
 
             txt_Password.Text = account.Password;
+
+            originPhoneNumber = employee.PhoneNumber;
         }
 
         private void btn_Cancel_Click(object sender, RoutedEventArgs e)
@@ -95,7 +99,7 @@ namespace HotelManagement.PresentationLayer
                 employee.FullName = name;
 
                 bool isCheck = false;
-                if (employee.PhoneNumber != phone)
+                if (originPhoneNumber != phone)
 				{
                     isCheck = true;
 				}

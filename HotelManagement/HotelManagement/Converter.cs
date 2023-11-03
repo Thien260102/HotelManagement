@@ -38,7 +38,7 @@ namespace HotelManagement.PresentationLayer
             foreach(var c in System.Convert.ToString(value))
 			{
                 strNum += c;
-                if (count == 2 || count == 6 || count == 9) 
+                if (count == 2 || count == 6) 
 				{
                     strNum += ' ';
 				}

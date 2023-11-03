@@ -25,6 +25,8 @@ namespace HotelManagement.PresentationLayer
         EmployeeDTO employee;
         AccountDTO account;
 
+        string originPhoneNumber = "";
+
         public Action ReloadEmployee;
 
         public Employeeinfo()
@@ -85,6 +87,8 @@ namespace HotelManagement.PresentationLayer
             Checkbox_IsAvailable.IsChecked = account.IsAvailable;
 
             txt_UserName.IsReadOnly = true;
+
+            originPhoneNumber = employee.PhoneNumber;
 		}
 
         private void btn_Cancel_Click(object sender, RoutedEventArgs e)
@@ -124,7 +128,7 @@ namespace HotelManagement.PresentationLayer
                     throw new Exception("Please fill correct phone number");
 				}
 
-                if (!Utilities.Validate_DateTime(birth) && Utilities.Validate_DateTime(start))
+                if (!Utilities.Validate_DateTime(birth) || !Utilities.Validate_DateTime(start))
 				{
                     throw new Exception("Please fill date with correct format");
                 }
@@ -138,7 +142,7 @@ namespace HotelManagement.PresentationLayer
                 employee.CitizenId = citizenId;
 
                 bool isCheck = false;
-                if (employee.PhoneNumber != phone)
+                if (originPhoneNumber != phone)
 				{
                     isCheck = true;
 				}

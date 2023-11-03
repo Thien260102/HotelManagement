@@ -49,6 +49,8 @@ namespace HotelManagement.PresentationLayer
             btn_Voucher.Foreground = (SolidColorBrush)new BrushConverter().ConvertFromString(Rule.BUTTON.NORMAL);
             Reports.Background = Brushes.Transparent;
             btn_Report.Foreground = (SolidColorBrush)new BrushConverter().ConvertFromString(Rule.BUTTON.NORMAL);
+            Bills.Background = Brushes.Transparent;
+            btn_Bill.Foreground = (SolidColorBrush)new BrushConverter().ConvertFromString(Rule.BUTTON.NORMAL);
         }
         void Button_Choose(object senderButton)
         {
@@ -173,7 +175,6 @@ namespace HotelManagement.PresentationLayer
             profile.IsChangePassword += ReLogin;
         }
 
-
         private void ReLogin()
 		{
             new Login().Show();
@@ -188,6 +189,5 @@ namespace HotelManagement.PresentationLayer
             OpenUserControl (bill);
 
         }
-
     }
 }
