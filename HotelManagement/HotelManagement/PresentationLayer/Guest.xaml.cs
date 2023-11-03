@@ -25,44 +25,20 @@ namespace HotelManagement.PresentationLayer
         {
             InitializeComponent();
         }
-        public void DisableButton()
+
+        private void btn_Add_Click(object sender, RoutedEventArgs e)
         {
-            BdCheckin.Background = Brushes.White;
-            BdCheckin.BorderBrush = (SolidColorBrush)new BrushConverter().ConvertFromString(Rule.BUTTON.NORMAL);
-            btn_Checkin.Foreground = (SolidColorBrush)new BrushConverter().ConvertFromString(Rule.BUTTON.NORMAL);
-            BdCheckout.Background = Brushes.White;
-            BdCheckout.BorderBrush = (SolidColorBrush)new BrushConverter().ConvertFromString(Rule.BUTTON.NORMAL);
-            btn_Checkout.Foreground = (SolidColorBrush)new BrushConverter().ConvertFromString(Rule.BUTTON.NORMAL);
-            BdAll.Background = Brushes.Transparent;
-            BdAll.BorderBrush = (SolidColorBrush)new BrushConverter().ConvertFromString(Rule.BUTTON.NORMAL);
-            btn_All.Foreground = (SolidColorBrush)new BrushConverter().ConvertFromString(Rule.BUTTON.NORMAL);
 
         }
-        private void btn_Checkin_Click(object sender, RoutedEventArgs e)
+
+        private void btn_Update_Click(object sender, RoutedEventArgs e)
         {
-            DisableButton();
-            BdCheckin.Background = (SolidColorBrush)new BrushConverter().ConvertFromString("#E8F1FD");
-            BdCheckin.BorderBrush = (SolidColorBrush)new BrushConverter().ConvertFromString("#1570EF");
-            btn_Checkin.Foreground = (SolidColorBrush)new BrushConverter().ConvertFromString("#1570EF");
-            //Checkout checkout   = new Checkout();
-            //checkout.Show();
+
         }
 
-        private void btn_Checkout_Click(object sender, RoutedEventArgs e)
+        private void btn_Delete_Click(object sender, RoutedEventArgs e)
         {
-            DisableButton();
-            BdCheckout.Background = (SolidColorBrush)new BrushConverter().ConvertFromString("#E8F1FD");
-            BdCheckout.BorderBrush = (SolidColorBrush)new BrushConverter().ConvertFromString("#1570EF");
-            btn_Checkout.Foreground = (SolidColorBrush)new BrushConverter().ConvertFromString("#1570EF");
-            
-        }
 
-        private void btn_All_Click(object sender, RoutedEventArgs e)
-        {
-            DisableButton();
-            BdAll.Background = (SolidColorBrush)new BrushConverter().ConvertFromString("#E8F1FD");
-            BdAll.BorderBrush = (SolidColorBrush)new BrushConverter().ConvertFromString("#1570EF");
-            btn_All.Foreground = (SolidColorBrush)new BrushConverter().ConvertFromString("#1570EF");
         }
     }
 }

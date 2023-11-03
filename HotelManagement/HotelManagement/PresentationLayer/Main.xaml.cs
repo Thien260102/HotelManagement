@@ -160,5 +160,14 @@ namespace HotelManagement.PresentationLayer
             Profile profile = new Profile();
             profile.Show();
         }
+
+        private void btn_Bill_Click(object sender, RoutedEventArgs e)
+        {
+            Button_Choose(sender);
+            Bills.Background = (SolidColorBrush)new BrushConverter().ConvertFromString(Rule.BUTTON.BORDER);
+            Bill bill = new Bill();
+            OpenUserControl (bill);
+
+        }
     }
 }

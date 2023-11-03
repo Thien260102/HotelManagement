@@ -9,20 +9,9 @@
     <Grid>
         <StackPanel Background="Transparent" >
             <StackPanel Height="50" Orientation="Horizontal" >
-                <!--Button Checkin-->
-                <Border x:Name="BdCheckin" Margin="10 10 0 0" CornerRadius="15" Background="White" Height="30" Width="80" BorderThickness="1" BorderBrush="#7F000000" >
-                    <Button x:Name="btn_Checkin" Content="Checkin" FontSize="12" FontWeight="Medium"  Background="Transparent" Foreground="#7F000000" BorderThickness="0" Click="btn_Checkin_Click" />
-                </Border>
-                <!--Button Checkout-->
-                <Border x:Name="BdCheckout" Margin="5 10 0 0" CornerRadius="15" Background="White" Height="30" Width="80" BorderThickness="1" BorderBrush="#7F000000" >
-                    <Button x:Name="btn_Checkout" Content="Checkout" FontSize="12" FontWeight="Medium"  Background="Transparent" Foreground="#7F000000" BorderThickness="0" Click="btn_Checkout_Click" />
-                </Border>
-                <!--Button All-->
-                <Border x:Name="BdAll" Margin="5 10 0 0" CornerRadius="15" Background="White" Height="30" Width="80" BorderThickness="1" BorderBrush="#7F000000" >
-                    <Button x:Name="btn_All" Content="All(50)" FontSize="12" FontWeight="Medium"  Background="Transparent" Foreground="#7F000000" BorderThickness="0" Click="btn_All_Click" />
-                </Border>
+                
                 <!--Search-->
-                <Border Width="262" Height="40" HorizontalAlignment="Left" Margin="235 5 0 0" CornerRadius="15" Background="White" BorderThickness="1" BorderBrush="#9081E4" >
+                <Border Width="262" Height="40" HorizontalAlignment="Left" Margin="10 5 0 0" CornerRadius="15" Background="White" BorderThickness="1" BorderBrush="#9081E4" >
                     <StackPanel Background="Transparent" Orientation="Horizontal">
                         <Border Margin="3 0 0 0" Width="30" Height="30">
                             <Border.Background>
@@ -31,6 +20,18 @@
                         </Border>
                         <TextBox x:Name="txt_Search" Width="220" BorderThickness="0" FontFamily="Segoe UI" Foreground="#7F000000" FontSize="14" VerticalContentAlignment="Center" />
                     </StackPanel>
+                </Border>
+                <!--Button Add-->
+                <Border Margin="180 5 0 0" CornerRadius="20" Background="#F3E5FF" Height="40" Width="96">
+                    <Button x:Name="btn_Add" Content="Add" FontSize="18" FontWeight="SemiBold"  Background="Transparent" Foreground="#4C00A3" BorderThickness="0" Click= "btn_Add_Click" Height="40" VerticalAlignment="Top" />
+                </Border>
+                <!--Button Update-->
+                <Border Margin="10 5 0 0" CornerRadius="20" Background="#F3E5FF" Height="40" Width="96">
+                    <Button x:Name="btn_Update" Content="Update" FontSize="18" FontWeight="SemiBold"  Background="Transparent" Foreground="#4C00A3" BorderThickness="0" Click= "btn_Update_Click" Height="40" VerticalAlignment="Top" />
+                </Border>
+                <!--Button Delete-->
+                <Border Margin="10 5 0 0" CornerRadius="20" Background="White" Height="40" Width="96" BorderThickness="1" BorderBrush="#4C00A3">
+                    <Button x:Name="btn_Delete" Content="Delete" FontSize="18" FontWeight="SemiBold"  Background="Transparent" Foreground="#4C00A3" BorderThickness="0" Click="btn_Delete_Click" />
                 </Border>
             </StackPanel>
             <!--DataGridView-->
