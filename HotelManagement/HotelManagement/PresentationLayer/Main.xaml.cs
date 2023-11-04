@@ -166,13 +166,24 @@ namespace HotelManagement.PresentationLayer
         {
             if (Utilities.GetRole() == Rule.ROLE.ADMIN)
             {
-                MessageBox.Show("Admin do not have personal infor.");
+                MessageBox.Show("Admin does not have personal infor.");
                 return;
             }
 
             Profile profile = new Profile();
             profile.Show();
             profile.IsChangePassword += ReLogin;
+        }
+
+        private void btn_Checkin_Click(object sender, RoutedEventArgs e)
+        {
+            if (Utilities.GetRole() == Rule.ROLE.ADMIN)
+            {
+                MessageBox.Show("Admin does not need check in.");
+                return;
+            }
+
+            new AccountBLL().Checkin();
         }
 
         private void ReLogin()

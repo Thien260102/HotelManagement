@@ -166,6 +166,26 @@ namespace HotelManagement.BusinessLogicLayer
 		public AccountDTO GetAccount(int employeeId) => AccountDAL.Instance.GetAccount(employeeId);
 
 		public bool RemoveAccount(string userName) => AccountDAL.Instance.RemoveAccount(userName);
+
+		public void Checkin()
+		{
+			switch(AttendanceDAL.Instance.AddNewAttendace(
+				new AttendanceDTO(Account.EmployeeID, DateTime.Now.ToString("yyyy-MM-dd"), 
+								  (int)Rule.ATTENDANCE.EXCUSED, "Worked")))
+			{
+				case Rule.STATE.SUCCESS:
+					MessageBox.Show("Checking in successfully.");
+					break;
+
+				case Rule.STATE.EXIST:
+					MessageBox.Show("You have already check in.");
+					break;
+
+				case Rule.STATE.FAIL:
+					MessageBox.Show("Check in fail");
+					break;
+			}
+		}
 		#endregion
 	}
 }

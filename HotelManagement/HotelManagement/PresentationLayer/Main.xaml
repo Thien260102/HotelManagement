@@ -33,12 +33,16 @@ WindowStyle="None" AllowsTransparency="True" Height="600" Width="950" >
                         </Border>
                         <Label Grid.Column="1" Content="4xT Hotel" FontSize="18" FontWeight="SemiBold" Padding="10" FontFamily="Segoe UI" Foreground="#4C00A3" VerticalContentAlignment="Center"/>
 
+                        <!--btn_Checkin-->
+                        <Button x:Name="btn_Checkin" Grid.Column="2" Content="Check In" FontSize="14" FontWeight="SemiBold" Background="Transparent" Foreground="White" FontFamily="Segoe UI"  BorderThickness="0" Click="btn_Checkin_Click"/>
+
                         <Border Grid.Column="3" CornerRadius="20" Background="#E2D8FB" Margin="6,10,10,9">
                             <Grid>
                                 <Grid.ColumnDefinitions>
                                     <ColumnDefinition Width="36"/>
                                     <ColumnDefinition Width="*"/>
                                 </Grid.ColumnDefinitions>
+
                                 <Border  CornerRadius="20" Width="36" Height="36" HorizontalAlignment="Right" BorderThickness="1" BorderBrush="White" VerticalAlignment="Center">
                                     <Border.Background>
                                         <ImageBrush ImageSource="/Resources/user.png" Stretch="Fill"/>

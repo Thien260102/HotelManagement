@@ -38,6 +38,18 @@ Create Table EMPLOYEE
 ALTER TABLE EMPLOYEE
 ADD CONSTRAINT PK_EMPLOYEE PRIMARY KEY (ID, CitizenID);
 
+Drop table ATTENDANCE;
+Create Table ATTENDANCE
+(
+	ID int not null IDENTITY(1,1),
+	EmployeeID int not null,
+	Date Date,
+	State int,
+	Note nvarchar(max)
+);
+ALTER TABLE ATTENDANCE
+ADD CONSTRAINT PK_ATTENDANCE PRIMARY KEY (ID);
+
 Drop table CUSTOMER;
 Create Table CUSTOMER
 (
@@ -165,6 +177,13 @@ insert into EMPLOYEE values(123, 'thien', 123, 0, '2022-12-12', '2022-12-12', 0)
 UPDATE EMPLOYEE
 SET Sex = 1, FullName = 'Tien'
 WHERE CitizenID = 12345;
+
+------------------
+
+--- ATTENDANCE ----
+delete from ATTENDANCE 
+
+Select * from ATTENDANCE where Date = '2002-10-10';
 
 ------------------
 
