@@ -39,6 +39,23 @@ namespace HotelManagement.DataAccessLayer
             return attendances;
         }
 
+        public List<AttendanceDTO> GetAll(int employeeId)
+        {
+            List<AttendanceDTO> attendances = new List<AttendanceDTO>();
+
+            string query = "Select * from ATTENDANCE " +
+                "Where EmployeeID = @employeeid ";
+
+            DataTable data = DataProvider.Instance.ExecuteQuery(query, new object[] { employeeId });
+
+            foreach (DataRow row in data.Rows)
+            {
+                attendances.Add(new AttendanceDTO(row));
+            }
+
+            return attendances;
+        }
+
         public AttendanceDTO GetAttendance(int id)
         {
             string query = "Select * from ATTENDANCE " +
@@ -99,11 +116,16 @@ namespace HotelManagement.DataAccessLayer
             return false;
         }
 
-        public Rule.STATE UpdateAttendance(AttendanceDTO attendace)
+        public Rule.STATE UpdateAttendance(AttendanceDTO attendace, bool isCheck)
         {
             string query = "UPDATE ATTENDANCE " +
                 "SET Date = @date , State = @state , Note = @note " +
                 "WHERE ID = @id ";
+
+            if (isCheck && IsExistDate(attendace.Date))
+			{
+                return Rule.STATE.EXIST;
+			}
 
             if (DataProvider.Instance.ExecuteNonQuery(query,
                 new object[] { attendace.Date, attendace.State,

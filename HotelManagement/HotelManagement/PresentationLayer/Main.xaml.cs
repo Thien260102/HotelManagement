@@ -51,6 +51,8 @@ namespace HotelManagement.PresentationLayer
             btn_Report.Foreground = (SolidColorBrush)new BrushConverter().ConvertFromString(Rule.BUTTON.NORMAL);
             Bills.Background = Brushes.Transparent;
             btn_Bill.Foreground = (SolidColorBrush)new BrushConverter().ConvertFromString(Rule.BUTTON.NORMAL);
+            BAttendance.Background = Brushes.Transparent;
+            btn_Attendance.Foreground = (SolidColorBrush)new BrushConverter().ConvertFromString(Rule.BUTTON.NORMAL);
         }
         void Button_Choose(object senderButton)
         {
@@ -134,6 +136,19 @@ namespace HotelManagement.PresentationLayer
             RoomType roomType = new RoomType();
             OpenUserControl(roomType);
         }
+        private void btn_Attendance_Click(object sender, RoutedEventArgs e)
+        {
+            if (Utilities.GetRole() == Rule.ROLE.ADMIN)
+            {
+                MessageBox.Show("You do not need checkin or any activity relate to attendance.");
+                return;
+            }
+
+            Button_Choose(sender);
+            BAttendance.Background = (SolidColorBrush)new BrushConverter().ConvertFromString(Rule.BUTTON.BORDER);
+            Attendance attendance = new Attendance();
+            OpenUserControl(attendance);
+        }
 
         #endregion
 
@@ -173,17 +188,6 @@ namespace HotelManagement.PresentationLayer
             Profile profile = new Profile();
             profile.Show();
             profile.IsChangePassword += ReLogin;
-        }
-
-        private void btn_Checkin_Click(object sender, RoutedEventArgs e)
-        {
-            if (Utilities.GetRole() == Rule.ROLE.ADMIN)
-            {
-                MessageBox.Show("Admin does not need check in.");
-                return;
-            }
-
-            new AccountBLL().Checkin();
         }
 
         private void ReLogin()

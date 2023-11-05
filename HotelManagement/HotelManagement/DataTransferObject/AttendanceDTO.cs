@@ -17,6 +17,7 @@ namespace HotelManagement.DataTransferObject
 		public string Date { get; set; }
 
 		public int State { get; set; }
+		public string SState { get; set; }
 
 		public string Note { get; set; }
 		#endregion
@@ -33,6 +34,7 @@ namespace HotelManagement.DataTransferObject
 			EmployeeId = employeeId;
 			Date = date;
 			State = state;
+			SState = ((Rule.ATTENDANCE)state).ToString();
 			Note = note;
 		}
 
@@ -42,6 +44,7 @@ namespace HotelManagement.DataTransferObject
 			EmployeeId = (int)row["EmployeeID"];
 			Date = string.Format("{0:yyyy-MM-dd}", DateTime.Parse(row["Date"].ToString()));
 			State = (int)row["State"];
+			SState = ((Rule.ATTENDANCE)State).ToString();
 			Note = row["Note"].ToString();
 
 		}

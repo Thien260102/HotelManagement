@@ -181,10 +181,9 @@ WHERE CitizenID = 12345;
 ------------------
 
 --- ATTENDANCE ----
-delete from ATTENDANCE 
+delete from ATTENDANCE
 
 Select * from ATTENDANCE where Date = '2002-10-10';
-
 ------------------
 
 --- ROOM_TYPE ---
