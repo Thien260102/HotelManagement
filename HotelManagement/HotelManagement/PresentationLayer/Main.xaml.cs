@@ -138,15 +138,9 @@ namespace HotelManagement.PresentationLayer
         }
         private void btn_Attendance_Click(object sender, RoutedEventArgs e)
         {
-            if (Utilities.GetRole() == Rule.ROLE.ADMIN)
-            {
-                MessageBox.Show("You do not need checkin or any activity relate to attendance.");
-                return;
-            }
-
             Button_Choose(sender);
             BAttendance.Background = (SolidColorBrush)new BrushConverter().ConvertFromString(Rule.BUTTON.BORDER);
-            Attendance attendance = new Attendance();
+            Attendance attendance = new Attendance(Utilities.GetRole());
             OpenUserControl(attendance);
         }
 

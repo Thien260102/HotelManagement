@@ -13,20 +13,30 @@ namespace HotelManagement.PresentationLayer
 	/// </summary>
 	public partial class Attendance : UserControl
 	{
+		Rule.ROLE role;
+
 		int currentIndex = -1;
 		List<AttendanceDTO> attendances;
 
-		public Attendance()
+		public Attendance(Rule.ROLE role = Rule.ROLE.EMPLOYEE)
 		{
 			InitializeComponent();
 
+			this.role = role;
 			LoadData();
 			DataGridAttendance.SelectedCellsChanged += SelectAttendance;
 		}
 
 		private void LoadData()
 		{
-			attendances = new AttendanceBLL().GetAttendancesOf(AccountBLL.Account.EmployeeID);
+			if (role == Rule.ROLE.ADMIN)
+			{
+				attendances = new AttendanceBLL().GetAll();
+			}
+			else
+			{
+				attendances = new AttendanceBLL().GetAttendancesOf(AccountBLL.Account.EmployeeID);
+			}
 
 			DataGridAttendance.ItemsSource = attendances;
 		}
@@ -50,6 +60,12 @@ namespace HotelManagement.PresentationLayer
 
 		private void btn_LeaveRegister_Click(object sender, RoutedEventArgs e)
 		{
+			if (Utilities.GetRole() == Rule.ROLE.ADMIN)
+			{
+				MessageBox.Show("Admin does not need leave register.");
+				return;
+			}
+
 			AttendanceInfor attendanceInfor = new AttendanceInfor();
 			attendanceInfor.Show();
 			attendanceInfor.ReloadAttendance += LoadData;
@@ -60,6 +76,12 @@ namespace HotelManagement.PresentationLayer
 			if (currentIndex == -1)
 			{
 				MessageBox.Show("Please choose attendance you want to change.");
+				return;
+			}
+
+			if (attendances[currentIndex].State == (int)Rule.ATTENDANCE.WORKED)
+			{
+				MessageBox.Show("Cannot change work day.");
 				return;
 			}
 

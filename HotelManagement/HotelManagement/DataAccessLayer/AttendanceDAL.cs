@@ -76,7 +76,7 @@ namespace HotelManagement.DataAccessLayer
             string query = "Insert into ATTENDANCE " +
                 "Values( @employeeID , @Date , @State , @Note ) ";
 
-            if (IsExistDate(attendace.Date))
+            if (IsExistDate(attendace.EmployeeId, attendace.Date))
             {
                 return Rule.STATE.EXIST;
             }
@@ -91,13 +91,13 @@ namespace HotelManagement.DataAccessLayer
             return Rule.STATE.FAIL;
         }
 
-        public bool IsExistDate(string date)
+        public bool IsExistDate(int employeeId, string date)
         {
             string query = "Select Count(*) from ATTENDANCE " +
-                "where Date = @date ";
+                "where Date = @date And EmployeeID = @employeeId ";
 
             if ((int)DataProvider.Instance.ExecuteScalar(query,
-                new object[] { date }) > 0)
+                new object[] { date, employeeId }) > 0)
             {
                 return true;
             }
@@ -122,7 +122,7 @@ namespace HotelManagement.DataAccessLayer
                 "SET Date = @date , State = @state , Note = @note " +
                 "WHERE ID = @id ";
 
-            if (isCheck && IsExistDate(attendace.Date))
+            if (isCheck && IsExistDate(attendace.EmployeeId, attendace.Date))
 			{
                 return Rule.STATE.EXIST;
 			}

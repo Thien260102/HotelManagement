@@ -55,7 +55,7 @@ namespace HotelManagement.PresentationLayer
                 }
 
                 if (!Utilities.Validate_DateTime(date)
-                 || DateTime.Parse(date) <= DateTime.Now)
+                 || (date != originDate && DateTime.Parse(date).Date < DateTime.Now.Date))
                 {
                     throw new Exception("Please fill date correctly");
                 }

@@ -181,7 +181,7 @@ WHERE CitizenID = 12345;
 ------------------
 
 --- ATTENDANCE ----
-delete from ATTENDANCE
+delete from ATTENDANCE where ID = 11
 
 Select * from ATTENDANCE where Date = '2002-10-10';
 ------------------
