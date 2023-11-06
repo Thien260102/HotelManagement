@@ -166,6 +166,7 @@ namespace HotelManagement.BusinessLogicLayer
 		public AccountDTO GetAccount(int employeeId) => AccountDAL.Instance.GetAccount(employeeId);
 
 		public bool RemoveAccount(string userName) => AccountDAL.Instance.RemoveAccount(userName);
+
 		#endregion
 	}
 }

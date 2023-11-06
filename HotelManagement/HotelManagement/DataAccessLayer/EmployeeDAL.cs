@@ -39,12 +39,27 @@ namespace HotelManagement.DataAccessLayer
             return employees;
 		}
 
+        public EmployeeDTO GetEmployee(int id)
+		{
+            string query = "Select * from EMPLOYEE " +
+                "where ID = @id ";
+
+            DataTable data = DataProvider.Instance.ExecuteQuery(query, new object[] { id });
+
+            if(data.Rows.Count > 0)
+			{
+                return new EmployeeDTO(data.Rows[0]);
+			}
+
+            return null;
+        }
+
         public Rule.STATE AddNewEmployee(EmployeeDTO employee)
         {
             string query = "Insert into EMPLOYEE " +
                 "Values( @citizenID , @Fullname , @Phone , @Sex , @Birth , @Start , @Salary ) ";
 
-            if(IsExistCitizenID(employee.CitizenId))
+            if(IsExistCitizenId(employee.CitizenId) || IsExistPhone(employee.PhoneNumber))
 			{
                 return Rule.STATE.EXIST;
             }
@@ -59,13 +74,27 @@ namespace HotelManagement.DataAccessLayer
             return Rule.STATE.FAIL;
         }
 
-        public bool IsExistCitizenID(string citizenID)
-        {
+        public bool IsExistCitizenId(string citizenId)
+		{
             string query = "Select Count(*) from EMPLOYEE " +
-                "where CitizenID = @citizenID ";
+                "where CitizenID = @id ";
 
             if ((int)DataProvider.Instance.ExecuteScalar(query,
-                new object[] { citizenID }) > 0)
+                new object[] { citizenId }) > 0)
+            {
+                return true;
+            }
+
+            return false;
+        }
+
+        public bool IsExistPhone(string phone)
+        {
+            string query = "Select Count(*) from EMPLOYEE " +
+                "where PhoneNumber = @phone ";
+
+            if ((int)DataProvider.Instance.ExecuteScalar(query,
+                new object[] { phone }) > 0)
             {
                 return true;
             }
@@ -97,12 +126,17 @@ namespace HotelManagement.DataAccessLayer
             return false;
 		}
 
-        public Rule.STATE UpdateEmployee(EmployeeDTO employee)
+        public Rule.STATE UpdateEmployee(EmployeeDTO employee, bool isCheck)
 		{
             string query = "UPDATE EMPLOYEE " +
                 "SET FullName = @name , PhoneNumber = @phone , " +
                 "Sex = @sex , BirthDay = @birth , StartDay = @start , Salary = @salary " +
                 "WHERE ID = @id ";
+
+            if (isCheck && IsExistPhone(employee.PhoneNumber))
+			{
+                return Rule.STATE.EXIST;
+			}
 
             if (DataProvider.Instance.ExecuteNonQuery(query,
                 new object[] { employee.FullName, employee.PhoneNumber

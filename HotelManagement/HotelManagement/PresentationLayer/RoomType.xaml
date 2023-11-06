@@ -6,6 +6,10 @@
              xmlns:local="clr-namespace:HotelManagement.PresentationLayer"
              mc:Ignorable="d" 
                      d:DesignHeight="545" d:DesignWidth="770">
+    <UserControl.Resources>
+        <local:MoneyConverter x:Key="converter"></local:MoneyConverter>
+    </UserControl.Resources>
+    
     <Grid>
         <StackPanel Background="Transparent" >
             <StackPanel Height="50" Orientation="Horizontal" >
@@ -28,12 +32,12 @@
                 <DataGrid RowStyle="{DynamicResource DataGridRowStyle1}" 
                   ColumnHeaderStyle="{DynamicResource DataGridColumnHeaderStyle1}" 
                   CellStyle="{DynamicResource DataGridCellStyle1}" 
-                  x:Name="DataGridRooType" Style="{DynamicResource DataGridStyle1}">
+                  x:Name="DataGridRoomType" Style="{DynamicResource DataGridStyle1}">
                     <DataGrid.Columns>
-                        <!--<DataGridTextColumn Header="No." IsReadOnly="True" CanUserResize="False" Width="auto" Binding="{Binding Id}"/>-->
+                        <DataGridTextColumn Header="No." IsReadOnly="True" CanUserResize="False" Width="auto" Binding="{Binding Id}"/>
                         <DataGridTextColumn Header="Name" Binding="{Binding Name}" IsReadOnly="True" Width="*"/>
                         <DataGridTextColumn Header="Number people" Binding="{Binding HighestNumberPeople}" IsReadOnly="True" Width="*"/>
-                        <DataGridTextColumn Header="Price" Binding="{Binding Price}" IsReadOnly="True" Width="*"/>
+                        <DataGridTextColumn Header="Price" Binding="{Binding Price, Converter={StaticResource converter}}"  IsReadOnly="True" Width="*"/>
                     </DataGrid.Columns>
                 </DataGrid>
             </StackPanel>

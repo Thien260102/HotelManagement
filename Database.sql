@@ -38,6 +38,18 @@ Create Table EMPLOYEE
 ALTER TABLE EMPLOYEE
 ADD CONSTRAINT PK_EMPLOYEE PRIMARY KEY (ID, CitizenID);
 
+Drop table ATTENDANCE;
+Create Table ATTENDANCE
+(
+	ID int not null IDENTITY(1,1),
+	EmployeeID int not null,
+	Date Date,
+	State int,
+	Note nvarchar(max)
+);
+ALTER TABLE ATTENDANCE
+ADD CONSTRAINT PK_ATTENDANCE PRIMARY KEY (ID);
+
 Drop table CUSTOMER;
 Create Table CUSTOMER
 (
@@ -168,6 +180,12 @@ WHERE CitizenID = 12345;
 
 ------------------
 
+--- ATTENDANCE ----
+delete from ATTENDANCE where ID = 11
+
+Select * from ATTENDANCE where Date = '2002-10-10';
+------------------
+
 --- ROOM_TYPE ---
 Delete from ROOM_TYPE
 Insert into ROOM_TYPE Values(1, 'SMALL', 2, 200000);
@@ -179,11 +197,20 @@ Select * from ROOM_TYPE
 -----------------
 
 --- ROOM ---
-Delete from ROOM
+Delete from ROOM 
 Insert into ROOM Values('1', 1, 0, 1, 'TV');	
 
 Select * from ROOM
 ------------------
+
+--- CUSTOMER ---
+Delete from CUSTOMER
+
+Insert into CUSTOMER VALUES('123456789011', 'Nguyen Van Thien', '0326933046', 1, '2002-01-26', 'Vietnamese');
+
+Select * from CUSTOMER
+
+---------------
 
 
 --- RENTING ---

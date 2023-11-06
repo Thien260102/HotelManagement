@@ -25,6 +25,8 @@ namespace HotelManagement.PresentationLayer
         EmployeeDTO employee;
         AccountDTO account;
 
+        string originPhoneNumber = "";
+
         public Action ReloadEmployee;
 
         public Employeeinfo()
@@ -40,6 +42,8 @@ namespace HotelManagement.PresentationLayer
 
             employee = new EmployeeDTO();
             account = new AccountDTO();
+
+            txt_DayStart.Text = DateTime.Now.ToString("yyyy-MM-dd");
         }
 
 		private void SelectPosition(object sender, SelectionChangedEventArgs e)
@@ -83,6 +87,8 @@ namespace HotelManagement.PresentationLayer
             Checkbox_IsAvailable.IsChecked = account.IsAvailable;
 
             txt_UserName.IsReadOnly = true;
+
+            originPhoneNumber = employee.PhoneNumber;
 		}
 
         private void btn_Cancel_Click(object sender, RoutedEventArgs e)
@@ -122,9 +128,7 @@ namespace HotelManagement.PresentationLayer
                     throw new Exception("Please fill correct phone number");
 				}
 
-                DateTime birthDay;
-                DateTime startDay;
-                if (!(DateTime.TryParse(birth, out birthDay) && DateTime.TryParse(start, out startDay)))
+                if (!Utilities.Validate_DateTime(birth) || !Utilities.Validate_DateTime(start))
 				{
                     throw new Exception("Please fill date with correct format");
                 }
@@ -136,7 +140,14 @@ namespace HotelManagement.PresentationLayer
 
                 employee.FullName = name;
                 employee.CitizenId = citizenId;
+
+                bool isCheck = false;
+                if (originPhoneNumber != phone)
+				{
+                    isCheck = true;
+				}
                 employee.PhoneNumber = phone;
+
                 employee.BirthDay = birth;
                 employee.StartDay = start;
                 employee.Salary = salary;
@@ -175,7 +186,7 @@ namespace HotelManagement.PresentationLayer
 
                 else                    // update
                 {
-                    if (employeeBLL.UpdateEmployee(employee))
+                    if (employeeBLL.UpdateEmployee(employee, isCheck))
                     {
                         MessageBox.Show("Update employee successful");
                         accountBLL.UpdateAccount(account);

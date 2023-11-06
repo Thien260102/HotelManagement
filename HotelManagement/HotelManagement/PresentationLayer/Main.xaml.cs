@@ -28,10 +28,15 @@ namespace HotelManagement.PresentationLayer
 
             btn_Dashboard_Click(null, null);
         }
-        public void DisableButton()
+
+		#region click Usercontrol
+
+		public void DisableButton()
         {
             Dashboards.Background = Brushes.Transparent;
             btn_Dashboard.Foreground = (SolidColorBrush)new BrushConverter().ConvertFromString(Rule.BUTTON.NORMAL);
+            RoomTypes.Background = Brushes.Transparent;
+            btn_RoomType.Foreground = (SolidColorBrush)new BrushConverter().ConvertFromString(Rule.BUTTON.NORMAL);
             Rooms.Background = Brushes.Transparent;
             btn_Room.Foreground = (SolidColorBrush)new BrushConverter().ConvertFromString(Rule.BUTTON.NORMAL);
             Guests.Background = Brushes.Transparent;
@@ -44,8 +49,11 @@ namespace HotelManagement.PresentationLayer
             btn_Voucher.Foreground = (SolidColorBrush)new BrushConverter().ConvertFromString(Rule.BUTTON.NORMAL);
             Reports.Background = Brushes.Transparent;
             btn_Report.Foreground = (SolidColorBrush)new BrushConverter().ConvertFromString(Rule.BUTTON.NORMAL);
+            Bills.Background = Brushes.Transparent;
+            btn_Bill.Foreground = (SolidColorBrush)new BrushConverter().ConvertFromString(Rule.BUTTON.NORMAL);
+            BAttendance.Background = Brushes.Transparent;
+            btn_Attendance.Foreground = (SolidColorBrush)new BrushConverter().ConvertFromString(Rule.BUTTON.NORMAL);
         }
-
         void Button_Choose(object senderButton)
         {
             if (senderButton != null)
@@ -121,6 +129,22 @@ namespace HotelManagement.PresentationLayer
             Report report = new Report();  
             OpenUserControl (report);
         }
+        private void btn_RoomType_Click(object sender, RoutedEventArgs e)
+        {
+            Button_Choose(sender);
+            RoomTypes.Background = (SolidColorBrush)new BrushConverter().ConvertFromString(Rule.BUTTON.BORDER);
+            RoomType roomType = new RoomType();
+            OpenUserControl(roomType);
+        }
+        private void btn_Attendance_Click(object sender, RoutedEventArgs e)
+        {
+            Button_Choose(sender);
+            BAttendance.Background = (SolidColorBrush)new BrushConverter().ConvertFromString(Rule.BUTTON.BORDER);
+            Attendance attendance = new Attendance(Utilities.GetRole());
+            OpenUserControl(attendance);
+        }
+
+        #endregion
 
         private void btn_Exit_Click(object sender, RoutedEventArgs e)
         {
@@ -147,19 +171,24 @@ namespace HotelManagement.PresentationLayer
             }
         }
 
-        private void btn_RoomType_Click(object sender, RoutedEventArgs e)
-        {
-            Button_Choose(sender);
-            RoomTypes.Background = (SolidColorBrush)new BrushConverter().ConvertFromString(Rule.BUTTON.BORDER);
-            RoomType roomType = new RoomType(); 
-            OpenUserControl(roomType);
-        }
-
         private void btn_Profile_Click(object sender, RoutedEventArgs e)
         {
+            if (Utilities.GetRole() == Rule.ROLE.ADMIN)
+            {
+                MessageBox.Show("Admin does not have personal infor.");
+                return;
+            }
+
             Profile profile = new Profile();
             profile.Show();
+            profile.IsChangePassword += ReLogin;
         }
+
+        private void ReLogin()
+		{
+            new Login().Show();
+            this.Close();
+		}
 
         private void btn_Bill_Click(object sender, RoutedEventArgs e)
         {

@@ -39,6 +39,7 @@ WindowStyle="None" AllowsTransparency="True" Height="600" Width="950" >
                                     <ColumnDefinition Width="36"/>
                                     <ColumnDefinition Width="*"/>
                                 </Grid.ColumnDefinitions>
+
                                 <Border  CornerRadius="20" Width="36" Height="36" HorizontalAlignment="Right" BorderThickness="1" BorderBrush="White" VerticalAlignment="Center">
                                     <Border.Background>
                                         <ImageBrush ImageSource="/Resources/user.png" Stretch="Fill"/>
@@ -181,6 +182,19 @@ WindowStyle="None" AllowsTransparency="True" Height="600" Width="950" >
                                     <Button x:Name="btn_Report" Content="Report" Width="134" Height="45" FontSize="16" FontWeight="SemiBold" Background="Transparent" Foreground="#7F000000"  BorderThickness="0" Click="btn_Report_Click" />
                                 </StackPanel>
                             </Border>
+
+                            <!--Attendace-->
+                            <Border x:Name="BAttendance"  Background="White"  CornerRadius="15" Grid.Row="9" Margin="5,0,5,0">
+                                <StackPanel  Orientation="Horizontal" Background="Transparent" >
+                                    <Border Height="28" Width="28" Margin="8 4 0 0" HorizontalAlignment="Left" BorderThickness="0">
+                                        <Border.Background>
+                                            <ImageBrush  Stretch="Fill" ImageSource="/Resources/report.png"/>
+                                        </Border.Background>
+                                    </Border>
+                                    <Button x:Name="btn_Attendance" Content="Attendance" Width="134" Height="45" FontSize="16" FontWeight="SemiBold" Background="Transparent" Foreground="#7F000000"  BorderThickness="0" Click="btn_Attendance_Click" />
+                                </StackPanel>
+                            </Border>
+                            
                             <!--Logout-->
                             <Border x:Name="Logout"  Background="White"  CornerRadius="15" Grid.Row="10" Margin="5,0,5,0">
                                 <StackPanel  Orientation="Horizontal" Background="Transparent" >
