@@ -16,7 +16,7 @@
                     <TextBox x:Name="txt_RoomName" Width="248" BorderThickness="0" FontFamily="Segoe UI" FontSize="14" VerticalContentAlignment="Center" Background="Transparent" Margin="1,0,1,0" />
                 </Border>
                 <Label Content="Room type" Margin="10 10 0 0" FontSize="12" FontWeight="Regular" Padding="5" FontFamily="Segoe UI" Width="264" />
-                <!--txt_RoomType-->
+                <!--cb_RoomType-->
                 <Border CornerRadius="5" Width="252" Height="35" BorderThickness="1" BorderBrush="#7F000000" Margin="5 0 0 0">
                     <ComboBox Name="cb_RoomType" Width="248" BorderThickness="0" FontFamily="Segoe UI" FontSize="14" VerticalContentAlignment="Center" Background="Transparent" Margin="1,0,1,0"/>
                 </Border>

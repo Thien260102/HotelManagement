@@ -4,6 +4,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
@@ -31,6 +32,9 @@ namespace HotelManagement.PresentationLayer
             InitializeComponent();
 
             roomType = new RoomTypeDTO();
+
+            txt_NumberPeople.PreviewTextInput += InputOnlyNumber;
+            txt_Price.PreviewTextInput += InputOnlyNumber;
         }
 
         public void SetData(RoomTypeDTO roomType)
@@ -42,6 +46,12 @@ namespace HotelManagement.PresentationLayer
 
             originName = roomType.Name;
 		}
+
+        private void InputOnlyNumber(object sender, TextCompositionEventArgs e)
+        {
+            var textBox = sender as TextBox;
+            e.Handled = Regex.IsMatch(e.Text, "[^0-9]+");
+        }
 
         private void btn_Cancel_Click(object sender, RoutedEventArgs e)
         {

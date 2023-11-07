@@ -167,6 +167,15 @@ namespace HotelManagement.BusinessLogicLayer
 
 		public bool RemoveAccount(string userName) => AccountDAL.Instance.RemoveAccount(userName);
 
+		public string GetEmployeeName()
+		{
+			if(Account.EmployeeID == 0)
+			{
+				return "Admin";
+			}
+
+			return new EmployeeBLL().GetEmployee(Account.EmployeeID).FullName;
+		}
 		#endregion
 	}
 }

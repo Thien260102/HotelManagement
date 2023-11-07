@@ -4,6 +4,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
@@ -49,6 +50,8 @@ namespace HotelManagement.PresentationLayer
             txt_CCCD.IsReadOnly = true;
 
             txt_Phone.Text = employee.PhoneNumber;
+            txt_Phone.PreviewTextInput += InputOnlyNumber;
+
             Checkbox_Male.IsChecked = employee.Sex;
 
             txt_UserName.Text = account.UserName;
@@ -57,6 +60,12 @@ namespace HotelManagement.PresentationLayer
             txt_Password.Text = account.Password;
 
             originPhoneNumber = employee.PhoneNumber;
+        }
+
+        private void InputOnlyNumber(object sender, TextCompositionEventArgs e)
+        {
+            var textBox = sender as TextBox;
+            e.Handled = Regex.IsMatch(e.Text, "[^0-9]+");
         }
 
         private void btn_Cancel_Click(object sender, RoutedEventArgs e)

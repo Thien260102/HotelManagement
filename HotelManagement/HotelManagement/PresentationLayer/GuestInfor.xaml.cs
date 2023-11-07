@@ -4,6 +4,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
@@ -30,6 +31,9 @@ namespace HotelManagement.PresentationLayer
 		{
 			InitializeComponent();
             customer = new CustomerDTO();
+
+			txt_CitizenID.PreviewTextInput += InputOnlyNumber;
+			txt_Phone.PreviewTextInput += InputOnlyNumber;
 		}
 
         public void SetData(CustomerDTO customer)
@@ -48,7 +52,13 @@ namespace HotelManagement.PresentationLayer
 			originPhoneNumber = customer.PhoneNumber;
         }
 
-        private void btn_Cancel_Click(object sender, RoutedEventArgs e)
+		private void InputOnlyNumber(object sender, TextCompositionEventArgs e)
+		{
+			var textBox = sender as TextBox;
+			e.Handled = Regex.IsMatch(e.Text, "[^0-9]+");
+		}
+
+		private void btn_Cancel_Click(object sender, RoutedEventArgs e)
         {
             this.Close();
         }
