@@ -51,12 +51,15 @@ namespace HotelManagement.BusinessLogicLayer
 			return false;
 		}
 
-		public int GetEmployeeId(string citizenId)
+		public int GetCustomerId(string citizenId)
 		{
 			return CustomerDAL.Instance.GetCustomerID(citizenId);
 		}
 
 		public CustomerDTO GetCustomer(int id) => CustomerDAL.Instance.GetCustomer(id);
+
+		public CustomerDTO GetCustomer(string citizenId = "", string phone = "")
+			=> CustomerDAL.Instance.GetCustomer(citizenId, phone);
 
 		public bool RemoveCustomer(int id)
 		{

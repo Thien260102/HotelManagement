@@ -19,6 +19,8 @@ namespace HotelManagement.BusinessLogicLayer
 		#region Methods
 		public List<RoomTypeDTO> GetAllRoomTypes() => RoomTypeDAL.Instance.GetAll();
 
+		public string GetRoomTypeName(int id) => RoomTypeDAL.Instance.GetRoomTypeName(id);
+
 		public bool AddNewRoomType(RoomTypeDTO roomType)
 		{
 			switch (RoomTypeDAL.Instance.AddNewRoomType(roomType))

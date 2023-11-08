@@ -37,7 +37,7 @@ namespace HotelManagement.DataAccessLayer
             return roomTypes;
         }
 
-        public string GeRoomTypeName(int id)
+        public string GetRoomTypeName(int id)
         {
             string query = "Select * from ROOM_TYPE " +
                 "where Id = @id ";

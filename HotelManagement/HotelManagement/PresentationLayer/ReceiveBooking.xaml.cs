@@ -22,12 +22,18 @@ namespace HotelManagement.PresentationLayer
     /// </summary>
     public partial class ReceiveBooking : Window
     {
-        List<RoomTypeDTO> roomTypes;
+		#region Fields & Properties
+		List<RoomTypeDTO> roomTypes;
         int currentType = 0;
+
+        CustomerDTO customer;
 
         decimal total = -1;
 
-        public ReceiveBooking()
+        public Action ReloadBooking;
+		#endregion
+
+		public ReceiveBooking()
         {
             InitializeComponent();
 
@@ -52,7 +58,7 @@ namespace HotelManagement.PresentationLayer
             txt_DateBooking.Text = DateTime.Now.ToString("yyyy-MM-dd");
             txt_DateBooking.IsReadOnly = true;
 
-            txt_EmployeeName.Text = new AccountBLL().GetEmployeeName();
+            txt_EmployeeName.Text = new AccountBLL().GetCurrentEmployeeName();
             txt_EmployeeName.IsReadOnly = true;
 
             txt_Total.IsReadOnly = true;
@@ -60,9 +66,35 @@ namespace HotelManagement.PresentationLayer
 
             txt_CCCD.PreviewTextInput += InputOnlyNumber;
             txt_Phone.PreviewTextInput += InputOnlyNumber;
+
+            txt_Phone.LostFocus += CheckCustomer;
+            txt_CCCD.LostFocus += CheckCustomer;
+
+            customer = new CustomerDTO();
         }
 
-        private void InputOnlyNumber(object sender, TextCompositionEventArgs e)
+		private void CheckCustomer(object sender, RoutedEventArgs e)
+		{
+            var textBox = sender as TextBox;
+            if (textBox.Name == "txt_Phone") 
+			{
+                customer = new CustomerBLL().GetCustomer("", textBox.Text.Trim());
+			}
+            else
+			{
+                customer = new CustomerBLL().GetCustomer(textBox.Text.Trim(), "");
+            }
+
+            if (customer.Id != -1)
+			{
+                txt_Name.Text = customer.FullName;
+                txt_Phone.Text = customer.PhoneNumber;
+                txt_CCCD.Text = customer.CitizenId;
+                //Checkbox_Male.IsChecked = customer.Sex;
+			}
+		}
+
+		private void InputOnlyNumber(object sender, TextCompositionEventArgs e)
         {
             var textBox = sender as TextBox;
             e.Handled = Regex.IsMatch(e.Text, "[^0-9]+");
@@ -123,14 +155,13 @@ namespace HotelManagement.PresentationLayer
                 string phone = txt_Phone.Text.Trim();
                 int roomType = roomTypes[currentType].Id;
                 string checkIn = txt_DateCheckin.Text.Trim();
-                bool sex = (bool)Checkbox_Male.IsChecked;
+                //bool sex = (bool)Checkbox_Male.IsChecked;
 
                 if (string.IsNullOrEmpty(name) || string.IsNullOrEmpty(citizenId) ||
                    string.IsNullOrEmpty(phone) || string.IsNullOrEmpty(checkIn))
                 {
                     throw new Exception("Please fill all information");
                 }
-
 
                 if (!Utilities.Validate_CitizenId(citizenId))
                 {
@@ -148,7 +179,7 @@ namespace HotelManagement.PresentationLayer
                 }
 
                 if (DateTime.Parse(checkIn).Date < DateTime.Now.Date)
-				{
+                {
                     throw new Exception("Check in date must be equal or larger than today.");
                 }
 
@@ -158,42 +189,36 @@ namespace HotelManagement.PresentationLayer
                     throw new Exception("Please fill correct Total day.");
                 }
 
-                EmployeeBLL employeeBLL = new EmployeeBLL();
-                AccountBLL accountBLL = new AccountBLL();
+                BookingBLL bookingBLL = new BookingBLL();
+                CustomerBLL customerBLL = new CustomerBLL();
 
-                //if (employee.Id == -1) // add new employeee
-                //{
-                //    if (employeeBLL.InsertEmployee(employee))
-                //    {
-                //        int employeeId = employeeBLL.GetEmployeeId(citizenId);
-                //        account.EmployeeID = employeeId;
+                if (customer.Id == -1)
+				{
+                    customer.CitizenId = citizenId;
+                    customer.FullName = name;
+                    customer.PhoneNumber = phone;
 
-                //        if (accountBLL.InsertAccount(account))
-                //        {
-                //            MessageBox.Show("Add new employee successful");
+                    if (!customerBLL.InsertCustomer(customer))
+					{
+                        throw new Exception("Insert customer infor fail.");
+					}
 
-                //            ReloadEmployee?.Invoke();
-                //            this.Close();
-                //        }
-                //        else
-                //        {
-                //            employeeBLL.RemoveEmployee(employeeId);
-                //            throw new Exception("Add new employee fail");
-                //        }
-                //    }
-                //}
+				}
 
-                //else                    // update
-                //{
-                //    if (employeeBLL.UpdateEmployee(employee, isCheck))
-                //    {
-                //        MessageBox.Show("Update employee successful");
-                //        accountBLL.UpdateAccount(account);
+                BookingDTO booking = new BookingDTO(
+                    customerBLL.GetCustomerId(customer.CitizenId),
+                    AccountBLL.Account.UserName, roomType,
+                    txt_DateBooking.Text.Trim(), checkIn,
+                    totalDay, total);
 
-                //        ReloadEmployee?.Invoke();
-                //        this.Close();
-                //    }
-                //}
+                if (!bookingBLL.InsertBooking(booking))
+                {
+                    throw new Exception("Insert booking infor fail.");
+                }
+
+                ReloadBooking?.Invoke();
+                this.Close();
+
             }
             catch (Exception ex)
             {

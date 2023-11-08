@@ -145,6 +145,22 @@ namespace HotelManagement.DataAccessLayer
 
             return Rule.STATE.FAIL;
         }
+
+        public CustomerDTO GetCustomer(string citizenId, string phone)
+		{
+            string query = "Select * from CUSTOMER " +
+                "where CitizenID = @citizenId Or PhoneNumber = @phone ";
+
+            DataTable data = DataProvider.Instance.ExecuteQuery(query, new object[] { citizenId, phone });
+
+            if (data.Rows.Count > 0)
+            {
+                return new CustomerDTO(data.Rows[0]);
+            }
+
+            return new CustomerDTO();
+        }
+
         #endregion
     }
 }

@@ -6,6 +6,12 @@
              xmlns:local="clr-namespace:HotelManagement.PresentationLayer"
              mc:Ignorable="d" 
              d:DesignHeight="545" d:DesignWidth="770">
+
+    <UserControl.Resources>
+        <local:MoneyConverter x:Key="moneyConverter"></local:MoneyConverter>
+        <local:PhoneConverter x:Key="phoneConverter"></local:PhoneConverter>
+    </UserControl.Resources>
+
     <Grid>
         <StackPanel Background="Transparent" >
             <StackPanel Height="50" Orientation="Horizontal" >
@@ -29,10 +35,22 @@
                     <Button x:Name="btn_Delete" Content="Delete" FontSize="18" FontWeight="SemiBold"  Background="Transparent" Foreground="#4C00A3" BorderThickness="0" Click="btn_Delete_Click" />
                 </Border>
             </StackPanel>
-            <!--DataGridView-->
-            <StackPanel Height="495" Background="Transparent">
-                <DataGrid x:Name="DataGridBooking" Margin="10" Height="470 " d:ItemsSource="{d:SampleData ItemCount=5}"/>
-            </StackPanel>
+
+            <DataGrid RowStyle="{DynamicResource DataGridRowStyle1}" 
+                      ColumnHeaderStyle="{DynamicResource DataGridColumnHeaderStyle1}" 
+                      CellStyle="{DynamicResource DataGridCellStyle1}" 
+                      x:Name="DataGridBooking" Style="{DynamicResource DataGridStyle1}">
+                <DataGrid.Columns>
+                    <DataGridTextColumn Header="Id" IsReadOnly="True" CanUserResize="False" Width="auto" Binding="{Binding Id}"/>
+                    <DataGridTextColumn Header="Customer Name" Binding="{Binding CustomerName}" IsReadOnly="True" Width="*"/>
+                    <DataGridTextColumn Header="Room Type" Binding="{Binding RoomTypeName}" IsReadOnly="True" Width="*"/>
+                    <DataGridTextColumn Header="Create Date" Binding="{Binding CreateDate}" IsReadOnly="True" Width="*"/>
+                    <DataGridTextColumn Header="Checkin Date" Binding="{Binding CheckinDate}" IsReadOnly="True" Width="*"/>
+                    <DataGridTextColumn Header="Total day" Binding="{Binding TotalDay, Converter={StaticResource moneyConverter}}" IsReadOnly="True" Width="*"/>
+                    <DataGridTextColumn Header="Total" Binding="{Binding Total, Converter={StaticResource moneyConverter}}" IsReadOnly="True" Width="*"/>
+                </DataGrid.Columns>
+            </DataGrid>
+
         </StackPanel>
     </Grid>
 </UserControl>

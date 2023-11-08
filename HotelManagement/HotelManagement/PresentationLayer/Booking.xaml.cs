@@ -1,4 +1,6 @@
-﻿using MaterialDesignThemes.Wpf;
+﻿using HotelManagement.BusinessLogicLayer;
+using HotelManagement.DataTransferObject;
+using MaterialDesignThemes.Wpf;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -21,16 +23,27 @@ namespace HotelManagement.PresentationLayer
     /// </summary>
     public partial class Booking : UserControl
     {
+        List<BookingDTO> bookings;
+
         public Booking()
         {
             InitializeComponent();
+
+            LoadData();
         }
+
+        private void LoadData()
+		{
+            bookings = new BookingBLL().GetAll();
+
+            DataGridBooking.ItemsSource = bookings;
+		}
 
         private void btn_Add_Click(object sender, RoutedEventArgs e)
         {
             ReceiveBooking receiveBooking = new ReceiveBooking();
             receiveBooking.Show();
-                    
+            receiveBooking.ReloadBooking += LoadData;
         }
 
         private void btn_Delete_Click(object sender, RoutedEventArgs e)

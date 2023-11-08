@@ -39,8 +39,8 @@
                         </Border>
                         <!--Sex-->
                         <StackPanel Orientation="Horizontal" Margin="10 20 0 0">
-                            <Label Content="Sex: " Margin="23 10 0 0" FontSize="12" FontWeight="Regular" Padding="5" FontFamily="Segoe UI" Width="50" />
-                            <CheckBox x:Name="Checkbox_Male" Content="Male" HorizontalAlignment="Right" VerticalAlignment="Bottom" Margin="0 0 0 5" FontFamily="Segoe UI"/>
+                            <!--<Label Content="Sex: " Margin="23 10 0 0" FontSize="12" FontWeight="Regular" Padding="5" FontFamily="Segoe UI" Width="50" />
+                            <CheckBox x:Name="Checkbox_Male" Content="Male" HorizontalAlignment="Right" VerticalAlignment="Bottom" Margin="0 0 0 5" FontFamily="Segoe UI"/>-->
                         </StackPanel>
                     </StackPanel>
                     <Button Grid.Column="1" Width="2" Margin="3 10 3 10" BorderThickness="2" BorderBrush="Black" IsEnabled="False"/>

@@ -165,9 +165,11 @@ namespace HotelManagement.BusinessLogicLayer
 
 		public AccountDTO GetAccount(int employeeId) => AccountDAL.Instance.GetAccount(employeeId);
 
+		public AccountDTO GetAccount(string userName) => AccountDAL.Instance.GetAccount(userName);
+
 		public bool RemoveAccount(string userName) => AccountDAL.Instance.RemoveAccount(userName);
 
-		public string GetEmployeeName()
+		public string GetCurrentEmployeeName()
 		{
 			if(Account.EmployeeID == 0)
 			{

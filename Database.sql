@@ -105,7 +105,7 @@ ADD CONSTRAINT PK_RENTING PRIMARY KEY (ID);
 Drop Table BOOKING
 Create Table BOOKING
 (
-	ID int not null,
+	ID int not null IDENTITY(1,1),
 	CustomerID int,
 	UserName nvarchar(50),
 	RoomTypeID int,
@@ -164,9 +164,9 @@ Select * from ROLE
 ---------------
 
 --- ACCOUNT ---
-Delete from ACCOUNT where UserName != 'admin';
+Delete from ACCOUNT where UserName = 'admin';
 Select * from ACCOUNT
-Insert into ACCOUNT Values('admin', '123', null, 1, 1, 0);
+Insert into ACCOUNT Values('Admin', '123', null, 1, 1, 0);
 ---------------
 
 --- EMPLOYEEE ----
@@ -218,6 +218,7 @@ Select * from RENTING
 ---------------
 
 --- BOOKING ---
+Delete from BOOKING
 Select * from BOOKING
 ---------------
 
