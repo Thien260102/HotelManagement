@@ -40,6 +40,7 @@ namespace HotelManagement.PresentationLayer
 			{
                 currentRoom = -1;
                 rooms = new RoomBLL().GetAllRooms();
+                rooms.Sort((a, b) => a.Floor.CompareTo(b.Floor));
 
                 dicRooms = new Dictionary<Rule.ROOM_STATE, List<RoomDTO>>();
                 dicRooms.Add(Rule.ROOM_STATE.AVAILABLE, rooms.FindAll(element => element.State == (int)Rule.ROOM_STATE.AVAILABLE));

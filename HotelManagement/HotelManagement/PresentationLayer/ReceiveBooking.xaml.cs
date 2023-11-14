@@ -197,6 +197,9 @@ namespace HotelManagement.PresentationLayer
                     customer.CitizenId = citizenId;
                     customer.FullName = name;
                     customer.PhoneNumber = phone;
+                    customer.Nationality = "";
+                    customer.Sex = true;
+                    customer.BirthDay = "";
 
                     if (!customerBLL.InsertCustomer(customer))
 					{

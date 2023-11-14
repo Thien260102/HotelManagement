@@ -60,10 +60,10 @@ namespace HotelManagement.DataAccessLayer
                 "Values( @customerId , @userName , @roomTypeId , @createDate , " +
                 " @checkin , @totalDay , @total ) ";
 
-			if (IsExistBooking(booking.CustomerId, booking.CheckinDate))
-			{
-				return Rule.STATE.EXIST;
-			}
+			//if (IsExistBooking(booking.CustomerId, booking.CheckinDate))
+			//{
+			//	return Rule.STATE.EXIST;
+			//}
 
 			if (DataProvider.Instance.ExecuteNonQuery(query,
                 new object[] { booking.CustomerId, booking.Username, booking.RoomTypeId, 
