@@ -30,9 +30,9 @@
                 <Border Margin="285 5 0 0" CornerRadius="20" Background="#F3E5FF" Height="40" Width="96">
                     <Button x:Name="btn_Add" Content="Add" FontSize="18" FontWeight="SemiBold"  Background="Transparent" Foreground="#4C00A3" BorderThickness="0" Click= "btn_Add_Click" />
                 </Border>
-                <!--Button Delete-->
+                <!--btn_Cancel-->
                 <Border Margin="10 5 0 0" CornerRadius="20" Background="White" Height="40" Width="96" BorderThickness="1" BorderBrush="#4C00A3">
-                    <Button x:Name="btn_Delete" Content="Delete" FontSize="18" FontWeight="SemiBold"  Background="Transparent" Foreground="#4C00A3" BorderThickness="0" Click="btn_Delete_Click" />
+                    <Button x:Name="btn_Cancel" Content="Cancel" FontSize="18" FontWeight="SemiBold"  Background="Transparent" Foreground="#4C00A3" BorderThickness="0" Click="btn_Cancel_Click" />
                 </Border>
             </StackPanel>
 

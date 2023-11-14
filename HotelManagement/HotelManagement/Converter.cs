@@ -12,7 +12,8 @@ namespace HotelManagement.PresentationLayer
     {
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
-            string strNum = System.Convert.ToDouble(value.ToString()).ToString("# ### ### ###");
+            CultureInfo cul = CultureInfo.GetCultureInfo("vi-VN");
+            string strNum = System.Convert.ToDouble(value.ToString()).ToString("# ### ### ###", cul.NumberFormat);
             if (strNum.Trim() == "")
 			{
                 strNum = "0";
