@@ -63,6 +63,17 @@ namespace HotelManagement.BusinessLogicLayer
 
 		public EmployeeDTO GetEmployee(int id) => EmployeeDAL.Instance.GetEmployee(id);
 
+		public string GetEmployeeName(int id)
+		{
+			EmployeeDTO employee = EmployeeDAL.Instance.GetEmployee(id);
+			if (employee == null)
+			{
+				return "Null";
+			}
+
+			return employee.FullName;
+		}
+
 		public bool RemoveEmployee(int id)
 		{
 			return EmployeeDAL.Instance.RemoveEmployee(id);
