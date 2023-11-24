@@ -5,6 +5,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
@@ -44,9 +45,18 @@ namespace HotelManagement.PresentationLayer
             account = new AccountDTO();
 
             txt_DayStart.Text = DateTime.Now.ToString("yyyy-MM-dd");
+
+            txt_CCCD.PreviewTextInput += InputOnlyNumber;
+            txt_Phone.PreviewTextInput += InputOnlyNumber;
         }
 
-		private void SelectPosition(object sender, SelectionChangedEventArgs e)
+        private void InputOnlyNumber(object sender, TextCompositionEventArgs e)
+        {
+            var textBox = sender as TextBox;
+            e.Handled = Regex.IsMatch(e.Text, "[^0-9]+");
+        }
+
+        private void SelectPosition(object sender, SelectionChangedEventArgs e)
 		{
 			switch((Rule.ROLE)cbb_Position.SelectedItem)
 			{
