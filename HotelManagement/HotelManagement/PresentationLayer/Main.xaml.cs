@@ -22,6 +22,7 @@ namespace HotelManagement.PresentationLayer
     {
         private UserControl currentUserControl;
         private Button currentButton;
+        public int expand = -1;
         public Main()
         {
             InitializeComponent();
@@ -81,12 +82,36 @@ namespace HotelManagement.PresentationLayer
             Dashboard dashboard = new Dashboard();
             OpenUserControl(dashboard);
         }
+        private void btn_RoomSub_Click(object sender, RoutedEventArgs e)
+        {
+            
+            if (expand == -1)
+            {
+                ChooseRoom.Height = 135;
+                expand *= -1;
+                image_sub.ImageSource = new BitmapImage(new Uri("pack://application:,,,/Resources/down-arrow.png"));
+            }
+            else
+            {
+                ChooseRoom.Height = 45;
+                expand *= -1;
+                image_sub.ImageSource = new BitmapImage(new Uri("pack://application:,,,/Resources/next.png"));
+            }
+        }
         private void btn_Room_Click(object sender, RoutedEventArgs e)
         {
             Button_Choose(sender);
             Rooms.Background = (SolidColorBrush)new BrushConverter().ConvertFromString(Rule.BUTTON.BORDER);
             Room room = new Room();
             OpenUserControl(room);
+
+        }
+        private void btn_RoomType_Click(object sender, RoutedEventArgs e)
+        {
+            Button_Choose(sender);
+            RoomTypes.Background = (SolidColorBrush)new BrushConverter().ConvertFromString(Rule.BUTTON.BORDER);
+            RoomType roomType = new RoomType();
+            OpenUserControl(roomType);
         }
         private void btn_Guest_Click(object sender, RoutedEventArgs e)
         {
@@ -129,13 +154,7 @@ namespace HotelManagement.PresentationLayer
             Report report = new Report();  
             OpenUserControl (report);
         }
-        private void btn_RoomType_Click(object sender, RoutedEventArgs e)
-        {
-            Button_Choose(sender);
-            RoomTypes.Background = (SolidColorBrush)new BrushConverter().ConvertFromString(Rule.BUTTON.BORDER);
-            RoomType roomType = new RoomType();
-            OpenUserControl(roomType);
-        }
+       
         private void btn_Attendance_Click(object sender, RoutedEventArgs e)
         {
             Button_Choose(sender);
@@ -198,5 +217,7 @@ namespace HotelManagement.PresentationLayer
             OpenUserControl (bill);
 
         }
+
+      
     }
 }

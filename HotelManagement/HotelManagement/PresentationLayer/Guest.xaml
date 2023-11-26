@@ -27,16 +27,16 @@
                     </StackPanel>
                 </Border>
                 <!--Button Add-->
-                <Border Margin="180 5 0 0" CornerRadius="20" Background="#F3E5FF" Height="40" Width="96">
-                    <Button x:Name="btn_Add" Content="Add" FontSize="18" FontWeight="SemiBold"  Background="Transparent" Foreground="#4C00A3" BorderThickness="0" Click= "btn_Add_Click" Height="40" VerticalAlignment="Top" />
+                <Border Margin="240 5 0 0" CornerRadius="20" Background="#F3E5FF" Height="40" Width="75">
+                    <Button x:Name="btn_Add" Content="Add" FontSize="16" FontWeight="SemiBold"  Background="Transparent" Foreground="#4C00A3" BorderThickness="0" Click= "btn_Add_Click" Height="40" VerticalAlignment="Top" />
                 </Border>
                 <!--Button Update-->
-                <Border Margin="10 5 0 0" CornerRadius="20" Background="#F3E5FF" Height="40" Width="96">
-                    <Button x:Name="btn_Update" Content="Update" FontSize="18" FontWeight="SemiBold"  Background="Transparent" Foreground="#4C00A3" BorderThickness="0" Click= "btn_Update_Click" Height="40" VerticalAlignment="Top" />
+                <Border Margin="10 5 0 0" CornerRadius="20" Background="#F3E5FF" Height="40" Width="75">
+                    <Button x:Name="btn_Update" Content="Update" FontSize="16" FontWeight="SemiBold"  Background="Transparent" Foreground="#4C00A3" BorderThickness="0" Click= "btn_Update_Click" Height="40" VerticalAlignment="Top" />
                 </Border>
                 <!--Button Delete-->
-                <Border Margin="10 5 0 0" CornerRadius="20" Background="White" Height="40" Width="96" BorderThickness="1" BorderBrush="#4C00A3">
-                    <Button x:Name="btn_Delete" Content="Delete" FontSize="18" FontWeight="SemiBold"  Background="Transparent" Foreground="#4C00A3" BorderThickness="0" Click="btn_Delete_Click" />
+                <Border Margin="10 5 0 0" CornerRadius="20" Background="White" Height="40" Width="75" BorderThickness="1" BorderBrush="#4C00A3">
+                    <Button x:Name="btn_Delete" Content="Delete" FontSize="16" FontWeight="SemiBold"  Background="Transparent" Foreground="#4C00A3" BorderThickness="0" Click="btn_Delete_Click" />
                 </Border>
             </StackPanel>
             <!--DataGridView-->
