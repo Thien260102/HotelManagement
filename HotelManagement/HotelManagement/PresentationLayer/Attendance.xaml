@@ -5,7 +5,7 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:HotelManagement.PresentationLayer"
              mc:Ignorable="d" 
-             d:DesignHeight="450" d:DesignWidth="800">
+             d:DesignHeight="545" d:DesignWidth="770">
   
         <Grid>
         <StackPanel Background="Transparent" >
@@ -22,20 +22,20 @@
                     </StackPanel>
                 </Border>
                 <!--Button Checkin-->
-                <Border Margin="160 5 0 0" CornerRadius="20" Background="#F3E5FF" Height="40" Width="96">
-                    <Button x:Name="btn_Checkin" Content="Checkin" FontSize="18" FontWeight="SemiBold"  Background="Transparent" Foreground="#4C00A3" BorderThickness="0" Click= "btn_Checkin_Click" Height="40" VerticalAlignment="Top" />
+                <Border Margin="165 5 0 0" CornerRadius="20" Background="#F3E5FF" Height="40" Width="75">
+                    <Button x:Name="btn_Checkin" Content="Checkin" FontSize="16" FontWeight="SemiBold"  Background="Transparent" Foreground="#4C00A3" BorderThickness="0" Click= "btn_Checkin_Click" Height="40" VerticalAlignment="Top" />
                 </Border>
                 <!--Button Leave register-->
                 <Border Margin="10 5 0 0" CornerRadius="20" Background="#F3E5FF" Height="40" Width="126">
-                    <Button x:Name="btn_LeaveRegister" Content="Leave Register" FontSize="18" FontWeight="SemiBold"  Background="Transparent" Foreground="#4C00A3" BorderThickness="0" Click= "btn_LeaveRegister_Click" Height="40" VerticalAlignment="Top" />
+                    <Button x:Name="btn_LeaveRegister" Content="Leave Register" FontSize="16" FontWeight="SemiBold"  Background="Transparent" Foreground="#4C00A3" BorderThickness="0" Click= "btn_LeaveRegister_Click" Height="40" VerticalAlignment="Top" />
                 </Border>
                 <!--Button Update-->
                 <Border Margin="10 5 0 0" CornerRadius="20" Background="White" Height="40" Width="96" BorderThickness="1" BorderBrush="#4C00A3">
-                    <Button x:Name="btn_Update" Content="Update" FontSize="18" FontWeight="SemiBold"  Background="Transparent" Foreground="#4C00A3" BorderThickness="0" Click="btn_Update_Click" />
+                    <Button x:Name="btn_Update" Content="Update" FontSize="16" FontWeight="SemiBold"  Background="Transparent" Foreground="#4C00A3" BorderThickness="0" Click="btn_Update_Click" />
                 </Border>
             </StackPanel>
-
-            <DataGrid RowStyle="{DynamicResource DataGridRowStyle1}" 
+            <StackPanel Height="495" Background="Transparent">
+                <DataGrid RowStyle="{DynamicResource DataGridRowStyle1}" 
                       ColumnHeaderStyle="{DynamicResource DataGridColumnHeaderStyle1}" 
                       CellStyle="{DynamicResource DataGridCellStyle1}" 
                       x:Name="DataGridAttendance" Style="{DynamicResource DataGridStyle1}">
@@ -47,6 +47,16 @@
                     <DataGridTextColumn Header="Note" Binding="{Binding Note}" IsReadOnly="True" Width="*"/>
                 </DataGrid.Columns>
             </DataGrid>
+
+
+                    <DataGrid.Columns>
+                        <DataGridTextColumn Header="Employee ID" Binding="{Binding EmployeeId}" IsReadOnly="True" CanUserResize="False" Width="auto" />
+                        <DataGridTextColumn Header="Date" Binding="{Binding Date}" IsReadOnly="True" Width="*"/>
+                        <DataGridTextColumn Header="State" Binding="{Binding SState}" IsReadOnly="True" Width="*"/>
+                        <DataGridTextColumn Header="Note" Binding="{Binding Note}" IsReadOnly="True" Width="*"/>
+                    </DataGrid.Columns>
+                </DataGrid>
+            </StackPanel>
 
         </StackPanel>
     </Grid>

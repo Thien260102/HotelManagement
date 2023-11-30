@@ -70,9 +70,9 @@ namespace HotelManagement.PresentationLayer
         private void AllRooms()
 		{
             DisableButton();
-            BdAll.Background = (SolidColorBrush)new BrushConverter().ConvertFromString("#FDDDB3");
-            BdAll.BorderBrush = (SolidColorBrush)new BrushConverter().ConvertFromString("#E18308");
-            btn_All.Foreground = (SolidColorBrush)new BrushConverter().ConvertFromString("#E18308");
+            BdAll.Background = (SolidColorBrush)new BrushConverter().ConvertFromString("#E8F1FD");
+            BdAll.BorderBrush = (SolidColorBrush)new BrushConverter().ConvertFromString("#1570EF");
+            btn_All.Foreground = (SolidColorBrush)new BrushConverter().ConvertFromString("#1570EF");
 
             btn_All.Content = $"All({rooms.Count})";
             DataGridRoom.ItemsSource = rooms;
@@ -202,6 +202,7 @@ namespace HotelManagement.PresentationLayer
                 MessageBox.Show(ex.Message);
 			}
         }
-		#endregion
-	}
+        #endregion
+
+    }
 }

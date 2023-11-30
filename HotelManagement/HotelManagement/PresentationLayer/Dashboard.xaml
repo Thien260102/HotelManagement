@@ -23,7 +23,7 @@
                                         <ImageBrush ImageSource="/Resources/bed.png" Stretch="Fill"/>
                                     </Border.Background>
                                 </Border>
-                                <Label x:Name="labelAvaliable" Grid.Column="1" Content="100" FontSize="18" FontWeight="SemiBold" Padding="10" FontFamily="Segoe UI" Foreground="#4C00A3" HorizontalAlignment="Center" />
+                                <Label x:Name="labelAvaliable" Grid.Column="1" Content="100" FontSize="26" FontWeight="SemiBold" Padding="10" FontFamily="Segoe UI" Foreground="#4C00A3" HorizontalAlignment="Center" />
                                 <Label  Content="Avaliable room" FontSize="14" FontWeight="Regular" Padding="10" FontFamily="Segoe UI" Foreground="#CC000000" HorizontalAlignment="Center" />
                             </StackPanel>
                         </Border>
@@ -36,7 +36,7 @@
                                         <ImageBrush ImageSource="/Resources/Calendar-check.png" Stretch="Fill"/>
                                     </Border.Background>
                                 </Border>
-                                <Label x:Name="labelBooking" Grid.Column="1" Content="100" FontSize="18" FontWeight="SemiBold" Padding="10" FontFamily="Segoe UI" Foreground="#4C00A3" HorizontalAlignment="Center" />
+                                <Label x:Name="labelBooking" Grid.Column="1" Content="100" FontSize="26" FontWeight="SemiBold" Padding="10" FontFamily="Segoe UI" Foreground="#4C00A3" HorizontalAlignment="Center" />
                                 <Label   Content="Booking" FontSize="14" FontWeight="Regular" Padding="10" FontFamily="Segoe UI" Foreground="#CC000000" HorizontalAlignment="Center" />
                             </StackPanel>
                         </Border>
@@ -49,7 +49,7 @@
                                         <ImageBrush ImageSource="/Resources/Location.png" Stretch="Fill"/>
                                     </Border.Background>
                                 </Border>
-                                <Label x:Name="labelCheckin" Grid.Column="1" Content="100" FontSize="18" FontWeight="SemiBold" Padding="10" FontFamily="Segoe UI" Foreground="#4C00A3" HorizontalAlignment="Center" />
+                                <Label x:Name="labelCheckin" Grid.Column="1" Content="100" FontSize="26" FontWeight="SemiBold" Padding="10" FontFamily="Segoe UI" Foreground="#4C00A3" HorizontalAlignment="Center" />
                                 <Label   Content="Today's check in" FontSize="14" FontWeight="Regular" Padding="10" FontFamily="Segoe UI" Foreground="#CC000000" HorizontalAlignment="Center" />
                             </StackPanel>
                         </Border>
@@ -62,7 +62,7 @@
                                         <ImageBrush ImageSource="/Resources/guests (1).png" Stretch="Fill"/>
                                     </Border.Background>
                                 </Border>
-                                <Label x:Name="labelGuests" Grid.Column="1" Content="100" FontSize="18" FontWeight="SemiBold" Padding="10" FontFamily="Segoe UI" Foreground="#4C00A3" HorizontalAlignment="Center" />
+                                <Label x:Name="labelGuests" Grid.Column="1" Content="100" FontSize="26" FontWeight="SemiBold" Padding="10" FontFamily="Segoe UI" Foreground="#4C00A3" HorizontalAlignment="Center" />
                                 <Label   Content="Guests check in " FontSize="14" FontWeight="Regular" Padding="10" FontFamily="Segoe UI" Foreground="#CC000000" HorizontalAlignment="Center" />
                             </StackPanel>
                         </Border>
