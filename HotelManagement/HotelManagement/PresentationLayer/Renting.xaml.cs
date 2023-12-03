@@ -7,34 +7,30 @@ using System.Windows.Controls;
 
 namespace HotelManagement.PresentationLayer
 {
-    /// <summary>
-    /// Interaction logic for Booking.xaml
-    /// </summary>
-    public partial class Booking : UserControl
-    {
-        List<BookingDTO> bookings;
-        int currentBooking = -1;
+	/// <summary>
+	/// Interaction logic for Renting.xaml
+	/// </summary>
+	public partial class Renting : UserControl
+	{
+        List<RentingDTO> rentings;
+        int currentRenting = -1;
 
-        public Booking()
+        public Renting()
+		{
+			InitializeComponent();
+		}
+
+        private void SelectBooking(object sender, SelectedCellsChangedEventArgs e)
         {
-            InitializeComponent();
-
-            LoadData();
-
-            DataGridBooking.SelectedCellsChanged += SelectBooking;
+            currentRenting = DataGridBooking.SelectedIndex;
         }
 
-		private void SelectBooking(object sender, SelectedCellsChangedEventArgs e)
-		{
-            currentBooking = DataGridBooking.SelectedIndex;
-		}
+        private void LoadData()
+        {
+            rentings = new RentingBLL().GetAll();
 
-		private void LoadData()
-		{
-            bookings = new BookingBLL().GetAll();
-
-            DataGridBooking.ItemsSource = bookings;
-		}
+            DataGridBooking.ItemsSource = rentings;
+        }
 
         private void btn_Add_Click(object sender, RoutedEventArgs e)
         {
@@ -45,7 +41,7 @@ namespace HotelManagement.PresentationLayer
 
         private void btn_Cancel_Click(object sender, RoutedEventArgs e)
         {
-            if (currentBooking == -1)
+            if (currentRenting == -1)
             {
                 MessageBox.Show("Please choose your booking you want to cancel");
                 return;
@@ -56,7 +52,7 @@ namespace HotelManagement.PresentationLayer
             {
                 try
                 {
-                    int remainDays = (int)(DateTime.Parse(bookings[currentBooking].CheckinDate).Date
+                    int remainDays = (int)(DateTime.Parse(rentings[currentRenting].CheckinDate).Date
                                 - DateTime.Now.Date).TotalDays;
                     double ratio = 0d;
                     if (remainDays > 15)
@@ -72,11 +68,11 @@ namespace HotelManagement.PresentationLayer
                         ratio = 0.3d;
                     }
 
-                    decimal refund = bookings[currentBooking].Total * (decimal)ratio;
+                    decimal refund = rentings[currentRenting].Total * (decimal)ratio;
 
-                    new BookingBLL().RemoveBooking(bookings[currentBooking].Id);
+                    new BookingBLL().RemoveBooking(rentings[currentRenting].Id);
 
-                    LoadData(); 
+                    LoadData();
 
                     MessageBox.Show($"The refunding is {new MoneyConverter().Convert(refund, null, null, null)}");
                 }

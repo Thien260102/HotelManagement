@@ -39,23 +39,22 @@
                       ColumnHeaderStyle="{DynamicResource DataGridColumnHeaderStyle1}" 
                       CellStyle="{DynamicResource DataGridCellStyle1}" 
                       x:Name="DataGridAttendance" Style="{DynamicResource DataGridStyle1}">
-                <DataGrid.Columns>
-                    <DataGridTextColumn Header="Employee ID" Binding="{Binding EmployeeId}" IsReadOnly="True" CanUserResize="False" Width="auto" />
-                    <DataGridTextColumn Header="Employee Name" Binding="{Binding EmployeeName}" IsReadOnly="True" CanUserResize="False" Width="auto" />
-                    <DataGridTextColumn Header="Date" Binding="{Binding Date}" IsReadOnly="True" Width="*"/>
-                    <DataGridTextColumn Header="State" Binding="{Binding SState}" IsReadOnly="True" Width="*"/>
-                    <DataGridTextColumn Header="Note" Binding="{Binding Note}" IsReadOnly="True" Width="*"/>
-                </DataGrid.Columns>
-            </DataGrid>
-
-
                     <DataGrid.Columns>
                         <DataGridTextColumn Header="Employee ID" Binding="{Binding EmployeeId}" IsReadOnly="True" CanUserResize="False" Width="auto" />
+                        <DataGridTextColumn Header="Employee Name" Binding="{Binding EmployeeName}" IsReadOnly="True" CanUserResize="False" Width="auto" />
                         <DataGridTextColumn Header="Date" Binding="{Binding Date}" IsReadOnly="True" Width="*"/>
                         <DataGridTextColumn Header="State" Binding="{Binding SState}" IsReadOnly="True" Width="*"/>
                         <DataGridTextColumn Header="Note" Binding="{Binding Note}" IsReadOnly="True" Width="*"/>
                     </DataGrid.Columns>
                 </DataGrid>
+
+                <!--<DataGrid.Columns>
+                        <DataGridTextColumn Header="Employee ID" Binding="{Binding EmployeeId}" IsReadOnly="True" CanUserResize="False" Width="auto" />
+                        <DataGridTextColumn Header="Date" Binding="{Binding Date}" IsReadOnly="True" Width="*"/>
+                        <DataGridTextColumn Header="State" Binding="{Binding SState}" IsReadOnly="True" Width="*"/>
+                        <DataGridTextColumn Header="Note" Binding="{Binding Note}" IsReadOnly="True" Width="*"/>
+                    </DataGrid.Columns>
+            </DataGrid>-->
             </StackPanel>
 
         </StackPanel>

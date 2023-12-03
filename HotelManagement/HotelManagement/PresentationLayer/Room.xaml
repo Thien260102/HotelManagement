@@ -47,12 +47,47 @@
                       CellStyle="{DynamicResource DataGridCellStyle1}" 
                       x:Name="DataGridRoom" Style="{DynamicResource DataGridStyle1}">
                     <DataGrid.Columns>
-                        <!--<DataGridTextColumn Header="No." IsReadOnly="True" CanUserResize="False" Width="auto" Binding="{Binding Id}"/>-->
-                        <DataGridTextColumn Header="Room Name" Binding="{Binding Name}" IsReadOnly="True" Width="*"/>
-                        <DataGridTextColumn Header="Floor" Binding="{Binding Floor}" IsReadOnly="True" Width="*"/>
+                        <DataGridTemplateColumn  Header="Room Name" >
+                            <DataGridTemplateColumn.CellTemplate>
+                                <DataTemplate>
+                                    <TextBlock Text="{Binding Name}"/>     
+                                </DataTemplate>
+                            </DataGridTemplateColumn.CellTemplate>
+                        </DataGridTemplateColumn>
+                        <DataGridTemplateColumn  Header="Floor" >
+                            <DataGridTemplateColumn.CellTemplate>
+                                <DataTemplate>
+                                    <TextBlock Text="{Binding Floor}"/>
+                                </DataTemplate>
+                            </DataGridTemplateColumn.CellTemplate>
+                        </DataGridTemplateColumn>
+                        <DataGridTemplateColumn  Header="State" >
+                            <DataGridTemplateColumn.CellTemplate>
+                                <DataTemplate>
+                                    <TextBlock Text="{Binding StateName}"/>
+                                </DataTemplate>
+                            </DataGridTemplateColumn.CellTemplate>
+                        </DataGridTemplateColumn>
+                        <DataGridTemplateColumn  Header="Type" >
+                            <DataGridTemplateColumn.CellTemplate>
+                                <DataTemplate>
+                                    <TextBlock Text="{Binding RoomTypeName}"/>
+                                </DataTemplate>
+                            </DataGridTemplateColumn.CellTemplate>
+                        </DataGridTemplateColumn>
+                        <DataGridTemplateColumn  Header="Note" >
+                            <DataGridTemplateColumn.CellTemplate>
+                                <DataTemplate>
+                                    <TextBlock Text="{Binding Note}"/>
+                                </DataTemplate>
+                            </DataGridTemplateColumn.CellTemplate>
+                        </DataGridTemplateColumn>
+                        <!--<DataGridTemplateColumn Header="Room Name" Binding="{Binding Name}" IsReadOnly="True" Width="*"/>-->
+                        <!--<DataGridTextColumn Header="Room Name" Binding="{Binding Name}" IsReadOnly="True" Width="*"/>-->
+                        <!--<DataGridTextColumn Header="Floor" Binding="{Binding Floor}" IsReadOnly="True" Width="*"/>
                         <DataGridTextColumn Header="State" Binding="{Binding StateName}" IsReadOnly="True" Width="*"/>
                         <DataGridTextColumn Header="Type" Binding="{Binding RoomTypeName}" IsReadOnly="True" Width="*"/>
-                        <DataGridTextColumn Header="Note" Binding="{Binding Note}" IsReadOnly="True" Width="*"/>
+                        <DataGridTextColumn Header="Note" Binding="{Binding Note}" IsReadOnly="True" Width="*"/>-->
                     </DataGrid.Columns>
                 </DataGrid>
             </StackPanel>

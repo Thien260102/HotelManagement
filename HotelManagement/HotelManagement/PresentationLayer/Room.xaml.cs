@@ -31,9 +31,9 @@ namespace HotelManagement.PresentationLayer
             InitializeComponent();
 
             LoadRoom();
-            DataGridRoom.SelectionChanged += SelectRoom;
+            DataGridRoom.SelectedCellsChanged += SelectRoom;
+            DataGridRoom.MouseDoubleClick += MakeRentingRoom;
         }
-
 		private void LoadRoom()
         {
             try
@@ -99,7 +99,25 @@ namespace HotelManagement.PresentationLayer
         }
 
         #region Events
-        private void SelectRoom(object sender, SelectionChangedEventArgs e)
+
+        private void MakeRentingRoom(object sender, MouseButtonEventArgs e)
+        {
+            if (e.ChangedButton == MouseButton.Left)
+            {
+                DataGrid grid = sender as DataGrid;
+                if (grid != null && grid.SelectedItems != null && grid.SelectedItems.Count == 1)
+                {
+                    DataGridRow dgr = grid.ItemContainerGenerator.ContainerFromItem(grid.SelectedItem) as DataGridRow;
+
+                    RentingRoom rentingRoom = new RentingRoom();
+                    rentingRoom.SetData(rooms[dgr.GetIndex()]);
+
+                    rentingRoom.Show();
+                }
+            }
+        }
+
+        private void SelectRoom(object sender, SelectedCellsChangedEventArgs e)
         {
             currentRoom = DataGridRoom.SelectedIndex;
         }

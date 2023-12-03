@@ -91,13 +91,16 @@ ADD CONSTRAINT PK_ROOM PRIMARY KEY (ID);
 Drop table RENTING;
 Create Table RENTING
 (
-	ID int not null,
+	ID int not null IDENTITY(1,1),
 	CustomerID int,
 	UserName nvarchar(50),
 	RoomID int,
-	StartDate Date,
-	EndDate Date,
-	TotalDayStay int,
+	CreateDate Date,
+	CheckinDate Date,
+	TotalDay int,
+	CheckoutDate Date,
+	Total money,
+	IsPaid bit,
 )
 ALTER TABLE RENTING
 ADD CONSTRAINT PK_RENTING PRIMARY KEY (ID);
@@ -212,15 +215,15 @@ Select * from CUSTOMER
 
 ---------------
 
+--- BOOKING ---
+Delete from BOOKING
+Select * from BOOKING
+---------------
 
 --- RENTING ---
 Select * from RENTING
 ---------------
 
---- BOOKING ---
-Delete from BOOKING
-Select * from BOOKING
----------------
 
 
 --- BILL ---
