@@ -30,7 +30,9 @@ namespace HotelManagement.PresentationLayer
 
         decimal _total = 0;
 
-		public RentingRoom()
+        public Action ReloadRoom;
+
+        public RentingRoom()
 		{
 			InitializeComponent();
 		}
@@ -138,7 +140,8 @@ namespace HotelManagement.PresentationLayer
 
         private void btn_Cancel_Click(object sender, RoutedEventArgs e)
         {
-            this.Close();
+            MessageBox.Show(tp_CheckinDate.SelectedTime.ToString());
+            //this.Close();
         }
 
         private void btn_Save_Click(object sender, RoutedEventArgs e)
@@ -219,6 +222,10 @@ namespace HotelManagement.PresentationLayer
 				{
 					throw new Exception("Insert renting infor fail.");
 				}
+
+                _roomInfor.State = (int)Rule.ROOM_STATE.RENTING;
+                new RoomBLL().UpdateRoom(_roomInfor);
+                ReloadRoom?.Invoke();
 
                 MessageBox.Show("Insert renting successfully");
 				//ReloadBooking?.Invoke();

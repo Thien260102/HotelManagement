@@ -47,6 +47,13 @@
                       CellStyle="{DynamicResource DataGridCellStyle1}" 
                       x:Name="DataGridRoom" Style="{DynamicResource DataGridStyle1}">
                     <DataGrid.Columns>
+                        <DataGridTemplateColumn  Header="Room Id" >
+                            <DataGridTemplateColumn.CellTemplate>
+                                <DataTemplate>
+                                    <TextBlock Text="{Binding Id}"/>
+                                </DataTemplate>
+                            </DataGridTemplateColumn.CellTemplate>
+                        </DataGridTemplateColumn>
                         <DataGridTemplateColumn  Header="Room Name" >
                             <DataGridTemplateColumn.CellTemplate>
                                 <DataTemplate>

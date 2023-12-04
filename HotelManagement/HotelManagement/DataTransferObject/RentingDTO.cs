@@ -82,7 +82,7 @@ namespace HotelManagement.DataTransferObject
 				EmployeeName = "Admin";
 			}
 
-			RoomId = (int)row["RoomTypeID"];
+			RoomId = (int)row["RoomID"];
 			RoomTypeName = new RoomTypeBLL().GetRoomTypeName(RoomId);
 
 			CreateDate = string.Format("{0:yyyy-MM-dd}", DateTime.Parse(row["CreateDate"].ToString()));

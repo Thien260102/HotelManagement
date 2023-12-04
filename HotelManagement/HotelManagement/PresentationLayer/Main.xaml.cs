@@ -54,6 +54,8 @@ namespace HotelManagement.PresentationLayer
             btn_Bill.Foreground = (SolidColorBrush)new BrushConverter().ConvertFromString(Rule.BUTTON.NORMAL);
             BAttendance.Background = Brushes.Transparent;
             btn_Attendance.Foreground = (SolidColorBrush)new BrushConverter().ConvertFromString(Rule.BUTTON.NORMAL);
+            BRenting.Background = Brushes.Transparent;
+            btn_Renting.Foreground = (SolidColorBrush)new BrushConverter().ConvertFromString(Rule.BUTTON.NORMAL);
         }
         void Button_Choose(object senderButton)
         {
@@ -161,6 +163,14 @@ namespace HotelManagement.PresentationLayer
             BAttendance.Background = (SolidColorBrush)new BrushConverter().ConvertFromString(Rule.BUTTON.BORDER);
             Attendance attendance = new Attendance(Utilities.GetRole());
             OpenUserControl(attendance);
+        }
+
+        private void btn_Renting_Click(object sender, RoutedEventArgs e)
+        {
+            Button_Choose(sender);
+            BRenting.Background = (SolidColorBrush)new BrushConverter().ConvertFromString(Rule.BUTTON.BORDER);
+            Renting renting = new Renting();
+            OpenUserControl(renting);
         }
 
         #endregion

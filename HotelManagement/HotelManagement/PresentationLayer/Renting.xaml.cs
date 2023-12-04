@@ -18,12 +18,9 @@ namespace HotelManagement.PresentationLayer
         public Renting()
 		{
 			InitializeComponent();
-		}
 
-        private void SelectBooking(object sender, SelectedCellsChangedEventArgs e)
-        {
-            currentRenting = DataGridBooking.SelectedIndex;
-        }
+            LoadData();
+		}
 
         private void LoadData()
         {
@@ -31,6 +28,12 @@ namespace HotelManagement.PresentationLayer
 
             DataGridBooking.ItemsSource = rentings;
         }
+
+        private void SelectBooking(object sender, SelectedCellsChangedEventArgs e)
+        {
+            currentRenting = DataGridBooking.SelectedIndex;
+        }
+
 
         private void btn_Add_Click(object sender, RoutedEventArgs e)
         {

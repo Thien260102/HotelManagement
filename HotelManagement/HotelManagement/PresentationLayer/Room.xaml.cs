@@ -109,10 +109,16 @@ namespace HotelManagement.PresentationLayer
                 {
                     DataGridRow dgr = grid.ItemContainerGenerator.ContainerFromItem(grid.SelectedItem) as DataGridRow;
 
-                    RentingRoom rentingRoom = new RentingRoom();
-                    rentingRoom.SetData(rooms[dgr.GetIndex()]);
+                    if(rooms[dgr.GetIndex()].State == (int)Rule.ROOM_STATE.AVAILABLE)
+                    {
+                        RentingRoom rentingRoom = new RentingRoom();
+                        rentingRoom.SetData(rooms[dgr.GetIndex()]);
+                        rentingRoom.ReloadRoom = LoadRoom;
+                        rentingRoom.Show();
+                        return;
+                    }
 
-                    rentingRoom.Show();
+                    MessageBox.Show("Cannot renting this room.");
                 }
             }
         }
