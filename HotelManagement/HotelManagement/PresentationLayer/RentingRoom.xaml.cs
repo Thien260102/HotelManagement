@@ -140,8 +140,7 @@ namespace HotelManagement.PresentationLayer
 
         private void btn_Cancel_Click(object sender, RoutedEventArgs e)
         {
-            MessageBox.Show(tp_CheckinDate.SelectedTime.ToString());
-            //this.Close();
+            this.Close();
         }
 
         private void btn_Save_Click(object sender, RoutedEventArgs e)

@@ -22,7 +22,7 @@ WindowStyle="None" AllowsTransparency="True" Height="600" Width="950" >
                             <ColumnDefinition Width="55"/>
                             <ColumnDefinition Width="100"/>
                             <ColumnDefinition/>
-                            <ColumnDefinition Width="124"/>
+                            <ColumnDefinition Width="134"/>
                             <ColumnDefinition Width="40"/>
                             <ColumnDefinition Width="36"/>
                             <ColumnDefinition Width="36"/>
@@ -47,7 +47,7 @@ WindowStyle="None" AllowsTransparency="True" Height="600" Width="950" >
                                         <ImageBrush ImageSource="/Resources/user.png" Stretch="Fill"/>
                                     </Border.Background>
                                 </Border>
-                                <Button x:Name="btn_Profile" Grid.Column="1" Content="ADMIN" FontSize="14" FontWeight="SemiBold" Background="Transparent" Foreground="White" FontFamily="Segoe UI"  BorderThickness="0" Click="btn_Profile_Click" Cursor="Hand"/>
+                                <Button x:Name="btn_Profile" Grid.Column="1" Content="ADMIN" FontSize="14" FontWeight="SemiBold" Background="Transparent" Foreground="White" FontFamily="Segoe UI"  BorderThickness="0" Click="btn_Profile_Click" Cursor="Hand" HorizontalAlignment="Left"/>
 
                             </Grid>
                         </Border>

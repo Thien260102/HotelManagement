@@ -44,7 +44,7 @@
                             <CheckBox x:Name="Checkbox_Female" Content="Female" HorizontalAlignment="Right" VerticalAlignment="Bottom" Margin="45  0 0 5" FontFamily="Segoe UI"/>
                         </StackPanel>
                     </StackPanel>
-                    <Button Grid.Column="1" Width="2" Margin="3 10 3 10" BorderThickness="2" BorderBrush="Black" IsEnabled="False"/>
+                    <Button Grid.Column="1" Width="2" Height="270" Margin="3 10 3 10" BorderThickness="2" BorderBrush="Black" IsEnabled="False"/>
                     <StackPanel Grid.Column="2" >
                         <Label Content="Room number" Margin="10 10 0 0" FontSize="12" FontWeight="Regular" Padding="5" FontFamily="Segoe UI" Width="264" />
                         <!--txt_RoomType-->
