@@ -51,7 +51,7 @@
                         </Border>
                         <!--button login-->
                         <Border CornerRadius="20" Width="125" Background="#4C00A3" BorderThickness="0" Margin="0 50 0 0">
-                            <Button x:Name="buttonLogin" Content="SIGN IN" FontSize="20" FontWeight="SemiBold" Height="41" Width="125" Background="Transparent" Foreground="White" Click="buttonLogin_Click" BorderThickness="0" />
+                            <Button x:Name="buttonLogin" Content="SIGN IN" FontSize="20" FontWeight="SemiBold" Height="41" Width="125" Background="Transparent" Foreground="White" Click="buttonLogin_Click" BorderThickness="0" Cursor="Hand" />
                         </Border>
 
 
