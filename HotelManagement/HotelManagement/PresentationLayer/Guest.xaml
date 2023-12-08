@@ -6,10 +6,10 @@
              xmlns:local="clr-namespace:HotelManagement.PresentationLayer"
              mc:Ignorable="d" 
                       d:DesignHeight="545" d:DesignWidth="770">
-    <!--<UserControl.Resources>
+    <UserControl.Resources>
         <local:MoneyConverter x:Key="moneyConverter"></local:MoneyConverter>
         <local:PhoneConverter x:Key="phoneConverter"></local:PhoneConverter>
-    </UserControl.Resources>-->
+    </UserControl.Resources>
 
     <Grid>
         <StackPanel Background="Transparent" >

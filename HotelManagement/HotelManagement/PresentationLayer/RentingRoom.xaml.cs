@@ -140,7 +140,13 @@ namespace HotelManagement.PresentationLayer
 
         private void btn_Cancel_Click(object sender, RoutedEventArgs e)
         {
-            this.Close();
+            TimeSpan time = new TimeSpan(14, 0, 0) - ((DateTime)tp_CheckinDate.SelectedTime).TimeOfDay;
+
+            decimal total = (decimal)time.TotalHours * 0.1m * _roomTypes[_currentType].Price;
+            string stotal = new MoneyConverter().Convert(total, null, null, null).ToString().Trim();
+
+            MessageBox.Show($"Soon {time}, pay {stotal}");
+            //this.Close();
         }
 
         private void btn_Save_Click(object sender, RoutedEventArgs e)
@@ -191,6 +197,13 @@ namespace HotelManagement.PresentationLayer
                 {
                     throw new Exception("Please fill correct Total day.");
                 }
+
+                if (tp_CheckinDate.SelectedTime == null) 
+				{
+                    throw new Exception("Choose time checkin.");
+                }
+                DateTime timeCheckin = (DateTime)tp_CheckinDate.SelectedTime;
+
 
                 RentingBLL rentingBLL = new RentingBLL();
                 CustomerBLL customerBLL = new CustomerBLL();
