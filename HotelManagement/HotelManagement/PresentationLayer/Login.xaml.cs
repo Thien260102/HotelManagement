@@ -43,26 +43,27 @@ namespace HotelManagement.PresentationLayer
             switch (accountBLL.Login(user, pass))
             {
                 case 0:
-                    MessageBox.Show("Login Successful!");
+                    new MessageBoxCustom("Login Successful!", MessageType.Info, MessageButtons.Ok).ShowDialog();
+                    //MessageBox.Show("Login Successful!");
                     Main main = new Main();
                     main.Show();
                     this.Close();
                     break;
 
                 case 1:
-                    MessageBox.Show("Please fill all information.");
+                    new MessageBoxCustom("Please fill all information.", MessageType.Info, MessageButtons.Ok).ShowDialog();
                     break;
 
                 case 2:
-                    MessageBox.Show("Wrong username or password");
+                    new MessageBoxCustom("Wrong username or password", MessageType.Info, MessageButtons.Ok).ShowDialog();
                     break;
 
                 case 3:
-                    MessageBox.Show("Not exist username");
+                    new MessageBoxCustom("Not exist username", MessageType.Info, MessageButtons.Ok).ShowDialog();
                     break;
 
                 case 4:
-                    MessageBox.Show("Your account not available. Please contact with your boss.");
+                    new MessageBoxCustom("Your account not available. Please contact with your boss.", MessageType.Info, MessageButtons.Ok).ShowDialog();
                     break;
             }
         }
