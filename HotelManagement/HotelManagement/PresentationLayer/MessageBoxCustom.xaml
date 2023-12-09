@@ -8,6 +8,7 @@
                Title="MessageBoxWindow"
         Height="220"
         Width="400"
+        SizeToContent="WidthAndHeight"
         WindowStartupLocation="CenterScreen"
         WindowStyle="None"
         Background="White"

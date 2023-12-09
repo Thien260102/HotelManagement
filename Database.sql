@@ -221,6 +221,7 @@ Select * from BOOKING
 ---------------
 
 --- RENTING ---
+Delete From RENTING
 Select * from RENTING
 ---------------
 

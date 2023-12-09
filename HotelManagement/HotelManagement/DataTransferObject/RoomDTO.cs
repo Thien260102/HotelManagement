@@ -1,4 +1,5 @@
-﻿using System.Data;
+﻿using HotelManagement.DataAccessLayer;
+using System.Data;
 
 namespace HotelManagement.DataTransferObject
 {
@@ -16,6 +17,7 @@ namespace HotelManagement.DataTransferObject
 
 		public int RoomTypeId { get; set; }
 		public string RoomTypeName { get; set; }
+		public int TotalPeople { get; set; }
 
 		public string Note { get; set; }
 		#endregion
@@ -48,6 +50,9 @@ namespace HotelManagement.DataTransferObject
 			StateName = ((Rule.ROOM_STATE)State).ToString();
 
 			RoomTypeId = (int)row["TypeID"];
+			RoomTypeName = RoomTypeDAL.Instance.GetRoomTypeName(RoomTypeId);
+			TotalPeople = RoomTypeDAL.Instance.GetTotalNumber(RoomTypeId);
+
 			Note = row["Note"].ToString();
 		}
 		#endregion

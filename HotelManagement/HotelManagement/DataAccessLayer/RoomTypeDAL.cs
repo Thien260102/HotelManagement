@@ -50,6 +50,19 @@ namespace HotelManagement.DataAccessLayer
             return null;
         }
 
+        public int GetTotalNumber(int id)
+		{
+            string query = "Select * from ROOM_TYPE " +
+                "where Id = @id ";
+
+            DataTable data = DataProvider.Instance.ExecuteQuery(query, new object[] { id });
+
+            if (data.Rows.Count == 1)
+                return new RoomTypeDTO(data.Rows[0]).HighestNumberPeople;
+
+            return 0;
+        }
+
         public int CountExistRoom(string roomName)
         {
             string query = "Select Count(*) from ROOM_TYPE " +

@@ -35,7 +35,10 @@ namespace HotelManagement.PresentationLayer
         public RentingRoom()
 		{
 			InitializeComponent();
-		}
+
+            txt_DateCheckin.SelectedDate = txt_DateCheckout.SelectedDate = DateTime.Now.Date;
+            tp_CheckinDate.SelectedTime = tp_CheckoutDate.SelectedTime = DateTime.Now.Date;
+        }
 
 		public void SetData(RoomDTO roomInfor)
 		{
@@ -49,7 +52,7 @@ namespace HotelManagement.PresentationLayer
             }
             cb_RoomType.Text = roomInfor.RoomTypeName;
             cb_RoomType.SelectionChanged += SelectRoomType;
-            _currentType = _roomTypes.FindIndex(e => e.Id == roomInfor.Id);
+            _currentType = _roomTypes.FindIndex(e => e.Id == roomInfor.RoomTypeId);
 
             txt_RoomID.Text = roomInfor.Id.ToString();
 			txt_RoomID.IsReadOnly = true;
@@ -62,12 +65,16 @@ namespace HotelManagement.PresentationLayer
 
             txt_NumberPhone.PreviewTextInput += InputOnlyNumber;
 			txt_CitizenID.PreviewTextInput += InputOnlyNumber;
+            txt_Totalday.PreviewTextInput += InputOnlyNumber;
+            txt_TotalPeople.PreviewTextInput += InputOnlyNumber;
 
 			txt_NumberPhone.LostFocus += CheckCustomer;
 			txt_CitizenID.LostFocus += CheckCustomer;
 
             txt_DateCheckin.LostFocus += CalculateTotal;
             txt_Totalday.LostFocus += CalculateTotal;
+
+            txt_Total.IsReadOnly = true;
         }
 
 		private void CheckCustomer(object sender, RoutedEventArgs e)
@@ -140,14 +147,46 @@ namespace HotelManagement.PresentationLayer
 
         private void btn_Cancel_Click(object sender, RoutedEventArgs e)
         {
-            TimeSpan time = new TimeSpan(14, 0, 0) - ((DateTime)tp_CheckinDate.SelectedTime).TimeOfDay;
-
-            decimal total = (decimal)time.TotalHours * 0.1m * _roomTypes[_currentType].Price;
-            string stotal = new MoneyConverter().Convert(total, null, null, null).ToString().Trim();
-
-            MessageBox.Show($"Soon {time}, pay {stotal}");
-            //this.Close();
+            this.Close();
         }
+
+        private bool CalculateCostIncurred(int totalPeople)
+		{
+            string message = "";
+
+            decimal total = 0;
+            double time = (Utilities.GetDefaultCheckinTime((DateTime)txt_DateCheckin.SelectedDate) - (DateTime)tp_CheckinDate.SelectedTime).Hours;
+            if(time > 0)
+            {
+                total += (decimal)time * 0.1m * _roomTypes[_currentType].Price;
+                string sTotal = new MoneyConverter().Convert(total, null, null, null).ToString().Trim();
+                message += $"Soon {time} hours, pay fee: \t{sTotal}VND\n";
+            }
+
+            int excessPeople = totalPeople - _roomInfor.TotalPeople;
+            if(excessPeople > 0)
+			{
+                decimal fee = (decimal)excessPeople * 0.25m * _roomTypes[_currentType].Price;
+                total += fee;
+                string sFee = new MoneyConverter().Convert(fee, null, null, null).ToString().Trim();
+                message += $"Excess {excessPeople} people, pay fee: \t{sFee}VND\n";
+            }
+
+            if(total > 0)
+            {
+                string sTotal = new MoneyConverter().Convert(total, null, null, null).ToString().Trim();
+                message += $"Total incurred fee: \t{sTotal}VND";
+
+                var popup = new MessageBoxCustom(message, MessageType.Confirmation, MessageButtons.YesNo).ShowDialog();
+                if (!popup.Value)
+                {
+                    new MessageBoxCustom($"Please choose another checkin datetime", MessageType.Info, MessageButtons.Ok).ShowDialog();
+                    return false;
+                }
+            }
+
+            return true;
+		}
 
         private void btn_Save_Click(object sender, RoutedEventArgs e)
         {
@@ -182,7 +221,14 @@ namespace HotelManagement.PresentationLayer
                     throw new Exception("Please fill date with correct format");
                 }
 
-                if (DateTime.Parse(checkIn).Date < DateTime.Now.Date)
+                if (tp_CheckinDate.SelectedTime == null || tp_CheckoutDate.SelectedTime == null)
+				{
+                    throw new Exception("Please choose time");
+                }
+
+                if (DateTime.Parse(checkIn).Date < DateTime.Now.Date
+                    || (DateTime.Parse(checkIn).Date == DateTime.Now.Date.Date &&
+                       ((DateTime)tp_CheckinDate.SelectedTime).TimeOfDay < DateTime.Now.TimeOfDay))
                 {
                     throw new Exception("Check in date must be equal or larger than today.");
                 }
@@ -198,12 +244,16 @@ namespace HotelManagement.PresentationLayer
                     throw new Exception("Please fill correct Total day.");
                 }
 
-                if (tp_CheckinDate.SelectedTime == null) 
-				{
-                    throw new Exception("Choose time checkin.");
+                int totalPeople;
+                if (!int.TryParse(txt_TotalPeople.Text.Trim(), out totalPeople))
+                {
+                    throw new Exception("Please fill correct total people.");
                 }
-                DateTime timeCheckin = (DateTime)tp_CheckinDate.SelectedTime;
 
+                if (!CalculateCostIncurred(totalPeople))
+				{
+                    return;
+				}
 
                 RentingBLL rentingBLL = new RentingBLL();
                 CustomerBLL customerBLL = new CustomerBLL();
@@ -239,14 +289,14 @@ namespace HotelManagement.PresentationLayer
                 new RoomBLL().UpdateRoom(_roomInfor);
                 ReloadRoom?.Invoke();
 
-                MessageBox.Show("Insert renting successfully");
-				//ReloadBooking?.Invoke();
-				this.Close();
+                new MessageBoxCustom("Insert renting successfully", MessageType.Success, MessageButtons.Ok).ShowDialog();
+                //ReloadBooking?.Invoke();
+                this.Close();
 
             }
             catch (Exception ex)
             {
-                MessageBox.Show(ex.Message);
+                new MessageBoxCustom(ex.Message, MessageType.Error, MessageButtons.Ok).ShowDialog();
             }
         }
 

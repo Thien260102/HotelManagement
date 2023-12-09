@@ -51,5 +51,11 @@ namespace HotelManagement
 			DateTime birthDay;
 			return DateTime.TryParse(datetime, out birthDay);
 		}
+
+		public static DateTime GetDefaultCheckinTime(DateTime checkin)
+			=> new DateTime(checkin.Year, checkin.Month, checkin.Day, 14, 0, 0);
+
+		public static DateTime GetDefaultCheckoutTime(DateTime checkout)
+			=> new DateTime(checkout.Year, checkout.Month, checkout.Day, 12, 0, 0);
 	}
 }
