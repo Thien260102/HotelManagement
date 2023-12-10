@@ -23,6 +23,7 @@ namespace HotelManagement.PresentationLayer
         private UserControl currentUserControl;
         private Button currentButton;
         public int expand = -1;
+        public int expandvch = -1;
         public Main()
         {
             InitializeComponent();
@@ -142,6 +143,29 @@ namespace HotelManagement.PresentationLayer
             Employee employee = new Employee();
             OpenUserControl(employee);
         }
+        private void btn_VoucherSub_Click(object sender, RoutedEventArgs e)
+        {
+            if (expandvch == -1)
+            {
+                ChooseVoucher.Height = 135;
+                expand *= -1;
+                image_subvoucher.ImageSource = new BitmapImage(new Uri("pack://application:,,,/Resources/down-arrow.png"));
+            }
+            else
+            {
+                ChooseVoucher.Height = 45;
+                expandvch *= -1;
+                image_subvoucher.ImageSource = new BitmapImage(new Uri("pack://application:,,,/Resources/next.png"));
+            }
+        }
+
+        private void btn_VoucherType_Click(object sender, RoutedEventArgs e)
+        {
+            Button_Choose(sender);
+            VoucherTypes.Background = (SolidColorBrush)new BrushConverter().ConvertFromString(Rule.BUTTON.BORDER);
+            VoucherType vouchertype = new VoucherType();
+            OpenUserControl(vouchertype);
+        }
         private void btn_Voucher_Click(object sender, RoutedEventArgs e)
         {
             Button_Choose(sender);
@@ -228,6 +252,6 @@ namespace HotelManagement.PresentationLayer
 
         }
 
-      
+
     }
 }
