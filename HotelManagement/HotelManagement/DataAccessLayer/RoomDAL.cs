@@ -37,6 +37,23 @@ namespace HotelManagement.DataAccessLayer
             return rooms;
         }
 
+        public List<RoomDTO> GetAll(Rule.ROOM_STATE state)
+        {
+            List<RoomDTO> rooms = new List<RoomDTO>();
+
+            string query = "Select * from ROOM " +
+                "Where State = @state ";
+
+            DataTable data = DataProvider.Instance.ExecuteQuery(query, new object[] { (int)state });
+
+            foreach (DataRow element in data.Rows)
+            {
+                rooms.Add(new RoomDTO(element));
+            }
+
+            return rooms;
+        }
+
         public RoomDTO GetRoomInfor(int id)
 		{
             string query = "Select * from ROOM " +

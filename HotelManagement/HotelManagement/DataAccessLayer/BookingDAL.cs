@@ -58,7 +58,7 @@ namespace HotelManagement.DataAccessLayer
         {
             string query = "Insert into BOOKING " +
                 "Values( @customerId , @userName , @roomTypeId , @createDate , " +
-                " @checkin , @totalDay , @total ) ";
+                " @checkin , @totalDay , @total , @isRented ) ";
 
 			//if (IsExistBooking(booking.CustomerId, booking.CheckinDate))
 			//{
@@ -68,7 +68,32 @@ namespace HotelManagement.DataAccessLayer
 			if (DataProvider.Instance.ExecuteNonQuery(query,
                 new object[] { booking.CustomerId, booking.Username, booking.RoomTypeId, 
                                booking.CreateDate, booking.CheckinDate, 
-                               booking.TotalDay, booking.Total}) > 0)
+                               booking.TotalDay, booking.Total, booking.IsRented }) > 0)
+            {
+                return Rule.STATE.SUCCESS;
+            }
+
+            return Rule.STATE.FAIL;
+        }
+
+        public Rule.STATE UpdateBooking(BookingDTO booking)
+        {
+            string query = "Update BOOKING " +
+                "Set CustomerID = @customerId , UserName = @userName , " +
+                "RoomTypeID = @roomTypeId , CreateDate = @createDate , " +
+                "CheckinDate = @checkin , TotalDay = @totalDay , Total = @total , IsRented = @isRented " +
+                "Where ID = @id ";
+
+            //if (IsExistBooking(booking.CustomerId, booking.CheckinDate))
+            //{
+            //	return Rule.STATE.EXIST;
+            //}
+
+            if (DataProvider.Instance.ExecuteNonQuery(query,
+                new object[] { booking.CustomerId, booking.Username, booking.RoomTypeId,
+                               booking.CreateDate, booking.CheckinDate,
+                               booking.TotalDay, booking.Total, booking.IsRented,
+                               booking.Id }) > 0)
             {
                 return Rule.STATE.SUCCESS;
             }

@@ -29,6 +29,8 @@ namespace HotelManagement.DataTransferObject
 		public int TotalDay { get; set; }
 
 		public decimal Total { get; set; }
+
+		public bool IsRented { get; set; }
 		#endregion
 
 		#region Methods
@@ -39,7 +41,7 @@ namespace HotelManagement.DataTransferObject
 		}
 
 		public BookingDTO(int customerId, string userName, int roomTypeId, string createDate,
-							string checkinDate, int totalDay, decimal total)
+							string checkinDate, int totalDay, decimal total, bool isRented)
 		{
 			CustomerId = customerId;
 			Username = userName;
@@ -48,6 +50,7 @@ namespace HotelManagement.DataTransferObject
 			CheckinDate = checkinDate;
 			TotalDay = totalDay;
 			Total = total;
+			IsRented = isRented;
 		}
 
 		public BookingDTO(DataRow row)
@@ -74,6 +77,7 @@ namespace HotelManagement.DataTransferObject
 			CheckinDate = string.Format("{0:yyyy-MM-dd}", DateTime.Parse(row["CheckinDate"].ToString()));
 			TotalDay = (int)row["TotalDay"];
 			Total = (decimal)row["Total"];
+			IsRented = (bool)row["IsRented"];
 		}
 		#endregion
 	}

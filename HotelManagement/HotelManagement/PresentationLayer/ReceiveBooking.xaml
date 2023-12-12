@@ -53,7 +53,11 @@
                         <Label Content="Date Check in" Margin="10 10 0 0" FontSize="12" FontWeight="Regular" Padding="5" FontFamily="Segoe UI" Width="264" />
                         <!--txt_DateCheckin-->
                         <Border CornerRadius="5" Width="252" Height="35" BorderThickness="1" BorderBrush="#7F000000" Margin="5 0 0 0">
-                            <TextBox x:Name="txt_DateCheckin" Width="248" BorderThickness="0" FontFamily="Segoe UI" FontSize="14" VerticalContentAlignment="Center" Background="Transparent" Margin="1,0,1,0" />
+                            <DatePicker x:Name="txt_DateCheckin"
+                                Width="248" Height="35" BorderThickness="0" 
+                                FontFamily="Segoe UI" FontSize="14" 
+                                VerticalContentAlignment="Center" 
+                                Background="Transparent" Margin="1,0,1,0" />
                         </Border>
                         <Label Content="Total day" Margin="10 10 0 0" FontSize="12" FontWeight="Regular" Padding="5" FontFamily="Segoe UI" Width="264" />
                         <!--txt_Totalday-->
@@ -66,7 +70,11 @@
                         <Label Content="Date booking" Margin="10 10 0 0" FontSize="12" FontWeight="Regular" Padding="5" FontFamily="Segoe UI" Width="264" />
                         <!--txt_DateBooking-->
                         <Border CornerRadius="5" Width="252" Height="35" BorderThickness="1" BorderBrush="#7F000000" Margin="5 0 0 0">
-                            <TextBox x:Name="txt_DateBooking" Width="248" BorderThickness="0" FontFamily="Segoe UI" FontSize="14" VerticalContentAlignment="Center" Background="Transparent" Margin="1,0,1,0" />
+                            <DatePicker x:Name="txt_DateBooking"
+                                Width="248" Height="35" BorderThickness="0" 
+                                FontFamily="Segoe UI" FontSize="14" 
+                                VerticalContentAlignment="Center" 
+                                Background="Transparent" Margin="1,0,1,0" />
                         </Border>
                         <Label Content="Employee's Name" Margin="10 10 0 0" FontSize="12" FontWeight="Regular" Padding="5" FontFamily="Segoe UI" Width="264" />
                         <!--txt_EmployeeName-->

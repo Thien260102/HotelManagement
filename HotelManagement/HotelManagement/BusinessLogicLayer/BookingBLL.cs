@@ -32,6 +32,25 @@ namespace HotelManagement.BusinessLogicLayer
 			return false;
 		}
 
+		public bool UpdateBooking(BookingDTO booking)
+		{
+			switch (BookingDAL.Instance.UpdateBooking(booking))
+			{
+				case Rule.STATE.SUCCESS:
+					return true;
+
+				case Rule.STATE.FAIL:
+					MessageBox.Show("Add booking infor fail");
+					return false;
+
+				case Rule.STATE.EXIST:
+					MessageBox.Show("The previous booking still remain.");
+					return false;
+			}
+
+			return false;
+		}
+
 		public bool RemoveBooking(int id)
 		{
 			return BookingDAL.Instance.RemoveBooking(id);

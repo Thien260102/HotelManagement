@@ -116,6 +116,7 @@ Create Table BOOKING
 	CheckinDate Date,
 	TotalDay int,
 	Total money,
+	IsRented bit,
 )
 ALTER TABLE BOOKING
 ADD CONSTRAINT PK_BOOKING PRIMARY KEY (ID);

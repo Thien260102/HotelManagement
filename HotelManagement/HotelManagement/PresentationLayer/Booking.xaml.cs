@@ -4,6 +4,7 @@ using System;
 using System.Collections.Generic;
 using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Input;
 
 namespace HotelManagement.PresentationLayer
 {
@@ -22,18 +23,46 @@ namespace HotelManagement.PresentationLayer
             LoadData();
 
             DataGridBooking.SelectedCellsChanged += SelectBooking;
+            DataGridBooking.MouseDoubleClick += MakeRentingRoom;
         }
 
-		private void SelectBooking(object sender, SelectedCellsChangedEventArgs e)
-		{
-            currentBooking = DataGridBooking.SelectedIndex;
-		}
-
-		private void LoadData()
-		{
+        private void LoadData()
+        {
             bookings = new BookingBLL().GetAll();
 
             DataGridBooking.ItemsSource = bookings;
+        }
+
+        #region Events
+        private void MakeRentingRoom(object sender, MouseButtonEventArgs e)
+        {
+            if (e.ChangedButton == MouseButton.Left)
+            {
+                DataGrid grid = sender as DataGrid;
+                if (grid != null && grid.SelectedItems != null && grid.SelectedItems.Count == 1)
+                {
+                    DataGridRow dgr = grid.ItemContainerGenerator.ContainerFromItem(grid.SelectedItem) as DataGridRow;
+
+                    var booking = bookings[dgr.GetIndex()];
+                    if (booking.IsRented
+                     || (Utilities.GetDefaultCheckinTime(DateTime.Parse(booking.CheckinDate)).AddDays(booking.TotalDay))
+                        < DateTime.Now)
+                    {
+                        new MessageBoxCustom("Booking is expired or rented", MessageType.Warning, MessageButtons.Ok).ShowDialog();
+                        return;
+                    }
+
+                    RentingRoom rentingRoom = new RentingRoom();
+                    rentingRoom.Show();
+                    rentingRoom.SetData(booking);
+                    rentingRoom.ReloadParent = LoadData;
+                }
+            }
+        }
+
+        private void SelectBooking(object sender, SelectedCellsChangedEventArgs e)
+		{
+            currentBooking = DataGridBooking.SelectedIndex;
 		}
 
         private void btn_Add_Click(object sender, RoutedEventArgs e)
@@ -87,5 +116,6 @@ namespace HotelManagement.PresentationLayer
             }
         }
 
-    }
+		#endregion
+	}
 }

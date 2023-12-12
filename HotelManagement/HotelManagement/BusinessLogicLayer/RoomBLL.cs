@@ -30,6 +30,19 @@ namespace HotelManagement.BusinessLogicLayer
 			return rooms;
 		}
 
+		public List<RoomDTO> GetRooms(Rule.ROOM_STATE state)
+		{
+			List<RoomDTO> rooms = RoomDAL.Instance.GetAll(state);
+
+			List<RoomTypeDTO> roomTypes = new RoomTypeBLL().GetAllRoomTypes();
+			foreach (var room in rooms)
+			{
+				room.RoomTypeName = roomTypes.Find(element => element.Id == room.RoomTypeId).Name;
+			}
+
+			return rooms;
+		}
+
 		public bool AddNewRoom(RoomDTO room)
 		{
 			switch (RoomDAL.Instance.AddNewRoom(room))

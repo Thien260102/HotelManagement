@@ -113,7 +113,7 @@ namespace HotelManagement.PresentationLayer
                     {
                         RentingRoom rentingRoom = new RentingRoom();
                         rentingRoom.SetData(rooms[dgr.GetIndex()]);
-                        rentingRoom.ReloadRoom = LoadRoom;
+                        rentingRoom.ReloadParent = LoadRoom;
                         rentingRoom.Show();
                         return;
                     }

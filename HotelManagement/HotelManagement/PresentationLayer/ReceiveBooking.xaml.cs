@@ -55,8 +55,9 @@ namespace HotelManagement.PresentationLayer
             txt_Totalday.LostFocus += CalculateTotal;
             txt_Totalday.PreviewTextInput += InputOnlyNumber;
 
-            txt_DateBooking.Text = DateTime.Now.ToString("yyyy-MM-dd");
-            txt_DateBooking.IsReadOnly = true;
+            txt_DateCheckin.SelectedDate = DateTime.Now;
+            txt_DateBooking.SelectedDate = DateTime.Now;
+            txt_DateBooking.IsDropDownOpen = false;
 
             txt_EmployeeName.Text = new AccountBLL().GetCurrentEmployeeName();
             txt_EmployeeName.IsReadOnly = true;
@@ -212,7 +213,7 @@ namespace HotelManagement.PresentationLayer
                     customerBLL.GetCustomerId(customer.CitizenId),
                     AccountBLL.Account.UserName, roomType,
                     txt_DateBooking.Text.Trim(), checkIn,
-                    totalDay, total);
+                    totalDay, total, false);
 
                 if (!bookingBLL.InsertBooking(booking))
                 {
