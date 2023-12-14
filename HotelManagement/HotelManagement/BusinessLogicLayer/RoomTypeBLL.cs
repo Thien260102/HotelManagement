@@ -76,7 +76,7 @@ namespace HotelManagement.BusinessLogicLayer
 			return RoomTypeDAL.Instance.RemoveRoomType(id);
 		}
 
-		public int CountAll() => RoomTypeDAL.Instance.CountAll();
+		public int GetLargestId() => RoomTypeDAL.Instance.GetLargestId();
 		#endregion
 	}
 }

@@ -137,12 +137,15 @@ namespace HotelManagement.DataAccessLayer
             return 0;
         }
 
-        public int CountAll()
+        public int GetLargestId()
 		{
-            string query = "Select Count(*) from ROOM_TYPE";
+            string query = "Select MAX(ID) from ROOM_TYPE";
 
-            return (int)DataProvider.Instance.ExecuteScalar(query,
-                new object[] { });
+            object result = DataProvider.Instance.ExecuteScalar(query);
+            if (result is null)
+                return 0;
+
+            return (int)result;
         }
         #endregion
     }

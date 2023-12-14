@@ -93,13 +93,18 @@ namespace HotelManagement.PresentationLayer
                 RoomTypeBLL roomTypeBLL = new RoomTypeBLL();
                 if (roomType.Id == -1)  // Add new room
                 {
-                    roomType.Id = roomTypeBLL.CountAll() + 1;
+                    roomType.Id = roomTypeBLL.GetLargestId() + 1;
                     if (roomTypeBLL.AddNewRoomType(roomType))
                     {
                         MessageBox.Show("Add new room type successfully");
                         ReloadRoomType?.Invoke();
                         this.Close();
                     }
+                    else
+					{
+                        roomType.Id = -1;
+                        return;
+					}
                 }
                 else                // Update room
                 {

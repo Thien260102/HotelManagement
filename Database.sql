@@ -124,7 +124,7 @@ ADD CONSTRAINT PK_BOOKING PRIMARY KEY (ID);
 Drop table BILL
 Create Table BILL
 (
-	ID int not null,
+	ID int not null IDENTITY(1,1),
 	BillDate Date,
 	UserName nvarchar(50),
 	Total money
@@ -146,7 +146,7 @@ ADD CONSTRAINT PK_VOUCHER_TYPE PRIMARY KEY (ID);
 Drop table VOUCHER
 Create Table VOUCHER
 (
-	ID int not null,
+	ID int not null IDENTITY(1,1),
 	CustomerID int,
 	ExpirationDate Date,
 	IsAvailable bit,
@@ -235,8 +235,14 @@ Select * from BILL
 
 --- VOUCHER_TYPE ---
 Select * from VOUCHER_TYPE
+Insert into VOUCHER_TYPE Values(1, 'DEFAULT', '10');
+Insert into VOUCHER_TYPE Values(2, 'SORRY', '20');
+Insert into VOUCHER_TYPE Values(3, 'VIP', '50');
+
 ---------------
 
 --- VOUCHER ---
 Select * from VOUCHER
+
+
 ---------------
