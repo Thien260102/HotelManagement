@@ -55,6 +55,8 @@ namespace HotelManagement.BusinessLogicLayer
 		}
 
 		public bool DeleteVoucher(int id) => VoucherDAL.Instance.RemoveVoucher(id);
+
+		public bool IsVoucherTypeUsing(int voucherTypeId) => VoucherDAL.Instance.CountExistVoucherWith(voucherTypeId) > 0;
 		#endregion
 
 		#region Voucher Type

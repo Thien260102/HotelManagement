@@ -79,6 +79,12 @@ namespace HotelManagement.PresentationLayer
                 return;
 			}
 
+            if(new VoucherBLL().IsVoucherTypeUsing(_vouchers[_current].Id))
+			{
+                new MessageBoxCustom("Voucher type is using\nPlease choose another voucher type.", MessageType.Info, MessageButtons.Ok).ShowDialog();
+                return;
+			}
+
             new VoucherBLL().DeleteVoucherType(_vouchers[_current].Id);
             new MessageBoxCustom("Remove voucher type successfully.", MessageType.Info, MessageButtons.Ok).ShowDialog();
             LoadData();

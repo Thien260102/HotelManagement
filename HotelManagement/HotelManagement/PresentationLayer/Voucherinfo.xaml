@@ -6,27 +6,40 @@
         xmlns:local="clr-namespace:HotelManagement.PresentationLayer"
         mc:Ignorable="d"
         WindowStartupLocation="CenterScreen"
-        Background="Transparent" WindowStyle="None" AllowsTransparency="True" Height="290" Width="280">
+        Background="Transparent" WindowStyle="None" AllowsTransparency="True" Height="500" Width="280">
     <Grid>
-        <Border Background="White" CornerRadius="10" Height="290" Width="280">
+        <Border Background="White" CornerRadius="10" Height="500" Width="280">
             <StackPanel Background="Transparent" >
-                <Label Content="Name" Margin="10 10 0 0" FontSize="12" FontWeight="Regular" Padding="5" FontFamily="Segoe UI" Width="264" />
+                <Label Content="Customer ID" Margin="10 10 0 0" FontSize="12" FontWeight="Regular" Padding="5" FontFamily="Segoe UI" Width="264" />
                     <!--txt_Name-->
                     <Border CornerRadius="5" Width="252" Height="35" BorderThickness="1" BorderBrush="#7F000000" Margin="5 0 0 0">
-                        <TextBox x:Name="txt_Name" Width="248" BorderThickness="0" FontFamily="Segoe UI" FontSize="14" VerticalContentAlignment="Center" Background="Transparent" Margin="1,0,1,0" />
+                        <TextBox x:Name="txt_CustomerId" Width="248" BorderThickness="0" FontFamily="Segoe UI" FontSize="14" VerticalContentAlignment="Center" Background="Transparent" Margin="1,0,1,0" />
                     </Border>
-                    <Label Content="Discount" Margin="10 10 0 0" FontSize="12" FontWeight="Regular" Padding="5" FontFamily="Segoe UI" Width="264" />
-                    <!--txt_Discount-->
+                    <Label Content="Voucher Type" Margin="10 10 0 0" FontSize="12" FontWeight="Regular" Padding="5" FontFamily="Segoe UI" Width="264" />
+                    <!--txt_VoucherType-->
+                <Border CornerRadius="5" Width="252" Height="35" BorderThickness="1" BorderBrush="#7F000000" Margin="5 0 0 0">
+                    <ComboBox x:Name="combobox_VoucherType" Width="248" BorderThickness="0" FontFamily="Segoe UI" FontSize="14" VerticalContentAlignment="Center" Background="Transparent" Margin="1,0,1,0" />
+                </Border>
+                <Label Content="Discount" Margin="10 10 0 0" FontSize="12" FontWeight="Regular" Padding="5" FontFamily="Segoe UI" Width="264" />
+                <!--txt_VoucherType-->
                     <Border CornerRadius="5" Width="252" Height="35" BorderThickness="1" BorderBrush="#7F000000" Margin="5 0 0 0">
                         <TextBox x:Name="txt_Discount" Width="248" BorderThickness="0" FontFamily="Segoe UI" FontSize="14" VerticalContentAlignment="Center" Background="Transparent" Margin="1,0,1,0" />
                     </Border>
-                    <Label Content="Expiration date" Margin="10 10 0 0" FontSize="12" FontWeight="Regular" Padding="5" FontFamily="Segoe UI" Width="264" />
+                <Label Content="Expiration date" Margin="10 10 0 0" FontSize="12" FontWeight="Regular" Padding="5" FontFamily="Segoe UI" Width="264" />
                     <!--txt_ED-->
                     <Border CornerRadius="5" Width="252" Height="35" BorderThickness="1" BorderBrush="#7F000000" Margin="5 0 0 0">
-                        <TextBox x:Name="txt_ExpirationDate" Width="248" BorderThickness="0" FontFamily="Segoe UI" FontSize="14" VerticalContentAlignment="Center" Background="Transparent" Margin="1,0,1,0" />
-                    </Border>
+                    <DatePicker x:Name="txt_Expiration"
+                                Width="248" Height="35" BorderThickness="0" 
+                                FontFamily="Segoe UI" FontSize="14" 
+                                VerticalContentAlignment="Center" 
+                                Background="Transparent" Margin="1,0,1,0" />
+                </Border>
+                    <!--<Label Content="Available" Margin="10 10 0 0" FontSize="12" FontWeight="Regular" Padding="5" FontFamily="Segoe UI" Width="264" />
+                    --><!--cb_IsAvailable--><!--
+                    <CheckBox x:Name="cb_IsAvailable" Width="248" BorderThickness="0" FontFamily="Segoe UI" FontSize="14" VerticalContentAlignment="Center" Background="Transparent" Margin="1,0,1,0" />-->
 
-                    <StackPanel Orientation="Horizontal">
+
+                <StackPanel Orientation="Horizontal">
                         <!--Button Cancel-->
                         <Border Margin="80 20 0 0" CornerRadius="15" Background="White" Height="36" Width="90" BorderThickness="1" BorderBrush="#4C00A3" >
                             <Button x:Name="btn_Cancel" Content="Cancel" Width="90" FontSize="14" FontWeight="SemiBold"  Background="Transparent" Foreground="#4C00A3" BorderThickness="0" HorizontalAlignment="Center" Click="btn_Cancel_Click" />

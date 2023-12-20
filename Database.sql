@@ -238,6 +238,7 @@ Select * from VOUCHER_TYPE
 Insert into VOUCHER_TYPE Values(1, 'DEFAULT', '10');
 Insert into VOUCHER_TYPE Values(2, 'SORRY', '20');
 Insert into VOUCHER_TYPE Values(3, 'VIP', '50');
+Select MAX(ID) from VOUCHER_TYPE
 
 ---------------
 

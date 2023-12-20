@@ -8,6 +8,8 @@ namespace HotelManagement
 {
 	public class Rule
 	{
+		public const int EXPIRATION_DATE_VOUCHER = 1;
+
 		public enum SEX
 		{
 			FEMALE = 0,
