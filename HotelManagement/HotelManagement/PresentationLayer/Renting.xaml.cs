@@ -27,6 +27,7 @@ namespace HotelManagement.PresentationLayer
             rentings = new RentingBLL().GetAll();
 
             DataGridBooking.ItemsSource = rentings;
+            DataGridBooking.SelectedCellsChanged += SelectBooking;
         }
 
         private void SelectBooking(object sender, SelectedCellsChangedEventArgs e)
@@ -37,51 +38,34 @@ namespace HotelManagement.PresentationLayer
 
         private void btn_Add_Click(object sender, RoutedEventArgs e)
         {
-            ReceiveBooking receiveBooking = new ReceiveBooking();
-            receiveBooking.Show();
-            receiveBooking.ReloadBooking += LoadData;
+            RentingRoom rentingRoom = new RentingRoom();
+            rentingRoom.Show();
+            rentingRoom.SetData();
+            rentingRoom.ReloadParent += LoadData;
         }
 
         private void btn_Cancel_Click(object sender, RoutedEventArgs e)
         {
             if (currentRenting == -1)
             {
-                MessageBox.Show("Please choose your booking you want to cancel");
+                new MessageBoxCustom("Please choose your renting you want to delete", MessageType.Info, MessageButtons.Ok).ShowDialog();
                 return;
             }
 
-            var Result = MessageBox.Show("Do you want to cancel this booking?", "Cancel Booking", MessageBoxButton.YesNo, MessageBoxImage.Question);
-            if (Result == MessageBoxResult.Yes)
+            var Result = new MessageBoxCustom("Do you want to delete this renting?", MessageType.Confirmation, MessageButtons.YesNo).ShowDialog();
+            if (Result.Value)
             {
                 try
                 {
-                    int remainDays = (int)(DateTime.Parse(rentings[currentRenting].CheckinDate).Date
-                                - DateTime.Now.Date).TotalDays;
-                    double ratio = 0d;
-                    if (remainDays > 15)
-                    {
-                        ratio = 0.7d;
-                    }
-                    else if (remainDays > 7 && remainDays <= 15)
-                    {
-                        ratio = 0.5d;
-                    }
-                    else if (remainDays > 3 && remainDays <= 7)
-                    {
-                        ratio = 0.3d;
-                    }
-
-                    decimal refund = rentings[currentRenting].Total * (decimal)ratio;
-
-                    new BookingBLL().RemoveBooking(rentings[currentRenting].Id);
+                    new RentingBLL().RemoveRenting(rentings[currentRenting].Id);
 
                     LoadData();
 
-                    MessageBox.Show($"The refunding is {new MoneyConverter().Convert(refund, null, null, null)}");
+                    new MessageBoxCustom("Delete successfully", MessageType.Success, MessageButtons.Ok).ShowDialog();
                 }
                 catch (Exception ex)
                 {
-                    MessageBox.Show(ex.Message);
+                    new MessageBoxCustom(ex.Message, MessageType.Error, MessageButtons.Ok).ShowDialog();
                 }
             }
         }

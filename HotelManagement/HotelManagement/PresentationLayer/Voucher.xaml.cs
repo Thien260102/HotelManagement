@@ -65,7 +65,7 @@ namespace HotelManagement.PresentationLayer
                 return;
             }
 
-            new VoucherBLL().DeleteVoucherType(_vouchers[_current].Id);
+            new VoucherBLL().DeleteVoucher(_vouchers[_current].Id);
             new MessageBoxCustom("Remove voucher successfully.", MessageType.Info, MessageButtons.Ok).ShowDialog();
             LoadData();
         }

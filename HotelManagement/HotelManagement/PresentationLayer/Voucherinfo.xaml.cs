@@ -28,12 +28,16 @@ namespace HotelManagement.PresentationLayer
         List<VoucherTypeDTO> _voucherTypes;
         int _current;
 
+        CustomerDTO _customer;
+
         public Action Reload;
 		#endregion
 
 		public Voucherinfo()
         {
             InitializeComponent();
+
+            _customer = new CustomerDTO();
 
             txt_Discount.PreviewTextInput += InputOnlyNumber;
             _voucher = new VoucherDTO();
@@ -48,18 +52,63 @@ namespace HotelManagement.PresentationLayer
             txt_Discount.IsReadOnly = true;
 
             txt_Expiration.SelectedDate = DateTime.Now.AddMonths(Rule.EXPIRATION_DATE_VOUCHER);
+
+            txt_CustomerPhone.LostFocus += CheckCustomer;
+            txt_CustomerCitizenID.LostFocus += CheckCustomer;
         }
 
+        public void SetData(int customerId)
+		{
+            _voucher = new VoucherDTO();
+
+            _customer = new CustomerBLL().GetCustomer(customerId);
+            txt_CustomerCitizenID.Text = _customer.CitizenId;
+            txt_CustomerName.Text = _customer.FullName;
+            txt_CustomerPhone.Text = _customer.PhoneNumber;
+
+            txt_CustomerPhone.IsReadOnly = true;
+            txt_CustomerName.IsReadOnly = true;
+            txt_CustomerCitizenID.IsReadOnly = true;
+        }
 		public void SetData(VoucherDTO voucher)
 		{
             _voucher = voucher;
 
-            txt_CustomerId.Text = voucher.CustomerId.ToString();
+            _customer = new CustomerBLL().GetCustomer(voucher.CustomerId);
+            txt_CustomerCitizenID.Text = _customer.CitizenId;
+            txt_CustomerName.Text = _customer.FullName;
+            txt_CustomerPhone.Text = _customer.PhoneNumber;
+
+            txt_CustomerPhone.IsReadOnly = true;
+            txt_CustomerName.IsReadOnly = true;
+            txt_CustomerCitizenID.IsReadOnly = true;
+            
             txt_Expiration.Text = voucher.ExpirationDate;
 		}
 
-		#region Events
-		private void SelectVoucher(object sender, SelectionChangedEventArgs e)
+        #region Events
+        private void CheckCustomer(object sender, RoutedEventArgs e)
+        {
+            var textBox = sender as TextBox;
+            if (textBox.Name == "txt_CustomerPhone")
+            {
+                _customer = new CustomerBLL().GetCustomer("", textBox.Text.Trim());
+            }
+            else
+            {
+                _customer = new CustomerBLL().GetCustomer(textBox.Text.Trim(), "");
+            }
+
+            if (_customer.Id != -1)
+            {
+                txt_CustomerName.Text = _customer.FullName;
+                txt_CustomerPhone.Text = _customer.PhoneNumber;
+                txt_CustomerCitizenID.Text = _customer.CitizenId;
+            }
+        }
+
+
+        private void SelectVoucher(object sender, SelectionChangedEventArgs e)
         {
             _current = combobox_VoucherType.SelectedIndex;
             txt_Discount.Text = _voucherTypes[_current].Ratio.ToString() + " %";
@@ -80,10 +129,23 @@ namespace HotelManagement.PresentationLayer
         {
             try
 			{
-                int customerID;
-                if (!int.TryParse(txt_CustomerId.Text, out customerID))
+                string citizenId = txt_CustomerCitizenID.Text.Trim();
+                string customerName = txt_CustomerName.Text.Trim();
+                string customerPhone = txt_CustomerPhone.Text.Trim();
+                if(string.IsNullOrEmpty(citizenId) || string.IsNullOrEmpty(customerName)
+                || string.IsNullOrEmpty(customerPhone))
 				{
-                    throw new Exception("Customer ID wrong");
+                    throw new Exception("Please fill all information.");
+				}
+
+                if(!Utilities.Validate_CitizenId(citizenId))
+				{
+                    throw new Exception("Please fill correct citizen ID");
+				}
+
+                if (!Utilities.Validate_Phone(customerPhone))
+				{
+                    throw new Exception("Please fill correct numberphone");
 				}
 
                 string expirationDate = ((DateTime)txt_Expiration.SelectedDate).ToString("yyyy-MM-dd");
@@ -92,7 +154,17 @@ namespace HotelManagement.PresentationLayer
                     throw new Exception("Expiration date must larger than today");
                 }
 
-                VoucherDTO voucher = new VoucherDTO(customerID, expirationDate, 
+                if(_customer.Id == -1)
+				{
+                    if (!new CustomerBLL().InsertCustomer(_customer))
+					{
+                        throw new Exception("Add customer information fail");
+					}
+
+				}
+
+                VoucherDTO voucher = new VoucherDTO(new CustomerBLL().GetCustomerId(_customer.CitizenId), 
+                    expirationDate, 
                     true, _voucherTypes[_current].Id);
 
                 if (!new VoucherBLL().AddNewVoucher(voucher))

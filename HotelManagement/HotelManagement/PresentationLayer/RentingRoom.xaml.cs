@@ -51,14 +51,19 @@ namespace HotelManagement.PresentationLayer
             this._roomInfor = roomInfor;
 
             // room type
+            cb_RoomType.Items.Add(roomInfor.RoomTypeName);
+            cb_RoomType.SelectedIndex = 0;
+            cb_RoomType.IsReadOnly = true;
             _roomTypes = new RoomTypeBLL().GetAllRoomTypes();
-            foreach (var roomType in _roomTypes)
-            {
-                cb_RoomType.Items.Add(roomType.Name);
-            }
-            cb_RoomType.Text = roomInfor.RoomTypeName;
-            cb_RoomType.SelectionChanged += SelectRoomType;
-            _currentType = _roomTypes.FindIndex(e => e.Id == roomInfor.RoomTypeId);
+
+            _currentType = _roomTypes.FindIndex(element => element.Name == cb_RoomType.Text.Trim());
+            //foreach (var roomType in _roomTypes)
+            //{
+            //    cb_RoomType.Items.Add(roomType.Name);
+            //}
+            //cb_RoomType.Text = roomInfor.RoomTypeName;
+            //cb_RoomType.SelectionChanged += SelectRoomType;
+            //_currentType = _roomTypes.FindIndex(e => e.Id == roomInfor.RoomTypeId);
 
             txt_RoomID.Text = roomInfor.Id.ToString();
 			txt_RoomID.IsReadOnly = true;
@@ -92,6 +97,9 @@ namespace HotelManagement.PresentationLayer
 
                 if (result.Value)
 				{
+                    Voucherinfo voucher = new Voucherinfo();
+                    voucher.Show();
+                    voucher.SetData(bookingDTO.CustomerId);
                     this.Close();
 				}
             }
@@ -149,6 +157,72 @@ namespace HotelManagement.PresentationLayer
             txt_DateCheckin.IsEnabled = false;
             txt_DateCheckout.SelectedDate = ((DateTime)txt_DateCheckin.SelectedDate).AddDays(bookingDTO.TotalDay);
             txt_DateCheckout.IsEnabled = false;
+
+            txt_Total.IsReadOnly = true;
+        }
+
+        public void SetData()
+		{
+            _roomsAvailable = new RoomBLL().GetRooms(Rule.ROOM_STATE.AVAILABLE);
+            if (_roomsAvailable.Count == 0)
+            {
+                var result = new MessageBoxCustom("All rooms are not available", MessageType.Info, MessageButtons.Ok).ShowDialog();
+
+                if (result.Value)
+                {
+                    this.Close();
+                }
+            }
+
+            // room type
+            _roomTypes = new RoomTypeBLL().GetAllRoomTypes();
+            foreach (var roomType in _roomTypes)
+            {
+                cb_RoomType.Items.Add(roomType.Name);
+            }
+            cb_RoomType.SelectionChanged += SelectRoomType;
+            _currentType = 0;
+            cb_RoomType.SelectedItem = _roomTypes[_currentType].Name;
+            //cb_RoomType.IsEnabled = false;
+
+            //txt_RoomID.Text = bookingDTO.Id.ToString();
+            txt_RoomID.IsReadOnly = true;
+
+            txt_DateCreate.Text = DateTime.Now.Date.ToString("yyyy-MM-dd");
+            txt_DateCreate.IsReadOnly = true;
+
+            txt_Employee.Text = new AccountBLL().GetCurrentEmployeeName();
+            txt_Employee.IsReadOnly = true;
+
+            _customer = new CustomerDTO();//new CustomerBLL().GetCustomer(bookingDTO.CustomerId);
+            //txt_CustomerName.Text = _customer.FullName;
+            //txt_CustomerName.IsReadOnly = true;
+            //txt_NumberPhone.Text = _customer.PhoneNumber;
+            //txt_NumberPhone.IsReadOnly = true;
+            //txt_CitizenID.Text = _customer.CitizenId;
+            //txt_CitizenID.IsReadOnly = true;
+            //Checkbox_Male.IsChecked = _customer.Sex;
+            //Checkbox_Male.IsEnabled = false;
+
+            txt_NumberPhone.PreviewTextInput += InputOnlyNumber;
+            txt_CitizenID.PreviewTextInput += InputOnlyNumber;
+            txt_Totalday.PreviewTextInput += InputOnlyNumber;
+            txt_TotalPeople.PreviewTextInput += InputOnlyNumber;
+
+            txt_NumberPhone.LostFocus += CheckCustomer;
+            txt_CitizenID.LostFocus += CheckCustomer;
+
+            txt_DateCheckin.LostFocus += CalculateTotal;
+            txt_Totalday.LostFocus += CalculateTotal;
+
+            txt_DateCheckin.SelectedDate = DateTime.Now.Date;
+            txt_DateCheckin.IsDropDownOpen = false;
+
+            //txt_Totalday.Text = bookingDTO.TotalDay.ToString();
+            //txt_Totalday.IsReadOnly = true;
+
+            txt_DateCheckin.IsEnabled = false;
+            txt_DateCheckout.SelectedDate = DateTime.Now.Date;
 
             txt_Total.IsReadOnly = true;
         }
@@ -301,7 +375,20 @@ namespace HotelManagement.PresentationLayer
                     _roomInfor = _roomsAvailable[index];
                 }
 			}
-
+            else
+			{
+                int index = _roomsAvailable.FindIndex(room => room.RoomTypeId == _roomTypes[_currentType].Id);
+                if (index == -1)
+                {
+                    txt_RoomID.Text = "No room";
+                    _roomInfor = new RoomDTO();
+                }
+                else
+                {
+                    txt_RoomID.Text = _roomsAvailable[index].Id.ToString();
+                    _roomInfor = _roomsAvailable[index];
+                }
+            }
             if (_total == -1)
             {
                 return;
@@ -349,7 +436,6 @@ namespace HotelManagement.PresentationLayer
                 string name = txt_CustomerName.Text.Trim();
                 string citizenId = txt_CitizenID.Text.Trim();
                 string phone = txt_NumberPhone.Text.Trim();
-                int roomType = int.Parse(txt_RoomID.Text.Trim());
                 string checkIn = txt_DateCheckin.Text.Trim();
                 string checkOut = txt_DateCheckout.Text.Trim();
                 bool sex = (bool)Checkbox_Male.IsChecked;
@@ -359,6 +445,12 @@ namespace HotelManagement.PresentationLayer
                 {
                     throw new Exception("Please fill all information");
                 }
+
+                int roomType;
+                if (!int.TryParse(txt_RoomID.Text.Trim(), out roomType))
+				{
+                    throw new Exception("Please choose another room");
+				}
 
                 if (!Utilities.Validate_CitizenId(citizenId))
                 {
@@ -383,7 +475,7 @@ namespace HotelManagement.PresentationLayer
                 if (!_fromBooking)
 				{
                     if (DateTime.Parse(checkIn).Date < DateTime.Now.Date
-                        || (DateTime.Parse(checkIn).Date == DateTime.Now.Date.Date &&
+                        || (DateTime.Parse(checkIn).Date == DateTime.Now.Date &&
                            ((DateTime)tp_CheckinDate.SelectedTime).TimeOfDay < DateTime.Now.TimeOfDay))
                     {
                         throw new Exception("Check in date must be equal or larger than today.");
@@ -391,7 +483,7 @@ namespace HotelManagement.PresentationLayer
 
                     if (DateTime.Parse(checkIn).Date > DateTime.Parse(checkOut))
                     {
-                        throw new Exception("Check in date must be smaller than check out date.");
+                        throw new Exception("Check out date must be smaller than check out date.");
                     }
                 }
                 else
@@ -446,11 +538,14 @@ namespace HotelManagement.PresentationLayer
 					throw new Exception("Insert renting infor fail.");
 				}
 
-                _booking.IsRented = true;
-                if (!new BookingBLL().UpdateBooking(_booking))
-				{
-                    throw new Exception("Update booking infor fail");
-				}
+                if(_fromBooking)
+                {
+                    _booking.IsRented = true;
+                    if (!new BookingBLL().UpdateBooking(_booking))
+                    {
+                        throw new Exception("Update booking infor fail");
+                    }
+                }
 
                 _roomInfor.State = (int)Rule.ROOM_STATE.RENTING;
                 new RoomBLL().UpdateRoom(_roomInfor);

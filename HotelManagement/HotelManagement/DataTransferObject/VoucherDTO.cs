@@ -1,4 +1,5 @@
-﻿using System;
+﻿using HotelManagement.BusinessLogicLayer;
+using System;
 using System.Data;
 
 namespace HotelManagement.DataTransferObject
@@ -9,6 +10,9 @@ namespace HotelManagement.DataTransferObject
 		public int Id { get; set; }
 
 		public int CustomerId { get; set; }
+
+		public string CustomerName { get; set; }
+		public string CustomerPhone { get; set; }
 
 		public string ExpirationDate { get; set; }
 
@@ -26,6 +30,10 @@ namespace HotelManagement.DataTransferObject
 		public VoucherDTO(int customerId, string expirationDate, bool isAvailable, int typeId)
 		{
 			CustomerId = customerId;
+			var customer = new CustomerBLL().GetCustomer(CustomerId);
+			CustomerName = customer.FullName;
+			CustomerPhone = customer.PhoneNumber;
+
 			ExpirationDate = expirationDate;
 			IsAvailable = isAvailable;
 			VoucherTypeId = typeId;
@@ -35,6 +43,10 @@ namespace HotelManagement.DataTransferObject
 		{
 			Id = (int)row["ID"];
 			CustomerId = (int)row["CustomerId"];
+			var customer = new CustomerBLL().GetCustomer(CustomerId);
+			CustomerName = customer.FullName;
+			CustomerPhone = customer.PhoneNumber;
+
 			ExpirationDate = string.Format("{0:yyyy-MM-dd}", DateTime.Parse(row["ExpirationDate"].ToString()));
 			IsAvailable = (bool)row["IsAvailable"];
 			VoucherTypeId = (int)row["TypeID"];

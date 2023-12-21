@@ -59,7 +59,7 @@ namespace HotelManagement.DataAccessLayer
         public int CountExistVoucherWith(int type)
         {
             string query = "Select Count(*) from VOUCHER " +
-                "where VoucherTypeId = @type ";
+                "where TypeId = @type ";
 
             return (int)DataProvider.Instance.ExecuteScalar(query,
                 new object[] { type });

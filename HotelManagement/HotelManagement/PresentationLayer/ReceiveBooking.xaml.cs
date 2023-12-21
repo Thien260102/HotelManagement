@@ -198,7 +198,7 @@ namespace HotelManagement.PresentationLayer
                     customer.CitizenId = citizenId;
                     customer.FullName = name;
                     customer.PhoneNumber = phone;
-                    customer.Nationality = "";
+                    customer.Nationality = "Vietnamese";
                     customer.Sex = true;
                     customer.BirthDay = "";
 
@@ -220,13 +220,14 @@ namespace HotelManagement.PresentationLayer
                     throw new Exception("Insert booking infor fail.");
                 }
 
+                new MessageBoxCustom("Insert booking successfully.", MessageType.Success, MessageButtons.Ok).ShowDialog();
                 ReloadBooking?.Invoke();
                 this.Close();
 
             }
             catch (Exception ex)
             {
-                MessageBox.Show(ex.Message);
+                new MessageBoxCustom(ex.Message, MessageType.Error, MessageButtons.Ok).ShowDialog();
             }
         }
     }
