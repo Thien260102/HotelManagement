@@ -8,7 +8,7 @@
              d:DesignHeight="545" d:DesignWidth="770">
 
     <UserControl.Resources>
-        <local:MoneyConverter x:Key="moneyConverter"></local:MoneyConverter>
+        <local:MoneyConverter x:Key="moneyConverter"></local:MoneyConverter> 
         <local:PhoneConverter x:Key="phoneConverter"></local:PhoneConverter>
     </UserControl.Resources>
 
