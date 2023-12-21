@@ -1,4 +1,5 @@
-﻿using System;
+﻿using HotelManagement.DataTransferObject;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -27,7 +28,11 @@ namespace HotelManagement.PresentationLayer
 
         private void btn_Export_Click(object sender, RoutedEventArgs e)
         {
-
+            List<RoomDTO> rooms = new List<RoomDTO>()
+            {
+                new RoomDTO(1, "abc", 1, 0, 1, "None"),
+            };
+            new ReportUtilities().ExportToExcel(rooms, Combobox_TypeReport.Text + DateTime.Now.ToString("HHmmss dd-MM-yyyy"));
         }
     }
 }

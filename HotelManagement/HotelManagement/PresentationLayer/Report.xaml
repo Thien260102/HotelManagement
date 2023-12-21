@@ -18,9 +18,9 @@
                 <Border Width="192" Height="35" HorizontalAlignment="Left" Margin="270 10 0 0" CornerRadius="15" Background="White" BorderThickness="1" BorderBrush="#9081E4" >
                     <StackPanel Background="Transparent" Orientation="Horizontal">
                         <ComboBox x:Name="Combobox_TypeReport" Margin="10 0 0 0" Background="Transparent" Width="170" Height="26"  BorderThickness="0" FontFamily="Segoe UI" FontWeight="Medium" Foreground="#7F000000" FontSize="14" >
-                            <ComboBoxItem Background="Transparent" IsSelected="True">Báo cáo doanh thu</ComboBoxItem>
-                            <ComboBoxItem  Background="Transparent">Báo cáo khách hàng</ComboBoxItem>
-                            <ComboBoxItem  Background="Transparent">ComboBox Item #3</ComboBoxItem>
+                            <ComboBoxItem Background="Transparent" IsSelected="True">Income Report</ComboBoxItem>
+                            <ComboBoxItem  Background="Transparent">Customer Report</ComboBoxItem>
+                            <ComboBoxItem  Background="Transparent">Salary Report</ComboBoxItem>
                         </ComboBox>
                     </StackPanel>
                 </Border>
