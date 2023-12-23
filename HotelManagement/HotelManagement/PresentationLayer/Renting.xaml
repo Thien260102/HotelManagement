@@ -26,8 +26,17 @@
                         <TextBox x:Name="txt_Search" Width="220" BorderThickness="0" FontFamily="Segoe UI" Foreground="#7F000000" FontSize="14" VerticalContentAlignment="Center" />
                     </StackPanel>
                 </Border>
+                
+                <!--btn_IsPaid-->
+                <Border x:Name="BdIsPaid" Margin="5 10 0 0" CornerRadius="15" Background="White" Height="30" Width="100" BorderThickness="1" BorderBrush="#7F000000" >
+                    <Button x:Name="btn_IsPaid" Content="IsPaid" FontSize="12" FontWeight="Medium"  Background="Transparent" Foreground="#7F000000" BorderThickness="0"/>
+                </Border>
+                <!--btn_IsPaid-->
+                <Border x:Name="BdAvaliable" Margin="5 10 0 0" CornerRadius="15" Background="White" Height="30" Width="100" BorderThickness="1" BorderBrush="#7F000000" >
+                    <Button x:Name="btn_Available" Content="Available" FontSize="12" FontWeight="Medium"  Background="Transparent" Foreground="#7F000000" BorderThickness="0"/>
+                </Border>
                 <!--Button Add-->
-                <Border Margin="315 5 0 0" CornerRadius="20" Background="#F3E5FF" Height="40" Width="75">
+                <Border Margin="100 5 0 0" CornerRadius="20" Background="#F3E5FF" Height="40" Width="75">
                     <Button x:Name="btn_Add" Content="Add" FontSize="16" FontWeight="SemiBold"  Background="Transparent" Foreground="#4C00A3" BorderThickness="0" Click= "btn_Add_Click" />
                 </Border>
 

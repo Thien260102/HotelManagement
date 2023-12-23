@@ -43,6 +43,8 @@ namespace HotelManagement.BusinessLogicLayer
 			return rooms;
 		}
 
+		public RoomDTO GetRoom(int id) => RoomDAL.Instance.GetRoomInfor(id);
+
 		public bool AddNewRoom(RoomDTO room)
 		{
 			switch (RoomDAL.Instance.AddNewRoom(room))

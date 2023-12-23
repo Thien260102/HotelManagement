@@ -32,6 +32,25 @@ namespace HotelManagement.BusinessLogicLayer
 			return false;
 		}
 
+		public bool UpdateRenting(RentingDTO renting)
+		{
+			switch (RentingDAL.Instance.Update(renting))
+			{
+				case Rule.STATE.SUCCESS:
+					return true;
+
+				case Rule.STATE.FAIL:
+					
+					return false;
+
+				case Rule.STATE.EXIST:
+					
+					return false;
+			}
+
+			return false;
+		}
+
 		public bool RemoveRenting(int id)
 		{
 			return RentingDAL.Instance.RemoveRenting(id);

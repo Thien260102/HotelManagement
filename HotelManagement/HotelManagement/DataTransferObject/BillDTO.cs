@@ -8,10 +8,12 @@ using System.Threading.Tasks;
 
 namespace HotelManagement.DataTransferObject
 {
-	public class RentingDTO
+	public class BillDTO
 	{
 		#region Fields & Properties
 		public int Id { get; set; }
+
+		public string BillDate { get; set; }
 
 		public int CustomerId { get; set; }
 		public string CustomerName { get; set; }
@@ -19,45 +21,32 @@ namespace HotelManagement.DataTransferObject
 		public string Username { get; set; }
 		public string EmployeeName { get; set; }
 
-		public int RoomId { get; set; }
-		public string RoomTypeName { get; set; }
-
-		public string CreateDate { get; set; }
-
-		public string CheckinDate { get; set; }
-
+		public int RentingId { get; set; }
+		
 		public int TotalDay { get; set; }
 
-		public string CheckoutDate { get; set; }
-
 		public decimal Total { get; set; }
-
-		public bool IsPaid { get; set; }
 		#endregion
 
 		#region Methods
 
-		public RentingDTO()
+		public BillDTO()
 		{
 			Id = -1;
-			IsPaid = false;
 		}
 
-		public RentingDTO(int customerId, string userName, int roomId, string createDate,
-							string checkinDate, int totalDay, string checkoutDate, decimal total)
+		public BillDTO(string billDate, string userName, int customerId, int rentingId, int totalDay,
+					   decimal total)
 		{
+			BillDate = billDate;
 			CustomerId = customerId;
 			Username = userName;
-			RoomId = roomId;
-			CreateDate = createDate;
-			CheckinDate = checkinDate;
+			RentingId = rentingId;
 			TotalDay = totalDay;
-			CheckoutDate = checkoutDate;
 			Total = total;
-			IsPaid = false;
 		}
 
-		public RentingDTO(DataRow row)
+		public BillDTO(DataRow row)
 		{
 			Id = (int)row["ID"];
 
@@ -68,7 +57,7 @@ namespace HotelManagement.DataTransferObject
 			if (Username != "Admin")
 			{
 				AccountDTO account = new AccountBLL().GetAccount(Username);
-				if (account.UserName == "") 
+				if (account.UserName == "")
 				{
 					EmployeeName = "Null";
 				}
@@ -82,17 +71,10 @@ namespace HotelManagement.DataTransferObject
 				EmployeeName = "Admin";
 			}
 
-			RoomId = (int)row["RoomID"];
-			int roomTypeId = new RoomBLL().GetRoom(RoomId).RoomTypeId;
-			RoomTypeName = new RoomTypeBLL().GetRoomTypeName(roomTypeId);
-
-			CreateDate = string.Format("{0:yyyy-MM-dd}", DateTime.Parse(row["CreateDate"].ToString()));
-			CheckinDate = string.Format("{0:yyyy-MM-dd}", DateTime.Parse(row["CheckinDate"].ToString()));
-			CheckoutDate = string.Format("{0:yyyy-MM-dd}", DateTime.Parse(row["CheckinDate"].ToString()));
+			RentingId = (int)row["RentingID"];
+			BillDate = string.Format("{0:yyyy-MM-dd}", DateTime.Parse(row["BillDate"].ToString()));
 			TotalDay = (int)row["TotalDay"];
 			Total = (decimal)row["Total"];
-
-			IsPaid = (bool)row["IsPaid"];
 		}
 		#endregion
 	}

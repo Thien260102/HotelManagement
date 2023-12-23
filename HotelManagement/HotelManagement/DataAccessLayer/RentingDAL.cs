@@ -73,6 +73,26 @@ namespace HotelManagement.DataAccessLayer
             return Rule.STATE.FAIL;
         }
 
+        public Rule.STATE Update(RentingDTO renting)
+		{
+            string query = "UPDATE RENTING " +
+                "SET IsPaid = @paid " +
+                "WHERE ID = @id ";
+
+            //if (IsExistBooking(booking.CustomerId, booking.CheckinDate))
+            //{
+            //	return Rule.STATE.EXIST;
+            //}
+
+            if (DataProvider.Instance.ExecuteNonQuery(query,
+                new object[] { renting.IsPaid, renting.Id }) > 0)
+            {
+                return Rule.STATE.SUCCESS;
+            }
+
+            return Rule.STATE.FAIL;
+        }
+
         public bool IsExistRenting(int customerId, string checkinDate)
         {
             string query = "Select Count(*) from Renting " +

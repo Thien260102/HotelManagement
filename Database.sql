@@ -127,6 +127,9 @@ Create Table BILL
 	ID int not null IDENTITY(1,1),
 	BillDate Date,
 	UserName nvarchar(50),
+	CustomerID int,
+	RentingID int,
+	TotalDay int,
 	Total money
 )
 ALTER TABLE BILL

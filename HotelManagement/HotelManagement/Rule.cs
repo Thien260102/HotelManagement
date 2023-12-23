@@ -10,6 +10,8 @@ namespace HotelManagement
 	{
 		public const int EXPIRATION_DATE_VOUCHER = 1;
 
+		public const int TIME_CHECKOUT = 12;
+
 		public enum SEX
 		{
 			FEMALE = 0,

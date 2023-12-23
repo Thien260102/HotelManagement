@@ -4,6 +4,7 @@ using System;
 using System.Collections.Generic;
 using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Input;
 
 namespace HotelManagement.PresentationLayer
 {
@@ -12,29 +13,88 @@ namespace HotelManagement.PresentationLayer
 	/// </summary>
 	public partial class Renting : UserControl
 	{
-        List<RentingDTO> rentings;
-        int currentRenting = -1;
+		#region Fields & Properties
+		List<RentingDTO> _rentings;
+        Dictionary<bool, List<RentingDTO>> _filterRooms;
 
-        public Renting()
+        int _currentRenting = -1;
+
+		#endregion
+
+		public Renting()
 		{
 			InitializeComponent();
 
+            _filterRooms = new Dictionary<bool, List<RentingDTO>>();
+            _filterRooms.Add(true, new List<RentingDTO>());
+            _filterRooms.Add(false, new List<RentingDTO>());
             LoadData();
+
+            btn_IsPaid.Click += IsPaid;
+            btn_Available.Click += Available;
+            DataGridBooking.MouseDoubleClick += ExportBill;
 		}
 
-        private void LoadData()
+		private void LoadData()
         {
-            rentings = new RentingBLL().GetAll();
+            _rentings = new RentingBLL().GetAll();
 
-            DataGridBooking.ItemsSource = rentings;
+            _filterRooms[false].Clear();
+            _filterRooms[true].Clear();
+            foreach (var renting in _rentings)
+			{
+                _filterRooms[renting.IsPaid].Add(renting);
+			}
+
+            DataGridBooking.ItemsSource = _rentings;
             DataGridBooking.SelectedCellsChanged += SelectBooking;
+        }
+
+        private void FilterRenting(bool state)
+        {
+            _currentRenting = -1;
+            DataGridBooking.ItemsSource = _filterRooms[state];
+        }
+
+        #region Events
+        private void ExportBill(object sender, MouseButtonEventArgs e)
+        {
+            if (e.ChangedButton == MouseButton.Left)
+            {
+                DataGrid grid = sender as DataGrid;
+                if (grid != null && grid.SelectedItems != null && grid.SelectedItems.Count == 1)
+                {
+                    DataGridRow dgr = grid.ItemContainerGenerator.ContainerFromItem(grid.SelectedItem) as DataGridRow;
+
+                    var renting = _rentings[dgr.GetIndex()];
+                    if (renting.IsPaid)
+                    {
+                        new MessageBoxCustom("The renting already paid.", MessageType.Warning, MessageButtons.Ok).ShowDialog();
+                        return;
+                    }
+                    
+                    Billinfor bill = new Billinfor();
+                    bill.Show();
+                    bill.SetData(renting);
+                    bill.ReloadParent = LoadData;
+                }
+            }
+        }
+
+        private void Available(object sender, RoutedEventArgs e)
+        {
+            FilterRenting(false);
+        }
+
+        private void IsPaid(object sender, RoutedEventArgs e)
+        {
+            FilterRenting(true);
         }
 
         private void SelectBooking(object sender, SelectedCellsChangedEventArgs e)
         {
-            currentRenting = DataGridBooking.SelectedIndex;
+            _currentRenting = DataGridBooking.SelectedIndex;
         }
-
 
         private void btn_Add_Click(object sender, RoutedEventArgs e)
         {
@@ -46,7 +106,7 @@ namespace HotelManagement.PresentationLayer
 
         private void btn_Cancel_Click(object sender, RoutedEventArgs e)
         {
-            if (currentRenting == -1)
+            if (_currentRenting == -1)
             {
                 new MessageBoxCustom("Please choose your renting you want to delete", MessageType.Info, MessageButtons.Ok).ShowDialog();
                 return;
@@ -57,7 +117,7 @@ namespace HotelManagement.PresentationLayer
             {
                 try
                 {
-                    new RentingBLL().RemoveRenting(rentings[currentRenting].Id);
+                    new RentingBLL().RemoveRenting(_rentings[_currentRenting].Id);
 
                     LoadData();
 
@@ -70,5 +130,6 @@ namespace HotelManagement.PresentationLayer
             }
         }
 
-    }
+		#endregion
+	}
 }

@@ -37,6 +37,32 @@ namespace HotelManagement.DataAccessLayer
             return roomTypes;
         }
 
+        public RoomTypeDTO GetRoomType(int id)
+        {
+            string query = "Select * from ROOM_TYPE " +
+                "where Id = @id ";
+
+            DataTable data = DataProvider.Instance.ExecuteQuery(query, new object[] { id });
+
+            if (data.Rows.Count == 1)
+                return new RoomTypeDTO(data.Rows[0]);
+
+            return new RoomTypeDTO();
+        }
+
+        public RoomTypeDTO GetRoomType(string name)
+        {
+            string query = "Select * from ROOM_TYPE " +
+                "where Name = @name ";
+
+            DataTable data = DataProvider.Instance.ExecuteQuery(query, new object[] { name });
+
+            if (data.Rows.Count == 1)
+                return new RoomTypeDTO(data.Rows[0]);
+
+            return new RoomTypeDTO();
+        }
+
         public string GetRoomTypeName(int id)
         {
             string query = "Select * from ROOM_TYPE " +
