@@ -1,17 +1,9 @@
-﻿using System;
+﻿using HotelManagement.BusinessLogicLayer;
+using HotelManagement.DataTransferObject;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
 using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
 
 namespace HotelManagement.PresentationLayer
 {
@@ -20,9 +12,19 @@ namespace HotelManagement.PresentationLayer
     /// </summary>
     public partial class Bill : UserControl
     {
-        public Bill()
+        #region Fields & Properties
+        List<BillDTO> _bills;
+
+		#endregion
+
+		public Bill()
         {
             InitializeComponent();
+
+            _bills = new BillBLL().GetAll();
+            
+            DataGridBill.ItemsSource = _bills;
+            DataGridBill.IsReadOnly = true;
         }
         public void DisableButton()
         {

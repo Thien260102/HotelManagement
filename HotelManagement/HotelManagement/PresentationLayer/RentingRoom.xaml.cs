@@ -281,6 +281,8 @@ namespace HotelManagement.PresentationLayer
                 new MessageBoxCustom(message, MessageType.Info, MessageButtons.Ok).ShowDialog();
             }
 
+            _total += total;
+
             return true;
         }
 
@@ -551,7 +553,8 @@ namespace HotelManagement.PresentationLayer
                 new RoomBLL().UpdateRoom(_roomInfor);
                 ReloadParent?.Invoke();
 
-                new MessageBoxCustom("Insert renting successfully", MessageType.Success, MessageButtons.Ok).ShowDialog();
+                new MessageBoxCustom("Insert renting successfully. " +
+                    $"\nCustomer must pay: {new MoneyConverter().Convert(_total, null, null, null).ToString().Trim()} VND", MessageType.Success, MessageButtons.Ok).ShowDialog();
                 this.Close();
 
             }

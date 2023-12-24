@@ -31,7 +31,7 @@
             </StackPanel>
             <!--DataGridView-->
             <StackPanel Height="495" Background="Transparent">
-                <DataGrid x:Name="DataGridGuest" Margin="10" Height="470 " d:ItemsSource="{d:SampleData ItemCount=5}"/>
+                <DataGrid x:Name="DataGridBill" Margin="10" Height="470 " d:ItemsSource="{d:SampleData ItemCount=5}"/>
             </StackPanel>
         </StackPanel>
     </Grid>
