@@ -16,6 +16,8 @@ namespace HotelManagement.BusinessLogicLayer
 		#region Voucher
 		public List<VoucherDTO> GetAll() => VoucherDAL.Instance.GetAll();
 
+		public List<VoucherDTO> GetVoucherOf(int customerId) => VoucherDAL.Instance.GetAll(customerId);
+
 		public bool AddNewVoucher(VoucherDTO voucher)
 		{
 			switch (VoucherDAL.Instance.AddNewVoucher(voucher))
@@ -61,6 +63,10 @@ namespace HotelManagement.BusinessLogicLayer
 
 		#region Voucher Type
 		public List<VoucherTypeDTO> GetAllVoucherTypes() => VoucherTypeDAL.Instance.GetAll();
+
+		public string GetVoucherTypeName(int id) => VoucherTypeDAL.Instance.GetVoucherTypeName(id);
+
+		public int GetVoucherRatio(int id) => VoucherTypeDAL.Instance.GetRatio(id);
 
 		public bool AddNewVoucherType(VoucherTypeDTO voucherType)
 		{

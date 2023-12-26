@@ -1,5 +1,6 @@
 ﻿using HotelManagement.DataAccessLayer;
 using HotelManagement.DataTransferObject;
+using HotelManagement.PresentationLayer;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -21,11 +22,9 @@ namespace HotelManagement.BusinessLogicLayer
 					return true;
 
 				case Rule.STATE.FAIL:
-					MessageBox.Show("Add booking infor fail");
 					return false;
 
 				case Rule.STATE.EXIST:
-					MessageBox.Show("The previous booking still remain.");
 					return false;
 			}
 

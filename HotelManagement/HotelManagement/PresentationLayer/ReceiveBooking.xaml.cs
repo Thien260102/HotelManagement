@@ -23,12 +23,15 @@ namespace HotelManagement.PresentationLayer
     public partial class ReceiveBooking : Window
     {
 		#region Fields & Properties
-		List<RoomTypeDTO> roomTypes;
-        int currentType = 0;
+		List<RoomTypeDTO> _roomTypes;
+        int _currentType = 0;
 
-        CustomerDTO customer;
+        CustomerDTO _customer;
 
-        decimal total = -1;
+        decimal _total = -1;
+
+        List<VoucherDTO> _vouchers;
+        int _currentVoucher = 0;
 
         public Action ReloadBooking;
 		#endregion
@@ -38,13 +41,17 @@ namespace HotelManagement.PresentationLayer
             InitializeComponent();
 
             LoadData();
+
+            cb_Voucher.IsReadOnly = true;
+            cb_Voucher.SelectionChanged += SelectVoucher;
+            txt_Discount.IsReadOnly = true;
         }
 
-        private void LoadData()
+		private void LoadData()
         {
             // room type
-            roomTypes = new RoomTypeBLL().GetAllRoomTypes();
-            foreach (var roomType in roomTypes)
+            _roomTypes = new RoomTypeBLL().GetAllRoomTypes();
+            foreach (var roomType in _roomTypes)
             {
                 cb_RoomType.Items.Add(roomType.Name);
             }
@@ -71,28 +78,66 @@ namespace HotelManagement.PresentationLayer
             txt_Phone.LostFocus += CheckCustomer;
             txt_CCCD.LostFocus += CheckCustomer;
 
-            customer = new CustomerDTO();
+            _customer = new CustomerDTO();
         }
 
-		private void CheckCustomer(object sender, RoutedEventArgs e)
+        #region Events
+        private void SelectVoucher(object sender, SelectionChangedEventArgs e)
+        {
+            if(_vouchers.Count > _currentVoucher)
+            {
+                _currentVoucher = cb_Voucher.SelectedIndex;
+                txt_Discount.Text = _vouchers[_currentVoucher].Ratio.ToString() + " %";
+            }
+            else
+			{
+                _currentVoucher = 0;
+			}
+        }
+
+        private void CheckCustomer(object sender, RoutedEventArgs e)
 		{
             var textBox = sender as TextBox;
             if (textBox.Name == "txt_Phone") 
 			{
-                customer = new CustomerBLL().GetCustomer("", textBox.Text.Trim());
+                _customer = new CustomerBLL().GetCustomer("", textBox.Text.Trim());
 			}
             else
 			{
-                customer = new CustomerBLL().GetCustomer(textBox.Text.Trim(), "");
+                _customer = new CustomerBLL().GetCustomer(textBox.Text.Trim(), "");
             }
 
-            if (customer.Id != -1)
+            cb_Voucher.Items.Clear();
+            txt_Discount.Text = "";
+            if (_customer.Id != -1)
 			{
-                txt_Name.Text = customer.FullName;
-                txt_Phone.Text = customer.PhoneNumber;
-                txt_CCCD.Text = customer.CitizenId;
+                txt_Name.Text = _customer.FullName;
+                txt_Phone.Text = _customer.PhoneNumber;
+                txt_CCCD.Text = _customer.CitizenId;
                 //Checkbox_Male.IsChecked = customer.Sex;
-			}
+
+                _vouchers = new VoucherBLL().GetVoucherOf(_customer.Id);
+                _currentVoucher = 0;
+
+                foreach(var voucher in _vouchers)
+				{
+                    cb_Voucher.Items.Add(voucher.VoucherTypeName);
+				}
+                cb_Voucher.SelectedIndex = 0;
+                _currentVoucher = 0;
+
+                txt_Discount.Text = _vouchers[_currentVoucher].Ratio.ToString() + " %";
+
+            }
+            else
+			{
+                _vouchers.Clear();
+                _currentVoucher = 0;
+
+                txt_Name.Text = "";
+                txt_Phone.Text = "";
+                txt_CCCD.Text = "";
+            }
 		}
 
 		private void InputOnlyNumber(object sender, TextCompositionEventArgs e)
@@ -103,18 +148,18 @@ namespace HotelManagement.PresentationLayer
 
         private void SelectRoomType(object sender, SelectionChangedEventArgs e)
         {
-            int previous = currentType;
+            int previous = _currentType;
 
-            currentType = cb_RoomType.SelectedIndex;
+            _currentType = cb_RoomType.SelectedIndex;
 
-            if (total == -1)
+            if (_total == -1)
 			{
                 return;
 			}
 
-            int totalDay = (int)(total / roomTypes[previous].Price);
-            total = totalDay * roomTypes[currentType].Price;
-            txt_Total.Text = new MoneyConverter().Convert(total, null, null, null).ToString().Trim();
+            int totalDay = (int)(_total / _roomTypes[previous].Price);
+            _total = totalDay * _roomTypes[_currentType].Price;
+            txt_Total.Text = new MoneyConverter().Convert(_total, null, null, null).ToString().Trim();
 		}
 
 		private void CalculateTotal(object sender, RoutedEventArgs e)
@@ -137,8 +182,8 @@ namespace HotelManagement.PresentationLayer
                 return;
 			}
 
-            total = totalDay * roomTypes[currentType].Price;
-            txt_Total.Text = new MoneyConverter().Convert(total, null, null, null).ToString().Trim();
+            _total = totalDay * _roomTypes[_currentType].Price;
+            txt_Total.Text = new MoneyConverter().Convert(_total, null, null, null).ToString().Trim();
         
         }
 
@@ -154,7 +199,7 @@ namespace HotelManagement.PresentationLayer
                 string name = txt_Name.Text.Trim();
                 string citizenId = txt_CCCD.Text.Trim();
                 string phone = txt_Phone.Text.Trim();
-                int roomType = roomTypes[currentType].Id;
+                int roomType = _roomTypes[_currentType].Id;
                 string checkIn = txt_DateCheckin.Text.Trim();
                 //bool sex = (bool)Checkbox_Male.IsChecked;
 
@@ -193,16 +238,16 @@ namespace HotelManagement.PresentationLayer
                 BookingBLL bookingBLL = new BookingBLL();
                 CustomerBLL customerBLL = new CustomerBLL();
 
-                if (customer.Id == -1)
+                if (_customer.Id == -1)
 				{
-                    customer.CitizenId = citizenId;
-                    customer.FullName = name;
-                    customer.PhoneNumber = phone;
-                    customer.Nationality = "Vietnamese";
-                    customer.Sex = true;
-                    customer.BirthDay = "";
+                    _customer.CitizenId = citizenId;
+                    _customer.FullName = name;
+                    _customer.PhoneNumber = phone;
+                    _customer.Nationality = "Vietnamese";
+                    _customer.Sex = true;
+                    _customer.BirthDay = "";
 
-                    if (!customerBLL.InsertCustomer(customer))
+                    if (!customerBLL.InsertCustomer(_customer))
 					{
                         throw new Exception("Insert customer infor fail.");
 					}
@@ -210,10 +255,31 @@ namespace HotelManagement.PresentationLayer
 				}
 
                 BookingDTO booking = new BookingDTO(
-                    customerBLL.GetCustomerId(customer.CitizenId),
+                    customerBLL.GetCustomerId(_customer.CitizenId),
                     AccountBLL.Account.UserName, roomType,
                     txt_DateBooking.Text.Trim(), checkIn,
-                    totalDay, total, false);
+                    totalDay, _total, false);
+
+                string message = $"Total room fee:\t\t  {new MoneyConverter().Convert(_total, null, null, null).ToString().Trim()}";
+
+                int discount = 0;
+                if(_vouchers.Count > _currentVoucher)
+				{
+                    discount = _vouchers[_currentVoucher].Ratio;
+                    message += $"\nApply discount '{discount}%':\t- {new MoneyConverter().Convert(_total * discount / 100, null, null, null).ToString().Trim()}";
+
+                    _total -= _total * discount / 100;
+                    txt_Total.Text = new MoneyConverter().Convert(_total, null, null, null).ToString().Trim();
+                    message += $"\nCustomer must pay:\t  {new MoneyConverter().Convert(_total, null, null, null).ToString().Trim()}";
+                }
+
+                var popup = new MessageBoxCustom(message, MessageType.Confirmation, MessageButtons.YesNo).ShowDialog();
+                if(!popup.Value)
+				{
+                    _total = totalDay * _roomTypes[_currentType].Price;
+                    txt_Total.Text = new MoneyConverter().Convert(_total, null, null, null).ToString().Trim();
+                    return;
+				}
 
                 if (!bookingBLL.InsertBooking(booking))
                 {
@@ -223,12 +289,12 @@ namespace HotelManagement.PresentationLayer
                 new MessageBoxCustom("Insert booking successfully.", MessageType.Success, MessageButtons.Ok).ShowDialog();
                 ReloadBooking?.Invoke();
                 this.Close();
-
             }
             catch (Exception ex)
             {
                 new MessageBoxCustom(ex.Message, MessageType.Error, MessageButtons.Ok).ShowDialog();
             }
         }
-    }
+		#endregion
+	}
 }

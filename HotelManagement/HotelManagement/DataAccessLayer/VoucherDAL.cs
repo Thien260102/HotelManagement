@@ -34,6 +34,23 @@ namespace HotelManagement.DataAccessLayer
             return vouchers;
         }
 
+        public List<VoucherDTO> GetAll(int customerId)
+		{
+            List<VoucherDTO> vouchers = new List<VoucherDTO>();
+
+            string query = "Select * from VOUCHER " +
+                "where CustomerID = @customerId ";
+
+            DataTable data = DataProvider.Instance.ExecuteQuery(query, new object[] { customerId });
+
+            foreach (DataRow element in data.Rows)
+            {
+                vouchers.Add(new VoucherDTO(element));
+            }
+
+            return vouchers;
+        }
+
         public VoucherDTO GetVoucher(int id)
         {
             string query = "Select * from VOUCHER " +

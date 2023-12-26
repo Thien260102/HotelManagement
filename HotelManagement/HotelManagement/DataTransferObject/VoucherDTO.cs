@@ -19,6 +19,8 @@ namespace HotelManagement.DataTransferObject
 		public bool IsAvailable { get; set; }
 
 		public int VoucherTypeId { get; set; }
+		public string VoucherTypeName { get; set; }
+		public int Ratio { get; set; }
 		#endregion
 
 		#region Methods
@@ -50,6 +52,10 @@ namespace HotelManagement.DataTransferObject
 			ExpirationDate = string.Format("{0:yyyy-MM-dd}", DateTime.Parse(row["ExpirationDate"].ToString()));
 			IsAvailable = (bool)row["IsAvailable"];
 			VoucherTypeId = (int)row["TypeID"];
+
+			var voucherBLL = new VoucherBLL();
+			VoucherTypeName = voucherBLL.GetVoucherTypeName(VoucherTypeId);
+			Ratio = voucherBLL.GetVoucherRatio(VoucherTypeId);
 		}
 
 		#endregion
