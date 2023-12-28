@@ -54,5 +54,7 @@ namespace HotelManagement.BusinessLogicLayer
 		{
 			return BookingDAL.Instance.RemoveBooking(id);
 		}
+
+		public int CountBooking(bool isRented = false) => BookingDAL.Instance.CountBooking(isRented);
 	}
 }

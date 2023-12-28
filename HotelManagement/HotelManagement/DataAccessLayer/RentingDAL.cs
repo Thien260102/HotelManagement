@@ -119,6 +119,22 @@ namespace HotelManagement.DataAccessLayer
             return false;
         }
 
+        public int CountRenting(string date)
+		{
+            string query = "Select Count(*) from RENTING " +
+                "where CheckinDate = @date ";
+
+            return (int)DataProvider.Instance.ExecuteScalar(query,
+                new object[] { date });
+        }
+
+        public int CountCustomers()
+        {
+            string query = "Select Count(Distinct(CustomerId)) from RENTING ";
+
+            return (int)DataProvider.Instance.ExecuteScalar(query,
+                new object[] { });
+        }
         #endregion
     }
 }

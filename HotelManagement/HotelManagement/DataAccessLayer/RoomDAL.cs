@@ -76,6 +76,15 @@ namespace HotelManagement.DataAccessLayer
                 new object[] { roomName, floor });
         }
 
+        public int CountRoomState(Rule.ROOM_STATE state)
+		{
+            string query = "Select Count(*) from ROOM " +
+                "where State = @state ";
+
+            return (int)DataProvider.Instance.ExecuteScalar(query,
+                new object[] { state });
+        }
+
         public Rule.STATE AddNewRoom(RoomDTO room)
         {
             string query = "Insert into ROOM " +

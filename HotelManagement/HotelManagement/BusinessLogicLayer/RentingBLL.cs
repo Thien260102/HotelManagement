@@ -55,5 +55,10 @@ namespace HotelManagement.BusinessLogicLayer
 		{
 			return RentingDAL.Instance.RemoveRenting(id);
 		}
+
+		public int CountRentingToday() => RentingDAL.Instance.CountRenting(DateTime.Now.ToString("yyyy-MM-dd"));
+
+		public int CountCustomers() => RentingDAL.Instance.CountCustomers();
+	
 	}
 }

@@ -127,6 +127,14 @@ namespace HotelManagement.DataAccessLayer
             return false;
         }
 
+        public int CountBooking(bool isRented)
+		{
+            string query = "Select Count(*) from BOOKING " +
+                "where IsRented = @isRented ";
+
+            return (int)DataProvider.Instance.ExecuteScalar(query,
+                new object[] { isRented });
+        }
         #endregion
     }
 }

@@ -160,7 +160,7 @@ namespace HotelManagement.DataAccessLayer
 
             return new CustomerDTO();
         }
-
+        
         #endregion
     }
 }

@@ -1,4 +1,5 @@
-﻿using System;
+﻿using HotelManagement.BusinessLogicLayer;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -23,6 +24,16 @@ namespace HotelManagement.PresentationLayer
         public Dashboard()
         {
             InitializeComponent();
+
+            LoadData();
         }
+
+        private void LoadData()
+		{
+            labelAvaliable.Content = new RoomBLL().CountAvailableRoom();
+            labelBooking.Content = new BookingBLL().CountBooking();
+            labelCheckin.Content = new RentingBLL().CountRentingToday();
+            labelGuests.Content = new RentingBLL().CountCustomers();
+		}
     }
 }

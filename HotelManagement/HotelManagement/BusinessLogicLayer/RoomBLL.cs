@@ -84,6 +84,8 @@ namespace HotelManagement.BusinessLogicLayer
 		}
 
 		public bool RemoveRoom(int id) => RoomDAL.Instance.RemoveRoom(id);
+
+		public int CountAvailableRoom() => RoomDAL.Instance.CountRoomState(Rule.ROOM_STATE.AVAILABLE);
 		#endregion
 	}
 }
