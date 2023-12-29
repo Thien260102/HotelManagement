@@ -1,4 +1,5 @@
-﻿using System;
+﻿using HotelManagement.DataTransferObject;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -24,5 +25,11 @@ namespace HotelManagement.PresentationLayer
         {
             InitializeComponent();
         }
+
+        public void SetData(VoucherTypeDTO voucher)
+		{
+            VoucherType.Content = voucher.Name;
+            Discount.Content = voucher.Ratio + "%";
+		}
     }
 }

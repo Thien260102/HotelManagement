@@ -146,6 +146,21 @@ namespace HotelManagement.DataAccessLayer
             return (int)DataProvider.Instance.ExecuteScalar(query,
                 new object[] { typeId });
         }
+
+        public bool UpdateRoomState(int id, int state)
+		{
+            string query = "UPDATE ROOM " +
+                "SET State = @state " +
+                "WHERE ID = @id ";
+
+            if (DataProvider.Instance.ExecuteNonQuery(query,
+                new object[] { state, id }) > 0)
+            {
+                return true;
+            }
+
+            return false;
+		}
         #endregion
     }
 }

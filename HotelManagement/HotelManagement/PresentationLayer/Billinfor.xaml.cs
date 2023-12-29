@@ -121,6 +121,11 @@ namespace HotelManagement.PresentationLayer
                     throw new Exception("Please fill correct Total day.");
                 }
 
+                if (!new RoomBLL().UpdateRoomState(_renting.RoomId, (int)Rule.ROOM_STATE.AVAILABLE))
+				{
+                    throw new Exception("Update room state fail");
+                }
+
                 _renting.IsPaid = true;
                 if (!new RentingBLL().UpdateRenting(_renting))
 				{

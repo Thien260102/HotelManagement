@@ -1,4 +1,6 @@
-﻿using System;
+﻿using HotelManagement.BusinessLogicLayer;
+using HotelManagement.DataTransferObject;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -24,5 +26,14 @@ namespace HotelManagement.PresentationLayer
         {
             InitializeComponent();
         }
+
+        public void SetData(RoomDTO room)
+		{
+            RoomType.Content = room.RoomTypeName;
+            StatusLabel.Content = room.StateName;
+
+            string sPrice = new MoneyConverter().Convert(new RoomTypeBLL().GetRoomType(room.RoomTypeId).Price, null, null, null).ToString().Trim();
+            Price.Content = sPrice;
+		}
     }
 }

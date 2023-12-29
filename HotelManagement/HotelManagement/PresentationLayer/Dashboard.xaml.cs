@@ -34,6 +34,24 @@ namespace HotelManagement.PresentationLayer
             labelBooking.Content = new BookingBLL().CountBooking();
             labelCheckin.Content = new RentingBLL().CountRentingToday();
             labelGuests.Content = new RentingBLL().CountCustomers();
+
+            var rooms = new RoomBLL().GetRooms(Rule.ROOM_STATE.AVAILABLE);
+            foreach(var room in rooms)
+			{
+                DBoardRoom dBoardRoom = new DBoardRoom();
+                dBoardRoom.SetData(room);
+
+                panelRooms.Children.Add(dBoardRoom);
+			}
+
+            var vouchers = new VoucherBLL().GetAllVoucherTypes();
+            foreach(var voucher in vouchers)
+			{
+                DBoardVoucher dBoardVoucher = new DBoardVoucher();
+                dBoardVoucher.SetData(voucher);
+
+                panelVouchers.Children.Add(dBoardVoucher);
+			}
 		}
     }
 }

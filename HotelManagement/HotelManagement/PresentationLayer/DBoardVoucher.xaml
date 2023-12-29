@@ -14,7 +14,7 @@
             </Border>
             <StackPanel Orientation="Horizontal">
                 <Label Name="Discount" Content="-25%" FontSize="14" FontWeight="Medium" Padding="5" FontFamily="Segoe UI" Foreground="#FF1493"  />
-                <Label Content="/ Person" FontSize="12" FontWeight="Medium" FontFamily="Segoe UI" Foreground="Black" VerticalAlignment="Bottom" Height="26"  />
+                <!--<Label Content="/ Person" FontSize="12" FontWeight="Medium" FontFamily="Segoe UI" Foreground="Black" VerticalAlignment="Bottom" Height="26"  />-->
             </StackPanel>
         </StackPanel>
     </Border>
