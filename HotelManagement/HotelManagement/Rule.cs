@@ -12,6 +12,9 @@ namespace HotelManagement
 
 		public const int TIME_CHECKOUT = 12;
 
+		public const float EXCUSED = 0.02f;
+		public const float UNEXCUSED = 0.04f;
+
 		public enum SEX
 		{
 			FEMALE = 0,

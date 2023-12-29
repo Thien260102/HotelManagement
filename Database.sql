@@ -170,20 +170,24 @@ Select * from ROLE
 
 ---------------
 
+--- EMPLOYEEE ----
+delete from EMPLOYEE where BirthDay = '2022-12-12'
+Select * from EMPLOYEE 
+insert into EMPLOYEE values(123321123321, 'Nguyen Van Thien', '0321222111', 0, '2022-12-12', '2022-12-12', 20000000)
+insert into EMPLOYEE values(123321123322, 'Tran Anh Dung', '0321222112', 0, '2022-12-12', '2022-12-12', 20000000)
+insert into EMPLOYEE values(123321123323, 'Nguyen Ngoc Duc', '0321222113', 0, '2022-12-12', '2022-12-12', 20000000)
+insert into EMPLOYEE values(123321123324, 'Tran Quang Dat', '0321222114', 0, '2022-12-12', '2022-12-12', 20000000)
+
 --- ACCOUNT ---
-Delete from ACCOUNT where UserName = 'admin';
+Delete from ACCOUNT where RoleID = 2;
 Select * from ACCOUNT
 Insert into ACCOUNT Values('Admin', '123', null, 1, 1, 0);
+Insert into ACCOUNT Values('thien', '123456', null, 1, 2, (Select ID from EMPLOYEE Where CitizenID = 123321123321));
+Insert into ACCOUNT Values('dung', '123456', null, 1, 2, (Select ID from EMPLOYEE Where CitizenID = 123321123322));
+Insert into ACCOUNT Values('duc', '123456', null, 1, 2, (Select ID from EMPLOYEE Where CitizenID = 123321123323));
+Insert into ACCOUNT Values('Dat', '123456', null, 1, 2, (Select ID from EMPLOYEE Where CitizenID = 123321123324));
+
 ---------------
-
---- EMPLOYEEE ----
-delete from EMPLOYEE 
-Select * from EMPLOYEE where CitizenID = '123'
-insert into EMPLOYEE values(123, 'thien', 123, 0, '2022-12-12', '2022-12-12', 0)
-
-UPDATE EMPLOYEE
-SET Sex = 1, FullName = 'Tien'
-WHERE CitizenID = 12345;
 
 ------------------
 
@@ -226,7 +230,8 @@ Select * from BOOKING
 
 --- RENTING ---
 Delete From RENTING
-Select * from RENTING
+Select Distinct(CustomerID) from RENTING
+Select * from Renting;
 ---------------
 
 

@@ -57,5 +57,10 @@ namespace HotelManagement
 
 		public static DateTime GetDefaultCheckoutTime(DateTime checkout)
 			=> new DateTime(checkout.Year, checkout.Month, checkout.Day, 12, 0, 0);
+
+		public static int GetDayInMonth(int month, int year = 2023)
+			=> DateTime.DaysInMonth(year, month);
+			
+
 	}
 }

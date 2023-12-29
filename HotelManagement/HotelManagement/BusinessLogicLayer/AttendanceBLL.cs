@@ -14,6 +14,8 @@ namespace HotelManagement.BusinessLogicLayer
 
 		public List<AttendanceDTO> GetAll() => AttendanceDAL.Instance.GetAll();
 
+		public List<AttendanceDTO> GetAll(int month, int year) => AttendanceDAL.Instance.GetAll(month, year);
+
 		public List<AttendanceDTO> GetAttendancesOf(int employeeId) 
 			=> AttendanceDAL.Instance.GetAll(employeeId);
 

@@ -39,6 +39,23 @@ namespace HotelManagement.DataAccessLayer
             return attendances;
         }
 
+        public List<AttendanceDTO> GetAll(int month, int year)
+        {
+            List<AttendanceDTO> attendances = new List<AttendanceDTO>();
+
+            string query = "Select * from ATTENDANCE " +
+                "where Year(Date) = @year And Month(Date) = @month ";
+
+            DataTable data = DataProvider.Instance.ExecuteQuery(query, new object[] { year, month });
+
+            foreach (DataRow row in data.Rows)
+            {
+                attendances.Add(new AttendanceDTO(row));
+            }
+
+            return attendances;
+        }
+
         public List<AttendanceDTO> GetAll(int employeeId)
         {
             List<AttendanceDTO> attendances = new List<AttendanceDTO>();

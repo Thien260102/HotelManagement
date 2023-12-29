@@ -39,6 +39,23 @@ namespace HotelManagement.DataAccessLayer
             return employees;
 		}
 
+        public List<EmployeeDTO> GetAll(int month, int year)
+        {
+            List<EmployeeDTO> employees = new List<EmployeeDTO>();
+
+            string query = "Select * from EMPLOYEE " +
+                "where Month(StartDay) <= @month And Year(StartDay) <= @year ";
+
+            DataTable data = DataProvider.Instance.ExecuteQuery(query, new object[] { month, year });
+
+            foreach (DataRow row in data.Rows)
+            {
+                employees.Add(new EmployeeDTO(row));
+            }
+
+            return employees;
+        }
+
         public EmployeeDTO GetEmployee(int id)
 		{
             string query = "Select * from EMPLOYEE " +

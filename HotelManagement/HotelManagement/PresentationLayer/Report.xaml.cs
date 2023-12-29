@@ -1,4 +1,6 @@
-﻿using HotelManagement.DataTransferObject;
+﻿using HotelManagement.BusinessLogicLayer;
+using HotelManagement.DataTransferObject;
+using HotelManagement.DataTransferObject.Report;
 using System;
 using System.Collections.Generic;
 using System.Data;
@@ -23,9 +25,14 @@ namespace HotelManagement.PresentationLayer
         int _currentFileType = 0;
 
         string _fileName = "";
+
+        #region Reports
+        List<EmployeeSalary> _employeeSalaries;
+
+		#endregion
 		#endregion
 
-        public Report()
+		public Report()
         {
             InitializeComponent();
 
@@ -35,6 +42,8 @@ namespace HotelManagement.PresentationLayer
 
             txt_Month.PreviewTextInput += InputOnlyNumber;
             txt_Year.PreviewTextInput += InputOnlyNumber;
+            txt_Month.Text = DateTime.Now.Month.ToString();
+            txt_Year.Text = DateTime.Now.Year.ToString();
         }
 
 		private void LoadData()
@@ -104,6 +113,19 @@ namespace HotelManagement.PresentationLayer
 
         private void ProcessingData(object sender, RoutedEventArgs e)
         {
+            int month;
+            if (!int.TryParse(txt_Month.Text.Trim(), out month))
+			{
+                new MessageBoxCustom("Input month truely", MessageType.Warning, MessageButtons.Ok).ShowDialog();
+                return;
+			}
+            int year;
+            if (!int.TryParse(txt_Year.Text.Trim(), out year))
+            {
+                new MessageBoxCustom("Input year truely", MessageType.Warning, MessageButtons.Ok).ShowDialog();
+                return;
+            }
+
             _fileName = _reportType[_currentReport] + DateTime.Now.ToString("HHmmss dd-MM-yyyy");
             switch (_currentReport)
             {
@@ -127,7 +149,8 @@ namespace HotelManagement.PresentationLayer
                     break;
 
                 case 4: // Employee
-                    
+                    _employeeSalaries = new EmployeeSalaryReportBLL().CalculateEmployeeSalaryMonth(month, year);
+                    DataGridReport.ItemsSource = _employeeSalaries;
                     break;
             }
         }
@@ -153,11 +176,11 @@ namespace HotelManagement.PresentationLayer
             switch(_currentFileType)
 			{
                 case 0: // csv
-                    ReportUtilities.ExportToExcel(ToDataTable(DataGridReport.ItemsSource as List<RoomDTO>), _fileName);
+                    ReportUtilities.ExportToExcel(ToDataTable(DataGridReport.ItemsSource as List<EmployeeSalary>), _fileName);
                     break;
 
                 case 1: // pdf
-                    ReportUtilities.ExportToPDF(ToDataTable(DataGridReport.ItemsSource as List<RoomDTO>), _fileName);
+                    ReportUtilities.ExportToPDF(ToDataTable(DataGridReport.ItemsSource as List<RoleDTO>), _fileName);
                     break;
 
                 case 2: // word

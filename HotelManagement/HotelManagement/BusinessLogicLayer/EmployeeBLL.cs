@@ -81,6 +81,8 @@ namespace HotelManagement.BusinessLogicLayer
 
 		public List<EmployeeDTO> GetAllEmployees() => EmployeeDAL.Instance.GetAll();
 
+		public List<EmployeeDTO> GetAllEmployees(int month, int year) => EmployeeDAL.Instance.GetAll(month, year);
+
 		public int GetRoleId(int id)
 		{
 			AccountDTO account = AccountDAL.Instance.GetAccount(id);
