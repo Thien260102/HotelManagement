@@ -1,0 +1,23 @@
+﻿<UserControl x:Class="HotelManagement.PresentationLayer.DBoardRoom"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:HotelManagement.PresentationLayer"
+             mc:Ignorable="d" 
+                     d:DesignHeight="87" d:DesignWidth="160">
+    <Border Margin="10 3 0 3" Width="150" Height="80" CornerRadius="10" BorderThickness="1" BorderBrush="Black" Background="White">
+        <StackPanel>
+            <Label  x:Name="RoomType" Content="Single room" FontSize="14" FontWeight="Medium" Padding="5" FontFamily="Segoe UI" Foreground="Black" HorizontalAlignment="Left" />
+            <Border x:Name="StatusBorder" Width="60" Height="20" HorizontalAlignment="Left" Margin="5 0 0 0" CornerRadius="10" Background="#E8F1FD" >
+                <Label x:Name="StatusLabel" Content="Available" FontSize="9" FontWeight="Medium" Padding="5" FontFamily="Segoe UI" Foreground="#1570EF" HorizontalAlignment="Center"  />
+            </Border>
+            <!--Nếu phòng loại này đã hết thì sử dụng St atusBorder.Background="#FAC5C1" và StatusLabel.Content="Unavailable" và StatusLabel.Foreground="#F04438"-->
+
+            <StackPanel Orientation="Horizontal">
+                <Label x:Name="Price" Content="500.000đ" FontSize="14" FontWeight="Medium" Padding="5" FontFamily="Segoe UI" Foreground="#FF1493"  />
+                <Label Content="/day" FontSize="12" FontWeight="Medium" FontFamily="Segoe UI" Foreground="Black" VerticalAlignment="Bottom" Height="26"  />
+            </StackPanel>
+        </StackPanel>
+    </Border>
+</UserControl>
