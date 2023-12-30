@@ -35,14 +35,14 @@ namespace HotelManagement
                 csv.WriteRecords(data);
             }
 
+            new MessageBoxCustom("Export sucessfully", MessageType.Success, MessageButtons.Ok).ShowDialog();
+
             var p = new Process();
             p.StartInfo = new ProcessStartInfo(path + @"\" + fileName + ".csv")
             {
                 UseShellExecute = true
             };
             p.Start();
-
-            new MessageBoxCustom("Export sucessfully", MessageType.Confirmation, MessageButtons.Ok).ShowDialog();
         }
 
         public static void ExportToExcel(DataTable data, string fileName)
@@ -80,15 +80,14 @@ namespace HotelManagement
                 }
             }
 
+            new MessageBoxCustom("Export sucessfully", MessageType.Success, MessageButtons.Ok).ShowDialog();
+
             var p = new Process();
             p.StartInfo = new ProcessStartInfo(path + @"\" + fileName + ".csv")
             {
                 UseShellExecute = true
             };
             p.Start();
-
-            new MessageBoxCustom("Export sucessfully", MessageType.Confirmation, MessageButtons.Ok).ShowDialog();
-
         }
 
         public static void ExportToPDF(DataTable data, string fileName)
@@ -202,6 +201,7 @@ namespace HotelManagement
 
             rtfExport.SaveToFile();
 
+            new MessageBoxCustom("Export sucessfully", MessageType.Success, MessageButtons.Ok).ShowDialog();
 
             var p = new Process();
             p.StartInfo = new ProcessStartInfo(sfd.FileName)

@@ -90,6 +90,29 @@ namespace HotelManagement.BusinessLogicLayer
 			return reports;
 		}
 
+		public List<CustomerType> CalculateTypeCustomer()
+		{
+			List<CustomerType> reports = new List<CustomerType>();
+
+			var customers = GetAllCustomers();
+
+			customers.ForEach(element =>
+			{
+				if (reports.FindIndex(report => report.Nationality == element.Nationality) == -1)
+				{
+					reports.Add(new CustomerType() { Nationality = element.Nationality });
+				}
+
+			});
+
+			foreach(var report in reports)
+			{
+				report.Quantity = customers.Count(element => element.Nationality == report.Nationality);
+			}
+
+			return reports;
+		}
+
 		#endregion
 	}
 }

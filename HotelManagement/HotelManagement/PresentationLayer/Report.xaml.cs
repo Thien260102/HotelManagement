@@ -35,6 +35,7 @@ namespace HotelManagement.PresentationLayer
 
         List<CustomerReturn> _customerReturns;
 
+        List<CustomerType> _customerTypes;
 		#endregion
 		#endregion
 
@@ -59,7 +60,7 @@ namespace HotelManagement.PresentationLayer
                 "Income Room Report",
                 "Most Uses Room Report",
                 "Customer Report",
-                "Service Report",
+                "Type Customer",
                 "Employee Report",
             };
             foreach (var report in _reportTypes)
@@ -131,13 +132,16 @@ namespace HotelManagement.PresentationLayer
         private void ProcessingData(object sender, RoutedEventArgs e)
         {
             int month = 0;
-            if (_reportTypes[_currentReport] != "Customer Report" && !int.TryParse(txt_Month.Text.Trim(), out month))
+            if (_reportTypes[_currentReport] != "Customer Report"
+                && _reportTypes[_currentReport] != "Type Customer"
+                && !int.TryParse(txt_Month.Text.Trim(), out month))
 			{
                 new MessageBoxCustom("Input month truely", MessageType.Warning, MessageButtons.Ok).ShowDialog();
                 return;
 			}
-            int year;
-            if (!int.TryParse(txt_Year.Text.Trim(), out year))
+            int year = 2023;
+            if (_reportTypes[_currentReport] != "Type Customer"
+                && !int.TryParse(txt_Year.Text.Trim(), out year))
             {
                 new MessageBoxCustom("Input year truely", MessageType.Warning, MessageButtons.Ok).ShowDialog();
                 return;
@@ -161,8 +165,9 @@ namespace HotelManagement.PresentationLayer
                     DataGridReport.ItemsSource = _customerReturns;
                     break;
 
-                case 3: // Service
-
+                case 3: // Type customer
+                    _customerTypes = new CustomerBLL().CalculateTypeCustomer();
+                    DataGridReport.ItemsSource = _customerTypes;
                     break;
 
                 case 4: // Employee
@@ -195,12 +200,12 @@ namespace HotelManagement.PresentationLayer
                             ReportUtilities.ExportToExcel(ToDataTable(_mostUsedRooms), _fileName);
                             break;
 
-                        case 2: // Customer
+                        case 2: // Customer returns
                             ReportUtilities.ExportToExcel(ToDataTable(_customerReturns), _fileName);
                             break;
 
-                        case 3: // Service
-
+                        case 3: // Customer Type
+                            ReportUtilities.ExportToExcel(ToDataTable(_customerTypes), _fileName);
                             break;
 
                         case 4: // Employee
@@ -221,12 +226,12 @@ namespace HotelManagement.PresentationLayer
                             ReportUtilities.ExportToPDF(ToDataTable(_mostUsedRooms), _fileName);
                             break;
 
-                        case 2: // Customer
+                        case 2: // Customer returns
                             ReportUtilities.ExportToPDF(ToDataTable(_customerReturns), _fileName);
                             break;
 
-                        case 3: // Service
-
+                        case 3: // Customer type
+                            ReportUtilities.ExportToPDF(ToDataTable(_customerTypes), _fileName);
                             break;
 
                         case 4: // Employee
@@ -246,12 +251,12 @@ namespace HotelManagement.PresentationLayer
                             ReportUtilities.ExportToWord(ToDataTable(_mostUsedRooms), _fileName);
                             break;
 
-                        case 2: // Customer
+                        case 2: // Customer returns
                             ReportUtilities.ExportToWord(ToDataTable(_customerReturns), _fileName);
                             break;
 
-                        case 3: // Service
-
+                        case 3: // Customer types
+                            ReportUtilities.ExportToWord(ToDataTable(_customerTypes), _fileName);
                             break;
 
                         case 4: // Employee
