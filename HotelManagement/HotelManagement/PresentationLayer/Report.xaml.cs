@@ -18,10 +18,10 @@ namespace HotelManagement.PresentationLayer
     public partial class Report : UserControl
     {
 		#region Fields & Properties
-		List<string> _reportType;
+		List<string> _reportTypes;
         int _currentReport = 0;
 
-        List<string> _fileType;
+        List<string> _fileTypes;
         int _currentFileType = 0;
 
         string _fileName = "";
@@ -29,6 +29,7 @@ namespace HotelManagement.PresentationLayer
         #region Reports
         List<EmployeeSalary> _employeeSalaries;
         List<IncomeRoom> _incomeRooms;
+        List<MostUsedRoom> _mostUsedRooms;
 		#endregion
 		#endregion
 
@@ -48,15 +49,15 @@ namespace HotelManagement.PresentationLayer
 
 		private void LoadData()
 		{
-            _reportType = new List<string>()
+            _reportTypes = new List<string>()
             {
                 "Income Room Report",
-                "Room Report",
+                "Most Uses Room Report",
                 "Customer Report",
                 "Service Report",
                 "Employee Report",
             };
-            foreach (var report in _reportType)
+            foreach (var report in _reportTypes)
             {
                 Combobox_TypeReport.Items.Add(report);
             }
@@ -64,13 +65,13 @@ namespace HotelManagement.PresentationLayer
             Combobox_TypeReport.SelectedIndex = _currentReport;
             Combobox_TypeReport.SelectionChanged += SelectReport;
 
-            _fileType = new List<string>()
+            _fileTypes = new List<string>()
             {
                 ".csv",
                 ".pdf",
                 ".doc"
             };
-            foreach (var file in _fileType)
+            foreach (var file in _fileTypes)
             {
                 Combobox_TypeExport.Items.Add(file);
             }
@@ -137,19 +138,17 @@ namespace HotelManagement.PresentationLayer
                 return;
             }
 
-            _fileName = _reportType[_currentReport] + DateTime.Now.ToString("HHmmss dd-MM-yyyy");
+            _fileName = _reportTypes[_currentReport] + DateTime.Now.ToString("HHmmss dd-MM-yyyy");
             switch (_currentReport)
             {
-                case 0: // Income 
+                case 0: // Income Room
                     _incomeRooms = new RoomBLL().CalculateIncomeRoom(month, year);
                     DataGridReport.ItemsSource = _incomeRooms;
                     break;
 
-                case 1: // Room
-                    DataGridReport.ItemsSource = new List<RoomDTO>()
-                    {
-                        new RoomDTO(1, "test", 1, 0, 1, "none"),
-                    };
+                case 1: // Most used Room
+                    _mostUsedRooms = new RoomBLL().CalculateUsesRoom(month, year);
+                    DataGridReport.ItemsSource = _mostUsedRooms;
                     break;
 
                 case 2: // Customer
@@ -165,6 +164,8 @@ namespace HotelManagement.PresentationLayer
                     DataGridReport.ItemsSource = _employeeSalaries;
                     break;
             }
+
+            DataGridReport.Tag = _currentReport;
         }
 
 		private void btn_Export_Click(object sender, RoutedEventArgs e)
@@ -178,16 +179,79 @@ namespace HotelManagement.PresentationLayer
             switch(_currentFileType)
 			{
                 case 0: // csv
-                    ReportUtilities.ExportToExcel(ToDataTable(DataGridReport.ItemsSource as List<IncomeRoom>), _fileName);
+                    switch((int)DataGridReport.Tag)
+					{
+                        case 0: // Income Room
+                            ReportUtilities.ExportToExcel(ToDataTable(_incomeRooms), _fileName);
+                            break;
+
+                        case 1: // Most used Room
+                            ReportUtilities.ExportToExcel(ToDataTable(_mostUsedRooms), _fileName);
+                            break;
+
+                        case 2: // Customer
+
+                            break;
+
+                        case 3: // Service
+
+                            break;
+
+                        case 4: // Employee
+                            ReportUtilities.ExportToExcel(ToDataTable(_employeeSalaries), _fileName);
+                            break;
+                    }
+
                     break;
 
                 case 1: // pdf
-                    ReportUtilities.ExportToPDF(ToDataTable(DataGridReport.ItemsSource as List<RoleDTO>), _fileName);
+                    switch ((int)DataGridReport.Tag)
+                    {
+                        case 0: // Income Room
+                            ReportUtilities.ExportToPDF(ToDataTable(_incomeRooms), _fileName);
+                            break;
+
+                        case 1: // Most used Room
+                            ReportUtilities.ExportToPDF(ToDataTable(_mostUsedRooms), _fileName);
+                            break;
+
+                        case 2: // Customer
+
+                            break;
+
+                        case 3: // Service
+
+                            break;
+
+                        case 4: // Employee
+                            ReportUtilities.ExportToPDF(ToDataTable(_employeeSalaries), _fileName);
+                            break;
+                    }
                     break;
 
                 case 2: // word
-                    ReportUtilities.ExportToWord(ToDataTable(DataGridReport.ItemsSource as List<RoomDTO>), _fileName);
+                    switch ((int)DataGridReport.Tag)
+                    {
+                        case 0: // Income Room
+                            ReportUtilities.ExportToWord(ToDataTable(_incomeRooms), _fileName);
+                            break;
 
+                        case 1: // Most used Room
+                            ReportUtilities.ExportToWord(ToDataTable(_mostUsedRooms), _fileName);
+                            break;
+
+                        case 2: // Customer
+
+                            break;
+
+                        case 3: // Service
+
+                            break;
+
+                        case 4: // Employee
+                            ReportUtilities.ExportToWord(ToDataTable(_employeeSalaries), _fileName);
+                            break;
+                    }
                     break;
 			}
         }

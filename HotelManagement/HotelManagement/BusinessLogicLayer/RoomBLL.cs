@@ -115,6 +115,27 @@ namespace HotelManagement.BusinessLogicLayer
 
 			return reports;
 		}
+
+		public List<MostUsedRoom> CalculateUsesRoom(int month, int year)
+		{
+			List<MostUsedRoom> reports = new List<MostUsedRoom>();
+
+			var rooms = GetAllRooms();
+			var rentings = new RentingBLL().GetAll(month, year);
+
+			foreach (var room in rooms)
+			{
+				var mostUsesRoom = new MostUsedRoom();
+				mostUsesRoom.RoomName = room.Name;
+				mostUsesRoom.Floor = room.Floor;
+				mostUsesRoom.TypeName = room.RoomTypeName;
+				mostUsesRoom.NumberOfUses = rentings.FindAll(element => element.RoomId == room.Id).Count;
+				
+				reports.Add(mostUsesRoom);
+			}
+
+			return reports;
+		}
 		#endregion
 	}
 }
