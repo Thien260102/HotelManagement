@@ -28,7 +28,7 @@ namespace HotelManagement.PresentationLayer
 
         #region Reports
         List<EmployeeSalary> _employeeSalaries;
-
+        List<IncomeRoom> _incomeRooms;
 		#endregion
 		#endregion
 
@@ -50,7 +50,7 @@ namespace HotelManagement.PresentationLayer
 		{
             _reportType = new List<string>()
             {
-                "Income Report",
+                "Income Room Report",
                 "Room Report",
                 "Customer Report",
                 "Service Report",
@@ -111,6 +111,17 @@ namespace HotelManagement.PresentationLayer
             e.Handled = Regex.IsMatch(e.Text, "[^0-9]+");
         }
 
+        private void SelectExport(object sender, SelectionChangedEventArgs e)
+        {
+            _currentFileType = Combobox_TypeExport.SelectedIndex;
+        }
+
+        private void SelectReport(object sender, SelectionChangedEventArgs e)
+        {
+            _currentReport = Combobox_TypeReport.SelectedIndex;
+        }
+
+
         private void ProcessingData(object sender, RoutedEventArgs e)
         {
             int month;
@@ -130,7 +141,8 @@ namespace HotelManagement.PresentationLayer
             switch (_currentReport)
             {
                 case 0: // Income 
-
+                    _incomeRooms = new RoomBLL().CalculateIncomeRoom(month, year);
+                    DataGridReport.ItemsSource = _incomeRooms;
                     break;
 
                 case 1: // Room
@@ -155,16 +167,6 @@ namespace HotelManagement.PresentationLayer
             }
         }
 
-        private void SelectExport(object sender, SelectionChangedEventArgs e)
-		{
-            _currentFileType = Combobox_TypeExport.SelectedIndex;
-		}
-
-		private void SelectReport(object sender, SelectionChangedEventArgs e)
-		{
-            _currentReport = Combobox_TypeReport.SelectedIndex;
-		}
-
 		private void btn_Export_Click(object sender, RoutedEventArgs e)
         {
             if(DataGridReport.Items.Count == 0)
@@ -176,7 +178,7 @@ namespace HotelManagement.PresentationLayer
             switch(_currentFileType)
 			{
                 case 0: // csv
-                    ReportUtilities.ExportToExcel(ToDataTable(DataGridReport.ItemsSource as List<EmployeeSalary>), _fileName);
+                    ReportUtilities.ExportToExcel(ToDataTable(DataGridReport.ItemsSource as List<IncomeRoom>), _fileName);
                     break;
 
                 case 1: // pdf

@@ -13,6 +13,8 @@ namespace HotelManagement.BusinessLogicLayer
 	{
 		public List<RentingDTO> GetAll() => RentingDAL.Instance.GetAll();
 
+		public List<RentingDTO> GetAll(int month, int year) => RentingDAL.Instance.GetAll(month, year);
+
 		public bool InsertRenting(RentingDTO renting)
 		{
 			switch (RentingDAL.Instance.AddNewRenting(renting))

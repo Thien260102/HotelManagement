@@ -36,6 +36,23 @@ namespace HotelManagement.DataAccessLayer
             return rentings;
         }
 
+        public List<RentingDTO> GetAll(int month, int year)
+        {
+            List<RentingDTO> rentings = new List<RentingDTO>();
+
+            string query = "Select * from RENTING " +
+                "where Year(CreateDate) = @year And Month(CreateDate) = @month ";
+
+            DataTable data = DataProvider.Instance.ExecuteQuery(query, new object[] { year, month });
+
+            foreach (DataRow row in data.Rows)
+            {
+                rentings.Add(new RentingDTO(row));
+            }
+
+            return rentings;
+        }
+
         public RentingDTO GetRenting(int id)
         {
             string query = "Select * from RENTING " +
