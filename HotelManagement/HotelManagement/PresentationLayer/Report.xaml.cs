@@ -28,8 +28,13 @@ namespace HotelManagement.PresentationLayer
 
         #region Reports
         List<EmployeeSalary> _employeeSalaries;
+
         List<IncomeRoom> _incomeRooms;
+
         List<MostUsedRoom> _mostUsedRooms;
+
+        List<CustomerReturn> _customerReturns;
+
 		#endregion
 		#endregion
 
@@ -125,8 +130,8 @@ namespace HotelManagement.PresentationLayer
 
         private void ProcessingData(object sender, RoutedEventArgs e)
         {
-            int month;
-            if (!int.TryParse(txt_Month.Text.Trim(), out month))
+            int month = 0;
+            if (_reportTypes[_currentReport] != "Customer Report" && !int.TryParse(txt_Month.Text.Trim(), out month))
 			{
                 new MessageBoxCustom("Input month truely", MessageType.Warning, MessageButtons.Ok).ShowDialog();
                 return;
@@ -152,7 +157,8 @@ namespace HotelManagement.PresentationLayer
                     break;
 
                 case 2: // Customer
-
+                    _customerReturns = new CustomerBLL().CalculateUsesRoom(year);
+                    DataGridReport.ItemsSource = _customerReturns;
                     break;
 
                 case 3: // Service
@@ -190,7 +196,7 @@ namespace HotelManagement.PresentationLayer
                             break;
 
                         case 2: // Customer
-
+                            ReportUtilities.ExportToExcel(ToDataTable(_customerReturns), _fileName);
                             break;
 
                         case 3: // Service
@@ -216,7 +222,7 @@ namespace HotelManagement.PresentationLayer
                             break;
 
                         case 2: // Customer
-
+                            ReportUtilities.ExportToPDF(ToDataTable(_customerReturns), _fileName);
                             break;
 
                         case 3: // Service
@@ -241,7 +247,7 @@ namespace HotelManagement.PresentationLayer
                             break;
 
                         case 2: // Customer
-
+                            ReportUtilities.ExportToWord(ToDataTable(_customerReturns), _fileName);
                             break;
 
                         case 3: // Service

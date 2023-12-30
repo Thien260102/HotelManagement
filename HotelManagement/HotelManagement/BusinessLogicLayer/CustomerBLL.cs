@@ -1,5 +1,6 @@
 ﻿using HotelManagement.DataAccessLayer;
 using HotelManagement.DataTransferObject;
+using HotelManagement.DataTransferObject.Report;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -67,6 +68,27 @@ namespace HotelManagement.BusinessLogicLayer
 		}
 
 		public List<CustomerDTO> GetAllCustomers() => CustomerDAL.Instance.GetAll();
+
+		public List<CustomerReturn> CalculateUsesRoom(int year)
+		{
+			List<CustomerReturn> reports = new List<CustomerReturn>();
+
+			var customers = GetAllCustomers();
+			var rentings = new RentingBLL().GetAll(year);
+
+			foreach (var customer in customers)
+			{
+				var customerReturn = new CustomerReturn();
+				customerReturn.CustomerName = customer.FullName;
+				customerReturn.Nationality = customer.Nationality;
+				customerReturn.PhoneNumber = customer.PhoneNumber;
+				customerReturn.NumberOfReturns = rentings.Count(element => element.CustomerId == customer.Id);
+
+				reports.Add(customerReturn);
+			}
+
+			return reports;
+		}
 
 		#endregion
 	}
