@@ -25,7 +25,16 @@
             </StackPanel>
             <!--DataGridView-->
             <StackPanel Height="495" Background="Transparent">
-                <DataGrid x:Name="DataGridVoucherType" Margin="0 10 0 0"  d:ItemsSource="{d:SampleData ItemCount=5}"/>
+                <DataGrid RowStyle="{DynamicResource DataGridRowStyle1}" 
+                      ColumnHeaderStyle="{DynamicResource DataGridColumnHeaderStyle1}" 
+                      CellStyle="{DynamicResource DataGridCellStyle1}" 
+                       x:Name="DataGridVoucherType" Style="{DynamicResource DataGridStyle1}">
+                    <DataGrid.Columns>
+                        <DataGridTextColumn Header="ID" Binding="{Binding Id}" IsReadOnly="True" CanUserResize="False" Width="auto"/>
+                        <DataGridTextColumn Header="Name" Binding="{Binding Name}" IsReadOnly="True" Width="*"/>
+                        <DataGridTextColumn Header="Discount" Binding="{Binding Ratio}" IsReadOnly="True" Width="*"/>
+                    </DataGrid.Columns>
+                </DataGrid>
             </StackPanel>
         </StackPanel> 
     </Grid>
