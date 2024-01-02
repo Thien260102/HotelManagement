@@ -17,8 +17,9 @@ namespace HotelManagement.PresentationLayer
 
 		int currentIndex = -1;
 		List<AttendanceDTO> attendances;
-
-		public Attendance(Rule.ROLE role = Rule.ROLE.EMPLOYEE)
+        List<string> _searchTypes;
+        int _currentSearchType = 0;
+        public Attendance(Rule.ROLE role = Rule.ROLE.EMPLOYEE)
 		{
 			InitializeComponent();
 
@@ -39,9 +40,21 @@ namespace HotelManagement.PresentationLayer
 			}
 
 			DataGridAttendance.ItemsSource = attendances;
-		}
 
-		private void SelectAttendance(object sender, SelectedCellsChangedEventArgs e)
+            _searchTypes = new List<string>()
+            {
+                "Name",
+                "Date"
+            };
+            foreach (var file in _searchTypes)
+            {
+                Combobox_TypeSearch.Items.Add(file);
+            }
+            Combobox_TypeSearch.SelectedIndex = _currentSearchType;
+            //Combobox_TypeSearch.SelectionChanged += SelectSearch;
+        }
+
+        private void SelectAttendance(object sender, SelectedCellsChangedEventArgs e)
 		{
 			currentIndex = DataGridAttendance.SelectedIndex;
 		}
@@ -50,7 +63,7 @@ namespace HotelManagement.PresentationLayer
 		{
 			if (Utilities.GetRole() == Rule.ROLE.ADMIN)
 			{
-				MessageBox.Show("Admin does not need check in.");
+                new MessageBoxCustom("Admin does not need check in", MessageType.Info, MessageButtons.Ok).ShowDialog();
 				return;
 			}
 
@@ -62,7 +75,7 @@ namespace HotelManagement.PresentationLayer
 		{
 			if (Utilities.GetRole() == Rule.ROLE.ADMIN)
 			{
-				MessageBox.Show("Admin does not need leave register.");
+                new MessageBoxCustom("Admin does not need leave register", MessageType.Info, MessageButtons.Ok).ShowDialog();
 				return;
 			}
 
@@ -75,13 +88,13 @@ namespace HotelManagement.PresentationLayer
 		{
 			if (currentIndex == -1)
 			{
-				MessageBox.Show("Please choose attendance you want to change.");
+                new MessageBoxCustom("Please choose attendance you want to change", MessageType.Info, MessageButtons.Ok).ShowDialog();
 				return;
 			}
 
 			if (attendances[currentIndex].State == (int)Rule.ATTENDANCE.WORKED)
 			{
-				MessageBox.Show("Cannot change work day.");
+                new MessageBoxCustom("Cannot change work day", MessageType.Info, MessageButtons.Ok).ShowDialog();
 				return;
 			}
 

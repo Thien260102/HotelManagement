@@ -24,6 +24,8 @@ namespace HotelManagement.PresentationLayer
     {
         List<CustomerDTO> customers;
         int currentCustomer = -1;
+        List<string> _searchTypes;
+        int _currentSearchType = 0;
 
         public Guest()
         {
@@ -38,7 +40,20 @@ namespace HotelManagement.PresentationLayer
             customers = new CustomerBLL().GetAllCustomers();
 
             DataGrid_Guest.ItemsSource = customers;
-		}
+
+            _searchTypes = new List<string>()
+            {
+                "Name",
+                "Phone",
+                "Citizen ID"
+            };
+            foreach (var file in _searchTypes)
+            {
+                Combobox_TypeSearch.Items.Add(file);
+            }
+            Combobox_TypeSearch.SelectedIndex = _currentSearchType;
+            //Combobox_TypeSearch.SelectionChanged += SelectSearch;
+        }
 
         private void SelectGuest(object sender, SelectedCellsChangedEventArgs e)
         {
@@ -57,7 +72,7 @@ namespace HotelManagement.PresentationLayer
         {
             if (currentCustomer == -1)
             {
-                MessageBox.Show("Please choose customer you want to change.");
+                new MessageBoxCustom("Please choose customer you want to change", MessageType.Info, MessageButtons.Ok).ShowDialog();
                 return;
             }
 
@@ -71,7 +86,7 @@ namespace HotelManagement.PresentationLayer
         {
             if (currentCustomer == -1)
             {
-                MessageBox.Show("Please choose customer you want to remove.");
+                new MessageBoxCustom("Please choose customer you want to remove", MessageType.Info, MessageButtons.Ok).ShowDialog();
                 return;
             }
 

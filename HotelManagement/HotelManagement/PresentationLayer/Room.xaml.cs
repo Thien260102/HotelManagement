@@ -48,7 +48,7 @@ namespace HotelManagement.PresentationLayer
                 dicRooms.Add(Rule.ROOM_STATE.FIXING, rooms.FindAll(element => element.State == (int)Rule.ROOM_STATE.FIXING));
 
                 btn_Avaliable.Content = $"Available({dicRooms[Rule.ROOM_STATE.AVAILABLE].Count})";
-                btn_Booked.Content = $"Booked({dicRooms[Rule.ROOM_STATE.RENTING].Count})";
+                btn_Booked.Content = $"Rented({dicRooms[Rule.ROOM_STATE.RENTING].Count})";
                 btn_Fixing.Content = $"Fixing({dicRooms[Rule.ROOM_STATE.FIXING].Count})";
                 btn_All.Content = $"Fixing({rooms.Count})";
 
@@ -146,7 +146,7 @@ namespace HotelManagement.PresentationLayer
             BdBooked.BorderBrush = (SolidColorBrush)new BrushConverter().ConvertFromString("#F04438");
             btn_Booked.Foreground = (SolidColorBrush)new BrushConverter().ConvertFromString("#F04438");
 
-            btn_Booked.Content = $"Booked({dicRooms[Rule.ROOM_STATE.RENTING].Count})";
+            btn_Booked.Content = $"Rented({dicRooms[Rule.ROOM_STATE.RENTING].Count})";
             FilterRoom(Rule.ROOM_STATE.RENTING);
         }
 
@@ -170,7 +170,7 @@ namespace HotelManagement.PresentationLayer
         {
             if (Utilities.GetRole() != Rule.ROLE.ADMIN)
             {
-                MessageBox.Show("You do not have an authority.");
+                new MessageBoxCustom("You do not have an authority", MessageType.Info, MessageButtons.Ok).ShowDialog();
                 return;
             }
 
@@ -183,13 +183,13 @@ namespace HotelManagement.PresentationLayer
         {
             if (Utilities.GetRole() != Rule.ROLE.ADMIN)
             {
-                MessageBox.Show("You do not have an authority.");
+                new MessageBoxCustom("You do not have an authority", MessageType.Info, MessageButtons.Ok).ShowDialog();
                 return;
             }
 
             if (currentRoom == -1)
 			{
-                MessageBox.Show("Choosing your room you want to change.");
+                new MessageBoxCustom("Choosing your room you want to change", MessageType.Info, MessageButtons.Ok).ShowDialog();
                 return;
             }
 
@@ -203,13 +203,13 @@ namespace HotelManagement.PresentationLayer
         {
             if (Utilities.GetRole() != Rule.ROLE.ADMIN)
             {
-                MessageBox.Show("You do not have an authority.");
+                new MessageBoxCustom("You do not have an authority", MessageType.Info, MessageButtons.Ok).ShowDialog();
                 return;
             }
 
             if (currentRoom == -1)
             {
-                MessageBox.Show("Choosing your room you want to remove.");
+                new MessageBoxCustom("Choosing your room you want to remove", MessageType.Info, MessageButtons.Ok).ShowDialog();
                 return;
             }
 
@@ -218,7 +218,7 @@ namespace HotelManagement.PresentationLayer
                 if (new RoomBLL().RemoveRoom(rooms[currentRoom].Id))
 				{
                     LoadRoom();
-                    MessageBox.Show("Remove room successfully.");
+                    new MessageBoxCustom("Remove room successfully", MessageType.Info, MessageButtons.Ok).ShowDialog();
 				}
             }
             catch (Exception ex)

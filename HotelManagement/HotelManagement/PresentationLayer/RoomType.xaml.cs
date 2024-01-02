@@ -57,7 +57,7 @@ namespace HotelManagement.PresentationLayer
         {
             if (current == -1)
             {
-                MessageBox.Show("Choosing your Room Type you want to change.");
+                new MessageBoxCustom("Choosing your Room Type you want to change", MessageType.Info, MessageButtons.Ok).ShowDialog();
                 return;
             }
 
@@ -71,13 +71,13 @@ namespace HotelManagement.PresentationLayer
         {
             if (current == -1)
             {
-                MessageBox.Show("Choosing your Room Type you want to delete.");
+                new MessageBoxCustom("Choosing your Room Type you want to delete", MessageType.Info, MessageButtons.Ok).ShowDialog();
                 return;
             }
 
             if (new RoomTypeBLL().RemoveRoomType(roomTypes[current].Id))
 			{
-                MessageBox.Show("Remove room type successfully");
+                new MessageBoxCustom("Remove room type successfully", MessageType.Info, MessageButtons.Ok).ShowDialog();
                 LoadRoomType();
 			}
         }

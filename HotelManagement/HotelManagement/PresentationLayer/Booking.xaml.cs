@@ -15,6 +15,8 @@ namespace HotelManagement.PresentationLayer
     {
         List<BookingDTO> bookings;
         int currentBooking = -1;
+        List<string> _searchTypes;
+        int _currentSearchType = 0;
 
         public Booking()
         {
@@ -31,6 +33,19 @@ namespace HotelManagement.PresentationLayer
             bookings = new BookingBLL().GetAll();
 
             DataGridBooking.ItemsSource = bookings;
+
+            _searchTypes = new List<string>()
+            {
+                "Name",
+                "Phone",
+            };
+            foreach (var file in _searchTypes)
+            {
+                Combobox_TypeSearch.Items.Add(file);
+            }
+            Combobox_TypeSearch.SelectedIndex = _currentSearchType;
+            //Combobox_TypeSearch.SelectionChanged += SelectSearch;
+
         }
 
         #region Events
@@ -76,7 +91,7 @@ namespace HotelManagement.PresentationLayer
         {
             if (currentBooking == -1)
             {
-                MessageBox.Show("Please choose your booking you want to cancel");
+                new MessageBoxCustom("Please choose your booking you want to cancel", MessageType.Info, MessageButtons.Ok).ShowDialog();
                 return;
             }
 

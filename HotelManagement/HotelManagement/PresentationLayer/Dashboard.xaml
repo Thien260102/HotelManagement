@@ -24,7 +24,7 @@
                                     </Border.Background>
                                 </Border>
                                 <Label x:Name="labelAvaliable" Grid.Column="1" Content="100" FontSize="26" FontWeight="SemiBold" Padding="10" FontFamily="Segoe UI" Foreground="#4C00A3" HorizontalAlignment="Center" />
-                                <Label  Content="Avaliable room" FontSize="14" FontWeight="Regular" Padding="10" FontFamily="Segoe UI" Foreground="#CC000000" HorizontalAlignment="Center" />
+                                <Label  Content="Available room" FontSize="14" FontWeight="Regular" Padding="10" FontFamily="Segoe UI" Foreground="#CC000000" HorizontalAlignment="Center" />
                             </StackPanel>
                         </Border>
                     </Border>

@@ -28,6 +28,8 @@
     <None Remove="PresentationLayer\logo.png" />
     <None Remove="PresentationLayer\minimize-sign.png" />
     <None Remove="PresentationLayer\next.png" />
+    <None Remove="PresentationLayer\rent %281%29.png" />
+    <None Remove="PresentationLayer\rent.png" />
     <None Remove="PresentationLayer\report.png" />
     <None Remove="PresentationLayer\Search.png" />
     <None Remove="PresentationLayer\user.png" />
@@ -50,6 +52,8 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Resource Include="Resources\rent %281%29.png" />
+    <Resource Include="Resources\rent.png" />
     <Resource Include="Resources\exit.png" />
     <Resource Include="Resources\check.png" />
     <Resource Include="Resources\down-arrow.png" />

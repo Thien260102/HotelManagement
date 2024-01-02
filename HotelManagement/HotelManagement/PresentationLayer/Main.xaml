@@ -22,7 +22,7 @@ WindowStyle="None" AllowsTransparency="True" Height="600" Width="950" >
                             <ColumnDefinition Width="55"/>
                             <ColumnDefinition Width="100"/>
                             <ColumnDefinition/>
-                            <ColumnDefinition Width="134"/>
+                            <ColumnDefinition Width="160"/>
                             <ColumnDefinition Width="40"/>
                             <ColumnDefinition Width="36"/>
                             <ColumnDefinition Width="36"/>
@@ -47,7 +47,7 @@ WindowStyle="None" AllowsTransparency="True" Height="600" Width="950" >
                                         <ImageBrush ImageSource="/Resources/user.png" Stretch="Fill"/>
                                     </Border.Background>
                                 </Border>
-                                <Button x:Name="btn_Profile" Grid.Column="1" Content="ADMIN" FontSize="14" FontWeight="SemiBold" Background="Transparent" Foreground="White" FontFamily="Segoe UI"  BorderThickness="0" Click="btn_Profile_Click" Cursor="Hand" HorizontalAlignment="Left"/>
+                                <Button x:Name="btn_Profile" Grid.Column="1" Margin="3 0 0 0" Content="ADMIN" FontSize="14" FontWeight="SemiBold" Background="Transparent" Foreground="White" FontFamily="Segoe UI"  BorderThickness="0" Click="btn_Profile_Click" Cursor="Hand" HorizontalAlignment="Left"/>
 
                             </Grid>
                         </Border>
@@ -77,163 +77,191 @@ WindowStyle="None" AllowsTransparency="True" Height="600" Width="950" >
                     <ScrollViewer VerticalScrollBarVisibility="Hidden">
                     <StackPanel  Width="180" HorizontalAlignment="Left" Background="Transparent">
                         <!--Dashboard-->
-                        <Border x:Name="Dashboards"  Background="White"  CornerRadius="15" Grid.Row="0" Margin="5,0,5,0">
-                            <StackPanel  Orientation="Horizontal" Background="Transparent" >
-                                <Border Height="28" Width="28" Margin="8 4 0 0" HorizontalAlignment="Left" BorderThickness="0">
-                                    <Border.Background>
-                                        <ImageBrush  Stretch="Fill" ImageSource="/Resources/dashboard.png"/>
-                                    </Border.Background>
+                            <Border  Background="White"  CornerRadius="15" Margin="5,0,5,0" MouseEnter="Border_MouseEnter" MouseLeave="Border_MouseLeave">
+                                <Border x:Name="Dashboards"  Background="White"  CornerRadius="15" >
+                                    <StackPanel  Orientation="Horizontal" Background="Transparent" >
+                                        <Border Height="28" Width="28" Margin="8 4 0 0" HorizontalAlignment="Left" BorderThickness="0">
+                                            <Border.Background>
+                                                <ImageBrush  Stretch="Fill" ImageSource="/Resources/dashboard.png"/>
+                                            </Border.Background>
+                                        </Border>
+                                        <Button x:Name="btn_Dashboard" Content="Dashboard" Width="134" Height="45" FontSize="16" FontWeight="SemiBold" Background="Transparent" Foreground="#7F000000"  BorderThickness="0" Click="btn_Dashboard_Click" Cursor="Hand" />
+                                    </StackPanel>
                                 </Border>
-                                <Button x:Name="btn_Dashboard" Content="Dashboard" Width="134" Height="45" FontSize="16" FontWeight="SemiBold" Background="Transparent" Foreground="#7F000000"  BorderThickness="0" Click="btn_Dashboard_Click" Cursor="Hand" />
-                            </StackPanel>
-                        </Border>
-                        <StackPanel x:Name="ChooseRoom" Height="45" Background="Transparent" >
+                            </Border>
+                            <StackPanel x:Name="ChooseRoom" Height="45" Background="Transparent" >
                             <!--RoomSubMenu-->
-                            <Border x:Name="RoomSub" Background="White"  CornerRadius="15" Grid.Row="2" Margin="5,0,5,0">
-                                <StackPanel  Orientation="Horizontal" Background="Transparent" >
-                                    <Border Height="28" Width="28" Margin="8 4 0 0" HorizontalAlignment="Left" BorderThickness="0">
-                                        <Border.Background>
-                                            <ImageBrush  Stretch="Fill" ImageSource="/Resources/double-bed.png"/>
-                                        </Border.Background>
+                                <Border  Background="White"  CornerRadius="15" Margin="5,0,5,0" MouseEnter="Border_MouseEnter" MouseLeave="Border_MouseLeave">
+                                    <Border x:Name="RoomSub" Background="White"  CornerRadius="15">
+                                        <StackPanel  Orientation="Horizontal" Background="Transparent" >
+                                            <Border Height="28" Width="28" Margin="8 4 0 0" HorizontalAlignment="Left" BorderThickness="0">
+                                                <Border.Background>
+                                                    <ImageBrush  Stretch="Fill" ImageSource="/Resources/double-bed.png"/>
+                                                </Border.Background>
+                                            </Border>
+                                            <Button x:Name="btn_RoomSub" Content="Room" Width="120" Height="45" FontSize="16" FontWeight="SemiBold" Background="Transparent" Foreground="#7F000000"  BorderThickness="0" Click="btn_RoomSub_Click" Cursor="Hand"  />
+                                            <Border Height="10" Width="10" HorizontalAlignment="Left" BorderThickness="0">
+                                                <Border.Background>
+                                                    <ImageBrush x:Name="image_sub"  Stretch="Fill" ImageSource="/Resources/next.png"/>
+                                                </Border.Background>
+                                            </Border>
+                                        </StackPanel>
                                     </Border>
-                                    <Button x:Name="btn_RoomSub" Content="Room" Width="120" Height="45" FontSize="16" FontWeight="SemiBold" Background="Transparent" Foreground="#7F000000"  BorderThickness="0" Click="btn_RoomSub_Click" Cursor="Hand"  />
-                                    <Border Height="10" Width="10" HorizontalAlignment="Left" BorderThickness="0">
-                                        <Border.Background>
-                                            <ImageBrush x:Name="image_sub"  Stretch="Fill" ImageSource="/Resources/next.png"/>
-                                        </Border.Background>
-                                    </Border>
-                                </StackPanel>
-                            </Border>
+                                </Border> 
                             <!--Room-->
-                            <Border x:Name="Rooms" Background="White"  CornerRadius="15" Grid.Row="2" Margin="5,0,5,0">
-                                <StackPanel  Orientation="Horizontal" Background="Transparent" >
+                                <Border  Background="White"  CornerRadius="15" Margin="5,0,5,0" MouseEnter="Border_MouseEnter" MouseLeave="Border_MouseLeave">
+                                    <Border x:Name="Rooms" Background="White"  CornerRadius="15">
+                                        <StackPanel  Orientation="Horizontal" Background="Transparent" >
 
-                                    <Button x:Name="btn_Room" Content="Room Detail" Width="170" Height="45" FontSize="16" FontWeight="SemiBold" Background="Transparent" Foreground="#7F000000"  BorderThickness="0" Click="btn_Room_Click" Cursor="Hand"  />
+                                            <Button x:Name="btn_Room" Content="Room Detail" Width="170" Height="45" FontSize="16" FontWeight="SemiBold" Background="Transparent" Foreground="#7F000000"  BorderThickness="0" Click="btn_Room_Click" Cursor="Hand"  />
 
-                                </StackPanel>
-                            </Border>
+                                        </StackPanel>
+                                    </Border>
+                                </Border>
                             <!--RoomType-->
-                            <Border x:Name="RoomTypes"  Background="White"  CornerRadius="15" Grid.Row="1" Margin="5,0,5,0">
-                                <StackPanel  Orientation="Horizontal" Background="Transparent" >
-                                    <Button x:Name="btn_RoomType" Content="Room Type" Width="170" Height="45" FontSize="16" FontWeight="SemiBold" Background="Transparent" Foreground="#7F000000"  BorderThickness="0" Click="btn_RoomType_Click" Cursor="Hand"  />
-                                </StackPanel>
-                            </Border>
-                        </StackPanel>
-                        <!--Guest-->
-                        <Border x:Name="Guests"  Background="White"  CornerRadius="15" Grid.Row="3" Margin="5,0,5,0">
-                            <StackPanel  Orientation="Horizontal" Background="Transparent" >
-                                <Border Height="28" Width="28" Margin="8 4 0 0" HorizontalAlignment="Left" BorderThickness="0">
-                                    <Border.Background>
-                                        <ImageBrush  Stretch="Fill" ImageSource="/Resources/guests.png"/>
-                                    </Border.Background>
-                                </Border>
-                                <Button x:Name="btn_Guest" Content="Guest" Width="134" Height="45" FontSize="16" FontWeight="SemiBold" Background="Transparent" Foreground="#7F000000"  BorderThickness="0" Click="btn_Guest_Click" Cursor="Hand" />
-                            </StackPanel>
-                        </Border>
-                        <!--Bill-->
-                        <Border x:Name="Bills"  Background="White"  CornerRadius="15" Grid.Row="4" Margin="5,0,5,0">
-                            <StackPanel  Orientation="Horizontal" Background="Transparent" >
-                                <Border Height="28" Width="28" Margin="8 4 0 0" HorizontalAlignment="Left" BorderThickness="0">
-                                    <Border.Background>
-                                        <ImageBrush  Stretch="Fill" ImageSource="/Resources/invoice.png"/>
-                                    </Border.Background>
-                                </Border>
-                                <Button x:Name="btn_Bill" Content="Bill" Width="134" Height="45" FontSize="16" FontWeight="SemiBold" Background="Transparent" Foreground="#7F000000"  BorderThickness="0" Click="btn_Bill_Click" Cursor="Hand" />
-                            </StackPanel>
-                        </Border>
-                        <!--Booking-->
-                        <Border x:Name="Bookings"  Background="White"  CornerRadius="15" Grid.Row="5" Margin="5,0,5,0">
-                            <StackPanel  Orientation="Horizontal" Background="Transparent" >
-                                <Border Height="28" Width="28" Margin="8 4 0 0" HorizontalAlignment="Left" BorderThickness="0">
-                                    <Border.Background>
-                                        <ImageBrush  Stretch="Fill" ImageSource="/Resources/calendar.png"/>
-                                    </Border.Background>
-                                </Border>
-                                <Button x:Name="btn_Booking" Content="Booking" Width="134" Height="45" FontSize="16" FontWeight="SemiBold" Background="Transparent" Foreground="#7F000000"  BorderThickness="0" Click="btn_Booking_Click" Cursor="Hand" />
-                            </StackPanel>
-                        </Border>
-                        <!--Employee-->
-                        <Border x:Name="Employees" Background="Transparent"  CornerRadius="15" Grid.Row="6" Margin="5,0,5,0">
-                            <StackPanel  Orientation="Horizontal" Background="Transparent" >
-                                <Border Height="28" Width="28" Margin="8 4 0 0" HorizontalAlignment="Left" BorderThickness="0">
-                                    <Border.Background>
-                                        <ImageBrush  Stretch="Fill" ImageSource="/Resources/employee.png"/>
-                                    </Border.Background>
-                                </Border>
-                                <Button x:Name="btn_Employee" Content="Employee" Width="134" Height="45" FontSize="16" FontWeight="SemiBold" Background="Transparent" Foreground="#7F000000"  BorderThickness="0" Click="btn_Employee_Click" Cursor="Hand" />
-                            </StackPanel>
-                        </Border>
-                        <StackPanel x:Name="ChooseVoucher" Height="45" Background="Transparent" >
-                            <!--VoucherSubMenu-->
-                            <Border x:Name="VoucherSub" Background="White"  CornerRadius="15" Grid.Row="2" Margin="5,0,5,0">
-                                <StackPanel  Orientation="Horizontal" Background="Transparent" >
-                                    <Border Height="28" Width="28" Margin="8 4 0 0" HorizontalAlignment="Left" BorderThickness="0">
-                                        <Border.Background>
-                                            <ImageBrush  Stretch="Fill" ImageSource="/Resources/coupon.png"/>
-                                        </Border.Background>
+                                <Border  Background="White"  CornerRadius="15" Margin="5,0,5,0" MouseEnter="Border_MouseEnter" MouseLeave="Border_MouseLeave">
+                                    <Border x:Name="RoomTypes"  Background="White"  CornerRadius="15">
+                                        <StackPanel  Orientation="Horizontal" Background="Transparent" >
+                                            <Button x:Name="btn_RoomType" Content="Room Type" Width="170" Height="45" FontSize="16" FontWeight="SemiBold" Background="Transparent" Foreground="#7F000000"  BorderThickness="0" Click="btn_RoomType_Click" Cursor="Hand"  />
+                                        </StackPanel>
                                     </Border>
-                                    <Button x:Name="btn_VoucherSub" Content="Voucher" Width="120" Height="45" FontSize="16" FontWeight="SemiBold" Background="Transparent" Foreground="#7F000000"  BorderThickness="0" Click="btn_VoucherSub_Click" Cursor="Hand"  />
-                                    <Border Height="10" Width="10" HorizontalAlignment="Left" BorderThickness="0">
-                                        <Border.Background>
-                                            <ImageBrush x:Name="image_subvoucher"  Stretch="Fill" ImageSource="/Resources/next.png"/>
-                                        </Border.Background>
+                                </Border>
+                            </StackPanel>
+                            <!--Renting-->
+                            <Border  Background="White"  CornerRadius="15" Margin="5,0,5,0" MouseEnter="Border_MouseEnter" MouseLeave="Border_MouseLeave">
+                                <Border x:Name="BRenting"  Background="White"  CornerRadius="15">
+                                    <StackPanel  Orientation="Horizontal" Background="Transparent" >
+                                        <Border Height="28" Width="28" Margin="8 4 0 0" HorizontalAlignment="Left" BorderThickness="0">
+                                            <Border.Background>
+                                                <ImageBrush  Stretch="Fill" ImageSource="/Resources/rent (1).png"/>
+                                            </Border.Background>
+                                        </Border>
+                                        <Button x:Name="btn_Renting" Content="Renting" Width="134" Height="45" FontSize="16" FontWeight="SemiBold" Background="Transparent" Foreground="#7F000000"  BorderThickness="0" Click="btn_Renting_Click" Cursor="Hand" />
+                                    </StackPanel>
+                                </Border>
+                            </Border>
+
+                            <!--Guest-->
+                            <Border  Background="White"  CornerRadius="15" Margin="5,0,5,0" MouseEnter="Border_MouseEnter" MouseLeave="Border_MouseLeave">
+                                <Border x:Name="Guests"  Background="White"  CornerRadius="15">
+                                    <StackPanel  Orientation="Horizontal" Background="Transparent" >
+                                        <Border Height="28" Width="28" Margin="8 4 0 0" HorizontalAlignment="Left" BorderThickness="0">
+                                            <Border.Background>
+                                                <ImageBrush  Stretch="Fill" ImageSource="/Resources/guests.png"/>
+                                            </Border.Background>
+                                        </Border>
+                                        <Button x:Name="btn_Guest" Content="Guest" Width="134" Height="45" FontSize="16" FontWeight="SemiBold" Background="Transparent" Foreground="#7F000000"  BorderThickness="0" Click="btn_Guest_Click" Cursor="Hand" />
+                                    </StackPanel>
+                                </Border>
+                            </Border>
+                            <!--Bill-->
+                            <Border  Background="White"  CornerRadius="15" Margin="5,0,5,0" MouseEnter="Border_MouseEnter" MouseLeave="Border_MouseLeave">
+                                <Border x:Name="Bills"  Background="White"  CornerRadius="15">
+                                    <StackPanel  Orientation="Horizontal" Background="Transparent" >
+                                        <Border Height="28" Width="28" Margin="8 4 0 0" HorizontalAlignment="Left" BorderThickness="0">
+                                            <Border.Background>
+                                                <ImageBrush  Stretch="Fill" ImageSource="/Resources/invoice.png"/>
+                                            </Border.Background>
+                                        </Border>
+                                        <Button x:Name="btn_Bill" Content="Bill" Width="134" Height="45" FontSize="16" FontWeight="SemiBold" Background="Transparent" Foreground="#7F000000"  BorderThickness="0" Click="btn_Bill_Click" Cursor="Hand" />
+                                    </StackPanel>
+                                </Border>
+                            </Border>
+                            <!--Booking-->
+                            <Border  Background="White"  CornerRadius="15" Margin="5,0,5,0" MouseEnter="Border_MouseEnter" MouseLeave="Border_MouseLeave">
+                                <Border x:Name="Bookings"  Background="White"  CornerRadius="15" >
+                                    <StackPanel  Orientation="Horizontal" Background="Transparent" >
+                                        <Border Height="28" Width="28" Margin="8 4 0 0" HorizontalAlignment="Left" BorderThickness="0">
+                                            <Border.Background>
+                                                <ImageBrush  Stretch="Fill" ImageSource="/Resources/calendar.png"/>
+                                            </Border.Background>
+                                        </Border>
+                                        <Button x:Name="btn_Booking" Content="Booking" Width="134" Height="45" FontSize="16" FontWeight="SemiBold" Background="Transparent" Foreground="#7F000000"  BorderThickness="0" Click="btn_Booking_Click" Cursor="Hand" />
+                                    </StackPanel>
+                                </Border>
+                            </Border>
+                            <StackPanel x:Name="ChooseVoucher" Height="45" Background="Transparent" >
+                                <!--VoucherSubMenu-->
+                                <Border  Background="White"  CornerRadius="15" Margin="5,0,5,0" MouseEnter="Border_MouseEnter" MouseLeave="Border_MouseLeave">
+                                    <Border x:Name="VoucherSub" Background="White"  CornerRadius="15">
+                                        <StackPanel  Orientation="Horizontal" Background="Transparent" >
+                                            <Border Height="28" Width="28" Margin="8 4 0 0" HorizontalAlignment="Left" BorderThickness="0">
+                                                <Border.Background>
+                                                    <ImageBrush  Stretch="Fill" ImageSource="/Resources/coupon.png"/>
+                                                </Border.Background>
+                                            </Border>
+                                            <Button x:Name="btn_VoucherSub" Content="Voucher" Width="120" Height="45" FontSize="16" FontWeight="SemiBold" Background="Transparent" Foreground="#7F000000"  BorderThickness="0" Click="btn_VoucherSub_Click" Cursor="Hand"  />
+                                            <Border Height="10" Width="10" HorizontalAlignment="Left" BorderThickness="0">
+                                                <Border.Background>
+                                                    <ImageBrush x:Name="image_subvoucher"  Stretch="Fill" ImageSource="/Resources/next.png"/>
+                                                </Border.Background>
+                                            </Border>
+                                        </StackPanel>
                                     </Border>
-                                </StackPanel>
+                                </Border>
+                                <!--Voucher-->
+                                <Border  Background="White"  CornerRadius="15" Margin="5,0,5,0" MouseEnter="Border_MouseEnter" MouseLeave="Border_MouseLeave">
+                                    <Border x:Name="Vouchers"  Background="White"  CornerRadius="15" >
+                                        <StackPanel  Orientation="Horizontal" Background="Transparent" >
+                                            <Button x:Name="btn_Voucher" Content="Voucher Deatail" Width="170" Height="45" FontSize="16" FontWeight="SemiBold" Background="Transparent" Foreground="#7F000000"  BorderThickness="0" Click="btn_Voucher_Click" Cursor="Hand" />
+                                        </StackPanel>
+                                    </Border>
+                                </Border>
+                                <!--VoucherType-->
+                                <Border  Background="White"  CornerRadius="15" Margin="5,0,5,0" MouseEnter="Border_MouseEnter" MouseLeave="Border_MouseLeave">
+                                    <Border x:Name="VoucherTypes"  Background="White"  CornerRadius="15">
+                                        <StackPanel  Orientation="Horizontal" Background="Transparent" >
+                                            <Button x:Name="btn_VoucherType" Content="Voucher Type" Width="170" Height="45" FontSize="16" FontWeight="SemiBold" Background="Transparent" Foreground="#7F000000"  BorderThickness="0" Click="btn_VoucherType_Click" Cursor="Hand"  />
+                                        </StackPanel>
+                                    </Border>
+                                </Border>
+                            </StackPanel>
+                            <!--Attendace-->
+                            <Border  Background="White"  CornerRadius="15" Margin="5,0,5,0" MouseEnter="Border_MouseEnter" MouseLeave="Border_MouseLeave">
+                                <Border x:Name="BAttendance"  Background="White"  CornerRadius="15">
+                                    <StackPanel  Orientation="Horizontal" Background="Transparent" >
+                                        <Border Height="28" Width="28" Margin="8 4 0 0" HorizontalAlignment="Left" BorderThickness="0">
+                                            <Border.Background>
+                                                <ImageBrush  Stretch="Fill" ImageSource="/Resources/check.png"/>
+                                            </Border.Background>
+                                        </Border>
+                                        <Button x:Name="btn_Attendance" Content="Attendance" Width="134" Height="45" FontSize="16" FontWeight="SemiBold" Background="Transparent" Foreground="#7F000000"  BorderThickness="0" Click="btn_Attendance_Click" Cursor="Hand" />
+                                    </StackPanel>
+                                </Border>
                             </Border>
-                            <!--Voucher-->
-                            <Border x:Name="Vouchers"  Background="White"  CornerRadius="15" Grid.Row="7" Margin="5,0,5,0">
-                                <StackPanel  Orientation="Horizontal" Background="Transparent" >
-                                    <Button x:Name="btn_Voucher" Content="Voucher Deatail" Width="170" Height="45" FontSize="16" FontWeight="SemiBold" Background="Transparent" Foreground="#7F000000"  BorderThickness="0" Click="btn_Voucher_Click" Cursor="Hand" />
-                                </StackPanel>
+                            <!--Employee-->
+                            <Border  Background="White"  CornerRadius="15" Margin="5,0,5,0" MouseEnter="Border_MouseEnter" MouseLeave="Border_MouseLeave">
+                                <Border x:Name="Employees" Background="Transparent"  CornerRadius="15">
+                                    <StackPanel  Orientation="Horizontal" Background="Transparent" >
+                                        <Border Height="28" Width="28" Margin="8 4 0 0" HorizontalAlignment="Left" BorderThickness="0">
+                                            <Border.Background>
+                                                <ImageBrush  Stretch="Fill" ImageSource="/Resources/employee.png"/>
+                                            </Border.Background>
+                                        </Border>
+                                        <Button x:Name="btn_Employee" Content="Employee" Width="134" Height="45" FontSize="16" FontWeight="SemiBold" Background="Transparent" Foreground="#7F000000"  BorderThickness="0" Click="btn_Employee_Click" Cursor="Hand" />
+                                    </StackPanel>
+                                </Border>
                             </Border>
-                            <!--VoucherType-->
-                            <Border x:Name="VoucherTypes"  Background="White"  CornerRadius="15" Grid.Row="1" Margin="5,0,5,0">
-                                <StackPanel  Orientation="Horizontal" Background="Transparent" >
-                                    <Button x:Name="btn_VoucherType" Content="Voucher Type" Width="170" Height="45" FontSize="16" FontWeight="SemiBold" Background="Transparent" Foreground="#7F000000"  BorderThickness="0" Click="btn_VoucherType_Click" Cursor="Hand"  />
-                                </StackPanel>
-                            </Border>
-                        </StackPanel>
+                            
                         <!--Report-->
-                        <Border x:Name="Reports"  Background="White"  CornerRadius="15" Grid.Row="8" Margin="5,0,5,0">
-                            <StackPanel  Orientation="Horizontal" Background="Transparent" >
-                                <Border Height="28" Width="28" Margin="8 4 0 0" HorizontalAlignment="Left" BorderThickness="0">
-                                    <Border.Background>
-                                        <ImageBrush  Stretch="Fill" ImageSource="/Resources/report.png"/>
-                                    </Border.Background>
+                            <Border  Background="White"  CornerRadius="15" Margin="5,0,5,0" MouseEnter="Border_MouseEnter" MouseLeave="Border_MouseLeave">
+                                <Border x:Name="Reports"  Background="White"  CornerRadius="15">
+                                    <StackPanel  Orientation="Horizontal" Background="Transparent" >
+                                        <Border Height="28" Width="28" Margin="8 4 0 0" HorizontalAlignment="Left" BorderThickness="0">
+                                            <Border.Background>
+                                                <ImageBrush  Stretch="Fill" ImageSource="/Resources/report.png"/>
+                                            </Border.Background>
+                                        </Border>
+                                        <Button x:Name="btn_Report" Content="Report" Width="134" Height="45" FontSize="16" FontWeight="SemiBold" Background="Transparent" Foreground="#7F000000"  BorderThickness="0" Click="btn_Report_Click" Cursor="Hand" />
+                                    </StackPanel>
                                 </Border>
-                                <Button x:Name="btn_Report" Content="Report" Width="134" Height="45" FontSize="16" FontWeight="SemiBold" Background="Transparent" Foreground="#7F000000"  BorderThickness="0" Click="btn_Report_Click" Cursor="Hand" />
-                            </StackPanel>
-                        </Border>
+                            </Border>
 
-                        <!--Attendace-->
-                        <Border x:Name="BAttendance"  Background="White"  CornerRadius="15" Grid.Row="9" Margin="5,0,5,0">
-                            <StackPanel  Orientation="Horizontal" Background="Transparent" >
-                                <Border Height="28" Width="28" Margin="8 4 0 0" HorizontalAlignment="Left" BorderThickness="0">
-                                    <Border.Background>
-                                        <ImageBrush  Stretch="Fill" ImageSource="/Resources/check.png"/>
-                                    </Border.Background>
-                                </Border>
-                                <Button x:Name="btn_Attendance" Content="Attendance" Width="134" Height="45" FontSize="16" FontWeight="SemiBold" Background="Transparent" Foreground="#7F000000"  BorderThickness="0" Click="btn_Attendance_Click" Cursor="Hand" />
-                            </StackPanel>
-                        </Border>
-
-                        <!--Renting-->
-                        <Border x:Name="BRenting"  Background="White"  CornerRadius="15" Grid.Row="9" Margin="5,0,5,0">
-                            <StackPanel  Orientation="Horizontal" Background="Transparent" >
-                                <Border Height="28" Width="28" Margin="8 4 0 0" HorizontalAlignment="Left" BorderThickness="0">
-                                    <Border.Background>
-                                        <ImageBrush  Stretch="Fill" ImageSource="/Resources/check.png"/>
-                                    </Border.Background>
-                                </Border>
-                                <Button x:Name="btn_Renting" Content="Renting" Width="134" Height="45" FontSize="16" FontWeight="SemiBold" Background="Transparent" Foreground="#7F000000"  BorderThickness="0" Click="btn_Renting_Click" Cursor="Hand" />
-                            </StackPanel>
-                        </Border>
-
-                    </StackPanel>
+                        </StackPanel>
                     </ScrollViewer>
                 </Border>
                 <!--panelMain-->
-                <StackPanel x:Name="panelMain" Width="770" Background="Transparent" />
+                <StackPanel x:Name="panelMain" Width="750" Background="Transparent" Margin="10 0 10 5" />
             </StackPanel>
         </Grid>
     </Border>

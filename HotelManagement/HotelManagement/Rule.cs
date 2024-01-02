@@ -55,6 +55,8 @@ namespace HotelManagement
 			public const string HIGHLIGHT = "#C379E2";
 
             public const string BORDER = "#F3E5FF";
+
+            public const string HOVER = "#DBF1FE";
         }
 
 		public enum ROOM_STATE

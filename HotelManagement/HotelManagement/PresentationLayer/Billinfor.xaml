@@ -14,7 +14,7 @@
         WindowStartupLocation="CenterScreen" Background="Transparent"
         WindowStyle="None" AllowsTransparency="True" Height="635" Width="650" >
     <Grid>
-        <Border Background="White" CornerRadius="13" Height="635" Width="650">
+        <Border Background="White" CornerRadius="13" Height="600" Width="650">
             <StackPanel Background="Transparent" >
                 <Grid>
                     <Grid.ColumnDefinitions>
@@ -23,7 +23,7 @@
                         <ColumnDefinition/>
                     </Grid.ColumnDefinitions>
                     <Grid.RowDefinitions>
-                        <RowDefinition Height="300"/>
+                        <RowDefinition Height="250"/>
                         <RowDefinition Height="10"/>
                         <RowDefinition Height="330"/>
                     </Grid.RowDefinitions>
@@ -93,7 +93,7 @@
                                        materialDesign:HintAssist.Hint="HH:mm"/>
                         </Border>-->
 
-                        <Label Content="Total day" Margin="10 10 0 0" FontSize="12" FontWeight="Regular" Padding="5" FontFamily="Segoe UI" Width="264" />
+                        <Label Content="Total day" Margin="10 1 0 0" FontSize="12" FontWeight="Regular" Padding="5" FontFamily="Segoe UI" Width="264" />
                         <!--txt_RoomFacility-->
                         <Border CornerRadius="5" Width="252" Height="35" BorderThickness="1" BorderBrush="#7F000000" Margin="5 0 0 0">
                             <TextBox x:Name="txt_Totalday" Width="248" BorderThickness="0" FontFamily="Segoe UI" FontSize="14" VerticalContentAlignment="Center" Background="Transparent" Margin="1,0,1,0" />
@@ -140,12 +140,12 @@
 
                         <StackPanel Orientation="Horizontal">
                             <!--Button Cancel-->
-                            <Border Margin="95 25 0 0" CornerRadius="15" Background="White" Height="36" Width="90" BorderThickness="1" BorderBrush="#4C00A3" >
+                            <Border Margin="95 35 0 0" CornerRadius="15" Background="White" Height="36" Width="90" BorderThickness="1" BorderBrush="#4C00A3" >
                                 <Button x:Name="btn_Cancel" Content="Cancel" Width="90" FontSize="14" FontWeight="SemiBold"  Background="Transparent" Foreground="#4C00A3" BorderThickness="0" HorizontalAlignment="Center" Click="btn_Cancel_Click" />
                             </Border>
                             <!--Button Save-->
-                            <Border Margin="10 25 0 0" CornerRadius="15" Background="#4C00A3" Height="36" Width="90" >
-                                <Button x:Name="btn_Save" Width="90" Content="OK" FontSize="14" FontWeight="SemiBold"  Background="Transparent" Foreground="White" BorderThickness="0" HorizontalAlignment="Center" Click="btn_Save_Click" />
+                            <Border Margin="10 35 0 0" CornerRadius="15" Background="#4C00A3" Height="36" Width="90" >
+                                <Button x:Name="btn_Save" Width="90" Content="Export" FontSize="14" FontWeight="SemiBold"  Background="Transparent" Foreground="White" BorderThickness="0" HorizontalAlignment="Center" Click="btn_Save_Click" />
                             </Border>
                         </StackPanel>
                     </StackPanel>

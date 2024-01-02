@@ -5,10 +5,9 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:HotelManagement.PresentationLayer"
         mc:Ignorable="d"
-           WindowStartupLocation="CenterScreen"
-    Background="Transparent" WindowStyle="None" AllowsTransparency="True" Height="290" Width="280">
+    Background="Transparent" WindowStyle="None" AllowsTransparency="True" Height="210" Width="280">
     <Grid>
-        <Border Background="White" CornerRadius="10" Height="290" Width="280">
+        <Border Background="White" CornerRadius="10" Height="210" Width="280">
             <StackPanel Background="Transparent" >
                 <Label Content="Name" Margin="10 10 0 0" FontSize="12" FontWeight="Regular" Padding="5" FontFamily="Segoe UI" Width="264" />
                 <!--txt_Name-->

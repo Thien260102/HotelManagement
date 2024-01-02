@@ -5,18 +5,12 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:HotelManagement.PresentationLayer"
         mc:Ignorable="d"
-        WindowStartupLocation="CenterScreen"
-        Background="Transparent" WindowStyle="None" AllowsTransparency="True" Height="355" Width="600">
+        Background="Transparent" WindowStyle="None" AllowsTransparency="True" Height="470" Width="280">
 
     <Grid>
-        <Border Background="White" CornerRadius="10" Height="355" Width="600">
+        <Border Background="White" CornerRadius="10" Height="470" Width="280">
             <StackPanel Background="Transparent" >
-                <Grid>
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition/>
-                        <ColumnDefinition/>
-                    </Grid.ColumnDefinitions>
-                    <StackPanel Grid.Column="0">
+                
                         <Label Content="CitizenID" Margin="10 10 0 0" FontSize="12" FontWeight="Regular" Padding="5" FontFamily="Segoe UI" Width="264" />
                         <!--txt_CitizenID-->
                         <Border CornerRadius="5" Width="252" Height="35" BorderThickness="1" BorderBrush="#7F000000" Margin="5 0 0 0">
@@ -32,6 +26,13 @@
                         <Border CornerRadius="5" Width="252" Height="35" BorderThickness="1" BorderBrush="#7F000000" Margin="5 0 0 0">
                             <TextBox x:Name="txt_Phone" Width="248" BorderThickness="0" FontFamily="Segoe UI" FontSize="14" VerticalContentAlignment="Center" Background="Transparent" Margin="1,0,1,0" />
                         </Border>
+                      
+                    
+                        <Label Content="Nationality" Margin="10 10 0 0" FontSize="12" FontWeight="Regular" Padding="5" FontFamily="Segoe UI" Width="264" />
+                        <!--txt_Nationality-->
+                        <Border CornerRadius="5" Width="252" Height="35" BorderThickness="1" BorderBrush="#7F000000" Margin="5 0 0 0">
+                            <TextBox x:Name="txt_Nationality" Width="248" BorderThickness="0" FontFamily="Segoe UI" FontSize="14" VerticalContentAlignment="Center" Background="Transparent" Margin="1,0,1,0" />
+                        </Border>
                         <Label Content="Birthday" Margin="10 10 0 0" FontSize="12" FontWeight="Regular" Padding="5" FontFamily="Segoe UI" Width="264" />
                         <!--txt_Birthday-->
                         <Border CornerRadius="5" Width="252" Height="35" BorderThickness="1" BorderBrush="#7F000000" Margin="5 0 0 0">
@@ -39,31 +40,20 @@
                         </Border>
                         <!--Sex-->
                         <StackPanel Orientation="Horizontal">
-                            <Label Content="Sex: " Margin="23 10 0 0" FontSize="12" FontWeight="Regular" Padding="5" FontFamily="Segoe UI" Width="50" />
+                            <Label Content="Sex: " Margin="20 20 0 0" FontSize="12" FontWeight="Regular" Padding="5" FontFamily="Segoe UI" Width="50" />
                             <CheckBox x:Name="Checkbox_Male" Content="Male" HorizontalAlignment="Right" VerticalAlignment="Bottom" Margin="0 0 0 5" FontFamily="Segoe UI"/>
                             <!--<CheckBox x:Name="Checkbox_Female" Content="Female" HorizontalAlignment="Right" VerticalAlignment="Bottom" Margin="45  0 0 5" FontFamily="Segoe UI"/>-->
                         </StackPanel>
-                    </StackPanel>
-                    <StackPanel Grid.Column="1">
-                        <Label Content="Nationality" Margin="10 10 0 0" FontSize="12" FontWeight="Regular" Padding="5" FontFamily="Segoe UI" Width="264" />
-                        <!--txt_Nationality-->
-                        <Border CornerRadius="5" Width="252" Height="35" BorderThickness="1" BorderBrush="#7F000000" Margin="5 0 0 0">
-                            <TextBox x:Name="txt_Nationality" Width="248" BorderThickness="0" FontFamily="Segoe UI" FontSize="14" VerticalContentAlignment="Center" Background="Transparent" Margin="1,0,1,0" />
-                        </Border>
-                        
-                        <StackPanel Orientation="Horizontal">
-                            <!--Button Cancel-->
-                            <Border Margin="90 95 0 0" CornerRadius="15" Background="White" Height="36" Width="90" BorderThickness="1" BorderBrush="#4C00A3" >
-                                <Button x:Name="btn_Cancel" Content="Cancel" Width="90" FontSize="14" FontWeight="SemiBold"  Background="Transparent" Foreground="#4C00A3" BorderThickness="0" HorizontalAlignment="Center" Click="btn_Cancel_Click" />
-                            </Border>
-                            <!--Button Save-->
-                            <Border Margin="10 95 0 0" CornerRadius="15" Background="#4C00A3" Height="36" Width="90" >
-                                <Button x:Name="btn_Save" Width="90" Content="Save" FontSize="14" FontWeight="SemiBold"  Background="Transparent" Foreground="White" BorderThickness="0" HorizontalAlignment="Center" Click="btn_Save_Click" />
-                            </Border>
-                        </StackPanel>
-                    </StackPanel>
-                   
-                </Grid>
+                <StackPanel Orientation="Horizontal">
+                    <!--Button Cancel-->
+                    <Border Margin="75 20 0 0" CornerRadius="15" Background="White" Height="36" Width="90" BorderThickness="1" BorderBrush="#4C00A3" >
+                        <Button x:Name="btn_Cancel" Content="Cancel" Width="90" FontSize="14" FontWeight="SemiBold"  Background="Transparent" Foreground="#4C00A3" BorderThickness="0" HorizontalAlignment="Center" Click="btn_Cancel_Click" />
+                    </Border>
+                    <!--Button Save-->
+                    <Border Margin="10 20 0 0" CornerRadius="15" Background="#4C00A3" Height="36" Width="90" >
+                        <Button x:Name="btn_Save" Width="90" Content="Save" FontSize="14" FontWeight="SemiBold"  Background="Transparent" Foreground="White" BorderThickness="0" HorizontalAlignment="Center" Click="btn_Save_Click" />
+                    </Border>
+                </StackPanel>
             </StackPanel>
         </Border>
 

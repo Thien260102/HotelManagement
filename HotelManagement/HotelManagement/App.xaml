@@ -730,7 +730,7 @@
                 <Style.Triggers>
                     <Trigger Property="IsMouseOver" Value="True">
                         <Setter Property="Background" Value="#FF7657" />
-                        <Setter Property="Foreground" Value="#ffffff" />
+                        <Setter Property="Foreground" Value="#4C00A3" />
                     </Trigger>
                 </Style.Triggers>
             </Style>
@@ -744,7 +744,7 @@
 
             <Style x:Key="ChangePassButton" TargetType="Button">
                 <Setter Property="Background" Value="#FF7657" />
-                <Setter Property="Foreground" Value="#ffffff" />
+                <Setter Property="Foreground" Value="#4C00A3" />
                 <Setter Property="FocusVisualStyle" Value="{x:Null}" />
                 <Setter Property="Height" Value="35" />
                 <Setter Property="Width" Value="150" />
@@ -765,7 +765,7 @@
                 <Style.Triggers>
                     <Trigger Property="IsMouseOver" Value="True">
                         <Setter Property="Background" Value="#FF7657" />
-                        <Setter Property="Foreground" Value="#ffffff" />
+                        <Setter Property="Foreground" Value="#4C00A3" />
                     </Trigger>
                 </Style.Triggers>
             </Style>
@@ -902,19 +902,19 @@
 
                 <Style.Triggers>
                     <Trigger Property="IsMouseOver" Value="True">
-                        <Setter Property="Background" Value="#FF7657"/>
+                        <Setter Property="Background" Value="#4C00A3"/>
                         <Setter Property="Foreground" Value="#ffffff"/>
                     </Trigger>
                     <Trigger Property="IsSelected" Value="True">
-                        <Setter Property="Background" Value="#FF7657"/>
-                        <Setter Property="Foreground" Value="#ffffff"/>
+                        <Setter Property="Background" Value="#4C00A3"/>
+                        <Setter Property="Foreground" Value="#fff"/>
                     </Trigger>
                     <MultiTrigger>
                         <MultiTrigger.Conditions>
                             <Condition Property="IsSelected" Value="true"/>
                             <Condition Property="Selector.IsSelectionActive" Value="false"/>
                         </MultiTrigger.Conditions>
-                        <Setter Property="Background" Value="#dfdfdf"/>
+                        <Setter Property="Background" Value="#ffffff"/>
                     </MultiTrigger>
                 </Style.Triggers>
             </Style>
@@ -990,8 +990,8 @@
 
                 <Style.Triggers>
                     <Trigger Property="IsMouseOver" Value="True">
-                        <Setter Property="BorderBrush" Value="#FF7657" />
-                        <Setter Property="Foreground" Value="#FF7657" />
+                        <Setter Property="BorderBrush" Value="#F3E5FF" />
+                        <Setter Property="Foreground" Value="#4C00A3" />
                     </Trigger>
                 </Style.Triggers>
             </Style>

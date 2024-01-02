@@ -1,6 +1,6 @@
 Create Database HotelManagement;
 Use HotelManagement;
-
+Drop Database HotelManagement;
 Drop table ACCOUNT;
 Create Table ACCOUNT
 (

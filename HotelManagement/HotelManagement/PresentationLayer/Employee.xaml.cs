@@ -26,9 +26,11 @@ namespace HotelManagement.PresentationLayer
         #region Fields & Properties
         private ObservableCollection<EmployeeDTO> employees;
         private int currentIndex = -1;
-		#endregion
+        List<string> _searchTypes;
+        int _currentSearchType = 0;
+        #endregion
 
-		public Employee()
+        public Employee()
         {
             InitializeComponent();
 
@@ -44,7 +46,20 @@ namespace HotelManagement.PresentationLayer
             employees = new ObservableCollection<EmployeeDTO>(employee.GetAllEmployees());
 
             membersDataGrid.ItemsSource = employees;
-		}
+
+            _searchTypes = new List<string>()
+            {
+                "Name",
+                "Phone",
+                "Citizen ID"
+            };
+            foreach (var file in _searchTypes)
+            {
+                Combobox_TypeSearch.Items.Add(file);
+            }
+            Combobox_TypeSearch.SelectedIndex = _currentSearchType;
+            //Combobox_TypeSearch.SelectionChanged += SelectSearch;
+        }
 
         #region Events
         private void SelectEmployee(object sender, SelectionChangedEventArgs e)
@@ -63,7 +78,7 @@ namespace HotelManagement.PresentationLayer
         {
             if(currentIndex == -1)
 			{
-                MessageBox.Show("Please choose employee you want to change.");
+                new MessageBoxCustom("Please choose employee you want to change", MessageType.Info, MessageButtons.Ok).ShowDialog();
                 return;
 			}
 
@@ -77,7 +92,7 @@ namespace HotelManagement.PresentationLayer
         {
             if (currentIndex == -1)
             {
-                MessageBox.Show("Please choose employee you want to change.");
+                new MessageBoxCustom("Please choose employee you want to delete", MessageType.Info, MessageButtons.Ok).ShowDialog();
                 return;
             }
 
@@ -93,11 +108,11 @@ namespace HotelManagement.PresentationLayer
                 accountBLL.RemoveAccount(account.UserName);
 
                 LoadEmployee();
-                MessageBox.Show("Remove employee successful");
+                new MessageBoxCustom("Remove employee successful", MessageType.Info, MessageButtons.Ok).ShowDialog();
 			}
             catch (Exception ex)
 			{
-                MessageBox.Show(ex.Message);
+                new MessageBoxCustom(ex.Message, MessageType.Info, MessageButtons.Ok).ShowDialog();
 			}
         }
 		#endregion

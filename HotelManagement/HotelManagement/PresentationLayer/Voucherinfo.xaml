@@ -5,7 +5,6 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:HotelManagement.PresentationLayer"
         mc:Ignorable="d"
-        WindowStartupLocation="CenterScreen"
         Background="Transparent" WindowStyle="None" AllowsTransparency="True" Height="500" Width="280">
     <Grid>
         <Border Background="White" CornerRadius="10" Height="500" Width="280">
@@ -53,11 +52,11 @@
 
                 <StackPanel Orientation="Horizontal">
                     <!--Button Cancel-->
-                    <Border Margin="80 20 0 0" CornerRadius="15" Background="White" Height="36" Width="90" BorderThickness="1" BorderBrush="#4C00A3" >
+                    <Border Margin="80 25 0 0" CornerRadius="15" Background="White" Height="36" Width="90" BorderThickness="1" BorderBrush="#4C00A3" >
                         <Button x:Name="btn_Cancel" Content="Cancel" Width="90" FontSize="14" FontWeight="SemiBold"  Background="Transparent" Foreground="#4C00A3" BorderThickness="0" HorizontalAlignment="Center" Click="btn_Cancel_Click" />
                     </Border>
                     <!--Button Save-->
-                    <Border Margin="10 20 0 0" CornerRadius="15" Background="#4C00A3" Height="36" Width="90" >
+                    <Border Margin="10 25 0 0" CornerRadius="15" Background="#4C00A3" Height="36" Width="90" >
                         <Button x:Name="btn_Save" Width="90" Content="Save" FontSize="14" FontWeight="SemiBold"  Background="Transparent" Foreground="White" BorderThickness="0" HorizontalAlignment="Center" Click="btn_Save_Click" />
                     </Border>
                 </StackPanel>

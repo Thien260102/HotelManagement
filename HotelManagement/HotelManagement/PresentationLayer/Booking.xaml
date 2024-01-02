@@ -5,7 +5,7 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:HotelManagement.PresentationLayer"
              mc:Ignorable="d" 
-             d:DesignHeight="545" d:DesignWidth="770">
+             d:DesignHeight="545" d:DesignWidth="750">
 
     <UserControl.Resources>
         <local:MoneyConverter x:Key="moneyConverter"></local:MoneyConverter>
@@ -16,24 +16,30 @@
         <StackPanel Background="Transparent" >
             <StackPanel Height="50" Orientation="Horizontal" >
                 <!--Search-->
-                <Border Width="262" Height="40" HorizontalAlignment="Left" Margin="10 5 0 0" CornerRadius="15" Background="White" BorderThickness="1" BorderBrush="#9081E4" >
+                <Border Width="330" Height="40" HorizontalAlignment="Left" Margin="10 5 0 0" CornerRadius="20" Background="White" BorderThickness="1" BorderBrush="#9081E4" >
                     <StackPanel Background="Transparent" Orientation="Horizontal">
-                        <Border Margin="3 0 0 0" Width="30" Height="30">
+                        <Border Margin="4 0 0 0" Width="20" Height="20">
                             <Border.Background>
                                 <ImageBrush ImageSource="/Resources/Search.png"/>
                             </Border.Background>
                         </Border>
-                        <TextBox x:Name="txt_Search" Width="220" BorderThickness="0" FontFamily="Segoe UI" Foreground="#7F000000" FontSize="14" VerticalContentAlignment="Center" />
+                        <TextBox x:Name="txt_Search" Width="200" Height="30" Margin="5 0 0 0" BorderThickness="0" FontFamily="Segoe UI" Foreground="#7F000000" FontSize="14" VerticalContentAlignment="Center" />
+                        <Border Width="90" Height="30" HorizontalAlignment="Left" Margin="5 0 0 0" CornerRadius="15" Background="White" BorderThickness="1" BorderBrush="#9081E4">
+                            <StackPanel Background="Transparent" Orientation="Horizontal">
+                                <ComboBox x:Name="Combobox_TypeSearch" Margin="10 0 0 0" Background="Transparent" Width="70" Height="22"  BorderThickness="0" FontFamily="Segoe UI" FontWeight="Medium" Foreground="#7F000000" FontSize="12" >
+                                </ComboBox>
+                            </StackPanel>
+                        </Border>
                     </StackPanel>
                 </Border>
                 <!--Button Add-->
-                <Border Margin="315 5 0 0" CornerRadius="20" Background="#F3E5FF" Height="40" Width="75">
-                    <Button x:Name="btn_Add" Content="Add" FontSize="16" FontWeight="SemiBold"  Background="Transparent" Foreground="#4C00A3" BorderThickness="0" Click= "btn_Add_Click" />
+                <Border Margin="230  5 0 0" CornerRadius="20" Background="#F3E5FF" Height="40" Width="80">
+                    <Button x:Name="btn_Add" Content="Add" FontSize="14" FontWeight="SemiBold"  Background="Transparent" Foreground="#4C00A3" BorderThickness="0" Click= "btn_Add_Click" />
                 </Border>
 
                 <!--btn_Cancel-->
-                <Border Margin="10 5 0 0" CornerRadius="20" Background="White" Height="40" Width="96" BorderThickness="1" BorderBrush="#4C00A3">
-                    <Button x:Name="btn_Cancel" Content="Cancel" FontSize="18" FontWeight="SemiBold"  Background="Transparent" Foreground="#4C00A3" BorderThickness="0" Click="btn_Cancel_Click" />
+                <Border Margin="10 5 0 0" CornerRadius="20" Background="White" Height="40" Width="80" BorderThickness="1" BorderBrush="#4C00A3">
+                    <Button x:Name="btn_Cancel" Content="Delete" FontSize="14" FontWeight="SemiBold"  Background="Transparent" Foreground="#4C00A3" BorderThickness="0" Click="btn_Cancel_Click" />
                 </Border>
             </StackPanel>
 

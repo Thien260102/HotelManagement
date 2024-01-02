@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
+using System.Windows.Media;
 
 namespace HotelManagement.PresentationLayer
 {
@@ -16,12 +17,13 @@ namespace HotelManagement.PresentationLayer
 		#region Fields & Properties
 		List<RentingDTO> _rentings;
         Dictionary<bool, List<RentingDTO>> _filterRooms;
-
         int _currentRenting = -1;
+        List<string> _searchTypes;
+        int _currentSearchType = 0;
 
-		#endregion
+        #endregion
 
-		public Renting()
+        public Renting()
 		{
 			InitializeComponent();
 
@@ -48,6 +50,19 @@ namespace HotelManagement.PresentationLayer
 
             DataGridBooking.ItemsSource = _rentings;
             DataGridBooking.SelectedCellsChanged += SelectBooking;
+
+            _searchTypes = new List<string>()
+            {
+                "Name",
+                "Citizen ID",
+                "Room ID"
+            };
+            foreach (var file in _searchTypes)
+            {
+                Combobox_TypeSearch.Items.Add(file);
+            }
+            Combobox_TypeSearch.SelectedIndex = _currentSearchType;
+            //Combobox_TypeSearch.SelectionChanged += SelectSearch;
         }
 
         private void FilterRenting(bool state)
@@ -80,14 +95,32 @@ namespace HotelManagement.PresentationLayer
                 }
             }
         }
+        public void DisableButton()
+        {
+            BdIsPaid.Background = Brushes.White;
+            BdIsPaid.BorderBrush = (SolidColorBrush)new BrushConverter().ConvertFromString(Rule.BUTTON.NORMAL);
+            btn_IsPaid.Foreground = (SolidColorBrush)new BrushConverter().ConvertFromString(Rule.BUTTON.NORMAL);
 
+            BdAvaliable.Background = Brushes.White;
+            BdAvaliable.BorderBrush = (SolidColorBrush)new BrushConverter().ConvertFromString(Rule.BUTTON.NORMAL);
+            btn_Available.Foreground = (SolidColorBrush)new BrushConverter().ConvertFromString(Rule.BUTTON.NORMAL);
+
+        }
         private void Available(object sender, RoutedEventArgs e)
         {
+            DisableButton();
+            BdAvaliable.Background = (SolidColorBrush)new BrushConverter().ConvertFromString("#FAC5C1");
+            BdAvaliable.BorderBrush = (SolidColorBrush)new BrushConverter().ConvertFromString("#F04438");
+            btn_Available.Foreground = (SolidColorBrush)new BrushConverter().ConvertFromString("#F04438");
             FilterRenting(false);
         }
 
         private void IsPaid(object sender, RoutedEventArgs e)
         {
+            DisableButton();
+            BdIsPaid.Background = (SolidColorBrush)new BrushConverter().ConvertFromString("#E8F1FD");
+            BdIsPaid.BorderBrush = (SolidColorBrush)new BrushConverter().ConvertFromString("#1570EF");
+            btn_IsPaid.Foreground = (SolidColorBrush)new BrushConverter().ConvertFromString("#1570EF");
             FilterRenting(true);
         }
 

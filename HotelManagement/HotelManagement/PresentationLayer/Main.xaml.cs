@@ -27,7 +27,7 @@ namespace HotelManagement.PresentationLayer
         public Main()
         {
             InitializeComponent();
-
+            btn_Profile.Content = Utilities.GetRole();
             btn_Dashboard_Click(null, null);
         }
 
@@ -47,6 +47,8 @@ namespace HotelManagement.PresentationLayer
             btn_Booking.Foreground = (SolidColorBrush)new BrushConverter().ConvertFromString(Rule.BUTTON.NORMAL);
             Employees.Background = Brushes.Transparent;
             btn_Employee.Foreground = (SolidColorBrush)new BrushConverter().ConvertFromString(Rule.BUTTON.NORMAL);
+            VoucherTypes.Background = Brushes.Transparent;
+            btn_VoucherType.Foreground = (SolidColorBrush)new BrushConverter().ConvertFromString(Rule.BUTTON.NORMAL);
             Vouchers.Background = Brushes.Transparent;
             btn_Voucher.Foreground = (SolidColorBrush)new BrushConverter().ConvertFromString(Rule.BUTTON.NORMAL);
             Reports.Background = Brushes.Transparent;
@@ -134,7 +136,7 @@ namespace HotelManagement.PresentationLayer
         {
             if(Utilities.GetRole() != Rule.ROLE.ADMIN)
 			{
-                MessageBox.Show("You do not have an authority.");
+                new MessageBoxCustom("You do not have an authority", MessageType.Info, MessageButtons.Ok).ShowDialog();
                 return;
 			}
 
@@ -148,7 +150,7 @@ namespace HotelManagement.PresentationLayer
             if (expandvch == -1)
             {
                 ChooseVoucher.Height = 135;
-                expand *= -1;
+                expandvch *= -1;
                 image_subvoucher.ImageSource = new BitmapImage(new Uri("pack://application:,,,/Resources/down-arrow.png"));
             }
             else
@@ -211,9 +213,13 @@ namespace HotelManagement.PresentationLayer
 
         private void btn_Logout_Click(object sender, RoutedEventArgs e)
         {
-            Login login = new Login();
-            login.Show();
-            this.Close();
+            bool? result = new MessageBoxCustom("Are you sure, You want to log out ?", MessageType.Confirmation, MessageButtons.YesNo).ShowDialog();
+            if (result.Value)
+            {
+                Login login = new Login();
+                login.Show();
+                this.Close();
+            }
         }
 
         private void Border_MouseDown(object sender, MouseButtonEventArgs e)
@@ -228,7 +234,7 @@ namespace HotelManagement.PresentationLayer
         {
             if (Utilities.GetRole() == Rule.ROLE.ADMIN)
             {
-                MessageBox.Show("Admin does not have personal infor.");
+                new MessageBoxCustom("Admin does not have personal infor", MessageType.Info, MessageButtons.Ok).ShowDialog();
                 return;
             }
 
@@ -252,6 +258,16 @@ namespace HotelManagement.PresentationLayer
 
         }
 
+        private void Border_MouseEnter(object sender, MouseEventArgs e)
+        {
+            Border border = sender as Border;
+            border.Background = (SolidColorBrush)new BrushConverter().ConvertFromString(Rule.BUTTON.HOVER);
+        }
 
+        private void Border_MouseLeave(object sender, MouseEventArgs e)
+        {
+            Border border = sender as Border;
+            border.Background = Brushes.Transparent;
+        }
     }
 }
