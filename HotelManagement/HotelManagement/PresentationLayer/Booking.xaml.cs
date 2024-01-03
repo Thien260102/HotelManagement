@@ -2,6 +2,7 @@
 using HotelManagement.DataTransferObject;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
@@ -13,8 +14,8 @@ namespace HotelManagement.PresentationLayer
     /// </summary>
     public partial class Booking : UserControl
     {
-        List<BookingDTO> bookings;
-        int currentBooking = -1;
+        List<BookingDTO> _bookings;
+        int _currentBooking = -1;
         List<string> _searchTypes;
         int _currentSearchType = 0;
 
@@ -26,13 +27,17 @@ namespace HotelManagement.PresentationLayer
 
             DataGridBooking.SelectedCellsChanged += SelectBooking;
             DataGridBooking.MouseDoubleClick += MakeRentingRoom;
+            Combobox_TypeSearch.SelectionChanged += SelectTypeSearch;
+            Combobox_TypeSearch.SelectedIndex = _currentSearchType;
+
+            txt_Search.KeyDown += Finding;
         }
 
         private void LoadData()
         {
-            bookings = new BookingBLL().GetAll();
+            _bookings = new BookingBLL().GetAll();
 
-            DataGridBooking.ItemsSource = bookings;
+            DataGridBooking.ItemsSource = _bookings;
 
             _searchTypes = new List<string>()
             {
@@ -43,12 +48,39 @@ namespace HotelManagement.PresentationLayer
             {
                 Combobox_TypeSearch.Items.Add(file);
             }
-            Combobox_TypeSearch.SelectedIndex = _currentSearchType;
-            //Combobox_TypeSearch.SelectionChanged += SelectSearch;
-
         }
 
         #region Events
+        private void SelectTypeSearch(object sender, SelectionChangedEventArgs e)
+        {
+            _currentSearchType = Combobox_TypeSearch.SelectedIndex;
+        }
+
+        private void Finding(object sender, KeyEventArgs e)
+        {
+            TextBox text = sender as TextBox;
+            if (e.Key == Key.Return)
+            {
+                var filter = new List<BookingDTO>();
+
+                switch (_currentSearchType)
+                {
+                    case 0: // Name
+                        filter = (from booking in _bookings
+                                  where booking.CustomerName.ToLower().Contains(text.Text.ToLower())
+                                  select booking).ToList();
+                        break;
+
+                    case 1: // Phone
+                        filter = (from booking in _bookings
+                                  where (new CustomerBLL().GetCustomer(booking.CustomerId).PhoneNumber).ToLower().Contains(text.Text.ToLower())
+                                  select booking).ToList();
+                        break;
+                }
+                DataGridBooking.ItemsSource = filter;
+            }
+        }
+
         private void MakeRentingRoom(object sender, MouseButtonEventArgs e)
         {
             if (e.ChangedButton == MouseButton.Left)
@@ -58,7 +90,7 @@ namespace HotelManagement.PresentationLayer
                 {
                     DataGridRow dgr = grid.ItemContainerGenerator.ContainerFromItem(grid.SelectedItem) as DataGridRow;
 
-                    var booking = bookings[dgr.GetIndex()];
+                    var booking = _bookings[dgr.GetIndex()];
                     if (booking.IsRented
                      || (Utilities.GetDefaultCheckinTime(DateTime.Parse(booking.CheckinDate)).AddDays(booking.TotalDay))
                         < DateTime.Now)
@@ -77,7 +109,7 @@ namespace HotelManagement.PresentationLayer
 
         private void SelectBooking(object sender, SelectedCellsChangedEventArgs e)
 		{
-            currentBooking = DataGridBooking.SelectedIndex;
+            _currentBooking = DataGridBooking.SelectedIndex;
 		}
 
         private void btn_Add_Click(object sender, RoutedEventArgs e)
@@ -89,7 +121,7 @@ namespace HotelManagement.PresentationLayer
 
         private void btn_Cancel_Click(object sender, RoutedEventArgs e)
         {
-            if (currentBooking == -1)
+            if (_currentBooking == -1)
             {
                 new MessageBoxCustom("Please choose your booking you want to cancel", MessageType.Info, MessageButtons.Ok).ShowDialog();
                 return;
@@ -100,7 +132,7 @@ namespace HotelManagement.PresentationLayer
             {
                 try
                 {
-                    int remainDays = (int)(DateTime.Parse(bookings[currentBooking].CheckinDate).Date
+                    int remainDays = (int)(DateTime.Parse(_bookings[_currentBooking].CheckinDate).Date
                                 - DateTime.Now.Date).TotalDays;
                     double ratio = 0d;
                     if (remainDays > 15)
@@ -116,9 +148,9 @@ namespace HotelManagement.PresentationLayer
                         ratio = 0.3d;
                     }
 
-                    decimal refund = bookings[currentBooking].Total * (decimal)ratio;
+                    decimal refund = _bookings[_currentBooking].Total * (decimal)ratio;
 
-                    new BookingBLL().RemoveBooking(bookings[currentBooking].Id);
+                    new BookingBLL().RemoveBooking(_bookings[_currentBooking].Id);
 
                     LoadData(); 
 
