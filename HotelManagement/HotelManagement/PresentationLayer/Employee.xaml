@@ -49,7 +49,7 @@
             <DataGrid RowStyle="{DynamicResource DataGridRowStyle1}" 
                       ColumnHeaderStyle="{DynamicResource DataGridColumnHeaderStyle1}" 
                       CellStyle="{DynamicResource DataGridCellStyle1}" 
-                      x:Name="membersDataGrid" Style="{DynamicResource DataGridStyle1}">
+                      x:Name="DataGridEmployee" Style="{DynamicResource DataGridStyle1}">
                 <DataGrid.Columns>
                     <!--<DataGridCheckBoxColumn Header="C" CanUserResize="False" Width="auto" >
                         <DataGridCheckBoxColumn.HeaderTemplate>

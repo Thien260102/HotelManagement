@@ -24,8 +24,8 @@ namespace HotelManagement.PresentationLayer
     public partial class Employee : UserControl
     {
         #region Fields & Properties
-        private ObservableCollection<EmployeeDTO> employees;
-        private int currentIndex = -1;
+        private ObservableCollection<EmployeeDTO> _employees;
+        private int _currentIndex = -1;
         List<string> _searchTypes;
         int _currentSearchType = 0;
         #endregion
@@ -36,16 +36,21 @@ namespace HotelManagement.PresentationLayer
 
             LoadEmployee();
 
-            membersDataGrid.SelectionChanged += SelectEmployee;
+            DataGridEmployee.SelectionChanged += SelectEmployee;
+
+            Combobox_TypeSearch.SelectionChanged += SelectTypeSearch;
+            Combobox_TypeSearch.SelectedIndex = _currentSearchType;
+
+            txt_Search.KeyDown += Finding;
         }
 
-		private void LoadEmployee()
+        private void LoadEmployee()
 		{
             EmployeeBLL employee = new EmployeeBLL();
 
-            employees = new ObservableCollection<EmployeeDTO>(employee.GetAllEmployees());
+            _employees = new ObservableCollection<EmployeeDTO>(employee.GetAllEmployees());
 
-            membersDataGrid.ItemsSource = employees;
+            DataGridEmployee.ItemsSource = _employees;
 
             _searchTypes = new List<string>()
             {
@@ -57,14 +62,47 @@ namespace HotelManagement.PresentationLayer
             {
                 Combobox_TypeSearch.Items.Add(file);
             }
-            Combobox_TypeSearch.SelectedIndex = _currentSearchType;
-            //Combobox_TypeSearch.SelectionChanged += SelectSearch;
         }
 
         #region Events
+        private void SelectTypeSearch(object sender, SelectionChangedEventArgs e)
+        {
+            _currentSearchType = Combobox_TypeSearch.SelectedIndex;
+        }
+
+        private void Finding(object sender, KeyEventArgs e)
+        {
+            TextBox text = sender as TextBox;
+            if (e.Key == Key.Return)
+            {
+                var filter = new List<EmployeeDTO>();
+
+                switch (_currentSearchType)
+                {
+                    case 0: // Name
+                        filter = (from employee in _employees
+                                  where employee.FullName.ToLower().Contains(text.Text.ToLower())
+                                  select employee).ToList();
+                        break;
+
+                    case 1: // phone
+                        filter = (from employee in _employees
+                                  where employee.PhoneNumber.Contains(text.Text.Trim())
+                                  select employee).ToList();
+                        break;
+                    case 2: // Citizen id
+                        filter = (from employee in _employees
+                                  where employee.CitizenId.ToLower().Contains(text.Text)
+                                  select employee).ToList();
+                        break;
+                }
+                DataGridEmployee.ItemsSource = filter;
+            }
+        }
+
         private void SelectEmployee(object sender, SelectionChangedEventArgs e)
         {
-            currentIndex = membersDataGrid.SelectedIndex;
+            _currentIndex = DataGridEmployee.SelectedIndex;
         }
 
         private void btn_Add_Click(object sender, RoutedEventArgs e)
@@ -76,7 +114,7 @@ namespace HotelManagement.PresentationLayer
 
         private void btn_Update_Click(object sender, RoutedEventArgs e)
         {
-            if(currentIndex == -1)
+            if(_currentIndex == -1)
 			{
                 new MessageBoxCustom("Please choose employee you want to change", MessageType.Info, MessageButtons.Ok).ShowDialog();
                 return;
@@ -85,19 +123,19 @@ namespace HotelManagement.PresentationLayer
             Employeeinfo employeeinfo = new Employeeinfo();
             employeeinfo.ReloadEmployee += LoadEmployee;
             employeeinfo.Show();
-            employeeinfo.SetData(employees[currentIndex]);
+            employeeinfo.SetData(_employees[_currentIndex]);
         }
 
         private void btn_Delete_Click(object sender, RoutedEventArgs e)
         {
-            if (currentIndex == -1)
+            if (_currentIndex == -1)
             {
                 new MessageBoxCustom("Please choose employee you want to delete", MessageType.Info, MessageButtons.Ok).ShowDialog();
                 return;
             }
 
             EmployeeBLL employeeBLL = new EmployeeBLL();
-            EmployeeDTO employee = employees[currentIndex];
+            EmployeeDTO employee = _employees[_currentIndex];
 
             AccountBLL accountBLL = new AccountBLL();
             AccountDTO account = accountBLL.GetAccount(employee.Id);
