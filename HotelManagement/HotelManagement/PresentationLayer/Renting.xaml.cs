@@ -2,6 +2,7 @@
 using HotelManagement.DataTransferObject;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
@@ -35,6 +36,9 @@ namespace HotelManagement.PresentationLayer
             btn_IsPaid.Click += IsPaid;
             btn_Available.Click += Available;
             DataGridBooking.MouseDoubleClick += ExportBill;
+
+            txt_Search.KeyDown += Finding;
+            Combobox_TypeSearch.SelectionChanged += SelectTypeSearch;
 		}
 
 		private void LoadData()
@@ -72,6 +76,42 @@ namespace HotelManagement.PresentationLayer
         }
 
         #region Events
+        private void SelectTypeSearch(object sender, SelectionChangedEventArgs e)
+        {
+            _currentSearchType = Combobox_TypeSearch.SelectedIndex;
+        }
+
+        private void Finding(object sender, KeyEventArgs e)
+        {
+            TextBox text = sender as TextBox;
+            if (e.Key == Key.Return)
+            {
+                var filter = new List<RentingDTO>();
+
+                switch (_currentSearchType)
+				{
+                    case 0: // name
+                        filter = (from renting in _rentings
+                                 where renting.CustomerName.ToLower().Contains(text.Text.ToLower())
+                                 select renting).ToList();
+                        break;
+
+                    case 1: // citizenid
+                        filter = (from renting in _rentings
+                                  where (new CustomerBLL().GetCustomer(renting.CustomerId).CitizenId).ToLower().Contains(text.Text)
+                                  select renting).ToList();
+                        break;
+
+                    case 2: // room Id
+                        filter = (from renting in _rentings
+                                  where renting.RoomId.ToString().ToLower().Contains(text.Text)
+                                  select renting).ToList();
+                        break;
+                }
+                DataGridBooking.ItemsSource = filter;
+            }
+        }
+
         private void ExportBill(object sender, MouseButtonEventArgs e)
         {
             if (e.ChangedButton == MouseButton.Left)
@@ -95,6 +135,7 @@ namespace HotelManagement.PresentationLayer
                 }
             }
         }
+
         public void DisableButton()
         {
             BdIsPaid.Background = Brushes.White;
@@ -106,6 +147,7 @@ namespace HotelManagement.PresentationLayer
             btn_Available.Foreground = (SolidColorBrush)new BrushConverter().ConvertFromString(Rule.BUTTON.NORMAL);
 
         }
+
         private void Available(object sender, RoutedEventArgs e)
         {
             DisableButton();
