@@ -22,8 +22,8 @@ namespace HotelManagement.PresentationLayer
     /// </summary>
     public partial class Guest : UserControl
     {
-        List<CustomerDTO> customers;
-        int currentCustomer = -1;
+        List<CustomerDTO> _customers;
+        int _currentCustomer = -1;
         List<string> _searchTypes;
         int _currentSearchType = 0;
 
@@ -33,13 +33,16 @@ namespace HotelManagement.PresentationLayer
 
             LoadData();
             DataGrid_Guest.SelectedCellsChanged += SelectGuest;
+
+            txt_Search.KeyDown += Finding;
+            Combobox_TypeSearch.SelectionChanged += SelectTypeSearch;
         }
 
 		private void LoadData()
 		{
-            customers = new CustomerBLL().GetAllCustomers();
+            _customers = new CustomerBLL().GetAllCustomers();
 
-            DataGrid_Guest.ItemsSource = customers;
+            DataGrid_Guest.ItemsSource = _customers;
 
             _searchTypes = new List<string>()
             {
@@ -55,9 +58,45 @@ namespace HotelManagement.PresentationLayer
             //Combobox_TypeSearch.SelectionChanged += SelectSearch;
         }
 
+        private void Finding(object sender, KeyEventArgs e)
+        {
+            TextBox text = sender as TextBox;
+            if (e.Key == Key.Return)
+            {
+                var filter = new List<CustomerDTO>();
+
+                switch (_currentSearchType)
+                {
+                    case 0: // name
+                        filter = (from customer in _customers
+                                  where customer.FullName.ToLower().Contains(text.Text.ToLower())
+                                  select customer).ToList();
+                        break;
+
+                    case 1: // phone
+                        filter = (from customer in _customers
+                                  where customer.PhoneNumber.ToLower().Contains(text.Text)
+                                  select customer).ToList();
+                        break;
+
+                    case 2: // citizen id
+                        filter = (from customer in _customers
+                                  where customer.CitizenId.ToLower().Contains(text.Text)
+                                  select customer).ToList();
+                        break;
+                }
+                DataGrid_Guest.ItemsSource = filter;
+            }
+        }
+
+        private void SelectTypeSearch(object sender, SelectionChangedEventArgs e)
+        {
+            _currentSearchType = Combobox_TypeSearch.SelectedIndex;
+        }
+
         private void SelectGuest(object sender, SelectedCellsChangedEventArgs e)
         {
-            currentCustomer = DataGrid_Guest.SelectedIndex;
+            _currentCustomer = DataGrid_Guest.SelectedIndex;
         }
 
         #region Button
@@ -70,27 +109,27 @@ namespace HotelManagement.PresentationLayer
 
         private void btn_Update_Click(object sender, RoutedEventArgs e)
         {
-            if (currentCustomer == -1)
+            if (_currentCustomer == -1)
             {
                 new MessageBoxCustom("Please choose customer you want to change", MessageType.Info, MessageButtons.Ok).ShowDialog();
                 return;
             }
 
             GuestInfor guestInfor = new GuestInfor();
-            guestInfor.SetData(customers[currentCustomer]);
+            guestInfor.SetData(_customers[_currentCustomer]);
             guestInfor.ReloadGuest += LoadData;
             guestInfor.Show();
         }
 
         private void btn_Delete_Click(object sender, RoutedEventArgs e)
         {
-            if (currentCustomer == -1)
+            if (_currentCustomer == -1)
             {
                 new MessageBoxCustom("Please choose customer you want to remove", MessageType.Info, MessageButtons.Ok).ShowDialog();
                 return;
             }
 
-            new CustomerBLL().RemoveCustomer(customers[currentCustomer].Id);
+            new CustomerBLL().RemoveCustomer(_customers[_currentCustomer].Id);
             LoadData();
         }
 		#endregion
