@@ -3,8 +3,10 @@ using HotelManagement.DataAccessLayer;
 using HotelManagement.DataTransferObject;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Input;
 
 namespace HotelManagement.PresentationLayer
 {
@@ -13,33 +15,41 @@ namespace HotelManagement.PresentationLayer
 	/// </summary>
 	public partial class Attendance : UserControl
 	{
-		Rule.ROLE role;
+		#region Fields And Properties
+		Rule.ROLE _role;
 
 		int currentIndex = -1;
-		List<AttendanceDTO> attendances;
+		List<AttendanceDTO> _attendances;
         List<string> _searchTypes;
         int _currentSearchType = 0;
-        public Attendance(Rule.ROLE role = Rule.ROLE.EMPLOYEE)
+		#endregion
+
+		public Attendance(Rule.ROLE role = Rule.ROLE.EMPLOYEE)
 		{
 			InitializeComponent();
 
-			this.role = role;
+			this._role = role;
 			LoadData();
 			DataGridAttendance.SelectedCellsChanged += SelectAttendance;
+
+			Combobox_TypeSearch.SelectionChanged += SelectTypeSearch;
+			Combobox_TypeSearch.SelectedIndex = _currentSearchType;
+
+			txt_Search.KeyDown += Finding;
 		}
 
 		private void LoadData()
 		{
-			if (role == Rule.ROLE.ADMIN)
+			if (_role == Rule.ROLE.ADMIN)
 			{
-				attendances = new AttendanceBLL().GetAll();
+				_attendances = new AttendanceBLL().GetAll();
 			}
 			else
 			{
-				attendances = new AttendanceBLL().GetAttendancesOf(AccountBLL.Account.EmployeeID);
+				_attendances = new AttendanceBLL().GetAttendancesOf(AccountBLL.Account.EmployeeID);
 			}
 
-			DataGridAttendance.ItemsSource = attendances;
+			DataGridAttendance.ItemsSource = _attendances;
 
             _searchTypes = new List<string>()
             {
@@ -50,11 +60,40 @@ namespace HotelManagement.PresentationLayer
             {
                 Combobox_TypeSearch.Items.Add(file);
             }
-            Combobox_TypeSearch.SelectedIndex = _currentSearchType;
-            //Combobox_TypeSearch.SelectionChanged += SelectSearch;
         }
 
-        private void SelectAttendance(object sender, SelectedCellsChangedEventArgs e)
+		#region Events
+		private void SelectTypeSearch(object sender, SelectionChangedEventArgs e)
+		{
+			_currentSearchType = Combobox_TypeSearch.SelectedIndex;
+		}
+
+		private void Finding(object sender, KeyEventArgs e)
+		{
+			TextBox text = sender as TextBox;
+			if (e.Key == Key.Return)
+			{
+				var filter = new List<AttendanceDTO>();
+
+				switch (_currentSearchType)
+				{
+					case 0: // Name
+						filter = (from attendance in _attendances
+								  where attendance.EmployeeName.ToLower().Contains(text.Text.ToLower())
+								  select attendance).ToList();
+						break;
+
+					case 1: // date
+						filter = (from attendance in _attendances
+								  where attendance.Date.ToLower().Contains(text.Text)
+								  select attendance).ToList();
+						break;
+				}
+				DataGridAttendance.ItemsSource = filter;
+			}
+		}
+
+		private void SelectAttendance(object sender, SelectedCellsChangedEventArgs e)
 		{
 			currentIndex = DataGridAttendance.SelectedIndex;
 		}
@@ -92,16 +131,17 @@ namespace HotelManagement.PresentationLayer
 				return;
 			}
 
-			if (attendances[currentIndex].State == (int)Rule.ATTENDANCE.WORKED)
+			if (_attendances[currentIndex].State == (int)Rule.ATTENDANCE.WORKED)
 			{
                 new MessageBoxCustom("Cannot change work day", MessageType.Info, MessageButtons.Ok).ShowDialog();
 				return;
 			}
 
 			AttendanceInfor attendanceInfor = new AttendanceInfor();
-			attendanceInfor.SetData(attendances[currentIndex]);
+			attendanceInfor.SetData(_attendances[currentIndex]);
 			attendanceInfor.Show();
 			attendanceInfor.ReloadAttendance += LoadData;
 		}
+		#endregion
 	}
 }
