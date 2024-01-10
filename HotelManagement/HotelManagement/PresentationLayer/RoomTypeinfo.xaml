@@ -5,8 +5,8 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:HotelManagement.PresentationLayer"
         mc:Ignorable="d"
-
-    Background="Transparent" WindowStyle="None" AllowsTransparency="True" Height="300" Width="280">
+        WindowStartupLocation="CenterScreen"
+        Background="Transparent" WindowStyle="None" AllowsTransparency="True" Height="300" Width="280">
 
     <Window.Resources>
         <local:MoneyConverter x:Key="converter"></local:MoneyConverter>

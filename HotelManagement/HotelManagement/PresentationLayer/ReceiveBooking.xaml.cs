@@ -30,7 +30,7 @@ namespace HotelManagement.PresentationLayer
 
         decimal _total = -1;
 
-        List<VoucherDTO> _vouchers;
+        List<VoucherDTO> _vouchers = new List<VoucherDTO>();
         int _currentVoucher = 0;
 
         public Action ReloadBooking;
