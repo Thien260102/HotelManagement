@@ -118,6 +118,11 @@ namespace HotelManagement.PresentationLayer
 
                 _vouchers = new VoucherBLL().GetVoucherOf(_customer.Id);
                 _currentVoucher = 0;
+                if(_vouchers.Count == 0)
+				{
+                    txt_Discount.Text = "0%";
+                    return;
+				}
 
                 foreach(var voucher in _vouchers)
 				{
