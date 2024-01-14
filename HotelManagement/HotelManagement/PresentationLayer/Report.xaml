@@ -50,9 +50,9 @@
                 </Button>
             </StackPanel>
             <!--DataGridView-->
-            <StackPanel Height="495" Background="Transparent">
+            <Grid Height="495" Background="Transparent">
                 <DataGrid x:Name="DataGridReport" Height="470 " d:ItemsSource="{d:SampleData ItemCount=5}"/>
-            </StackPanel>
+            </Grid>
         </StackPanel>
     </Grid>
 </UserControl>

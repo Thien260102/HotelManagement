@@ -9,7 +9,7 @@
     <Border Margin="10 3 0 3" Width="150" Height="80" CornerRadius="10" BorderThickness="1" BorderBrush="Black" Background="White">
         <StackPanel>
             <Label  x:Name="RoomType" Content="Single room" FontSize="14" FontWeight="Medium" Padding="5" FontFamily="Segoe UI" Foreground="Black" HorizontalAlignment="Left" />
-            <Border x:Name="StatusBorder" Width="60" Height="20" HorizontalAlignment="Left" Margin="5 0 0 0" CornerRadius="10" Background="#E8F1FD" >
+            <Border x:Name="StatusBorder" Width="65" Height="22" HorizontalAlignment="Left" Margin="5 0 0 0" CornerRadius="10" Background="#E8F1FD" >
                 <Label x:Name="StatusLabel" Content="Available" FontSize="9" FontWeight="Medium" Padding="5" FontFamily="Segoe UI" Foreground="#1570EF" HorizontalAlignment="Center"  />
             </Border>
             <!--Nếu phòng loại này đã hết thì sử dụng St atusBorder.Background="#FAC5C1" và StatusLabel.Content="Unavailable" và StatusLabel.Foreground="#F04438"-->

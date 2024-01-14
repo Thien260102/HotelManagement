@@ -20,7 +20,7 @@
                 </Border>
             </StackPanel>
             <!--DataGridView-->
-            <StackPanel Height="495" Background="Transparent">
+            <Grid Height="495" Background="Transparent">
                 <DataGrid RowStyle="{DynamicResource DataGridRowStyle1}" 
                       ColumnHeaderStyle="{DynamicResource DataGridColumnHeaderStyle1}" 
                       CellStyle="{DynamicResource DataGridCellStyle1}"
@@ -34,7 +34,7 @@
                         <DataGridTextColumn Header="Discount" Binding="{Binding Ratio}" IsReadOnly="True" Width="*"/>
                     </DataGrid.Columns>
                 </DataGrid>
-            </StackPanel>
+            </Grid>
         </StackPanel>
     </Grid>
 </UserControl>

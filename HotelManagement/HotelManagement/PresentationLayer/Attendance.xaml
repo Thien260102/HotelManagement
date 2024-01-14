@@ -40,7 +40,7 @@
                     <Button x:Name="btn_Update" Content="Update" FontSize="14" FontWeight="SemiBold"  Background="Transparent" Foreground="#4C00A3" BorderThickness="0" Click="btn_Update_Click" />
                 </Border>
             </StackPanel>
-            <StackPanel Height="495" Background="Transparent">
+            <Grid Height="495" Background="Transparent">
                 <DataGrid RowStyle="{DynamicResource DataGridRowStyle1}" 
                       ColumnHeaderStyle="{DynamicResource DataGridColumnHeaderStyle1}" 
                       CellStyle="{DynamicResource DataGridCellStyle1}" 
@@ -61,8 +61,7 @@
                         <DataGridTextColumn Header="Note" Binding="{Binding Note}" IsReadOnly="True" Width="*"/>
                     </DataGrid.Columns>
             </DataGrid>-->
-            </StackPanel>
-
+            </Grid>
         </StackPanel>
     </Grid>
 

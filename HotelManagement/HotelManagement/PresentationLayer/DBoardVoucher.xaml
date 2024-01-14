@@ -9,8 +9,8 @@
     <Border Margin="10 3 0 3 " Width="150" Height="80" CornerRadius="10" BorderThickness="1" BorderBrush="Black" Background="White">
         <StackPanel>
             <Label  x:Name="VoucherType" Content="Family deal" FontSize="14" FontWeight="Medium" Padding="5" FontFamily="Segoe UI" Foreground="Black" HorizontalAlignment="Left" />
-            <Border x:Name="EDayBorder" Width="70" Height="20" HorizontalAlignment="Left" Margin="5 0 0 0" CornerRadius="10" Background="#FAC5C1" >
-                <Label x:Name="EDayLabel"  Content="24/11/2023" FontSize="9" FontWeight="Medium" Padding="5" FontFamily="Segoe UI" Foreground="#F04438" HorizontalAlignment="Center"  />
+            <Border x:Name="EDayBorder" Width="65" Height="22" HorizontalAlignment="Left" Margin="5 0 0 0" CornerRadius="10" Background="#E8F1FD" >
+                <Label x:Name="EDayLabel"  Content="AVAILABLE" FontSize="9" FontWeight="Medium" Padding="5" FontFamily="Segoe UI" Foreground="#1570EF" HorizontalAlignment="Center"  />
             </Border>
             <StackPanel Orientation="Horizontal">
                 <Label Name="Discount" Margin="5 0 0 0" Content="-25%" FontSize="14" FontWeight="Medium" Padding="5" FontFamily="Segoe UI" Foreground="#FF1493"  />

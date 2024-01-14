@@ -45,39 +45,39 @@
                     <Button x:Name="btn_Delete" Content="Delete" FontSize="14" FontWeight="SemiBold"  Background="Transparent" Foreground="#4C00A3" BorderThickness="0" Click="btn_Delete_Click" />
                 </Border>
             </StackPanel>
-
-            <DataGrid RowStyle="{DynamicResource DataGridRowStyle1}" 
+            <Grid Height="495" Background="Transparent">
+                <DataGrid RowStyle="{DynamicResource DataGridRowStyle1}" 
                       ColumnHeaderStyle="{DynamicResource DataGridColumnHeaderStyle1}" 
                       CellStyle="{DynamicResource DataGridCellStyle1}" 
                       x:Name="DataGridEmployee" Style="{DynamicResource DataGridStyle1}">
-                <DataGrid.Columns>
-                    <!--<DataGridCheckBoxColumn Header="C" CanUserResize="False" Width="auto" >
+                    <DataGrid.Columns>
+                        <!--<DataGridCheckBoxColumn Header="C" CanUserResize="False" Width="auto" >
                         <DataGridCheckBoxColumn.HeaderTemplate>
                             <DataTemplate>
                                 <CheckBox />
                             </DataTemplate>
                         </DataGridCheckBoxColumn.HeaderTemplate>
                     </DataGridCheckBoxColumn>-->
-                    <DataGridTextColumn Header="No." IsReadOnly="True" CanUserResize="False" Width="auto" Binding="{Binding Id}"/>
-                    <DataGridTextColumn Header="CitizenId" Binding="{Binding CitizenId}" IsReadOnly="True" Width="*"/>
-                    <DataGridTemplateColumn Header="Full Name" IsReadOnly="True" Width="*">
-                        <DataGridTemplateColumn.CellTemplate>
-                            <DataTemplate>
-                                <StackPanel Orientation="Horizontal">
-                                    
-                                    <TextBlock Text="{Binding FullName}" VerticalAlignment="Center"/>
-                                </StackPanel>
-                            </DataTemplate>
-                        </DataGridTemplateColumn.CellTemplate>
-                    </DataGridTemplateColumn>
-                    <DataGridTextColumn Header="Birth Day" Binding="{Binding BirthDay}" IsReadOnly="True" Width="*"/>
-                    <DataGridTextColumn Header="Sex" Binding="{Binding SSex}" IsReadOnly="True" Width="*"/>
-                    <DataGridTextColumn Header="Phone Number" Binding="{Binding PhoneNumber, Converter={StaticResource phoneConverter}}" IsReadOnly="True" Width="*"/>
-                    <DataGridTextColumn Header="Salary" Binding="{Binding Salary, Converter={StaticResource moneyConverter}}" IsReadOnly="True" Width="*"/>
+                        <DataGridTextColumn Header="No." IsReadOnly="True" CanUserResize="False" Width="auto" Binding="{Binding Id}"/>
+                        <DataGridTextColumn Header="CitizenId" Binding="{Binding CitizenId}" IsReadOnly="True" Width="*"/>
+                        <DataGridTemplateColumn Header="Full Name" IsReadOnly="True" Width="*">
+                            <DataGridTemplateColumn.CellTemplate>
+                                <DataTemplate>
+                                    <StackPanel Orientation="Horizontal">
 
-                </DataGrid.Columns>
-            </DataGrid>
+                                        <TextBlock Text="{Binding FullName}" VerticalAlignment="Center"/>
+                                    </StackPanel>
+                                </DataTemplate>
+                            </DataGridTemplateColumn.CellTemplate>
+                        </DataGridTemplateColumn>
+                        <DataGridTextColumn Header="Birth Day" Binding="{Binding BirthDay}" IsReadOnly="True" Width="*"/>
+                        <DataGridTextColumn Header="Sex" Binding="{Binding SSex}" IsReadOnly="True" Width="*"/>
+                        <DataGridTextColumn Header="Phone Number" Binding="{Binding PhoneNumber, Converter={StaticResource phoneConverter}}" IsReadOnly="True" Width="*"/>
+                        <DataGridTextColumn Header="Salary" Binding="{Binding Salary, Converter={StaticResource moneyConverter}}" IsReadOnly="True" Width="*"/>
 
+                    </DataGrid.Columns>
+                </DataGrid>
+            </Grid>
         </StackPanel>
     </Grid>
 </UserControl>

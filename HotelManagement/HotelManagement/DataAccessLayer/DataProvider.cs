@@ -11,7 +11,7 @@ namespace HotelManagement.DataAccessLayer
     public class DataProvider
     {
         #region Fields & Properties
-        private string connectionSTR = "Data Source=MSI;Initial Catalog=HotelManagement;Integrated Security=True";
+        private string connectionSTR = "Data Source=LAPTOP-L8MAAO7V\\SQLEXPRESS;Initial Catalog=HotelManagement;Integrated Security=True";
 
         private static DataProvider instance;
         public static DataProvider Instance
